@@ -1,3 +1,11 @@
+/*
+Title: index.js
+Author: Professor Krasso
+Date: 02/07/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: App Server File
+*/
+
 /**
  * Require statements
  */
@@ -5,6 +13,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 
+// import MongoDB database connection string from config.json
 const config = require("./data/config.json");
 
 const app = express(); // Express variable.
