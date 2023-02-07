@@ -19,6 +19,12 @@ import { LoginComponent } from './pages/login/login.component';
  */
 import {MatCardModule} from '@angular/material/card';
 
+/**
+ * Description: Importing the Material Form Field Module. This is used to display form fields for the application.
+ * link: https://material.angular.io/components/form-field/overview
+ */
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +41,8 @@ import {MatCardModule} from '@angular/material/card';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
