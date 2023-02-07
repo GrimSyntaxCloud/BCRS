@@ -10,12 +10,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // create the model of roleSchema to use with mongoose
-const userRoleSchema = new Schema(
-  {
-    text: { type: String, default: "standard" },
-  },
-  { collection: "roles" } // pre-build collection in mongodb atlas
-);
+const userRoleSchema = new Schema({
+  text: { type: String, default: "standard" },
+});
 
 // export roleSchema
-module.exports = mongoose.model("Role", userRoleSchema);
+module.exports = userRoleSchema;
