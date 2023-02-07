@@ -25,6 +25,13 @@ import {MatCardModule} from '@angular/material/card';
  */
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+/**
+ * Description: Importing the Material Input Module. This is used to display input fields for the application.
+ * link: https://material.angular.io/components/input/overview
+ * note: This is a sub-module of the Material Form Field Module. Without the Material Form Field Module, this will not work.
+ */
+import {MatInputModule} from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +49,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
