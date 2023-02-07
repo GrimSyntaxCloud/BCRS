@@ -1,0 +1,13 @@
+.login-card-title {
+  font-size: 56px;
+  text-align: center;
+}
+
+.login-card {
+  margin: 15% auto;
+  width: 30%;
+}
+
+.login-card-full-width {
+  width: 100%;
+}
