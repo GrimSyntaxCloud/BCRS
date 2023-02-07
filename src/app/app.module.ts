@@ -13,6 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './pages/login/login.component';
 
+/**
+ * Description: Importing the Material Card Module. This is used to display cards for the application.
+ * link: https://material.angular.io/components/card/overview
+ */
+import {MatCardModule} from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +34,8 @@ import { LoginComponent } from './pages/login/login.component';
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
