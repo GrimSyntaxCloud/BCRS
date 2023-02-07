@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {BaseLayoutComponent} from "./shared/base-layout/base-layout.component";
-import {HomeComponent} from "./pages/home/home.component";
+import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 const routes: Routes = [
   {
@@ -11,13 +12,30 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent
-      }
-    ]
+      },
+    ],
+  },
+  {
+    path: '',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
   }
+  ]
+},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  /**
+   * Description: UseHash: true, enableTracing: false, scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy'
+   * UseHash: true - This is used to enable the hash location strategy.
+   * enableTracing: false - This is used to enable the router events.
+   * scrollPositionRestoration: 'enabled' - This is used to enable the scroll position restoration.
+  * relativeLinkResolution: 'legacy' - This is used to enable the legacy relative link resolution. Because of this, the router will use the first route that matches the URL.
+   */
+  imports: [RouterModule.forRoot(routes, { useHash: true, enableTracing: false, scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
