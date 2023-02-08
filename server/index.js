@@ -17,8 +17,12 @@ const SecurityQuestionsAPI = require("./routes/security-questions-api");
 
 // import MongoDB database connection string from config.json
 const config = require("./data/config.json");
+// Express variable.
+const app = express();
 
-const app = express(); // Express variable.
+// import swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 /**
  * App configurations.
@@ -44,8 +48,31 @@ const CONN = config.dbConn;
 mongoose.set("strictQuery", false);
 
 /**
- * APIs
+ * APIs go here
  */
+
+/* define an variable object named options for configuring swagger UI */
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "WEB450 Bob's Computer Repair Shop",
+      version: "1.0.0",
+    },
+  },
+  // files containing annotations for the OpenAPI Specification
+  apis: [
+    "./server/routes/security-questions-api.js",
+    // "./server/routes/users-api.js",
+  ],
+};
+
+/* call the swaggerJsdoc library using the options object literal. */
+const openapiSpecification = swaggerJsdoc(options);
+/* wire the openapiSpecification variable to the app variable. Configure express to use /api-docs route to serve swaggerJsdoc  */
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification)); // http://localhost:3000/api-docs
+
+// localhost:3000/api/security-questions/:id
 app.use("/api/security-questions", SecurityQuestionsAPI);
 
 /**
