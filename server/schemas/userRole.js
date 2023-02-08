@@ -9,10 +9,10 @@ Description: Creating role schema with mongoose
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// create the model of roleSchema to use with mongoose
+// create user role Schema to use with mongoose
 const userRoleSchema = new Schema({
   text: { type: String, default: "standard" },
 });
 
-// export roleSchema
+// export userRoleSchema
 module.exports = userRoleSchema;
