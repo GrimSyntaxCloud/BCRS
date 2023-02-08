@@ -13,6 +13,8 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 
+const SecurityQuestionsAPI = require("./routes/security-questions-api");
+
 // import MongoDB database connection string from config.json
 const config = require("./data/config.json");
 
@@ -42,6 +44,11 @@ const CONN = config.dbConn;
 mongoose.set("strictQuery", false);
 
 /**
+ * APIs
+ */
+app.use("/api/security-questions", SecurityQuestionsAPI);
+
+/**
  * Database connection.
  */
 mongoose
@@ -52,6 +59,14 @@ mongoose
   .catch((err) => {
     console.log("MongoDB Error: " + err.message);
   });
+
+mongoose.connection.on("error", (err) => {
+  console.log(config.mongoServerError + ": " + err.message);
+});
+
+mongoose.connection.on("disconnected", () => {
+  console.log("Server disconnected from host (MongoDB Atlas).");
+});
 
 // Wire-up the Express server.
 app.listen(PORT, () => {
