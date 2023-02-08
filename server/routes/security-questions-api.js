@@ -13,11 +13,11 @@ const config = require("../data/config.json");
 
 const router = express.Router();
 
-// Find all security questions for account registration form: Security Questions page
+// Find all security questions for the account registration form: Security Questions page
 // findAllSecurityQuestions
 /**
  * @openapi
- * /api/security-questions/list-questions:
+ * /api/security-questions:
  *   get:
  *     tags:
  *       - A list of security questions
@@ -26,7 +26,7 @@ const router = express.Router();
  *     summary: Returns a list of all security questions.
  *     operationId: findAllSecurityQuestions
  *     parameters:
- *       - name: list-questions
+ *       - name: security-questions
  *         in: path
  *         required: true
  *         description: Reads,retrieves a list of all security questions.
@@ -40,7 +40,7 @@ const router = express.Router();
  *       '501':
  *         description: MongoDB Exception
  */
-router.get("/list-questions", async (req, res) => {
+router.get("/", async (req, res) => {
   // find all security questions, or return an error message
   try {
     SecurityQuestion.find({}, function (err, securityQuestions) {
