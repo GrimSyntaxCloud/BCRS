@@ -66,4 +66,55 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Delete a security question by ID, deleteSecurityQuestionById;
+/**
+ * @openapi
+ * /api/security-questions/{id}:
+ *   delete:
+ *     tags:
+ *       - Security Questions
+ *     description: Reads,retrieves a security question by id and deletes it.
+ *     summary: deletes a security question by id
+ *     operationId: deleteSecurityQuestionById
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         scheme:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: A security question gets deleted
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.delete("/:id", async (req, res) => {
+  // find a security question by _id and delete it, or return an error message
+  try {
+    SecurityQuestion.findByIdAndDelete(
+      { _id: req.params.id },
+      function (err, securityQuestion) {
+        if (err) {
+          console.log(err);
+          // if there is a mongodb error, handle it and return a 501 error message
+          res.status(501).send({
+            err: config.mongoServerError + ": " + err.message,
+          });
+        } else {
+          console.log(securityQuestion);
+          res.json(securityQuestion);
+        }
+      }
+    );
+  } catch (e) {
+    console.log(e);
+    // internal Server Error
+    res.status(501).send({
+      err: config.mongoServerError + ": " + err.message,
+    });
+  }
+});
+
 module.exports = router;
