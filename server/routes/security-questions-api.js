@@ -13,6 +13,57 @@ const config = require("../data/config.json");
 
 const router = express.Router();
 
+// Find all security questions for account registration form: Security Questions page
+// findAllSecurityQuestions
+/**
+ * @openapi
+ * /api/security-questions/list-questions:
+ *   get:
+ *     tags:
+ *       - A list of security questions
+ *     name: findAllSecurityQuestions
+ *     description: Reads,retrieves a list of all security questions.
+ *     summary: Returns a list of all security questions.
+ *     operationId: findAllSecurityQuestions
+ *     parameters:
+ *       - name: list-questions
+ *         in: path
+ *         required: true
+ *         description: Reads,retrieves a list of all security questions.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Returned a list of all security questions
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.get("/list-questions", async (req, res) => {
+  // find all security questions, or return an error message
+  try {
+    SecurityQuestion.find({}, function (err, securityQuestions) {
+      if (err) {
+        console.log(err);
+        // if there is a mongodb error, handle it and return a 501 error message
+        res.status(501).send({
+          err: config.mongoServerError + ": " + err.message,
+        });
+      } else {
+        console.log(securityQuestions);
+        res.json(securityQuestions);
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    // internal Server Error
+    res.status(500).send({
+      err: config.serverError + ": " + err.message,
+    });
+  }
+});
+
 // Find an security question by ID , findSecurityQuestionById
 /**
  * @openapi
@@ -111,8 +162,8 @@ router.delete("/:id", async (req, res) => {
   } catch (e) {
     console.log(e);
     // internal Server Error
-    res.status(501).send({
-      err: config.mongoServerError + ": " + err.message,
+    res.status(500).send({
+      err: config.serverError + ": " + err.message,
     });
   }
 });
