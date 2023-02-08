@@ -2,7 +2,7 @@
 Title: auth.guard.ts
 Author: Professor Krasso
 Date: 02/07/2023
-Modified By: Modified By: Andres Macias/Patrick Wolff/April Yang
+Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Use cookie service to guard user login
 */
 
