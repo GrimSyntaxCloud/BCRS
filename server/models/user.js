@@ -9,7 +9,6 @@ Description: Creates the model of user schema with mongoose
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-//
 const userRoleSchema = require("../schemas/userRole");
 const selectedSecurityQuestionSchema = require("../schemas/selectedSecurityQuestion");
 
@@ -33,4 +32,4 @@ const userSchema = new Schema(
 );
 
 // exports user model
-module.expert = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
