@@ -29,13 +29,6 @@ const router = express.Router();
  *     description: Reads,retrieves all users.
  *     summary: Returns all users.
  *     operationId: findAllUsers
- *     parameters:
- *       - name: users
- *         in: path
- *         required: true
- *         description: Reads,retrieves all users.
- *         schema:
- *           type: string
  *     responses:
  *       '200':
  *         description: Returned all users
