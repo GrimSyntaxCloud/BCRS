@@ -18,6 +18,7 @@ const router = express.Router();
 
 // Find all security questions for the account registration form: Security Questions page
 // findAllSecurityQuestions
+
 /**
  * @openapi
  * /api/security-questions:

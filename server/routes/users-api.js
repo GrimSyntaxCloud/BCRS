@@ -8,6 +8,9 @@
 
 const express = require("express");
 const User = require("../models/user");
+// building reusable APIs
+const ErrorResponse = require("../services/error-response");
+const BaseResponse = require("../services/base-response");
 
 // import reuseable error messages from config.json
 const config = require("../data/config.json");
@@ -15,6 +18,7 @@ const config = require("../data/config.json");
 const router = express.Router();
 
 // Find all users, findAllUsers
+
 /**
  * @openapi
  * /api/users:
@@ -41,26 +45,41 @@ const router = express.Router();
  *         description: MongoDB Exception
  */
 router.get("/", async (req, res) => {
+  // find all users, or return an error message
   try {
-    // find all users, or return an error message
-    User.find({}, function (err, users) {
-      if (err) {
-        console.log(err);
-        // if there is a mongodb error, handle it and return a 501 error message
-        res.status(501).send({
-          err: config.mongoServerError + ": " + err.message,
-        });
-      } else {
-        console.log(users);
-        res.json(users);
-      }
-    });
+    User.find({})
+      .where("isDisabled")
+      .equals(false)
+      .exec(function (err, users) {
+        if (err) {
+          console.log(err);
+          const findAllMongoDBErrorResponse = new BaseResponse(
+            501,
+            `${config.mongoServerError}:${err.message}`,
+            null
+          );
+
+          console.log(findAllMongoDBErrorResponse.toObject());
+          res.status(501).send(findAllMongoDBErrorResponse.toObject());
+        } else {
+          const findAllResponse = new BaseResponse(
+            200,
+            `findAllUsers query was successful.`,
+            users
+          );
+          console.log(findAllResponse.toObject());
+          res.json(findAllResponse.toObject());
+        }
+      });
   } catch (e) {
-    console.log(e);
     // internal Server Error
-    res.status(500).send({
-      err: config.serverError + ": " + err.message,
-    });
+    const findAllErrorResponse = new ErrorResponse(
+      500,
+      `${config.serverError}:${err.message}`,
+      null
+    );
+    console.log(findAllErrorResponse.toObject());
+    res.status(500).send(findAllErrorResponse.toObject());
   }
 });
 
