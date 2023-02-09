@@ -79,14 +79,14 @@ app.use("/api/users", UserAPI);
 /**
  * Database connection.
  */
-mongoose
-  .connect(CONN)
-  .then(() => {
-    console.log("Connection to the database was successful");
-  })
-  .catch((err) => {
-    console.log("MongoDB Error: " + err.message);
-  });
+mongoose.connect(CONN)
+  .then(
+    () => {
+      console.log("Connection to the database was successful");
+    },
+    (err) => {
+      console.log("MongoDB Error: " + err.message);
+    });
 
 mongoose.connection.on("error", (err) => {
   console.log(config.mongoServerError + ": " + err.message);
