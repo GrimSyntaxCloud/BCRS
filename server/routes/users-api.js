@@ -29,13 +29,6 @@ const saltRounds = 10; // default salt rounds for hashing algorithm
  *     description: Reads,retrieves all users.
  *     summary: Returns all users.
  *     operationId: findAllUsers
- *     parameters:
- *       - name: users
- *         in: path
- *         required: true
- *         description: Reads,retrieves all users.
- *         schema:
- *           type: string
  *     responses:
  *       '200':
  *         description: Returned all users
