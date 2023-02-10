@@ -29,13 +29,6 @@ const router = express.Router();
  *     description: Reads,retrieves a list of all security questions.
  *     summary: Returns a list of all security questions.
  *     operationId: findAllSecurityQuestions
- *     parameters:
- *       - name: security-questions
- *         in: path
- *         required: true
- *         description: Reads,retrieves a list of all security questions.
- *         schema:
- *           type: string
  *     responses:
  *       '200':
  *         description: Returned a list of all security questions
@@ -47,10 +40,13 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // finds all security questions if isDisabled property is set to false, or return an error message
   try {
-    SecurityQuestion.find({})
-      .where("isDisabled")
-      .equals(false)
-      .exec(function (err, securityQuestions) {
+    SecurityQuestion.find({}, function (err, securityQuestions) {
+      /**
+       * TODO: Uncomment the following code when the isDisabled property is ready to be tested.
+       */
+      // .where("isDisabled")
+      // .equals(false)
+      // .exec(function (err, securityQuestions) {
         if (err) {
           console.log(err);
           const findAllMongoDBErrorResponse = new BaseResponse(
