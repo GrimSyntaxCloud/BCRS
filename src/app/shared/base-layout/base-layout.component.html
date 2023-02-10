@@ -11,7 +11,7 @@ Description: application base layout template
   <header>
     <nav>
       <mat-toolbar-row class="logoBar">
-        <!-- logo -->
+        <!-- logo bar wiht sign up and log in link-->
         <button class="logo" routerLink="/" mat-button>
           Bob's Computer Repair Shop
         </button>
@@ -20,7 +20,7 @@ Description: application base layout template
         <a href="" class="navbar-link-signUp" routerLink="/sign-up">Sign up</a>
         <a href="" class="navbar-link-logIn" routerLink="/log-in">Log in</a>
       </mat-toolbar-row>
-
+      <!-- slogen bar with page links -->
       <mat-toolbar-row class="slogenBar">
         <span class="slogen">Amazing Help!</span>
         <span class="example-spacer"></span>
@@ -29,10 +29,7 @@ Description: application base layout template
         <a href="" class="navbar-link" routerLink="/">About</a>
       </mat-toolbar-row>
     </nav>
-
-    <!-- </div> -->
   </header>
-  <!-- main content -->
 
   <div class="content">
     <router-outlet></router-outlet>
