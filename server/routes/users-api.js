@@ -71,11 +71,14 @@ router.get("/", async (req, res) => {
         }
       });
   } catch (e) {
-    console.log(e);
     // internal Server Error
-    res.status(500).send({
-      err: config.serverError + ": " + err.message,
-    });
+    const findAllErrorResponse = new ErrorResponse(
+      500,
+      `${config.serverError}:${err.message}`,
+      null
+    );
+    console.log(findAllErrorResponse.toObject());
+    res.status(500).send(findAllErrorResponse.toObject());
   }
 });
 

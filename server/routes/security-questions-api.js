@@ -29,6 +29,13 @@ const router = express.Router();
  *     description: Reads,retrieves a list of all security questions.
  *     summary: Returns a list of all security questions.
  *     operationId: findAllSecurityQuestions
+ *     parameters:
+ *       - name: security-questions
+ *         in: path
+ *         required: true
+ *         description: Reads,retrieves all security questions.
+ *         schema:
+ *           type: string
  *     responses:
  *       '200':
  *         description: Returned a list of all security questions
@@ -40,13 +47,11 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // finds all security questions if isDisabled property is set to false, or return an error message
   try {
-    SecurityQuestion.find({}, function (err, securityQuestions) {
-      /**
-       * TODO: Uncomment the following code when the isDisabled property is ready to be tested.
-       */
-      // .where("isDisabled")
-      // .equals(false)
-      // .exec(function (err, securityQuestions) {
+    SecurityQuestion.find({})
+
+      .where("isDisabled")
+      .equals(false)
+      .exec(function (err, securityQuestions) {
         if (err) {
           console.log(err);
           const findAllMongoDBErrorResponse = new BaseResponse(
@@ -185,15 +190,6 @@ router.delete("/:id", async (req, res) => {
           console.log(deleteByIdMongoDBErrorResponse.toObject());
           res.status(501).send(deleteByIdMongoDBErrorResponse.toObject());
         } else {
-          // const deleteByIdResponse = new BaseResponse(
-          //   200,
-          //   `deleteSecurityQuestionById query was successful.`,
-
-          //   securityQuestion.set({
-          //     isDisabled: true,
-          //   })
-          // );
-
           securityQuestion.set({
             isDisabled: true,
           });
