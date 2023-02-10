@@ -1,7 +1,47 @@
-.logo {
+/*
+Title: base-layout.component.css
+Author: Professor Krasso
+Date: 01/03/2023
+Modified By: April Yang
+Description: styling for base-layout template
+*/
+
+
+
+/* .logo {
   margin-left: 75px;
-  font-size: 24px;
-  font-weight: lighter;;
+  font-size: 28px;
+  color: white;
+  font-weight: Regular;
+  margin-right: 20px;
+  margin-left: 10px;
+  font-family: Grand Hotel;
+} */
+
+.logo{
+  color: #FFFFFF;
+  font-family: 'Grand Hotel';
+  font-size: 45px;
+  text-align: left;
+}
+
+.logoBar{
+  height: 100px;
+  background-color: #740001;
+  padding: 0 36px;
+}
+
+.slogenBar{
+  background-color: #eeba30;
+  height: 40px;
+  color: #47525e;
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 30px;
+  padding: 0 36px;
+}
+
+.slogen{
+  margin: 2px 0 2px 70px;
 }
 
 .navbar-container {
@@ -9,8 +49,60 @@
 }
 
 .navbar-link {
-  font-size: 24px;
-  font-weight: lighter;
+  font-size: 20px;
+  color: #47525E;
+  margin-right: 10px;
+  font-family: Abril Fatface;
+  text-decoration: none;
+}
+
+.navbar-link-signUp{
+  color: white;
+  margin-top: 50px;
+  margin-right: 30px;
+  font-size: 20px;
+  margin-right: 10px;
+  font-family: Abril Fatface;
+  text-decoration: none;
+}
+
+.navbar-link-logIn{
+  color: white;
+  margin-top: 50px;
+  font-size: 20px;
+  margin-right: 10px;
+  font-family: Abril Fatface;
+  text-decoration: none;
+}
+
+.example-spacer {
+  flex: 5 5 auto;
+}
+
+
+.profileMenu{
+  font-size: 40px;
+  overflow: visible;
+
+}
+
+.logout-link{
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #D3A625 ;
+  text-align: center;
+  font-family: Inter;
+  color:white;
+  margin-left:15px;
+}
+
+
+.empName{
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-family: Inter;
+  background-color: #D9D9D9;
 }
 
 .main-content {
@@ -21,6 +113,7 @@
   bottom: 0;
   position: absolute;
   width: 100%;
+  position: fixed;
 }
 
 .footer-content {

@@ -5,3 +5,55 @@ Updated Date: 02/09/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: application base layout template
 -->
+
+<div fxLayout="column">
+  <!-- navigation -->
+  <header>
+    <!-- <div fxLayout> -->
+    <nav>
+      <mat-toolbar-row class="logoBar">
+        <!-- navbar container -->
+        <!-- <div class="navbar-container"> -->
+        <!-- logo -->
+        <button class="logo" routerLink="/" mat-button>
+          Bob's Computer Repair Shop
+        </button>
+        <!-- routerLink for sign up and log in -->
+        <span class="example-spacer"></span>
+        <a href="" class="navbar-link-signUp" routerLink="/sign-up">Sign up</a>
+        <a href="" class="navbar-link-logIn" routerLink="/log-in">Log in</a>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row class="slogenBar">
+        <span class="slogen">Amazing Help!</span>
+        <span class="example-spacer"></span>
+        <a href="" class="navbar-link" routerLink="/">Home</a>
+        <a href="" class="navbar-link" routerLink="/about">About</a>
+        <a href="" class="navbar-link" routerLink="/contact">Contact Us</a>
+      </mat-toolbar-row>
+    </nav>
+
+    <!-- </div> -->
+  </header>
+  <!-- main content -->
+
+  <div class="content">
+    <!-- <main class="main-content" fxFlex="100%;"> -->
+    <router-outlet></router-outlet>
+    <!-- </main> -->
+  </div>
+
+  <!-- footer -->
+  <div fxFlex>
+    <footer class="footer">
+      <mat-toolbar class="footer-content">
+        <p>
+          &copy; {{ year | date : "yyyy" }} - nodebucket -
+          <a href="https://www.bellevue.edu/" class="bu-link" target="_blank"
+            >Bellevue University</a
+          >
+        </p>
+      </mat-toolbar>
+    </footer>
+  </div>
+</div>

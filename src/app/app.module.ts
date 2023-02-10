@@ -21,8 +21,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';//
 import { MatInputModule } from '@angular/material/input';//
 import { MatDialogModule } from '@angular/material/dialog'; //
 import { MatTableModule } from '@angular/material/table'; //
+import { MatDividerModule } from '@angular/material/divider';//
 import { LoginComponent } from './pages/login/login.component'; //
-import { CookieService } from 'ngx-cookie-service';import { MatDividerModule } from '@angular/material/divider';
+import { CookieService } from 'ngx-cookie-service';
 
 /* -------- PrimeNg Materials -------- */
 import { TableModule } from 'primeng/table';
@@ -58,6 +59,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MatMenuModule,
     MatDialogModule,
     MatTableModule,
+    MatDividerModule,
     // NgPrime Materials
     TableModule,
     MessageModule,
