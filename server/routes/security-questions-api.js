@@ -29,13 +29,6 @@ const router = express.Router();
  *     description: Reads,retrieves a list of all security questions.
  *     summary: Returns a list of all security questions.
  *     operationId: findAllSecurityQuestions
- *     parameters:
- *       - name: security-questions
- *         in: path
- *         required: true
- *         description: Reads,retrieves all security questions.
- *         schema:
- *           type: string
  *     responses:
  *       '200':
  *         description: Returned a list of all security questions
