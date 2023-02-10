@@ -1,22 +1,11 @@
 /*
 Title: base-layout.component.css
 Author: Professor Krasso
-Date: 01/03/2023
-Modified By: April Yang
+Date: 02/09/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: styling for base-layout template
 */
 
-
-
-/* .logo {
-  margin-left: 75px;
-  font-size: 28px;
-  color: white;
-  font-weight: Regular;
-  margin-right: 20px;
-  margin-left: 10px;
-  font-family: Grand Hotel;
-} */
 
 .logo{
   color: #FFFFFF;
@@ -116,20 +105,6 @@ Description: styling for base-layout template
   position: fixed;
 }
 
-/* .footer-content {
-  font-size: 16px;
-  font-weight: lighter;
-  padding-left: 100px;
-  letter-spacing: 3px;
-} */
-
-.bu-link {
-  text-decoration: none;
-}
-
-.bu-link:hover {
-  text-decoration: underline;
-}
 
 .copyRight{
   color: #47525E;
