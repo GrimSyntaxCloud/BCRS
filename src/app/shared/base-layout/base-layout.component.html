@@ -9,11 +9,8 @@ Description: application base layout template
 <div fxLayout="column">
   <!-- navigation -->
   <header>
-    <!-- <div fxLayout> -->
     <nav>
       <mat-toolbar-row class="logoBar">
-        <!-- navbar container -->
-        <!-- <div class="navbar-container"> -->
         <!-- logo -->
         <button class="logo" routerLink="/" mat-button>
           Bob's Computer Repair Shop
@@ -38,21 +35,18 @@ Description: application base layout template
   <!-- main content -->
 
   <div class="content">
-    <!-- <main class="main-content" fxFlex="100%;"> -->
     <router-outlet></router-outlet>
-    <!-- </main> -->
   </div>
 
   <!-- footer -->
   <div fxFlex>
     <footer class="footer">
       <mat-toolbar class="footer-content">
-        <p>
-          &copy; {{ year | date : "yyyy" }} - nodebucket -
-          <a href="https://www.bellevue.edu/" class="bu-link" target="_blank"
-            >Bellevue University</a
-          >
-        </p>
+        <span class="copyRight">
+          &copy; Copyright {{ year | date : "yyyy" }} Bob's Computer Repair Shop
+        </span>
+        <span class="example-spacer"></span>
+        <p class="contributors">Andres Macias/Patrick Wolff/April Yang</p>
       </mat-toolbar>
     </footer>
   </div>

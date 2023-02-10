@@ -116,12 +116,12 @@ Description: styling for base-layout template
   position: fixed;
 }
 
-.footer-content {
+/* .footer-content {
   font-size: 16px;
   font-weight: lighter;
   padding-left: 100px;
   letter-spacing: 3px;
-}
+} */
 
 .bu-link {
   text-decoration: none;
@@ -129,4 +129,21 @@ Description: styling for base-layout template
 
 .bu-link:hover {
   text-decoration: underline;
+}
+
+.copyRight{
+  color: #47525E;
+  font-family: Abril Fatface;
+  font-size: 15px;
+  text-align: left;
+   padding-left: 20px;
+}
+
+.contributors{
+  color: #47525E;
+  font-family: Abril Fatface;
+  font-size: 15px;
+  text-align: left;
+   padding-right: 20px;
+
 }
