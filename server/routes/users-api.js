@@ -40,14 +40,10 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // find all users, or return an error message
   try {
-    User.find({}, function(err, users) {
-      /**
-       * TODO: Uncomment this code when we have more users and ready to test the API with the isDisabled flag
-       * Keep this commented out, api will not work with this code for now.
-       */
-      // .where("isDisabled")
-      // .equals(false)
-      // .exec(function (err, users) {
+    User.find({})
+      .where("isDisabled")
+      .equals(false)
+      .exec(function (err, users) {
         if (err) {
           console.log(err);
           const findAllMongoDBErrorResponse = new BaseResponse(
