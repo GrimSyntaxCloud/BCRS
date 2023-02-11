@@ -1,3 +1,12 @@
+/*
+Title: base-layout.component.ts
+Author: Professor Krasso
+Date: 02/09/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: application layout component
+*/
+
+
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
