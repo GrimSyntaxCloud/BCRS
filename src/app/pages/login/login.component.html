@@ -6,26 +6,41 @@
   Description: Login page for the application.
 -->
 
-<div fxLayout="column" >
+<div fxLayout>
   <mat-card class="mat-elevation-z0 login-card">
-    <mat-card-header>
-      <mat-card-title >
-       <h1 class="login-card-title" >Login</h1>
+    <mat-card-header class="padding-bottom-5" fxLayoutAlign="center">
+      <mat-card-title>
+        <h1 class="card-title">Login</h1>
       </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
       <form>
         <mat-card-content>
-          <mat-form-field appearance="fill" class="login-card-full-width">
-            <input type="text" matInput placeholder="Username" formControlName="username">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput>
           </mat-form-field>
           <br>
-          <mat-form-field appearance="fill" class="login-card-full-width">
-            <input type="password" matInput placeholder="Password" formControlName="password">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput>
           </mat-form-field>
+          <button class="full-width" mat-raised-button>Submit</button>
         </mat-card-content>
       </form>
+      <div fxLayout fxLayoutAlign="space-between">
+        <!--
+          TODO:
+          - Add sign up route
+        -->
+        <a href="" class="navbar-link" routerLink="#">Sign up</a>
+        <!--
+          TODO:
+          - Add forgot password route
+        -->
+        <a href="" class="navbar-link" routerLink="#">Forgot Password</a>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
