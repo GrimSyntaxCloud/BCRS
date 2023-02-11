@@ -39,7 +39,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     HomeComponent,
     AuthLayoutComponent,
     BaseLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    AuthLayoutComponent
   ],
   imports: [
      // Angular Materials
@@ -65,8 +66,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MessageModule,
     MessagesModule,
     ButtonModule,
-    ConfirmDialogModule,
-
+    ConfirmDialogModule
   ],
 
   providers: [CookieService],
