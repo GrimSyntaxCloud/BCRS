@@ -76,6 +76,35 @@ router.get("/", async (req, res) => {
 });
 
 // Create User
+/**
+@openapi
+ * /api/users:
+ *   post:
+ *     tags:
+ *       - Users
+ *     description: API to create new user objects
+ *     summary: Creates a new user object
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *              userName:
+ *                type: string
+ *              password:
+ *                type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
 
 router.post("/", async (req, res) => {
   try {
@@ -124,6 +153,66 @@ router.post("/", async (req, res) => {
       e.message
     );
     res.status(500).send(createUserCatchErrorResponse.toObject());
+  }
+});
+
+// Delete User
+/**
+@openapi
+ * /api/user/{id}:
+ *  post:
+ *      tags:
+ *          - user
+ *      description: Deletes a user
+ *      summary: Delete a user from the database
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: the id of the employee to update
+ *            required: yes
+ *            schema:
+ *              type: number
+ *      response:
+ *          '200':
+ *              description: Document updated
+ *          '500':
+ *              description: Server Exception
+ *          '501':
+ *              description: MongoDB Exception
+ */
+
+router.delete('/:id', async (req, res) => {
+  try {
+    User.findOne({'_id': req.params.id}, function(err, user) {
+      if (err) {
+        console.log(err);
+        const deleteUserMongodbErrorResponse = new ErrorResponse(500, 'Internal sever error', err);
+        res.status(500).send(deleteUserMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+
+        user.set({
+          isDisabled: true,
+          dateModified: new Date()
+        });
+
+        user.save(function(err, savedUser) {
+          if (err) {
+            console.log(err);
+            const savedUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+            res.json(savedUserMongodbErrorResponse.toObject());
+          } else {
+            console.log(savedUser);
+            const savedUserResponse = new BaseResponse(200, 'Query successful', savedUser);
+            res.json(savedUserResponse.toObject());
+          }
+        })
+      }
+    })
+  } catch(e){
+    console.log(e);
+    const deleteUserCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    res.status(500).send(deleteUserCatchErrorResponse.toObject());
   }
 });
 
