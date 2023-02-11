@@ -41,7 +41,8 @@ import { SecurityQuestionListComponent } from './pages/security-question-list/se
     AuthLayoutComponent,
     BaseLayoutComponent,
     LoginComponent,
-    SecurityQuestionListComponent
+    SecurityQuestionListComponent,
+    AuthLayoutComponent
   ],
   imports: [
      // Angular Materials
@@ -67,8 +68,7 @@ import { SecurityQuestionListComponent } from './pages/security-question-list/se
     MessageModule,
     MessagesModule,
     ButtonModule,
-    ConfirmDialogModule,
-
+    ConfirmDialogModule
   ],
 
   providers: [CookieService],

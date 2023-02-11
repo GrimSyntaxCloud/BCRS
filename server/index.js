@@ -15,6 +15,7 @@ const mongoose = require("mongoose");
 
 const SecurityQuestionsAPI = require("./routes/security-questions-api");
 const UserAPI = require("./routes/users-api");
+const SessionAPI = require("./routes/session-api");
 
 // import MongoDB database connection string from config.json
 const config = require("./data/config.json");
@@ -65,6 +66,7 @@ const options = {
   apis: [
     "./server/routes/security-questions-api.js",
     "./server/routes/users-api.js",
+    "./server/routes/session-api.js"
   ],
 };
 
@@ -76,6 +78,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification)); //
 // localhost:3000/api/security-questions/:id
 app.use("/api/security-questions", SecurityQuestionsAPI);
 app.use("/api/users", UserAPI);
+app.use("/api/session", SessionAPI);
 /**
  * Database connection.
  */

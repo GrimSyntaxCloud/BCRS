@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-/* * {
-  font-family: 'Lato', sans-serif;
-} */
+
+/*
+- Description: flex layout documentation. DO NOT REMOVE THIS COMMENT
+- link: https://github.com/angular/flex-layout/wiki/API-Documentation */
 
 html,
 body {
@@ -13,6 +14,42 @@ body {
 
 }
 
-/* h1, h2, h3, h4, h5, h6 {
+/**********
+Generic utility styles
+***********/
+
+.full-width {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+h1.card-title {
+  font-size: 56px;
+}
+
+.padding-bottom-5 {
+  padding-bottom: 5em;
+}
+
+/* Global styles for paragraphs */
+* p {
+  font-family: 'Lato', sans-serif;
+}
+
+
+/* Global styles for the heading elements */
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Abril Fatface', cursive !important;
-} */
+}
+
+/* Global styles for the anchor elements */
+a {
+  text-decoration: none;
+  color: #47525E;
+  font-weight: bold;
+}
+
+
