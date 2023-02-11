@@ -32,6 +32,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SecurityQuestionListComponent } from './pages/security-question-list/security-question-list.component';
+import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
 // import { ConfirmationService } from 'priment/api';
 
 @NgModule({
@@ -42,7 +43,8 @@ import { SecurityQuestionListComponent } from './pages/security-question-list/se
     BaseLayoutComponent,
     LoginComponent,
     SecurityQuestionListComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    SecurityQuestionDetailsComponent
   ],
   imports: [
      // Angular Materials

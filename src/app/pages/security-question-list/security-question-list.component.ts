@@ -1,3 +1,11 @@
+/*
+Title: security-question-list.component.ts
+Author: Professor Krasso
+Updated Date: 02/11/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description:
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { SecurityQuestionService } from 'src/app/shared/services/security-question.service';
@@ -14,7 +22,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   providers: [ConfirmationService] // primeng
 })
 export class SecurityQuestionListComponent implements OnInit {
-
   securityQuestions: SecurityQuestion[];
   sqForm: FormGroup = this.fb.group({
     text:[null, Validators.compose([Validators.required])]
@@ -39,25 +46,25 @@ export class SecurityQuestionListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // create(): void {
-  //   const sqText = this.sqForm.controls['text'].value;
+  create(): void {
+    const sqText = this.sqForm.controls['text'].value;
 
-  //   const newSq = {
-  //     text: sqText
-  //   }
+    const newSq = {
+      text: sqText
+    }
 
-  //   this.securityQuestionService.createSecurityQuestion(newSq).subscribe({
-  //     next: (res) => {
-  //       this.securityQuestions.push(res.data);
-  //     },
-  //     error: (e) => {
-  //       console.log(e);
-  //     },
-  //     complete: () => {
-  //       this.sqForm.controls['text'].setErrors({'incorrect': false})
-  //     }
-  //   })
-  // }
+    this.securityQuestionService.createSecurityQuestion(newSq).subscribe({
+      next: (res) => {
+        this.securityQuestions.push(res.data);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.sqForm.controls['text'].setErrors({'incorrect': false})
+      }
+    })
+  }
 
   delete(sqId: string): void{
     this.confirmationService.confirm({
