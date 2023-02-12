@@ -10,11 +10,12 @@ Description: Create, display security questions template
 <p-confirmDialog
   [style]="{ width: '35vw' }"
   [baseZIndex]="10000"
-  rejectButtonStyleClass="p-button-text"
-></p-confirmDialog>
+  rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
 
 <!-- page title -->
 <div fxLayout="column" fxLayoutGap="20px">
+
   <div fxFlex>
     <h1 class="title">
       Security Questions Configuration Page! <br />
@@ -23,11 +24,12 @@ Description: Create, display security questions template
       </span>
     </h1>
   </div>
+
   <!-- enter and submit security question form or returns error messages-->
   <div fxFlex>
     <div fxLayout="column">
       <mat-card>
-        <form [formGroup]="sqForm" (ngSubmit)="create(); sqForm.reset()">
+        <form [formGroup]="sqForm" (ngSubmit)="create(); sqForm.reset();">
           <mat-form-field appearance="fill" class="w-100">
             <mat-label>Security question</mat-label>
             <input
@@ -35,29 +37,26 @@ Description: Create, display security questions template
               matInput
               formControlName="text"
               required
-              placeholder="Enter a security question..."
-            />
-            <button
+              placeholder="Enter a security question..." />
+
+              <button
               type="submit"
               [disabled]="!sqForm.valid"
               mat-icon-button
-              matSuffix
-            >
+              matSuffix>
+
               <mat-icon
                 color="primary"
                 style="width: 36px; height: 36px; font-size: 36px"
-                matSuffix
-                >add_circle</mat-icon
-              >
+                matSuffix>
+                add_circle</mat-icon>
             </button>
           </mat-form-field>
 
           <mat-error
-            *ngIf="
-              sqForm.controls['text'].hasError('required') &&
-              sqForm.controls['text'].touched
-            "
-          >
+            *ngIf=
+              "sqForm.controls['text'].hasError('required') &&
+              sqForm.controls['text'].touched">
             Security question is a required field.
           </mat-error>
         </form>
@@ -85,16 +84,16 @@ Description: Create, display security questions template
               type="button"
               routerLink="/security-questions/{{ sq._id }}"
               icon="pi pi-pencil"
-              class="p-button-rounded p-button-text"
-            ></button>
+              class="p-button-rounded p-button-text">
+            </button>
             <button
               pButton
               pRipple
               type="button"
               (click)="delete(sq._id)"
               icon="pi pi-trash"
-              class="p-button-rounded p-button-text"
-            ></button>
+              class="p-button-rounded p-button-text">
+            </button>
           </td>
         </tr>
       </ng-template>

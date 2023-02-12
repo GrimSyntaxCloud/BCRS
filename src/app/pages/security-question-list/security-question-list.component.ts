@@ -10,10 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { SecurityQuestionService } from 'src/app/shared/services/security-question.service';
 import { SecurityQuestion } from 'src/app/shared/models/security-question.interface';
-import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-
 
 @Component({
   selector: 'app-security-question-list',
@@ -25,7 +22,7 @@ export class SecurityQuestionListComponent implements OnInit {
   securityQuestions: SecurityQuestion[];
   sqForm: FormGroup = this.fb.group({
     text:[null, Validators.compose([Validators.required])]
-  })
+  });
 
   constructor(private securityQuestionService: SecurityQuestionService,
     private confirmationService: ConfirmationService,

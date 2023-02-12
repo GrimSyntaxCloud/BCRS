@@ -33,6 +33,8 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SecurityQuestionListComponent } from './pages/security-question-list/security-question-list.component';
 import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { DeleteRecordDialogComponent } from './shared/delete-record-dialog/delete-record-dialog.component';
 // import { ConfirmationService } from 'priment/api';
 
 @NgModule({
@@ -44,7 +46,9 @@ import { SecurityQuestionDetailsComponent } from './pages/security-question-deta
     LoginComponent,
     SecurityQuestionListComponent,
     AuthLayoutComponent,
-    SecurityQuestionDetailsComponent
+    SecurityQuestionDetailsComponent,
+    UserDetailsComponent,
+    DeleteRecordDialogComponent
   ],
   imports: [
      // Angular Materials
