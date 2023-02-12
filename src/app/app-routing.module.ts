@@ -5,6 +5,8 @@ import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { AuthGuard } from './auth.guard';
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
+import { SecurityQuestionListComponent } from './pages/security-question-list/security-question-list.component';
+import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
 
 const routes: Routes = [
   {
@@ -15,9 +17,22 @@ const routes: Routes = [
         path: '',
         component: HomeComponent
       },
+      {
+      path: 'security-questions',
+      component: SecurityQuestionListComponent,
+      },
+      {
+      path: 'security-questions/:questionId',
+      component: SecurityQuestionDetailsComponent,
+      },
+
     ],
     canActivate: [AuthGuard]
   },
+
+
+
+
   {
     path: 'session',
     component: AuthLayoutComponent,
