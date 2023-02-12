@@ -17,11 +17,36 @@ Description: application base layout template
         </button>
         <!-- routerLink for sign up and log in -->
         <span class="example-spacer"></span>
-        <a href="" class="navbar-link-signUp" routerLink="/signup">Sign up</a>
-        <a href="" class="navbar-link-logIn" routerLink="/session/login"
-          >Log in</a
-        >
+
+        <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
+          <mat-icon>person</mat-icon>
+        </button>
+
+        <mat-menu #session="matMenu" x-position="before">
+
+          <button mat-menu-item [matMenuTriggerFor]="configs">
+            <mat-icon>settings</mat-icon>
+            Configurations
+          </button>
+
+          <mat-menu #configs="matMenu">
+            <button mat-menu-item routerLink="/users">
+              <mat-icon>person_add</mat-icon>
+              Users
+            </button>
+            <button mat-menu-item routerLink="/security-questions">
+              <mat-icon>help</mat-icon>
+              Security Questions
+            </button>
+          </mat-menu>
+
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit-to-app</mat-icon>
+            Sign out
+          </button>
+        </mat-menu>
       </mat-toolbar-row>
+
       <!-- slogen bar with page links -->
       <mat-toolbar-row class="slogenBar">
         <span class="slogen">Amazing Help!</span>
