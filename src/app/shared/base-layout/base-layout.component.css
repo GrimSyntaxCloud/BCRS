@@ -45,7 +45,17 @@ Description: styling for base-layout template
   text-decoration: none;
 }
 
-.navbar-link-signUp{
+.profileIcon{
+  color: white;
+  margin-top: 20px;
+  font-size: 50px;
+  margin-right: 100px;
+  overflow:visible;
+}
+
+
+
+/* .navbar-link-signUp{
   color: white;
   margin-top: 50px;
   margin-right: 30px;
@@ -62,10 +72,10 @@ Description: styling for base-layout template
   margin-right: 10px;
   font-family: Abril Fatface;
   text-decoration: none;
-}
+} */
 
 .example-spacer {
-  flex: 5 5 auto;
+  flex: 4 4 auto;
 }
 
 

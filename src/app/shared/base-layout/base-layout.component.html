@@ -19,11 +19,10 @@ Description: application base layout template
         <span class="example-spacer"></span>
 
         <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
-          <mat-icon>person</mat-icon>
+          <mat-icon class="profileIcon">person</mat-icon>
         </button>
 
         <mat-menu #session="matMenu" x-position="before">
-
           <button mat-menu-item [matMenuTriggerFor]="configs">
             <mat-icon>settings</mat-icon>
             Configurations
