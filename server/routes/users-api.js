@@ -24,7 +24,7 @@ const saltRounds = 10; // default salt rounds for hashing algorithm
  * /api/users:
  *   get:
  *     tags:
- *       - All users
+ *       - Users
  *     name: findAllUsers
  *     description: Reads,retrieves all users.
  *     summary: Returns all users.
@@ -78,7 +78,7 @@ router.get("/", async (req, res) => {
 // Create User
 /**
 @openapi
- * /api/users:
+ * /api/user:
  *   post:
  *     tags:
  *       - Users
@@ -105,7 +105,6 @@ router.get("/", async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-
 router.post("/", async (req, res) => {
   try {
     let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
@@ -156,13 +155,121 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Delete User
+
+// Find User by Id
 /**
-@openapi
+ * @openapi
  * /api/user/{id}:
  *  post:
  *      tags:
- *          - user
+ *          - Users
+ *      description: finds user by Id
+ *      summary: retrieves a user from the database
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: the id of the employee to update
+ *            required: yes
+ *            schema:
+ *              type: number
+ *      response:
+ *          '200':
+ *              description: Document updated
+ *          '500':
+ *              description: Server Exception
+ *          '501':
+ *              description: MongoDB Exception
+ */
+
+router.get('/:id', async (req, res) => {
+  try {
+    User.findOne({'_id': req.params.id}, function(err, user) {
+      if (err) {
+        console.log(err);
+        const findByIdMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+        res.status(500).send(findByIdMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+      }
+    })
+  } catch(e){
+    console.log(e);
+    const findByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    res.status(500).send(findByIdCatchErrorResponse.toObject());
+  }
+});
+
+// Update user by Id
+/**
+ * @openapi
+ * /api/user/{id}:
+ *  put:
+ *      tags:
+ *          - Users
+ *      description: finds user by Id
+ *      summary: retrieves a user from the database
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: the id of the employee to update
+ *            required: yes
+ *            schema:
+ *              type: number
+ *      response:
+ *          '200':
+ *              description: Document updated
+ *          '500':
+ *              description: Server Exception
+ *          '501':
+ *              description: MongoDB Exception
+ */
+
+router.put('/:id', async (req, res) => {
+  try {
+    User.findOne({'_id': req.params.id}, function(err, user) {
+      if (err) {
+        console.log(err);
+        const updateUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+        res.status(500).send(updateUserMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+
+        user.set({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          phoneNumber: req.body.phoneNumber,
+          address: req.body.address,
+          email: req.body.email,
+          dateModified: new Date()
+        })
+
+        user.save(function(err, savedUser) {
+          if (err) {
+            console.log(err);
+            const saveUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+            res.status(500).send(saveUserMongodbErrorResponse.toObject());
+          } else {
+            console.log(savedUser);
+            const saveUserResponse = new BaseResponse(200, 'Query successful', savedUser);
+            res.json(saveUserResponse.toObject());
+          }
+        })
+      }
+    })
+  } catch(e){
+    console.log(e);
+    const updateUserCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    res.status(500).send(updateUserCatchErrorResponse.toObject());
+  }
+});
+
+// Delete User
+/**
+ * @openapi
+ * /api/user/{id}:
+ *  post:
+ *      tags:
+ *          - Users
  *      description: Deletes a user
  *      summary: Delete a user from the database
  *      parameters:
