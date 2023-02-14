@@ -15,24 +15,30 @@
     </mat-card-header>
 
     <mat-card-content>
+          <!-- Error messages -->
+    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
       <form [formGroup]="loginForm" (ngSubmit)="login(); loginForm.reset()">
-        <!--
-          TODO:
-          - Add username and password validation
-        -->
+
         <mat-card-content>
+
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Username</mat-label>
             <input type="text" matInput formControlName="userName">
+
+            <mat-error *ngIf="loginForm.controls['userName'].hasError('required') && loginForm.controls['userName'].touched">Username is required.</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName="password">
+
+            <mat-error *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required.</mat-error>
+
+            <mat-error *ngIf="loginForm.controls['password'].hasError('pattern') && loginForm.controls['password'].touched">Password must be at least 8 characters.</mat-error>
           </mat-form-field>
 
           <mat-card-actions>
-            <button type="submit" class="full-width" mat-raised-button>Submit</button>
+            <button type="submit" class="full-width btn-primary" mat-raised-button [disabled]="!loginForm.valid">Submit</button>
           </mat-card-actions>
 
         </mat-card-content>

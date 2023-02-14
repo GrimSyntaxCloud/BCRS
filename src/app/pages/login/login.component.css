@@ -2,3 +2,8 @@
   margin: 10em auto;
   width: 30em;
 }
+
+.btn-primary {
+  background-color: #740001;
+  color: white;
+}
