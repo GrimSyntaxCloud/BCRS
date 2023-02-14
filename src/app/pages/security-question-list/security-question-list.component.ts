@@ -67,7 +67,7 @@ export class SecurityQuestionListComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this record?',
       header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+      icon: '<div style="background-color: #D3A625; color: black">pi pi-exclamation-triangle</div>',
       accept: () => {
         this.securityQuestionService.deleteSecurityQuestion(sqId).subscribe({
           next: (res) => {
