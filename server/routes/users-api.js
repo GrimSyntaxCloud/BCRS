@@ -77,25 +77,29 @@ router.get("/", async (req, res) => {
 
 // Create User
 /**
-@openapi
+ * @openapi
  * /api/user:
  *   post:
  *     tags:
  *       - Users
- *     description: API to create new user objects
+ *     description: API to create new user
  *     summary: Creates a new user object
  *     requestBody:
- *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             required:
- *               - userName
- *               - password
  *             properties:
  *              userName:
  *                type: string
  *              password:
+ *                type: string
+ *              firstName:
+ *                type: string
+ *              lastName:
+ *                type: string
+ *              phoneNumber:
+ *                type: string
+ *              address:
  *                type: string
  *     responses:
  *       '200':
@@ -109,7 +113,7 @@ router.post("/", async (req, res) => {
   try {
     let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
 
-    standardRole = {
+   let standardRole = {
       text: "standard",
     };
 
@@ -128,29 +132,17 @@ router.post("/", async (req, res) => {
     User.create(newUser, function (err, user) {
       if (err) {
         console.log(err);
-        const createUserMongodbErrorResponse = new ErrorResponse(
-          500,
-          "Internal server error",
-          err
-        );
+        const createUserMongodbErrorResponse = new ErrorResponse(500,"Internal server error",err);
         res.status(500).send(createUserMongodbErrorResponse.toObject());
       } else {
         console.log(user);
-        const CreateUserResponse = new BaseResponse(
-          200,
-          "Query successful",
-          user
-        );
+        const CreateUserResponse = new BaseResponse(200,"Query successful",user);
         res.json(CreateUserResponse.toObject());
       }
     });
   } catch (e) {
     console.log(e);
-    const createUserCatchErrorResponse = ErrorResponse(
-      500,
-      "Internal server error",
-      e.message
-    );
+    const createUserCatchErrorResponse = ErrorResponse(500,"Internal server error",e.message);
     res.status(500).send(createUserCatchErrorResponse.toObject());
   }
 });
@@ -159,8 +151,8 @@ router.post("/", async (req, res) => {
 // Find User by Id
 /**
  * @openapi
- * /api/user/{id}:
- *  post:
+ * /api/users/{id}:
+ *  get:
  *      tags:
  *          - Users
  *      description: finds user by Id
@@ -168,10 +160,10 @@ router.post("/", async (req, res) => {
  *      parameters:
  *          - in: path
  *            name: id
- *            description: the id of the employee to update
+ *            description: find the user by id
  *            required: yes
  *            schema:
- *              type: number
+ *              type: string
  *      response:
  *          '200':
  *              description: Document updated
@@ -202,12 +194,12 @@ router.get('/:id', async (req, res) => {
 // Update user by Id
 /**
  * @openapi
- * /api/user/{id}:
+ * /api/users/{id}:
  *  put:
  *      tags:
  *          - Users
- *      description: finds user by Id
- *      summary: retrieves a user from the database
+ *      description: updates a user by Id
+ *      summary: updates a user from the database
  *      parameters:
  *          - in: path
  *            name: id
@@ -266,8 +258,8 @@ router.put('/:id', async (req, res) => {
 // Delete User
 /**
  * @openapi
- * /api/user/{id}:
- *  post:
+ * /api/users/{id}:
+ *  delete:
  *      tags:
  *          - Users
  *      description: Deletes a user
@@ -278,7 +270,7 @@ router.put('/:id', async (req, res) => {
  *            description: the id of the employee to update
  *            required: yes
  *            schema:
- *              type: number
+ *              type: string
  *      response:
  *          '200':
  *              description: Document updated
