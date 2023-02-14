@@ -35,7 +35,8 @@ import { SecurityQuestionListComponent } from './pages/security-question-list/se
 import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { DeleteRecordDialogComponent } from './shared/delete-record-dialog/delete-record-dialog.component';
-// import { ConfirmationService } from 'priment/api';
+import { ConfirmationService } from 'primeng/api';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
 
 @NgModule({
   declarations: [

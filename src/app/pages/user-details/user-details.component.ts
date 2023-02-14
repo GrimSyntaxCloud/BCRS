@@ -1,5 +1,5 @@
 /*
-Title: user-detailst.component.ts
+Title: user-details.component.ts
 Author: Professor Krasso
 Updated Date: 02/11/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
