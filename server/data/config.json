@@ -1,0 +1,5 @@
+{
+  "dbConn": "REMOVED_EXPOSED_CREDENTIAL",
+  "serverError": "Internal Server Error",
+  "mongoServerError": "MongoDB Server Error"
+}
