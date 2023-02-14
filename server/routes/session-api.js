@@ -6,6 +6,37 @@ const BaseResponse = require("../services/base-response");
 const ErrorResponse = require("../services/error-response");
 const router = express.Router();
 
+// Create User
+/**
+@openapi
+ * /api/users:
+ *   post:
+ *     tags:
+ *       - Session
+ *     description: API to login a user
+ *     summary: looks for a user in the database and validates the password
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *              userName:
+ *                type: string
+ *              password:
+ *                type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
+
 
 /**
  * User sign in
@@ -34,6 +65,7 @@ router.post('/login', (req, res) => {
             console.log('Login successful');
             const signinResponse = new BaseResponse(200, 'Login successful', user);
             res.json(signinResponse.toObject());
+
           }
         /**
          * If password is invalid, return an error
