@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 
 // create user role Schema to use with mongoose
 const userRoleSchema = new Schema({
-  text: { type: String, default: "standard" },
+  text: { type: String, default: "standard" }
 });
 
 // export userRoleSchema
