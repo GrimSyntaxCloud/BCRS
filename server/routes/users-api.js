@@ -182,11 +182,13 @@ router.get('/:id', async (req, res) => {
         res.status(500).send(findByIdMongodbErrorResponse.toObject());
       } else {
         console.log(user);
+        const findByIdResponse = new BaseResponse(200, 'Query successful', user)
+        res.json(findByIdResponse.toObject());
       }
     })
   } catch(e){
     console.log(e);
-    const findByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    const findByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e);
     res.status(500).send(findByIdCatchErrorResponse.toObject());
   }
 });
