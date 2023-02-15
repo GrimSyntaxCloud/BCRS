@@ -80,7 +80,7 @@ Description: styling for base-layout template
   font-size: 30px;
   margin-right: 20px;
   overflow: visible;
-  display: none;
+  /* display: none; */
 }
 
 .example-spacer {
