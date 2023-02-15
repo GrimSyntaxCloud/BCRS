@@ -6,7 +6,7 @@ const BaseResponse = require("../services/base-response");
 const ErrorResponse = require("../services/error-response");
 const router = express.Router();
 
-// Create User
+// find user by username and verify password to login
 /**
 @openapi
  * /api/session/login:
