@@ -18,12 +18,15 @@ import { Router } from '@angular/router';
 })
 export class BaseLayoutComponent implements OnInit {
 
-  employeeName: string;
+
   year: number = Date.now();
+  // shopping_cart: string;
+  // sessionUserName: string;
 
   constructor(private cookieService: CookieService, private router: Router) {
      // from login component
-    this.employeeName = this.cookieService.get('session_name');
+    // this.sessionUserName = this.cookieService.get('session_name');
+    // this.shopping_cart = this.cookieService.get('session_user');
     this.year = Date.now();
   }
 
@@ -35,5 +38,7 @@ export class BaseLayoutComponent implements OnInit {
     this.cookieService.deleteAll();
     this.router.navigate(['/session/login']);
   }
+
+
 
 }
