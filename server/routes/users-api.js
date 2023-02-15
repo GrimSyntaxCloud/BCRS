@@ -191,7 +191,7 @@ router.get('/:id', async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    const findByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    const findByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e);
     res.status(500).send(findByIdCatchErrorResponse.toObject());
   }
 });
