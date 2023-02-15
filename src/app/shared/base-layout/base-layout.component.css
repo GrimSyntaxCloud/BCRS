@@ -74,14 +74,14 @@ Description: styling for base-layout template
   text-decoration: none;
 } */
 
-/* .shopping-cart{
+.shopping-cart{
  color: #eeba30;
   margin-top: 40px;
   font-size: 30px;
   margin-right: 20px;
   overflow: visible;
   display: none;
-} */
+}
 
 .example-spacer {
   flex: 4 4 auto;

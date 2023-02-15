@@ -20,13 +20,13 @@ export class BaseLayoutComponent implements OnInit {
 
 
   year: number = Date.now();
-  // shopping_cart: string;
+  shopping_cart: string;
   // sessionUserName: string;
 
   constructor(private cookieService: CookieService, private router: Router) {
      // from login component
     // this.sessionUserName = this.cookieService.get('session_name');
-    // this.shopping_cart = this.cookieService.get('session_user');
+    this.shopping_cart = this.cookieService.get('session_user');
     this.year = Date.now();
   }
 
