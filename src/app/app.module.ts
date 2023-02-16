@@ -39,7 +39,6 @@ import { DeleteRecordDialogComponent } from './shared/delete-record-dialog/delet
 import { ConfirmationService } from 'primeng/api';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { AboutComponent } from './pages/about/about.component';
-import { ErrorComponent } from './pages/error/error.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 
 @NgModule({
@@ -55,7 +54,6 @@ import { ServiceRepairComponent } from './pages/service-repair/service-repair.co
     UserDetailsComponent,
     DeleteRecordDialogComponent,
     AboutComponent,
-    ErrorComponent,
     ServiceRepairComponent
   ],
   imports: [
