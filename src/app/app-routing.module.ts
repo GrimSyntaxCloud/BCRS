@@ -8,27 +8,42 @@ import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component'
 import { SecurityQuestionListComponent } from './pages/security-question-list/security-question-list.component';
 import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
     component: BaseLayoutComponent,
     children: [
-      {
+    {
         path: '',
+        component: HomeComponent
+      },
+    {
+        path: 'service-repair',
         component: ServiceRepairComponent
       },
+      // {
+      //   path: 'contact-us',
+      //   component: ContactUsComponent
+      // },
+      // {
+      //   path: 'about',
+      //   component: AboutComponent
+      // },
       {
       path: 'security-questions',
-      component: SecurityQuestionListComponent,
+        component: SecurityQuestionListComponent,
+      canActivate: [AuthGuard] // for logged in user
       },
       {
       path: 'security-questions/:questionId',
-      component: SecurityQuestionDetailsComponent,
+        component: SecurityQuestionDetailsComponent,
+      canActivate: [AuthGuard]  // for logged in user
       },
-
     ],
-    canActivate: [AuthGuard]
+
+
   },
 
 
