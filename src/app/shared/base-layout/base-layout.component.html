@@ -8,8 +8,9 @@ Description: application base layout template
 
 <div fxLayout="column">
   <!-- navigation -->
+  <!-- navbarA for user is logged in -->
   <header>
-    <nav>
+    <nav class="navbarA">
       <mat-toolbar-row class="logoBar">
         <!-- logo bar wiht sign up and log in link-->
         <button class="logo" routerLink="/" mat-button>
@@ -18,53 +19,58 @@ Description: application base layout template
         <!-- routerLink for sign up and log in -->
         <span class="example-spacer"></span>
 
-        <!-- <a href="" class="navbar-link-signUp" routerLink="/sign-up">Sign up</a>
-        <a href="" class="navbar-link-logIn" routerLink="/log-in">Log in</a> -->
+        <button mat-icon-button class="ml-xs">
+          <mat-icon class="shopping-cart">shopping_cart</mat-icon>
+        </button>
+        <ng-container *ngIf="!sessionUserName">
+          <a class="navbar-link-signUp" routerLink="/session/signup">Sign up</a>
+          <a class="navbar-link-logIn" routerLink="/session/login">Log in</a>
+        </ng-container>
 
         <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
 
-        <!-- <p>{{ sessionUserName }}</p> -->
-        <!-- <button mat-icon-button class="ml-xs">
-          <mat-icon class="shopping-cart"
-            >shopping_cart{{ shopping_cart }}</mat-icon
-          >
-        </button> -->
-
-        <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
-          <mat-icon class="profileIcon">person</mat-icon>
-        </button>
-
-        <mat-menu #session="matMenu" x-position="before">
-          <button mat-menu-item [matMenuTriggerFor]="configs">
-            <mat-icon>settings</mat-icon>
-            Configurations
+        <ng-container *ngIf="sessionUserName">
+          <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
+            <mat-icon class="profileIcon">person</mat-icon>
+            <!-- <p>Welcome {{ sessionUserName }}!</p> -->
           </button>
 
-          <mat-menu #configs="matMenu">
-            <button mat-menu-item routerLink="/users">
-              <mat-icon>person_add</mat-icon>
-              Users
+          <mat-menu #session="matMenu" x-position="before">
+            <p style="height: 30px">
+              {{ sessionUserName }}
+            </p>
+            <mat-divider></mat-divider>
+            <button mat-menu-item [matMenuTriggerFor]="configs">
+              <mat-icon>settings</mat-icon>
+              Configurations
             </button>
-            <button mat-menu-item routerLink="/security-questions">
-              <mat-icon>help</mat-icon>
-              Security Questions
+
+            <mat-menu #configs="matMenu">
+              <button mat-menu-item routerLink="/users">
+                <mat-icon>person_add</mat-icon>
+                Users
+              </button>
+              <button mat-menu-item routerLink="/security-questions">
+                <mat-icon>help</mat-icon>
+                Security Questions
+              </button>
+            </mat-menu>
+
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              Sign out
             </button>
           </mat-menu>
-
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>exit-to-app</mat-icon>
-            Sign out
-          </button>
-        </mat-menu>
+        </ng-container>
       </mat-toolbar-row>
 
       <!-- slogen bar with page links -->
       <mat-toolbar-row class="slogenBar">
         <span class="slogen">Amazing Help!</span>
         <span class="example-spacer"></span>
-        <a href="" class="navbar-link" routerLink="/">Service Repair</a>
-        <a href="" class="navbar-link" routerLink="/">Contact Us</a>
-        <a href="" class="navbar-link" routerLink="/">About</a>
+        <a class="navbar-link" routerLink="/">Service Repair</a>
+        <a class="navbar-link" routerLink="/">Contact Us</a>
+        <a class="navbar-link" routerLink="/">About</a>
       </mat-toolbar-row>
     </nav>
   </header>

@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-base-layout',
   templateUrl: './base-layout.component.html',
@@ -19,13 +20,19 @@ import { Router } from '@angular/router';
 export class BaseLayoutComponent implements OnInit {
 
 
+
+  // isLoggedIn = true;
+
   year: number = Date.now();
   // shopping_cart: string;
-  // sessionUserName: string;
+  sessionUserName: string;
 
   constructor(private cookieService: CookieService, private router: Router) {
      // from login component
-    // this.sessionUserName = this.cookieService.get('session_name');
+    this.sessionUserName = this.cookieService.get('session_user');
+    console.log('we  are in the const')
+    console.log(this.sessionUserName)
+
     // this.shopping_cart = this.cookieService.get('session_user');
     this.year = Date.now();
   }

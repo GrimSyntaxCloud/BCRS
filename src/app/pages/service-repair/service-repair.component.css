@@ -1,0 +1,23 @@
+/*
+Title: service-repair.component.css
+Author: April Yang
+Date: 02/16/2023
+Modified By: Andres Macias/Patrick Wolff
+Description: Styling for service-repair component
+*/
+
+
+.main-welcome {
+  margin-top: 30px;
+}
+
+.title {
+  text-align: center;
+  font-weight: lighter;
+}
+
+.subtitle {
+  text-align: center;
+  font-family: lato;
+  font-size: 10px;
+}

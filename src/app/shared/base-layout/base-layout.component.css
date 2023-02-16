@@ -47,15 +47,16 @@ Description: styling for base-layout template
 
 .profileIcon{
   color: white;
-  margin-top: 20px;
+  margin-top: 0px;
   font-size: 50px;
   margin-right: 100px;
   overflow:visible;
+  margin-right:0px;
 }
 
 
 
-/* .navbar-link-signUp{
+.navbar-link-signUp{
   color: white;
   margin-top: 50px;
   margin-right: 30px;
@@ -63,25 +64,25 @@ Description: styling for base-layout template
   margin-right: 10px;
   font-family: Abril Fatface;
   text-decoration: none;
-} */
+}
 
-/* .navbar-link-logIn{
+.navbar-link-logIn{
   color: white;
   margin-top: 50px;
   font-size: 20px;
   margin-right: 10px;
   font-family: Abril Fatface;
   text-decoration: none;
-} */
+}
 
-/* .shopping-cart{
+.shopping-cart{
  color: #eeba30;
   margin-top: 40px;
   font-size: 30px;
   margin-right: 20px;
   overflow: visible;
-  display: none;
-} */
+  /* display: none; */
+}
 
 .example-spacer {
   flex: 4 4 auto;
