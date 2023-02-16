@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table'; //
 import { MatDividerModule } from '@angular/material/divider';//
 import { LoginComponent } from './pages/login/login.component'; //
 import { CookieService } from 'ngx-cookie-service';
+// import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
 import { TableModule } from 'primeng/table';
@@ -39,6 +40,7 @@ import { ConfirmationService } from 'primeng/api';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { ErrorComponent } from './pages/error/error.component';
     UserDetailsComponent,
     DeleteRecordDialogComponent,
     AboutComponent,
-    ErrorComponent
+    ErrorComponent,
+    ServiceRepairComponent
   ],
   imports: [
      // Angular Materials

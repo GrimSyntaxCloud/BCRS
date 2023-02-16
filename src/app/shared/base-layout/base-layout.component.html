@@ -32,7 +32,7 @@ Description: application base layout template
         <ng-container *ngIf="sessionUserName">
           <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
             <mat-icon class="profileIcon">person</mat-icon>
-            <p>Welcome {{ sessionUserName }}!</p>
+            <!-- <p>Welcome {{ sessionUserName }}!</p> -->
           </button>
 
           <mat-menu #session="matMenu" x-position="before">
