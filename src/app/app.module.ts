@@ -38,6 +38,7 @@ import { DeleteRecordDialogComponent } from './shared/delete-record-dialog/delet
 import { ConfirmationService } from 'primeng/api';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AboutComponent } from './pages/about/about.component';
     SecurityQuestionDetailsComponent,
     UserDetailsComponent,
     DeleteRecordDialogComponent,
-    AboutComponent
+    AboutComponent,
+    ErrorComponent
   ],
   imports: [
      // Angular Materials
