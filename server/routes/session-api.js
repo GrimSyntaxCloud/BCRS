@@ -5,6 +5,8 @@ const BaseResponse = require("../services/base-response");
 const ErrorResponse = require("../services/error-response");
 const router = express.Router();
 
+const saltRounds = 10; // default salt rounds for hashing algorithm
+
 // find user by username and verify password to login
 /**
 @openapi
@@ -57,10 +59,7 @@ router.post("/login", (req, res) => {
          * Description: If the user is found, compare the password
          */
         if (user) {
-          let passwordIsValid = bcrypt.compareSync(
-            req.body.password,
-            user.password
-          );
+          let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
           console.log(passwordIsValid);
           /**
@@ -68,47 +67,29 @@ router.post("/login", (req, res) => {
            */
           if (passwordIsValid) {
             console.log("Login successful");
-            const signinResponse = new BaseResponse(
-              200,
-              "Login successful",
-              user
-            );
+            const signinResponse = new BaseResponse(200, "Login successful", user);
             res.json(signinResponse.toObject());
           } else {
             /**
              * If password is invalid, return an error
              */
             console.log("Invalid password: Please try again");
-            const invalidPasswordResponse = new BaseResponse(
-              401,
-              "Invalid password",
-              "Please try again",
-              null
-            );
+            const invalidPasswordResponse = new BaseResponse(401, "Invalid password", "Please try again", user);
             res.status(401).send(invalidPasswordResponse.toObject());
           }
         } else {
           /**
            * if username is invalid, return an error
            */
-          console.log("Invalid username: Please try again");
-          const invalidUserNameResponse = new BaseResponse(
-            401,
-            "Invalid username",
-            "Please try again",
-            null
-          );
+          console.log(`Invalid username: ${req.body.userName}. Please try again`);
+          const invalidUserNameResponse = new BaseResponse(401, "Invalid username", "Please try again", null);
           res.status(401).send(invalidUserNameResponse.toObject());
         }
       }
     });
   } catch (e) {
     console.log(e);
-    const signinCatchErrorResponse = new ErrorResponse(
-      500,
-      "Internal Server Error",
-      e.message
-    );
+    const signinCatchErrorResponse = new ErrorResponse(500, "Internal Server Error", e.message);
     res.status(500).send(signinCatchErrorResponse.toObject());
   }
 });
@@ -306,7 +287,7 @@ router.post("/verify/users/:userName/security-questions", async (req, res) => {
 // reset password
 /**
 @openapi
- * /api/users/{userName}/reset-password:
+ * /api/session/users/{userName}/reset-password:
  *   post:
  *     tags:
  *       - Session
@@ -319,6 +300,7 @@ router.post("/verify/users/:userName/security-questions", async (req, res) => {
  *         required: true
  *         scheme:
  *           type: string
+ *         description: username of the user who's password is being changed.
  *     requestBody:
  *       description: new value for the password
  *       required: true
@@ -341,16 +323,13 @@ router.post("/verify/users/:userName/security-questions", async (req, res) => {
 
 router.post("/users/:userName/reset-password", (req, res) => {
   try {
+    console.log(req.body.password);
     const password = req.body.password;
 
-    User.findOne({ userName: req.params.userName }, function (err, user) {
+    User.findOne({userName: req.params.userName }, function (err, user) {
       if (err) {
         console.log(err);
-        const resetPasswordMongodbErrorResponse = new ErrorResponse(
-          "500",
-          "Internal Server Error",
-          err
-        );
+        const resetPasswordMongodbErrorResponse = new ErrorResponse("500", "Internal Server Error", err);
         res.status(500).send(resetPasswordMongodbErrorResponse.toObject());
       } else {
         console.log(user);
@@ -364,19 +343,11 @@ router.post("/users/:userName/reset-password", (req, res) => {
         user.save(function (err, updatedUser) {
           if (err) {
             console.log(err);
-            const updatedUserMongodbErrorResponse = new ErrorResponse(
-              "500",
-              "Internal Server Error",
-              err
-            );
+            const updatedUserMongodbErrorResponse = new ErrorResponse("500","Internal Server Error",err);
             res.status(500).send(updatedUserMongodbErrorResponse.toObject());
           } else {
             console.log(updatedUser);
-            const updatedUserPasswordResponse = new BaseResponse(
-              "200",
-              "Query successful",
-              updatedUser
-            );
+            const updatedUserPasswordResponse = new BaseResponse("200","Query successful",updatedUser);
             res.json(updatedUserPasswordResponse.toObject());
           }
         });
@@ -384,11 +355,7 @@ router.post("/users/:userName/reset-password", (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    const resetPasswordCatchErrorResponse = new ErrorResponse(
-      "500",
-      "Internal Server Error",
-      e.message
-    );
+    const resetPasswordCatchErrorResponse = new ErrorResponse("500","Internal Server Error",e.message);
     res.status(500).send(resetPasswordCatchErrorResponse.toObject());
   }
 });
