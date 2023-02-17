@@ -6,7 +6,6 @@
  Description: Building User APIs
  */
 
-
 const express = require("express");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
@@ -49,23 +48,34 @@ router.get("/", async (req, res) => {
       .exec(function (err, users) {
         if (err) {
           console.log(err);
-          const findAllUsersMongodbErrorResponse = new BaseResponse(501, `${config.mongoServerError}:${err.message}`, null);
+          const findAllUsersMongodbErrorResponse = new BaseResponse(
+            501,
+            `${config.mongoServerError}:${err.message}`,
+            null
+          );
           console.log(findAllUsersMongodbErrorResponse.toObject());
           res.status(500).send(findAllUsersMongodbErrorResponse.toObject());
         } else {
-          const findAllUsersResponse = new BaseResponse(200, `findAllUsers query was successful.`, users);
+          const findAllUsersResponse = new BaseResponse(
+            200,
+            `findAllUsers query was successful.`,
+            users
+          );
           console.log(findAllUsersResponse.toObject());
           res.json(findAllUsersResponse.toObject());
         }
       });
   } catch (e) {
     // internal Server Error
-    const findAllUsersCatchErrorResponse = new ErrorResponse(500, `${config.serverError}:${err.message}`, null);
+    const findAllUsersCatchErrorResponse = new ErrorResponse(
+      500,
+      `${config.serverError}:${err.message}`,
+      null
+    );
     console.log(findAllUsersCatchErrorResponse.toObject());
     res.status(500).send(findAllUsersCatchErrorResponse.toObject());
   }
 });
-
 
 /**
  * API: http://localhost:3000/api/user
@@ -130,21 +140,32 @@ router.post("/", async (req, res) => {
     User.create(newUser, function (err, user) {
       if (err) {
         console.log(err);
-        const createUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+        const createUserMongodbErrorResponse = new ErrorResponse(
+          500,
+          "Internal server error",
+          err
+        );
         res.status(500).send(createUserMongodbErrorResponse.toObject());
       } else {
         console.log(user);
-        const CreateUserResponse = new BaseResponse(200, "Query successful", user);
+        const CreateUserResponse = new BaseResponse(
+          200,
+          "Query successful",
+          user
+        );
         res.json(CreateUserResponse.toObject());
       }
     });
   } catch (e) {
     console.log(e);
-    const createUserCatchErrorResponse = ErrorResponse(500, "Internal server error", e.message);
+    const createUserCatchErrorResponse = ErrorResponse(
+      500,
+      "Internal server error",
+      e.message
+    );
     res.status(500).send(createUserCatchErrorResponse.toObject());
   }
 });
-
 
 /**
  * API: http://localhost:3000/api/users/{id}
@@ -176,22 +197,34 @@ router.post("/", async (req, res) => {
  *          description: MongoDB Exception
  */
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    User.findOne({ '_id': req.params.id }, function (err, user) {
+    User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
-        const findUserByIdMongodbErrorResponse = new BaseResponse(500, `${config.mongoServerError}:${err.message}`, null);
+        const findUserByIdMongodbErrorResponse = new BaseResponse(
+          500,
+          `${config.mongoServerError}:${err.message}`,
+          null
+        );
         console.log(findUserByIdMongodbErrorResponse.toObject());
         res.status(500).send(findUserByIdMongodbErrorResponse.toObject());
       } else {
-        const findUserByIdResponse = new BaseResponse(200, `findUserById query was successful.`, user);
+        const findUserByIdResponse = new BaseResponse(
+          200,
+          `findUserById query was successful.`,
+          user
+        );
         res.json(findUserByIdResponse.toObject());
       }
     });
   } catch (e) {
     console.log(e);
-    const findByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e);
+    const findByIdCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal server error",
+      e
+    );
     res.status(500).send(findByIdCatchErrorResponse.toObject());
   }
 });
@@ -242,12 +275,16 @@ router.get('/:id', async (req, res) => {
  *              description: MongoDB Exception
  */
 
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    User.findOne({ '_id': req.params.id }, function (err, user) {
+    User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
-        const updateUserByIdMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+        const updateUserByIdMongodbErrorResponse = new ErrorResponse(
+          500,
+          "Internal server error",
+          err
+        );
         res.status(500).send(updateUserByIdMongodbErrorResponse.toObject());
       } else {
         console.log(user);
@@ -260,25 +297,37 @@ router.put('/:id', async (req, res) => {
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
-          dateModified: new Date()
-        })
+          dateModified: new Date(),
+        });
 
         user.save(function (err, savedUser) {
           if (err) {
             console.log(err);
-            const saveUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+            const saveUserMongodbErrorResponse = new ErrorResponse(
+              500,
+              "Internal server error",
+              err
+            );
             res.status(500).send(saveUserMongodbErrorResponse.toObject());
           } else {
             console.log(savedUser);
-            const saveUserResponse = new BaseResponse(200, 'Query successful', savedUser);
+            const saveUserResponse = new BaseResponse(
+              200,
+              "Query successful",
+              savedUser
+            );
             res.json(saveUserResponse.toObject());
           }
-        })
+        });
       }
-    })
+    });
   } catch (e) {
     console.log(e);
-    const updateUserByIdCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    const updateUserByIdCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal server error",
+      e.message
+    );
     res.status(500).send(updateUserByIdCatchErrorResponse.toObject());
   }
 });
@@ -308,38 +357,118 @@ router.put('/:id', async (req, res) => {
  *              description: MongoDB Exception
  */
 
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    User.findOne({ '_id': req.params.id }, function (err, user) {
+    User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
-        const deleteUserMongodbErrorResponse = new ErrorResponse(500, 'Internal sever error', err);
+        const deleteUserMongodbErrorResponse = new ErrorResponse(
+          500,
+          "Internal sever error",
+          err
+        );
         res.status(500).send(deleteUserMongodbErrorResponse.toObject());
       } else {
         console.log(user);
 
         user.set({
           isDisabled: true,
-          dateModified: new Date()
+          dateModified: new Date(),
         });
 
         user.save(function (err, savedUser) {
           if (err) {
             console.log(err);
-            const savedUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+            const savedUserMongodbErrorResponse = new ErrorResponse(
+              500,
+              "Internal server error",
+              err
+            );
             res.json(savedUserMongodbErrorResponse.toObject());
           } else {
             console.log(savedUser);
-            const savedUserResponse = new BaseResponse(200, 'Query successful', savedUser);
+            const savedUserResponse = new BaseResponse(
+              200,
+              "Query successful",
+              savedUser
+            );
             res.json(savedUserResponse.toObject());
           }
-        })
+        });
       }
-    })
+    });
   } catch (e) {
     console.log(e);
-    const deleteUserCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    const deleteUserCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal server error",
+      e.message
+    );
     res.status(500).send(deleteUserCatchErrorResponse.toObject());
+  }
+});
+
+/**
+ * API queries the users collection by username and return the users registered security questions.
+ * findSelectedSecurityQuestions
+ */
+/**
+ * @openapi
+ * /api/users/{userName}/security-questions:
+ *   get:
+ *     tags:
+ *       - Users
+ *     name: findSelectedSecurityQuestions
+ *     description: API to find a registered userName and return this user's saved security questions in the database
+ *     summary: Returns a registered user's security questions were saved the database
+ *     operationId: findSelectedSecurityQuestions
+ *     parameters:
+ *       - name: userName
+ *         in: path
+ *         required: true
+ *         description: find a userName.
+ *         scheme:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Returned security questions by userName
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.get("/userName/security-questions", async (req, res) => {
+  try {
+    // find a userName with security questions were saved in the database,  or return an error message
+    User.findOne({ userName: req.params.userName }, function (err, user) {
+      if (err) {
+        console.log(err);
+        const findSelectedSecurityQuestionsMongodbErrorResponse =
+          new ErrorResponse(500, "Internal server error", e.message);
+        res
+          .status(500)
+          .send(findSelectedSecurityQuestionsMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+        const findSelectedSecurityQuestionsResponse = new BaseResponse(
+          200,
+          "Query successful",
+          user.selectedSecurityQuestions
+        );
+        res.json(findSelectedSecurityQuestionsResponse.toObject());
+      }
+    });
+  } catch (e) {
+    console.log(user);
+    // Internal server error
+    const findSelectedSecurityQuestionsCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal server error",
+      e.message
+    );
+    res
+      .status(500)
+      .send(findSelectedSecurityQuestionsCatchErrorResponse.toObject());
   }
 });
 

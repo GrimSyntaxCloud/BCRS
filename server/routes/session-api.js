@@ -113,8 +113,10 @@ router.post("/login", (req, res) => {
   }
 });
 
-// verify security questions when user select security questions in the form
-// verifySecurityQuestions
+/**
+ * verify security questions when user select security questions in the form
+ * verifySecurityQuestions
+ */
 /**
  * @openapi
  * /api/session/verify/users/{username}/security-questions:
