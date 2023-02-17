@@ -113,10 +113,72 @@ router.post("/login", (req, res) => {
   }
 });
 
+// verifyUser
 /**
- * verify security questions when user select security questions in the form
- * verifySecurityQuestions
+ * @openapi
+ * /api/session/verify/users/{userName}:
+ *   get:
+ *     tags:
+ *       - Session
+ *     description: API will verify if a username is valid
+ *     summary: verify username against what is in db
+ *     parameters:
+ *       - in: path
+ *         name: userName
+ *         schema:
+ *           type: string
+ *           description: userName to search
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '400':
+ *         description: Invalid username
+ *       '500':
+ *         description: Internal server error
  */
+router.get("/verify/users/:userName", async (req, res) => {
+  try {
+    User.findOne({ userName: req.params.userName }, function (err, user) {
+      if (err) {
+        console.log(err);
+        const verifyUserMongodbErrorResponse = new ErrorResponse(
+          "500",
+          "Internal server error",
+          err
+        );
+        res.status(500).send(verifyUserMongodbErrorResponse.toObject());
+      } else {
+        if (user) {
+          console.log(user);
+          const verifyUserResponse = new BaseResponse(
+            "200",
+            "Query successful",
+            user
+          );
+          res.json(verifyUserResponse.toObject());
+        } else {
+          const invalidUserNameResponse = new BaseResponse(
+            "400",
+            "Invalid username",
+            req.params.userName
+          );
+          res.status(400).send(invalidUserNameResponse.toObject());
+        }
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    const verifyUserCatchErrorResponse = new ErrorResponse(
+      "500",
+      "Internal server error",
+      e.message
+    );
+    res.status(500).send(verifyUserCatchErrorResponse.toObject());
+  }
+});
+
+// verify security questions when user select security questions in the form
+// verifySecurityQuestions
 /**
  * @openapi
  * /api/session/verify/users/{username}/security-questions:
