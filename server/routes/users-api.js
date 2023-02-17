@@ -48,30 +48,19 @@ router.get("/", async (req, res) => {
       .exec(function (err, users) {
         if (err) {
           console.log(err);
-          const findAllUsersMongodbErrorResponse = new BaseResponse(
-            501,
-            `${config.mongoServerError}:${err.message}`,
-            null
-          );
+          const findAllUsersMongodbErrorResponse = new BaseResponse(501, `${config.mongoServerError}:${err.message}`, null);
           console.log(findAllUsersMongodbErrorResponse.toObject());
           res.status(500).send(findAllUsersMongodbErrorResponse.toObject());
         } else {
           const findAllUsersResponse = new BaseResponse(
-            200,
-            `findAllUsers query was successful.`,
-            users
-          );
+            200, `findAllUsers query was successful.`, users);
           console.log(findAllUsersResponse.toObject());
           res.json(findAllUsersResponse.toObject());
         }
       });
   } catch (e) {
     // internal Server Error
-    const findAllUsersCatchErrorResponse = new ErrorResponse(
-      500,
-      `${config.serverError}:${err.message}`,
-      null
-    );
+    const findAllUsersCatchErrorResponse = new ErrorResponse(500, `${config.serverError}:${err.message}`, null);
     console.log(findAllUsersCatchErrorResponse.toObject());
     res.status(500).send(findAllUsersCatchErrorResponse.toObject());
   }
@@ -140,28 +129,17 @@ router.post("/", async (req, res) => {
     User.create(newUser, function (err, user) {
       if (err) {
         console.log(err);
-        const createUserMongodbErrorResponse = new ErrorResponse(
-          500,
-          "Internal server error",
-          err
-        );
+        const createUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(createUserMongodbErrorResponse.toObject());
       } else {
         console.log(user);
-        const CreateUserResponse = new BaseResponse(
-          200,
-          "Query successful",
-          user
-        );
+        const CreateUserResponse = new BaseResponse(200, "Query successful", user);
         res.json(CreateUserResponse.toObject());
       }
     });
   } catch (e) {
     console.log(e);
-    const createUserCatchErrorResponse = ErrorResponse(
-      500,
-      "Internal server error",
-      e.message
+    const createUserCatchErrorResponse = ErrorResponse(500, "Internal server error", e.message
     );
     res.status(500).send(createUserCatchErrorResponse.toObject());
   }
@@ -289,11 +267,13 @@ router.put("/:id", async (req, res) => {
       } else {
         console.log(user);
 
+        let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
+
+        
         user.set({
-          userName: req.body.userName,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          password: req.body.password,
+          password: hashedPassword,
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
@@ -303,19 +283,11 @@ router.put("/:id", async (req, res) => {
         user.save(function (err, savedUser) {
           if (err) {
             console.log(err);
-            const saveUserMongodbErrorResponse = new ErrorResponse(
-              500,
-              "Internal server error",
-              err
-            );
+            const saveUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
             res.status(500).send(saveUserMongodbErrorResponse.toObject());
           } else {
             console.log(savedUser);
-            const saveUserResponse = new BaseResponse(
-              200,
-              "Query successful",
-              savedUser
-            );
+            const saveUserResponse = new BaseResponse(200, "Query successful", savedUser);
             res.json(saveUserResponse.toObject());
           }
         });
