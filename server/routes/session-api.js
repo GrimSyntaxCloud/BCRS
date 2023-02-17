@@ -75,9 +75,9 @@ router.post("/login", (req, res) => {
             );
             res.json(signinResponse.toObject());
           } else {
-          /**
-           * If password is invalid, return an error
-           */
+            /**
+             * If password is invalid, return an error
+             */
             console.log("Invalid password: Please try again");
             const invalidPasswordResponse = new BaseResponse(
               401,
@@ -88,9 +88,9 @@ router.post("/login", (req, res) => {
             res.status(401).send(invalidPasswordResponse.toObject());
           }
         } else {
-        /**
-         * if username is invalid, return an error
-         */
+          /**
+           * if username is invalid, return an error
+           */
           console.log("Invalid username: Please try again");
           const invalidUserNameResponse = new BaseResponse(
             401,
@@ -110,6 +110,132 @@ router.post("/login", (req, res) => {
       e.message
     );
     res.status(500).send(signinCatchErrorResponse.toObject());
+  }
+});
+
+// verify security questions when user select security questions in the form
+// verifySecurityQuestions
+/**
+ * @openapi
+ * /api/session/verify/users/{username}/security-questions:
+ *   post:
+ *     tags:
+ *       - Session
+ *     name: verifySecurityQuestions
+ *     description: API for comparing the users entered security question answers against what's saved in the users document.
+ *     summary: Verify a user's security questions
+ *     operationId: verifySecurityQuestions
+ *     parameters:
+ *       - name: userName
+ *         in: path
+ *         required: true
+ *         description: find a userName first.
+ *         scheme:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       description: User's security questions with answers' information are saved in the users document
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - questionText1
+ *               - questionText2
+ *               - questionText3
+ *               - answerText1
+ *               - answerText2
+ *               - answerText3
+ *             properties:
+ *               questionText1:
+ *                 type: string
+ *               questionText2:
+ *                 type: string
+ *               questionText3:
+ *                 type: string
+ *               answerText1:
+ *                 type: string
+ *               answerText2:
+ *                 type: string
+ *               answerText3:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: Verified security question
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.post("/verify/users/:userName/security-questions", async (req, res) => {
+  try {
+    // find a userName for verifying user's security questions were saved in the database,  or return an error message
+    User.findOne({ userName: req.params.userName }, function (err, user) {
+      if (err) {
+        console.log(err);
+        const verifySecurityQuestionsMongodbErrorResponse = new ErrorResponse(
+          500,
+          "Internal server error",
+          err
+        );
+        res
+          .status(500)
+          .send(verifySecurityQuestionsMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+        // user's selected security questions must match the information was saved in the database
+        const selectedSecurityQuestionOne = user.selectedSecurityQuestions.find(
+          (q) => q.questionText === req.body.questionText1
+        );
+        const selectedSecurityQuestionTwo = user.selectedSecurityQuestions.find(
+          (q2) => q2.questionText === req.body.questionText2
+        );
+        const selectedSecurityQuestionThree =
+          user.selectedSecurityQuestions.find(
+            (q3) => q3.questionText === req.body.questionText3
+          );
+
+        const isValidAnswerOne =
+          selectedSecurityQuestionOne.answerText === req.body.answerText1;
+        const isValidAnswerTwo =
+          selectedSecurityQuestionTwo.answerText === req.body.answerText2;
+        const isValidAnswerThree =
+          selectedSecurityQuestionThree.answerText === req.body.answerText3;
+
+        // if user's answer is valid to match the answer was saved in the database, then return success and display a message
+        if (isValidAnswerOne && isValidAnswerTwo && isValidAnswerThree) {
+          console.log(
+            `User ${user.userName} answered their security questions correctly`
+          );
+          const validSecurityQuestionsResponse = new BaseResponse(
+            "200",
+            "success",
+            user
+          );
+          res.json(validSecurityQuestionsResponse.toObject());
+        } else {
+          // if user's answer is invalid to match the answer was saved in the database, then return error and display a message
+          console.log(
+            `User ${user.userName} did not answer their security questions correctly`
+          );
+          const invalidSecurityQuestionsResponse = new BaseResponse(
+            "200",
+            "error",
+            user
+          );
+          res.json(invalidSecurityQuestionsResponse.toObject());
+        }
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    // Internal Server Error
+    const verifySecurityQuestionsCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal Server Error",
+      e.message
+    );
+    res.status(500).send(verifySecurityQuestionsCatchErrorResponse.toObject());
   }
 });
 

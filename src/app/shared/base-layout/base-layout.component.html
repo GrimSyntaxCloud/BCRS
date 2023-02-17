@@ -19,17 +19,18 @@ Description: application base layout template
         <!-- routerLink for sign up and log in -->
         <span class="example-spacer"></span>
 
-        <button mat-icon-button class="ml-xs">
-          <mat-icon class="shopping-cart">shopping_cart</mat-icon>
-        </button>
+        <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
           <a class="navbar-link-signUp" routerLink="/session/signup">Sign up</a>
           <a class="navbar-link-logIn" routerLink="/session/login">Log in</a>
         </ng-container>
 
-        <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
-
         <ng-container *ngIf="sessionUserName">
+          <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
+          <button mat-icon-button class="ml-xs">
+            <mat-icon class="shopping-cart">shopping_cart</mat-icon>
+          </button>
+
           <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
             <mat-icon class="profileIcon">person</mat-icon>
             <!-- <p>Welcome {{ sessionUserName }}!</p> -->
