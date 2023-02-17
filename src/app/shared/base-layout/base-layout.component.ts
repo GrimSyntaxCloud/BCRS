@@ -21,10 +21,10 @@ export class BaseLayoutComponent implements OnInit {
 
 
 
-  // isLoggedIn = true;
+
 
   year: number = Date.now();
-  // shopping_cart: string;
+
   sessionUserName: string;
 
   constructor(private cookieService: CookieService, private router: Router) {
@@ -33,7 +33,7 @@ export class BaseLayoutComponent implements OnInit {
     console.log('we  are in the const')
     console.log(this.sessionUserName)
 
-    // this.shopping_cart = this.cookieService.get('session_user');
+
     this.year = Date.now();
   }
 
