@@ -40,10 +40,10 @@ export class BaseLayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
-    // logout function deletes all cookies and navigate user to login page
+    // logout function deletes all cookies and navigate user to the home page by reloading the window
   logout() {
     this.cookieService.deleteAll();
-    this.router.navigate(['/session/login']);
+    this.router.navigate(['/']).then(() => { window.location.reload(); });
   }
 
 

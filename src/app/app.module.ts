@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table'; //
 import { MatDividerModule } from '@angular/material/divider';//
 import { LoginComponent } from './pages/login/login.component'; //
 import { CookieService } from 'ngx-cookie-service';
+import {MatGridListModule} from '@angular/material/grid-list';//
 // import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
@@ -75,6 +76,7 @@ import { ServiceRepairComponent } from './pages/service-repair/service-repair.co
     MatDialogModule,
     MatTableModule,
     MatDividerModule,
+    MatGridListModule,//
     // NgPrime Materials
     TableModule,
     MessageModule,
