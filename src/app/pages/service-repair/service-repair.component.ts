@@ -15,27 +15,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./service-repair.component.css']
 })
 export class ServiceRepairComponent implements OnInit {
-  // price1: string;
-  // price2: string;
-  // price3: string;
 
   descriptions!: Array<any>
   cards: Array<any>;
-  item!: object
-
-
 
 
   constructor() {
-
-    // this.price1 = "5,000";
-    // this.price2 = "4,000";
-    // this.price3 = "6,000";
-    // this.count = [1,2,3];
     this.cards = [
     {
       title: 'Card Title 1',
-      // icon:"attach_money",
       price:'29.99',
       descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
       buttonText: 'Choose'
@@ -64,7 +52,7 @@ export class ServiceRepairComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // document.getElementById("price1")!.innerHTML = this.price1;
+
   }
 
 }
