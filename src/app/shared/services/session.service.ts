@@ -38,7 +38,8 @@ export class SessionService {
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
       address: user.address,
-      email: user.email
+      email: user.email,
+      selectedSecurityQuestions: user.selectedSecurityQuestions
     })
   }
 
