@@ -1,0 +1,154 @@
+<!--
+Title: verify-security-questions-form.component.html
+Author: Professor Krasso
+Date: 02/12/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: Verify security questions form template
+-->
+
+<!-- http://localhost:4200/#/session/verify-security-questions -->
+<!-- navbar -->
+<header>
+  <nav>
+    <mat-toolbar>
+      <mat-toolbar-row class="logoBar">
+        <div class="layout-header-container">
+          <button class="logo" routerLink="/" mat-button>
+            Bob's Computer Repair Shop
+          </button>
+          <span class="example-spacer"></span>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row class="slogenBar"></mat-toolbar-row>
+    </mat-toolbar>
+  </nav>
+</header>
+
+<br />
+
+<div fxLayout="row wrap" fxLayoutAlign="center start">
+  <div fxFlex.gt-sm="55" fxFlex="100">
+    <br /><br />
+
+    <mat-card
+      class="mat-card-top mat-elevation-z4 card-container"
+      style="margin-bottom: 70px; background-color: #f2f2f2"
+    >
+      <mat-card-title>
+        <h1 class="title" style="text-align: center">
+          Forgot Password <br />
+          <h4 style="text-align: center">
+            <span class="subtitle">
+              Fields marked with an asterisk (*) are required.
+            </span>
+          </h4>
+        </h1>
+      </mat-card-title>
+      <br /><br />
+
+      <p-messages
+        [(value)]="errorMessages"
+        [enableService]="false"
+      ></p-messages>
+
+      <form
+        *ngIf="selectedSecurityQuestions"
+        [formGroup]="form"
+        (ngSubmit)="verifySecurityQuestions()"
+        #usernameForm
+      >
+        <mat-card-content fxLayout="column">
+          <!-- verifySecurityQuestionsModel.question1 -->
+          <mat-form-field fxFlex appearance="fill">
+            <mat-label>{{ verifySecurityQuestionsModel.question1 }}</mat-label>
+            <input
+              matInput
+              required
+              formControlName="answerToSecurityQuestion1"
+            />
+            <mat-error
+              class="error"
+              *ngIf="
+                form.controls['answerToSecurityQuestion1'].hasError(
+                  'required'
+                ) && form.controls['answerToSecurityQuestion1'].touched
+              "
+            >
+              Required field.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- verifySecurityQuestionsModel.question2 -->
+          <mat-form-field fxFlex appearance="fill">
+            <mat-label>{{ verifySecurityQuestionsModel.question2 }}</mat-label>
+            <input
+              matInput
+              required
+              formControlName="answerToSecurityQuestion2"
+            />
+            <mat-error
+              class="error"
+              *ngIf="
+                form.controls['answerToSecurityQuestion2'].hasError(
+                  'required'
+                ) && form.controls['answerToSecurityQuestion2'].touched
+              "
+            >
+              Required field.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- verifySecurityQuestionsModel.question3 -->
+          <mat-form-field fxFlex appearance="fill">
+            <mat-label>{{ verifySecurityQuestionsModel.question3 }}</mat-label>
+            <input
+              matInput
+              required
+              formControlName="answerToSecurityQuestion3"
+            />
+            <mat-error
+              class="error"
+              *ngIf="
+                form.controls['answerToSecurityQuestion3'].hasError(
+                  'required'
+                ) && form.controls['answerToSecurityQuestion3'].touched
+              "
+            >
+              Required field.
+            </mat-error>
+          </mat-form-field>
+
+          <br /><br /><br />
+
+          <div fxFlex fxLayoutAlign="end" class="p5">
+            <button
+              mat-raised-button
+              routerLink="/session/login"
+              style="
+                background-color: #eeba30;
+                color: white;
+                font-family: Lato;
+                font-weight: bold;
+              "
+            >
+              Cancel
+            </button>
+            &nbsp;&nbsp;
+            <button
+              mat-raised-button
+              [disabled]="!form.valid"
+              style="
+                background-color: #e40002;
+                color: white;
+                font-family: Lato;
+                font-weight: bold;
+              "
+            >
+              Verify Security Questions
+            </button>
+          </div>
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+</div>
