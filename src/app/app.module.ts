@@ -42,6 +42,7 @@ import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { RegisterComponent } from './pages/register/register.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { RegisterComponent } from './pages/register/register.component';
     MessageModule,
     MessagesModule,
     ButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MatStepperModule
   ],
 
   providers: [CookieService],
