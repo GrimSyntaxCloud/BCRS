@@ -412,7 +412,7 @@ router.post("/users/:userName/reset-password", (req, res) => {
 router.post('/register', async (req, res) => {
   try {
     // check to see if the user already exists
-    user.findOne({ username: req.body.username }, function (err, user) {
+    User.findOne({ userName: req.body.userName }, function (err, user) {
       if (err) {
         console.log(err);
         const registerUserMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
@@ -427,7 +427,7 @@ router.post('/register', async (req, res) => {
 
           //user object
           let registeredUser = {
-            username: req.body.username,
+            userName: req.body.userName,
             password: hashedPassword,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
