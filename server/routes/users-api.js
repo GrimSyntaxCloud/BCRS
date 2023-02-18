@@ -269,7 +269,7 @@ router.put("/:id", async (req, res) => {
 
         let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
 
-        
+
         user.set({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
@@ -409,7 +409,7 @@ router.delete("/:id", async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.get("/userName/security-questions", async (req, res) => {
+router.get("/:userName/security-questions", async (req, res) => {
   try {
     // find a userName with security questions were saved in the database,  or return an error message
     User.findOne({ userName: req.params.userName }, function (err, user) {
