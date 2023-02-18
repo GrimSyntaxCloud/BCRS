@@ -9,6 +9,7 @@ import { SecurityQuestionListComponent } from './pages/security-question-list/se
 import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   {
@@ -42,13 +43,7 @@ const routes: Routes = [
       canActivate: [AuthGuard]  // for logged in user
       },
     ],
-
-
   },
-
-
-
-
   {
     path: 'session',
     component: AuthLayoutComponent,
@@ -56,6 +51,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
   ]
 },
