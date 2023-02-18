@@ -41,6 +41,7 @@ import { ConfirmationService } from 'primeng/api';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ServiceRepairComponent } from './pages/service-repair/service-repair.co
     UserDetailsComponent,
     DeleteRecordDialogComponent,
     AboutComponent,
-    ServiceRepairComponent
+    ServiceRepairComponent,
+    RegisterComponent
   ],
   imports: [
      // Angular Materials
