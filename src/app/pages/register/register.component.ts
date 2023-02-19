@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Message } from 'primeng/api';
+import { SecurityQuestion } from 'src/app/shared/models/security-question.interface';
+import { User } from 'src/app/shared/models/user.interface';
 
 @Component({
   selector: 'app-register',
@@ -7,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+
+
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
