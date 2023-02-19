@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 
 const routes: Routes = [
@@ -28,17 +29,17 @@ const routes: Routes = [
         path: 'service-repair',
         component: ServiceRepairComponent
       },
-      // {
-      //   path: 'contact-us',
-      //   component: ContactUsComponent
-      // },
+      {
+        path: 'contact',
+        component: ContactComponent
+      },
       // {
       //   path: 'about',
       //   component: AboutComponent
       // },
       {
       path: 'security-questions',
-        component: SecurityQuestionListComponent,
+      component: SecurityQuestionListComponent,
       canActivate: [AuthGuard] // for logged in user
       },
       {
