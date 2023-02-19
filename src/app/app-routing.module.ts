@@ -14,6 +14,7 @@ import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-secu
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 
 const routes: Routes = [
@@ -72,7 +73,11 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundComponent
-  }
+      },
+  {
+        path: 'error-500',
+        component: ErrorComponent,
+  },
   ]
 },
 {
