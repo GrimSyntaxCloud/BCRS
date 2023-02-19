@@ -10,6 +10,7 @@ import { SecurityQuestionDetailsComponent } from './pages/security-question-deta
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
       },
       {
       path: 'security-questions/:questionId',
-        component: SecurityQuestionDetailsComponent,
+      component: SecurityQuestionDetailsComponent,
       canActivate: [AuthGuard]  // for logged in user
       },
     ],
@@ -55,7 +56,17 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+
+   {
+    path: 'verify-security-questions',
+    component: VerifySecurityQuestionsFormComponent,
+  },
+  //  {
+  //       path: 'reset-password',
+  //       component: ResetPasswordFormComponent,
+  //     },
+
   ]
 },
 ];

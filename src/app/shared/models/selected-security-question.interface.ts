@@ -1,9 +1,9 @@
 /*
-Title: security-question.interface.ts
+Title: selected-security-question.interface.ts
 Author: Professor Krasso
 Updated Date: 02/17/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: Security Question interface
+Description: Selected security Question interface
 */
 
 

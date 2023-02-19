@@ -43,6 +43,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     DeleteRecordDialogComponent,
     AboutComponent,
     ServiceRepairComponent,
-    RegisterComponent
+    RegisterComponent,
+    VerifySecurityQuestionsFormComponent
   ],
   imports: [
      // Angular Materials
