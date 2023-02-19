@@ -45,6 +45,12 @@ export class SessionService {
   }
 
 
+  // verify username
+  // verifyUsername(username: string): Observable<any>{
+  //   return this.http.get('/api/session/verify/users/' + username);
+  // }
+
+
   // verify security questions
   verifySecurityQuestions(model: VerifySecurityQuestionModel, userName: String,): Observable<any>{
     return this.http.post('/api/session/verify/users/' + userName + '/security-questions', {
@@ -61,8 +67,8 @@ export class SessionService {
   /**
    * Description: This function will call the API to update a user's password
    */
-  updatePassword(password: string, userName: string): Observable<any> {
-    return this.http.put('/api/session/users/' + userName + '/password', {
+  updatePassword(password: string, username: string): Observable<any> {
+    return this.http.post('/api/session/users/' + username + '/reset-password', {
       password
     })
   }

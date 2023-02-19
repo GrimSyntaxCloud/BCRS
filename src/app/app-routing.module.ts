@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
 
 
 const routes: Routes = [
@@ -63,10 +64,10 @@ const routes: Routes = [
     path: 'verify-security-questions',
     component: VerifySecurityQuestionsFormComponent,
   },
-  //  {
-  //       path: 'reset-password',
-  //       component: ResetPasswordFormComponent,
-  //     },
+  {
+        path: 'reset-password',
+        component: ResetPasswordFormComponent,
+  },
   {
     path: 'not-found',
     component: NotFoundComponent

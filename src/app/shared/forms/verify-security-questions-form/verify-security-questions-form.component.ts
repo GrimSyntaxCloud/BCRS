@@ -1,3 +1,14 @@
+/*
+Title: verify-security-question-form.component.ts
+Author: Professor Krasso
+Date: 02/17/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: verify-security-question-form component
+*/
+
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

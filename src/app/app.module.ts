@@ -46,6 +46,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 
 import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ServiceRepairComponent,
     RegisterComponent,
     VerifySecurityQuestionsFormComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ResetPasswordFormComponent
   ],
   imports: [
      // Angular Materials
