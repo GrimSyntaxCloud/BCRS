@@ -1,0 +1,37 @@
+<!--
+Title: error.component.html
+Author: Professor Krasso
+Date: 02/19/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: error 500 page template
+-->
+
+<!-- Angular flex layout -->
+<div fxLayout="column">
+  <!-- Begin error 500 container -->
+  <mat-card class="error500Card">
+    <mat-card-title>
+      <h1 class="error500">ERROR 500</h1>
+    </mat-card-title>
+    <mat-card-content>
+      <div>
+        <img
+          class="error500Img"
+          src="../../../assets/error-500.jpg"
+          alt="error500"
+        />
+        <span>
+          <!-- Return link to home page -->
+          <a class="returnLink" href=" " routerLink="/">Return</a>
+        </span>
+      </div>
+      <br />
+      <p class="error500Meg">Oops, something went wrong.</p>
+      <p class="error500Meg">
+        Please return to home or feel free to contact us if the problem
+        persists.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <!-- End error 500 container -->
+</div>
