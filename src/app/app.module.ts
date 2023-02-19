@@ -43,7 +43,9 @@ import { AboutComponent } from './pages/about/about.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {MatStepperModule} from '@angular/material/stepper';
+
 import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
+// import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-secu
     AboutComponent,
     ServiceRepairComponent,
     RegisterComponent,
-    VerifySecurityQuestionsFormComponent
+    VerifySecurityQuestionsFormComponent,
+    // NotFoundComponent
   ],
   imports: [
      // Angular Materials
