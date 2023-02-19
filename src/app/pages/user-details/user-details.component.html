@@ -97,5 +97,17 @@ Description: User Details
         <button mat-raised-button [disabled]="!form.valid" color="primary">Submit</button>
       </mat-card-actions>
     </form>
+
+    <!-- Purchase history for user goes here -->
+    <mat-card-content>
+
+    </mat-card-content>
+
+    <br/>
+
+    <!-- Button to deactivate/soft delete account -->
+      <mat-card-actions align="end">
+        <button mat-raised-button (click)="cancel()" color="warn">Deactivate Account</button>
+      </mat-card-actions>
   </mat-card>
 </div>
