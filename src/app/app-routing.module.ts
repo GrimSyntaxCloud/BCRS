@@ -10,6 +10,7 @@ import { SecurityQuestionDetailsComponent } from './pages/security-question-deta
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -55,9 +56,18 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
   }
   ]
 },
+{
+  path: '**',
+  redirectTo: 'session/not-found'
+}
+
 ];
 
 @NgModule({
