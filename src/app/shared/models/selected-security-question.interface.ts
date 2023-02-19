@@ -7,7 +7,7 @@ Description: Selected security Question interface
 */
 
 
-export interface SelectedSecurityQuestions {
+export interface SelectedSecurityQuestion {
   questionText: string;
   answerText: string;
 }

@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'primeng/api';
-import { SelectedSecurityQuestions } from '../../models/selected-security-question.interface';
+import { SelectedSecurityQuestion } from '../../models/selected-security-question.interface';
 import { VerifySecurityQuestionModel } from '../../models/verify-security-question.interface';
 import { UserService } from '../../services/user.service';
 import { SessionService } from '../../services/session.service';
@@ -26,7 +26,7 @@ import { SessionService } from '../../services/session.service';
 })
 export class VerifySecurityQuestionsFormComponent implements OnInit {
 
-  selectedSecurityQuestions: SelectedSecurityQuestions[];
+  selectedSecurityQuestions: SelectedSecurityQuestion[];
   verifySecurityQuestionsModel: VerifySecurityQuestionModel;
   username: string;
   errorMessages: Message[];
