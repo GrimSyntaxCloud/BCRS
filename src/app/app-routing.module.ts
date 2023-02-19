@@ -10,11 +10,9 @@ import { SecurityQuestionDetailsComponent } from './pages/security-question-deta
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
-<<<<<<< HEAD
 import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
-=======
 import { NotFoundComponent } from './pages/not-found/not-found.component';
->>>>>>> 8c4093b2a760c221e31967c24fd26aacc6bcf687
+
 
 const routes: Routes = [
   {
@@ -69,10 +67,10 @@ const routes: Routes = [
   //       path: 'reset-password',
   //       component: ResetPasswordFormComponent,
   //     },
-  // {
-  //   path: 'not-found',
-  //   component: NotFoundComponent
-  // }
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  }
   ]
 },
 {
