@@ -363,7 +363,7 @@ router.post("/users/:userName/reset-password", (req, res) => {
 // register a new user
 /**
  * @openapi
- * /api/users:
+ * /api/session/register:
  *   post:
  *     tags:
  *       - Session
@@ -451,9 +451,9 @@ router.post('/register', async (req, res) => {
             }
           })
         } else {
-          console.log(newUser);
+          console.log(`Username ${req.body.userName} already exists`);
           const alreadyExistsUserResponse = new BaseResponse('400', `The username: ${req.body.userName} is already in use.`, null);
-          res.json(alreadyExistsUserResponse.toObject());
+          res.status(400).send(alreadyExistsUserResponse.toObject());
         }
       }
     });
