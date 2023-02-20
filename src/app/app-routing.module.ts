@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
-// import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { AuthGuard } from './auth.guard';
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
@@ -16,6 +15,7 @@ import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/r
 import { ContactComponent } from './pages/contact/contact.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { AboutComponent } from './pages/about/about.component';
 
 
 const routes: Routes = [
@@ -35,10 +35,10 @@ const routes: Routes = [
         path: 'contact',
         component: ContactComponent
       },
-      // {
-      //   path: 'about',
-      //   component: AboutComponent
-      // },
+      {
+        path: 'about',
+        component: AboutComponent
+      },
       {
         path: 'security-questions',
         component: SecurityQuestionListComponent,
