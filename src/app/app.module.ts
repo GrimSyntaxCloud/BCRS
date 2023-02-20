@@ -25,6 +25,7 @@ import { MatDividerModule } from '@angular/material/divider';//
 import { LoginComponent } from './pages/login/login.component'; //
 import { CookieService } from 'ngx-cookie-service';
 import {MatGridListModule} from '@angular/material/grid-list';//
+import {MatListModule} from '@angular/material/list';//
 // import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
@@ -43,6 +44,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -90,14 +92,17 @@ import { ErrorComponent } from './pages/error/error.component';
     MatDialogModule,
     MatTableModule,
     MatDividerModule,
-    MatGridListModule,//
+    MatGridListModule,
+    MatListModule,
+    MatStepperModule,
+    MatSelectModule,
     // NgPrime Materials
     TableModule,
     MessageModule,
     MessagesModule,
     ButtonModule,
     ConfirmDialogModule,
-    MatStepperModule
+
   ],
 
   providers: [CookieService],
