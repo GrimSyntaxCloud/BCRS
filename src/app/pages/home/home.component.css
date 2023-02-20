@@ -5,9 +5,29 @@
 .title {
   text-align: center;
   font-weight: lighter;
+  background-color: rgb(255, 255, 255);
 }
 
 .subtitle {
   text-align: center;
   font-size: 14px;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../assets/home/radek-grzybowski-eBRTYyjwpRY-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 36px;
+}
+
+.services {
+  margin-top: 30px;
+  margin-bottom: 130px;
+}
+
+.services-card {
+  width: 50%;
 }
