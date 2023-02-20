@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';/
 import { HomeComponent } from './pages/home/home.component';//
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';//
 import { BaseLayoutComponent } from './shared/base-layout/base-layout.component';//
-import { HttpClientModule, HttpClient } from '@angular/common/http'; //
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'; //
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //
 import { FlexLayoutModule } from '@angular/flex-layout'; //
 import { MatToolbarModule } from '@angular/material/toolbar';//
@@ -51,6 +51,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { ErrorInterceptor } from './shared/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,12 @@ import { ErrorComponent } from './pages/error/error.component';
 
   ],
 
-  providers: [CookieService],
+  providers: [
+      CookieService,
+      {
+        provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
+      }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
