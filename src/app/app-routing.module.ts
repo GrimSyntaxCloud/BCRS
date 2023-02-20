@@ -16,6 +16,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { AboutComponent } from './pages/about/about.component';
+import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'forgot',
+        component: VerifyUsernameFormComponent,
       },
       {
         path: 'verify-security-questions',

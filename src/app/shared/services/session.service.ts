@@ -46,9 +46,9 @@ export class SessionService {
 
 
   // verify username
-  // verifyUsername(username: string): Observable<any>{
-  //   return this.http.get('/api/session/verify/users/' + username);
-  // }
+  verifyUsername(username: string): Observable<any>{
+    return this.http.get('/api/session/verify/users/' + username);
+  }
 
 
   // verify security questions
