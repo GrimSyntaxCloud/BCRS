@@ -1,0 +1,218 @@
+<!--
+Title: register.component.html
+Author: Professor Krasso
+Date: 02/19/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: register/signup page
+-->
+
+<mat-card fxFlex>
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="title">Account Registration Form</h1>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h3>Create an account</h3>
+    </mat-card-subtitle>
+  </mat-card-header>
+<mat-card-content fxLayout="column" fxLayoutGap="10px">
+  <!-- Stepper
+  TODO:
+  1. add linear to the mat-stepper to mat-stepper tag
+
+  -->
+  <mat-stepper orientation="horizontal" #stepper linear>
+    <mat-step [stepControl]="contactForm" errorMessage="Contact information is required">
+      <form [formGroup]="contactForm">
+        <ng-template matStepLabel>Contact Information</ng-template>
+        <br>
+        <mat-list>
+          <mat-list-item>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>First name</mat-label>
+              <input type="text" matInput required formControlName="firstName">
+              <mat-error>First name is required</mat-error>
+            </mat-form-field>
+
+            &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Last name</mat-label>
+              <input type="text" matInput required formControlName="lastName">
+              <mat-error>Last name is required</mat-error>
+            </mat-form-field>
+
+            &nbsp;
+          </mat-list-item>
+          <br> <br>
+          <mat-list-item>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Email Address</mat-label>
+              <input type="email" matInput required formControlName="email">
+              <mat-error>Email address is required</mat-error>
+
+              <mat-error>Invalid email format</mat-error>
+            </mat-form-field>
+
+            &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Phone number</mat-label>
+              <input type="tel" matInput required formControlName="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+              <mat-error>Phone number is required</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+
+          <br><br>
+          <mat-list-item>
+            &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Address</mat-label>
+              <input type="text" matInput required formControlName="address">
+              <mat-error>Address is required</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <br><br>
+          <mat-list-item>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Zip</mat-label>
+              <input type="text" matInput required formControlName="zip">
+              <mat-error>Zip is required</mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>City</mat-label>
+              <input type="text" matInput required formControlName="city">
+              <mat-error>City is required</mat-error>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>State</mat-label>
+              <input type="text" matInput required formControlName="state">
+              <mat-error>State is required</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+        </mat-list>
+
+        <div fxLayoutAlign="end">
+          <button mat-raised-button matStepperNext>Next</button>
+        </div>
+
+      </form>
+    </mat-step>
+    <!-- Security Questions -->
+    <mat-step [stepControl]="securityQuestionsForm" errorMessage="Security Questions are required">
+      <form [formGroup]="securityQuestionsForm">
+        <ng-template matStepLabel>Security Questions</ng-template>
+
+        <br>
+
+        <mat-list>
+          <!-- question 1 -->
+          <mat-list-item>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Security Question</mat-label>
+             <mat-select required formControlName="securityQuestion1">
+              <mat-option *ngFor="let question of securityQuestions" [value]="question.text">
+                    {{question.text}}
+              </mat-option>
+              </mat-select>
+              <mat-error>Security question is required</mat-error>
+            </mat-form-field>
+
+            &nbsp; &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Answer</mat-label>
+              <input type="text" matInput required formControlName="securityQuestionAnswer1">
+              <mat-error>required field</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+
+          <br><br>
+          <!-- question 2 -->
+          <mat-list-item>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Security Question</mat-label>
+             <mat-select required formControlName="securityQuestion2">
+              <mat-option *ngFor="let question of securityQuestions" [value]="question.text">
+                {{question.text}}
+              </mat-option>
+              </mat-select>
+              <mat-error>Security question is required</mat-error>
+            </mat-form-field>
+
+            &nbsp; &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Answer</mat-label>
+              <input type="text" matInput required formControlName="securityQuestionAnswer2">
+              <mat-error>required field</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+
+          <br><br>
+          <!-- question 3 -->
+          <mat-list-item>
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Security Question</mat-label>
+             <mat-select required formControlName="securityQuestion3">
+              <mat-option *ngFor="let question of securityQuestions" [value]="question.text">
+                {{question.text}}
+              </mat-option>
+              </mat-select>
+              <mat-error>Security question is required</mat-error>
+            </mat-form-field>
+
+            &nbsp; &nbsp;
+            <mat-form-field fxFlex appearance="fill">
+              <mat-label>Answer</mat-label>
+              <input type="text" matInput required formControlName="securityQuestionAnswer3">
+              <mat-error>required field</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+        </mat-list>
+
+        <div fxLayoutAlign="end">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          &nbsp;&nbsp;
+          <button mat-raised-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Credentials -->
+    <mat-step [stepControl]="credentialsForm">
+      <form [formGroup]="credentialsForm">
+        <ng-template matStepLabel>Credentials</ng-template>
+          <br>
+
+          <p-messages [value]="errorMessages" [enableService]="false"></p-messages>
+          <mat-list>
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput required formControlName="userName">
+                <mat-error>Username is required</mat-error>
+              </mat-form-field>
+            </mat-list-item>
+            <br><br>
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput required formControlName="password">
+                <mat-error>Password is required</mat-error>
+
+                <mat-error>Password must be at least 8 characters, contain one letter, and one number</mat-error>
+              </mat-form-field>
+            </mat-list-item>
+          </mat-list>
+          <br>
+
+          <div fxLayoutAlign="end">
+            <button mat-raised-button matStepperPrevious>Back</button>
+            &nbsp;&nbsp;
+            <button mat-raised-button (click)="register()">Register</button>
+          </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</mat-card-content>
+</mat-card>
+
