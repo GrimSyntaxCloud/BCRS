@@ -22,11 +22,11 @@ const routes: Routes = [
     path: '',
     component: BaseLayoutComponent,
     children: [
-    {
+      {
         path: '',
         component: HomeComponent
       },
-    {
+      {
         path: 'service-repair',
         component: ServiceRepairComponent
       },
@@ -39,51 +39,51 @@ const routes: Routes = [
       //   component: AboutComponent
       // },
       {
-      path: 'security-questions',
-      component: SecurityQuestionListComponent,
-      canActivate: [AuthGuard] // for logged in user
+        path: 'security-questions',
+        component: SecurityQuestionListComponent,
+        canActivate: [AuthGuard] // for logged in user
       },
       {
-      path: 'security-questions/:questionId',
-      component: SecurityQuestionDetailsComponent,
-      canActivate: [AuthGuard]  // for logged in user
+        path: 'security-questions/:questionId',
+        component: SecurityQuestionDetailsComponent,
+        canActivate: [AuthGuard]  // for logged in user
       },
     ],
   },
   {
     path: 'session',
-    component: AuthLayoutComponent,
+    component: BaseLayoutComponent,
     children: [
       {
         path: 'login',
         component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
-  },
-   {
-    path: 'verify-security-questions',
-    component: VerifySecurityQuestionsFormComponent,
-  },
-  {
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
+        path: 'verify-security-questions',
+        component: VerifySecurityQuestionsFormComponent,
+      },
+      {
         path: 'reset-password',
         component: ResetPasswordFormComponent,
-  },
-  {
-    path: 'not-found',
-    component: NotFoundComponent
       },
-  {
+      {
+        path: 'not-found',
+        component: NotFoundComponent
+      },
+      {
         path: 'error-500',
         component: ErrorComponent,
+      },
+    ]
   },
-  ]
-},
-{
-  path: '**',
-  redirectTo: 'session/not-found'
-}
+  {
+    path: '**',
+    redirectTo: 'session/not-found'
+  }
 
 ];
 
