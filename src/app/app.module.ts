@@ -51,6 +51,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ErrorComponent } from './pages/error/error.component';
     NotFoundComponent,
     ResetPasswordFormComponent,
     ContactComponent,
-    ErrorComponent
+    ErrorComponent,
+    VerifyUsernameFormComponent
   ],
   imports: [
      // Angular Materials
