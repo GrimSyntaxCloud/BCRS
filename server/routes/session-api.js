@@ -391,15 +391,22 @@ router.post("/users/:userName/reset-password", (req, res) => {
  *                  type: string
  *                email:
  *                  type: string
- *                securityQuestions:
+ *                selectedSecurityQuestions:
  *                  type: array
  *                  items:
- *                    type: object
  *                    properties:
- *                      questionText:
- *                        type: string
- *                      answerText:
- *                        type: string
+ *                        questionText1:
+ *                          type: string
+ *                        answerText1:
+ *                          type: string
+ *                        questionText2:
+ *                          type: string
+ *                        answerText2:
+ *                          type: string
+ *                        questionText3:
+ *                          type: string
+ *                        answerText3:
+ *                          type: string
  *     responses:
  *       '200':
  *         description: Query successful
