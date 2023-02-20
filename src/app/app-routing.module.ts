@@ -15,6 +15,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,11 @@ const routes: Routes = [
         component: SecurityQuestionDetailsComponent,
         canActivate: [AuthGuard]  // for logged in user
       },
+      {
+      path: 'users',
+      component: UserDetailsComponent,
+      canActivate: [AuthGuard] // for logged in user
+      }
     ],
   },
   {
