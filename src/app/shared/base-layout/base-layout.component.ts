@@ -30,8 +30,6 @@ export class BaseLayoutComponent implements OnInit {
   constructor(private cookieService: CookieService, private router: Router) {
      // from login component
     this.sessionUserName = this.cookieService.get('session_user');
-    console.log('we  are in the const')
-    console.log(this.sessionUserName)
 
 
     this.year = Date.now();
