@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
     address: [null, Validators.compose([Validators.required])],
   });
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService,private sessionService: SessionService, private confirmationService: ConfirmationService, private cookieService: CookieService) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService, private sessionService: SessionService, private confirmationService: ConfirmationService, private cookieService: CookieService) {
     // this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
     this.userName = this.cookieService.get('session_user');
     this.userId = '';
@@ -62,10 +62,10 @@ export class UserDetailsComponent implements OnInit {
         this.form.controls['address'].setValue(this.user.address);
 
         this.userId = this.user._id ?? '';
-        console.log('oncomplete: ' + "userID: "+ this.userId + ' ' + "username: " + this.userName);
+        console.log('oncomplete: ' + "userID: " + this.userId + ' ' + "username: " + this.userName);
       }
     })
-   }
+  }
 
 
 
@@ -103,7 +103,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   // Deactivate a user record
- deleteUser() {
+  deleteUser() {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this record?',
       header: 'Confirmation',
@@ -112,7 +112,10 @@ export class UserDetailsComponent implements OnInit {
         this.userService.deleteUser(this.userId).subscribe({
           next: (res) => {
             console.log('User deleted successfully');
-            this.router.navigate(["/"])
+            // route to the home page and reload the page
+            // deleteAll cookies
+            this.cookieService.deleteAll();
+            this.router.navigate(['/']).then(() => { window.location.reload(); });
           },
           error: (e) => {
             console.log(e);
@@ -120,7 +123,7 @@ export class UserDetailsComponent implements OnInit {
         })
       },
       reject: (type: any) => {
-        switch(type) {
+        switch (type) {
           case ConfirmEventType.REJECT:
             console.log('User rejected this operation');
             break;
