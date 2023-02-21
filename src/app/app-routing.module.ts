@@ -51,7 +51,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]  // for logged in user
       },
       {
-      path: 'users',
+      path: 'users/:userName',
       component: UserDetailsComponent,
       canActivate: [AuthGuard] // for logged in user
       }

@@ -6,6 +6,8 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: User Details
 -->
 
+<p-confirmDialog [style]="{width: '35vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
 <div fxLayout="column">
   <mat-card class="mat-elevation-z0">
 
@@ -104,16 +106,20 @@ Description: User Details
     </form>
 
     <!-- Purchase history for user goes here -->
-    <mat-card-content>
+    <mat-card>
+      <mat-card-content>
 
-    </mat-card-content>
+      </mat-card-content>
+    </mat-card>
 
     <br/>
 
-    <!-- Button to deactivate/soft delete account -->
-      <mat-card-actions align="end">
-        <button mat-raised-button (click)="cancel()" color="warn">Deactivate Account</button>
-      </mat-card-actions>
+   <!-- Button to deactivate/soft delete account -->
+
+
+   <div style="margin: 5%; float: right; width: 10%;">
+    <button mat-raised-button (click)="deactivateUser()" icon="pi pi-trash class=p-button-rounded p-button-text" color="warn">Deactivate Account</button>
+  </div>
   </mat-card>
 </div>
 
