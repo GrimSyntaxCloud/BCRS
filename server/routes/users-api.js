@@ -207,6 +207,39 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Add api for findUserByUsername
+router.get('/users/:userName', async(req, res) =>  {
+  /** try {
+    User.findOne({ _id: req.params.id }, function (err, user) {
+      if (err) {
+        console.log(err);
+        const findUserByIdMongodbErrorResponse = new BaseResponse(
+          500,
+          `${config.mongoServerError}:${err.message}`,
+          null
+        );
+        console.log(findUserByIdMongodbErrorResponse.toObject());
+        res.status(500).send(findUserByIdMongodbErrorResponse.toObject());
+      } else {
+        const findUserByIdResponse = new BaseResponse(
+          200,
+          `findUserByUserName query was successful.`,
+          user
+        );
+        res.json(findUserByIdResponse.toObject());
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    const findByIdCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal server error",
+      e
+    );
+    res.status(500).send(findByIdCatchErrorResponse.toObject());
+  } */
+})
+
 /**
  * API: http://localhost:3000/api/users/{id}
  * updateUserById
@@ -379,6 +412,58 @@ router.delete("/:id", async (req, res) => {
     res.status(500).send(deleteUserCatchErrorResponse.toObject());
   }
 });
+
+router.delete("/deactivate/:userName", async (req, res) => {
+  try {
+    User.findOne({ userName: req.params.userName }, function (err, user) {
+      if (err) {
+        console.log(err);
+        const deleteUserMongodbErrorResponse = new ErrorResponse(
+          500,
+          "Internal sever error",
+          err
+        );
+        res.status(500).send(deleteUserMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+
+        user.set({
+          isDisabled: true,
+          dateModified: new Date(),
+        });
+
+        user.save(function (err, savedUser) {
+          if (err) {
+            console.log(err);
+            const savedUserMongodbErrorResponse = new ErrorResponse(
+              500,
+              "Internal server error",
+              err
+            );
+            res.json(savedUserMongodbErrorResponse.toObject());
+          } else {
+            console.log(savedUser);
+            const savedUserResponse = new BaseResponse(
+              200,
+              "Query successful",
+              savedUser
+            );
+            res.json(savedUserResponse.toObject());
+          }
+        });
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    const deleteUserCatchErrorResponse = new ErrorResponse(
+      500,
+      "Internal server error",
+      e.message
+    );
+    res.status(500).send(deleteUserCatchErrorResponse.toObject());
+  }
+});
+
 
 /**
  * API queries the users collection by username and return the users registered security questions.
