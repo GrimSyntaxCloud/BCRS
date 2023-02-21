@@ -1,33 +1,32 @@
-.main-welcome {
-  margin-top: 30px;
+/*
+Title: about.component.css
+Author: Professor Krasso
+Date: 02/20/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: styling for about page
+*/
+
+
+.aboutUsImg{
+    max-width: 350px;
+    border-radius: 15%;
+    border: 8px solid #D3A625;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 10));
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
 }
 
-.title {
+.appName{
   text-align: center;
-  font-weight: lighter;
+  font-family: Lato;
+  color: #ae0001;
+  font-weight: bold;
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 14px;
-  font-style: italic;
-}
-
-.task-container {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.about-us-text {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.task-column {
-  border: 1px solid #ccc;
-  min-height: 68px;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  display: block;
+.aboutApp{
+   text-align: left;
+   padding-right: 30px;
+   font-size: medium;
 }
