@@ -208,37 +208,8 @@ router.get("/:id", async (req, res) => {
 });
 
 // Add api for findUserByUsername
-router.get('/users/:userName', async(req, res) =>  {
-  /** try {
-    User.findOne({ _id: req.params.id }, function (err, user) {
-      if (err) {
-        console.log(err);
-        const findUserByIdMongodbErrorResponse = new BaseResponse(
-          500,
-          `${config.mongoServerError}:${err.message}`,
-          null
-        );
-        console.log(findUserByIdMongodbErrorResponse.toObject());
-        res.status(500).send(findUserByIdMongodbErrorResponse.toObject());
-      } else {
-        const findUserByIdResponse = new BaseResponse(
-          200,
-          `findUserByUserName query was successful.`,
-          user
-        );
-        res.json(findUserByIdResponse.toObject());
-      }
-    });
-  } catch (e) {
-    console.log(e);
-    const findByIdCatchErrorResponse = new ErrorResponse(
-      500,
-      "Internal server error",
-      e
-    );
-    res.status(500).send(findByIdCatchErrorResponse.toObject());
-  } */
-})
+// router.get('/users/:userName', async(req, res) =>  {
+// })
 
 /**
  * API: http://localhost:3000/api/users/{id}
