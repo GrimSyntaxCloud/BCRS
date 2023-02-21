@@ -1,0 +1,23 @@
+/*
+Title: contact.component.css
+Author: Professor Krasso
+Date: 02/19/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: styling for contact page
+*/
+
+
+.addressCard{
+    background: #E0E0E0;
+    width: 70%;
+    font-family: Lato;
+    height: 100%;
+}
+
+
+.phoneCard{
+    background: #E0E0E0;
+    width: 70%;
+    font-family: Lato;
+    height: 100%;
+}

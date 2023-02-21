@@ -16,9 +16,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceRepairComponent implements OnInit {
 
-  constructor() { }
+  descriptions!: Array<any>
+  cards: Array<any>;
+
+
+  constructor() {
+    this.cards = [
+    {
+      title: 'Card Title 1',
+      price:'29.99',
+      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
+      buttonText: 'Choose'
+
+    },
+    {
+      title: 'Card Title 2',
+      price:'39.99',
+      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
+      buttonText: 'Choose'
+    },
+    {
+      title: 'Card Title 3',
+      price:'49.99',
+      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
+      buttonText: 'Choose'
+    },
+    {
+      title: 'Card Title 4',
+      price:'59.99',
+      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
+      buttonText: 'Choose'
+    },
+
+  ];
+  }
 
   ngOnInit(): void {
+
   }
 
 }

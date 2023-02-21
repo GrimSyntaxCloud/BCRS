@@ -6,6 +6,7 @@
   Description: Login page for the application.
 -->
 
+
 <div fxLayout>
   <mat-card class="mat-elevation-z0 login-card">
     <mat-card-header class="padding-bottom-5" fxLayoutAlign="center">
@@ -15,45 +16,45 @@
     </mat-card-header>
 
     <mat-card-content>
-          <!-- Error messages -->
-    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+      <!-- Error messages -->
+      <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
       <form [formGroup]="loginForm" (ngSubmit)="login(); loginForm.reset()">
-
         <mat-card-content>
-
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Username</mat-label>
-            <input type="text" matInput formControlName="userName">
+            <input type="text" matInput formControlName="userName" />
 
-            <mat-error *ngIf="loginForm.controls['userName'].hasError('required') && loginForm.controls['userName'].touched">Username is required.</mat-error>
+            <mat-error *ngIf="
+                loginForm.controls['userName'].hasError('required') &&
+                loginForm.controls['userName'].touched
+              ">Username is required.</mat-error>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password">
+            <input type="password" matInput formControlName="password" />
 
-            <mat-error *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required.</mat-error>
+            <mat-error *ngIf="
+                loginForm.controls['password'].hasError('required') &&
+                loginForm.controls['password'].touched
+              ">Password is required.</mat-error>
 
-            <mat-error *ngIf="loginForm.controls['password'].hasError('pattern') && loginForm.controls['password'].touched">Password must be at least 8 characters.</mat-error>
+            <mat-error *ngIf="
+                loginForm.controls['password'].hasError('pattern') &&
+                loginForm.controls['password'].touched
+              ">Password must be at least 8 characters.</mat-error>
           </mat-form-field>
 
           <mat-card-actions>
-            <button type="submit" class="full-width btn-primary" mat-raised-button [disabled]="!loginForm.valid">Submit</button>
+            <button type="submit" class="full-width btn-primary" mat-raised-button [disabled]="!loginForm.valid">
+              Submit
+            </button>
           </mat-card-actions>
-
         </mat-card-content>
       </form>
       <div fxLayout fxLayoutAlign="space-between">
-        <!--
-          TODO:
-          - Add sign up route
-        -->
-        <a href="" class="navbar-link" routerLink="#">Sign up</a>
-        <!--
-          TODO:
-          - Add forgot password route
-        -->
-        <a href="" class="navbar-link" routerLink="#">Forgot Password</a>
+        <a href="" class="navbar-link" routerLink="/session/register">Sign up</a>
+        <a href="" class="navbar-link" routerLink="/session/forgot">Forgot Password</a>
       </div>
     </mat-card-content>
   </mat-card>

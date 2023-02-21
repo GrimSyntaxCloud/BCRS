@@ -1,9 +1,36 @@
+/*
+Title: verify-security-questions-form.component.css
+Author: Andres Macias
+Date: 02/18/2023
+Modified By: April Yang/Patrick Wolff
+Description: styling for verify-security-questions-form template
+*/
+
+
+
 .login-card {
   margin: 10em auto;
   width: 30em;
 }
 
-.btn-primary {
+
+
+
+.logo{
+  color: #FFFFFF;
+  font-family: 'Grand Hotel';
+  font-size: 45px;
+  text-align: left;
+}
+
+.logoBar{
+  height: 100px;
   background-color: #740001;
-  color: white;
+  padding: 0 36px;
+}
+
+.slogenBar{
+  background-color: #eeba30;
+  height: 40px;
+
 }

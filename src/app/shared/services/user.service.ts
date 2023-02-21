@@ -26,6 +26,11 @@ export class UserService {
     return this.http.get('/api/users/' + userId);
   }
 
+  // add service for findByUsername
+  //findUserByUserName(userId: string): Observable<any> {
+    //return this.http.get('/api/users/' + userId);
+  //}
+
   createUser(user: User): Observable<any> {
     return this.http.post('/api/users/', {
       userName: user.userName,
@@ -50,4 +55,18 @@ export class UserService {
   deleteUser(userId: string): Observable<any> {
     return this.http.delete('/api/users/' + userId);
   }
+
+  deactivateUser(userName: string): Observable<any> {
+    console.log("inside deactivate")
+    console.log(userName)
+    return this.http.delete('/api/users/deactivate/' + userName);
+  }
+
+  // find user selected security questions
+findSelectedSecurityQuestions(username: string): Observable < any > {
+  return this.http.get('/api/users/' + username + '/security-questions');
 }
+
+}
+
+

@@ -21,10 +21,10 @@ export class BaseLayoutComponent implements OnInit {
 
 
 
-  // isLoggedIn = true;
+
 
   year: number = Date.now();
-  // shopping_cart: string;
+
   sessionUserName: string;
 
   constructor(private cookieService: CookieService, private router: Router) {
@@ -33,19 +33,22 @@ export class BaseLayoutComponent implements OnInit {
     console.log('we  are in the const')
     console.log(this.sessionUserName)
 
-    // this.shopping_cart = this.cookieService.get('session_user');
+
     this.year = Date.now();
   }
 
   ngOnInit(): void {
   }
 
-    // logout function deletes all cookies and navigate user to login page
+    // logout function deletes all cookies and navigate user to the home page by reloading the window
   logout() {
     this.cookieService.deleteAll();
-    this.router.navigate(['/session/login']);
+    this.router.navigate(['/']).then(() => { window.location.reload(); });
   }
 
-
+  profile() {
+    const userName = this.cookieService.get('session_user')
+    this.router.navigate(['/users/' + userName])
+  }
 
 }

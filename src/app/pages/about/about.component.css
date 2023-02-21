@@ -1,0 +1,33 @@
+.main-welcome {
+  margin-top: 30px;
+}
+
+.title {
+  text-align: center;
+  font-weight: lighter;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.task-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.about-us-text {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.task-column {
+  border: 1px solid #ccc;
+  min-height: 68px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}

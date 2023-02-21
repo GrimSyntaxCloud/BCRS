@@ -6,9 +6,16 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: User Details
 -->
 
+<p-confirmDialog [style]="{width: '35vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
 <div fxLayout="column">
   <mat-card class="mat-elevation-z0">
-    <mat-card-title style="text-align: center; font-weight: lighter;">Update User Form</mat-card-title>
+
+    <mat-card-title style="text-align: center; font-weight: lighter;">
+      <img src="../assets/profileicon.png" alt="Profile icon"  />
+      <br />
+      Update User Details
+    </mat-card-title>
     <mat-card-subtitle style="text-align: center; font-weight: lighter;">
       Fields marked with an asterisk (*) are required.
     </mat-card-subtitle>
@@ -20,7 +27,7 @@ Description: User Details
       <mat-card-content>
         <div fxLayout="column" fxLayoutGap="10px">
           <mat-form-field appearance="fill">
-            <mat-label>First name</mat-label>
+            <mat-label>First Name</mat-label>
             <input
               type="text"
               matInput
@@ -97,5 +104,22 @@ Description: User Details
         <button mat-raised-button [disabled]="!form.valid" color="primary">Submit</button>
       </mat-card-actions>
     </form>
+
+    <!-- Purchase history for user goes here -->
+    <mat-card>
+      <mat-card-content>
+
+      </mat-card-content>
+    </mat-card>
+
+    <br/>
+
+   <!-- Button to deactivate/soft delete account -->
+
+
+   <div style="margin: 5%; float: right; width: 10%;">
+    <button mat-raised-button (click)="deactivateUser()" icon="pi pi-trash class=p-button-rounded p-button-text" color="warn">Deactivate Account</button>
+  </div>
   </mat-card>
 </div>
+

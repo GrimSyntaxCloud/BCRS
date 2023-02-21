@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';/
 import { HomeComponent } from './pages/home/home.component';//
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';//
 import { BaseLayoutComponent } from './shared/base-layout/base-layout.component';//
-import { HttpClientModule, HttpClient } from '@angular/common/http'; //
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'; //
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //
 import { FlexLayoutModule } from '@angular/flex-layout'; //
 import { MatToolbarModule } from '@angular/material/toolbar';//
@@ -24,6 +24,8 @@ import { MatTableModule } from '@angular/material/table'; //
 import { MatDividerModule } from '@angular/material/divider';//
 import { LoginComponent } from './pages/login/login.component'; //
 import { CookieService } from 'ngx-cookie-service';
+import {MatGridListModule} from '@angular/material/grid-list';//
+import {MatListModule} from '@angular/material/list';//
 // import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
@@ -39,8 +41,18 @@ import { DeleteRecordDialogComponent } from './shared/delete-record-dialog/delet
 import { ConfirmationService } from 'primeng/api';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { AboutComponent } from './pages/about/about.component';
-import { ErrorComponent } from './pages/error/error.component';
 import { ServiceRepairComponent } from './pages/service-repair/service-repair.component';
+import { RegisterComponent } from './pages/register/register.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
+
+import { VerifySecurityQuestionsFormComponent } from './shared/forms/verify-security-questions-form/verify-security-questions-form.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ResetPasswordFormComponent } from './shared/forms/reset-password-form/reset-password-form.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ErrorComponent } from './pages/error/error.component';
+import { ErrorInterceptor } from './shared/error.interceptor';
+import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +67,14 @@ import { ServiceRepairComponent } from './pages/service-repair/service-repair.co
     UserDetailsComponent,
     DeleteRecordDialogComponent,
     AboutComponent,
+    ServiceRepairComponent,
+    RegisterComponent,
+    VerifySecurityQuestionsFormComponent,
+    NotFoundComponent,
+    ResetPasswordFormComponent,
+    ContactComponent,
     ErrorComponent,
-    ServiceRepairComponent
+    VerifyUsernameFormComponent
   ],
   imports: [
      // Angular Materials
@@ -77,15 +95,25 @@ import { ServiceRepairComponent } from './pages/service-repair/service-repair.co
     MatDialogModule,
     MatTableModule,
     MatDividerModule,
+    MatGridListModule,
+    MatListModule,
+    MatStepperModule,
+    MatSelectModule,
     // NgPrime Materials
     TableModule,
     MessageModule,
     MessagesModule,
     ButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+
   ],
 
-  providers: [CookieService],
+  providers: [
+      CookieService,
+      {
+        provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
+      }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,7 +19,7 @@ const router = express.Router();
 // Create security question, createSecurityQuestion
 /**
 @openapi
- * /api/securityQuestion:
+ * /api/security-questions:
  *   post:
  *     tags:
  *       - Security Questions

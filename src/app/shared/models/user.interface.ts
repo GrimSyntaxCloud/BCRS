@@ -6,6 +6,9 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: User interface
 */
 
+import { SelectedSecurityQuestion } from "./selected-security-question.interface";
+
+
 
 export interface User {
   _id?: string;
@@ -16,4 +19,5 @@ export interface User {
   phoneNumber: string;
   address: string;
   email: string;
+  selectedSecurityQuestions?: SelectedSecurityQuestion[];
 }

@@ -24,7 +24,7 @@ const userSchema = new Schema(
     email: { type: String },
     isDisabled: { type: Boolean, default: false }, // data will not be hard deleted in mongoDB
     role: userRoleSchema,
-    securityQuestions: [selectedSecurityQuestionSchema],
+    selectedSecurityQuestions: [selectedSecurityQuestionSchema],
     dateCreated: { type: Date, default: new Date() },
     dateModified: { type: Date },
   },

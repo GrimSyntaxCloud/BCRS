@@ -19,17 +19,18 @@ Description: application base layout template
         <!-- routerLink for sign up and log in -->
         <span class="example-spacer"></span>
 
-        <button mat-icon-button class="ml-xs">
-          <mat-icon class="shopping-cart">shopping_cart</mat-icon>
-        </button>
+        <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
-          <a class="navbar-link-signUp" routerLink="/session/signup">Sign up</a>
+          <a class="navbar-link-signUp" routerLink="/session/register">Sign up</a>
           <a class="navbar-link-logIn" routerLink="/session/login">Log in</a>
         </ng-container>
 
-        <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
-
         <ng-container *ngIf="sessionUserName">
+          <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
+          <button mat-icon-button class="ml-xs">
+            <mat-icon class="shopping-cart">shopping_cart</mat-icon>
+          </button>
+
           <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
             <mat-icon class="profileIcon">person</mat-icon>
             <!-- <p>Welcome {{ sessionUserName }}!</p> -->
@@ -46,9 +47,9 @@ Description: application base layout template
             </button>
 
             <mat-menu #configs="matMenu">
-              <button mat-menu-item routerLink="/users">
-                <mat-icon>person_add</mat-icon>
-                Users
+              <button mat-menu-item (click)="profile()">
+                <mat-icon>person</mat-icon>
+                Profile
               </button>
               <button mat-menu-item routerLink="/security-questions">
                 <mat-icon>help</mat-icon>
@@ -68,9 +69,10 @@ Description: application base layout template
       <mat-toolbar-row class="slogenBar">
         <span class="slogen">Amazing Help!</span>
         <span class="example-spacer"></span>
-        <a class="navbar-link" routerLink="/">Service Repair</a>
-        <a class="navbar-link" routerLink="/">Contact Us</a>
-        <a class="navbar-link" routerLink="/">About</a>
+        <a class="navbar-link" routerLink="/">Home</a>
+        <a class="navbar-link" routerLink="/service-repair">Service Repair</a>
+        <a class="navbar-link" routerLink="/contact">Contact Us</a>
+        <a class="navbar-link" routerLink="/about">About</a>
       </mat-toolbar-row>
     </nav>
   </header>

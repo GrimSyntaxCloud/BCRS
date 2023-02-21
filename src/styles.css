@@ -34,6 +34,11 @@ h1.card-title {
   padding-bottom: 5em;
 }
 
+.btn-primary {
+  background-color: #740001;
+  color: white;
+}
+
 /* Global styles for paragraphs */
 * p {
   font-family: 'Lato', sans-serif;
