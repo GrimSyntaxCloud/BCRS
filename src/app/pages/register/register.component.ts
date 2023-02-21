@@ -39,31 +39,31 @@ export class RegisterComponent implements OnInit {
 
   //first form
   contactForm: FormGroup = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    phoneNumber: [null, Validators.required],
-    address: [null, Validators.required],
-    zip: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required],
-    email: [null, Validators.required]
+    firstName: [null, Validators.compose([Validators.required])],
+    lastName: [null, Validators.compose([Validators.required])],
+    phoneNumber: [null, Validators.compose([Validators.required])],
+    address: [null, Validators.compose([Validators.required])],
+    zip: [null, Validators.compose([Validators.required])],
+    city: [null, Validators.compose([Validators.required])],
+    state: [null, Validators.compose([Validators.required])],
+    email: [null, Validators.compose([Validators.required])]
   });
 
   //second form
   securityQuestionsForm: FormGroup = this.fb.group({
-    securityQuestion1: [null, Validators.required],
-    securityQuestion2: [null, Validators.required],
-    securityQuestion3: [null, Validators.required],
-    securityQuestionAnswer1: [null, Validators.required],
-    securityQuestionAnswer2: [null, Validators.required],
-    securityQuestionAnswer3: [null, Validators.required]
+    securityQuestion1: [null, Validators.compose([Validators.required])],
+    securityQuestion2: [null, Validators.compose([Validators.required])],
+    securityQuestion3: [null, Validators.compose([Validators.required])],
+    securityQuestionAnswer1: [null, Validators.compose([Validators.required])],
+    securityQuestionAnswer2: [null, Validators.compose([Validators.required])],
+    securityQuestionAnswer3: [null, Validators.compose([Validators.required])]
   });
 
   //third form
   credentialsForm: FormGroup = this.fb.group({
-    userName: [null, Validators.required],
+    userName: [null, Validators.compose([Validators.required])],
     // password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long
-    password: [null, Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})')]
+    password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.{8,})')])]
   });
 
 
@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
       firstName: contactInformation.firstName,
       lastName: contactInformation.lastName,
       phoneNumber: contactInformation.phoneNumber,
-      address: contactInformation.address + ' ' + contactInformation.city + ' ' + contactInformation.state + ' ' + contactInformation.zip,
+      address: contactInformation.address + ' ' + contactInformation.city + ', ' + contactInformation.state + ' ' + contactInformation.zip,
       email: contactInformation.email,
       selectedSecurityQuestions: this.selectedSecurityQuestions
   }
