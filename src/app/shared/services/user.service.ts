@@ -44,7 +44,7 @@ export class UserService {
   }
 
   updateUser(userId: string, user: User): Observable<any> {
-    return this.http.put('/api/users' + userId, {
+    return this.http.put('/api/users/' + userId, {
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
@@ -53,14 +53,15 @@ export class UserService {
   }
 
   deleteUser(userId: string): Observable<any> {
+      console.log("inside delete" + userId);
     return this.http.delete('/api/users/' + userId);
   }
 
-  deactivateUser(userName: string): Observable<any> {
-    console.log("inside deactivate")
-    console.log(userName)
-    return this.http.delete('/api/users/deactivate/' + userName);
-  }
+  // deactivateUser(userName: string): Observable<any> {
+  //   console.log("inside deactivate")
+  //   console.log(userName)
+  //   return this.http.delete('/api/users/deactivate/' + userName);
+  // }
 
   // find user selected security questions
 findSelectedSecurityQuestions(username: string): Observable < any > {
