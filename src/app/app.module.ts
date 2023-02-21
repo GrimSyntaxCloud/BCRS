@@ -53,6 +53,8 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './shared/error.interceptor';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+// import { Chart } from 'chart.js';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form
     ResetPasswordFormComponent,
     ContactComponent,
     ErrorComponent,
-    VerifyUsernameFormComponent
+    VerifyUsernameFormComponent,
+    ProfileComponent
   ],
   imports: [
      // Angular Materials
