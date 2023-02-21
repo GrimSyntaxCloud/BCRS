@@ -442,7 +442,6 @@ router.post('/register', async (req, res) => {
             address: req.body.address,
             email: req.body.email,
             role: standardRole,
-            //in database, this is securityQuestions, If changed then an Id populates in the database but not the text
             selectedSecurityQuestions: selectedSecurityQuestionsTest
           };
 
