@@ -391,22 +391,6 @@ router.post("/users/:userName/reset-password", (req, res) => {
  *                  type: string
  *                email:
  *                  type: string
- *                selectedSecurityQuestions:
- *                  type: array
- *                  items:
- *                    properties:
- *                        questionText1:
- *                          type: string
- *                        answerText1:
- *                          type: string
- *                        questionText2:
- *                          type: string
- *                        answerText2:
- *                          type: string
- *                        questionText3:
- *                          type: string
- *                        answerText3:
- *                          type: string
  *     responses:
  *       '200':
  *         description: Query successful
@@ -432,6 +416,22 @@ router.post('/register', async (req, res) => {
             text: 'standard'
           }
 
+          //delete after testing is done
+          selectedSecurityQuestionsTest = [
+            {
+              questionText: "where is waldo?",
+              answerText: "at the mall"
+            },
+            {
+              questionText: "what is the capital of france?",
+              answerText: "paris"
+            },
+            {
+              questionText: "what is the capital of spain?",
+              answerText: "madrid"
+            }
+          ]
+
           //user object
           let registeredUser = {
             userName: req.body.userName,
@@ -442,7 +442,8 @@ router.post('/register', async (req, res) => {
             address: req.body.address,
             email: req.body.email,
             role: standardRole,
-            selectedSecurityQuestions: req.body.selectedSecurityQuestions
+            //in database, this is securityQuestions, If changed then an Id populates in the database but not the text
+            selectedSecurityQuestions: selectedSecurityQuestionsTest
           };
 
           //create a new user
@@ -452,7 +453,6 @@ router.post('/register', async (req, res) => {
               const newUserMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
               res.status(500).send(newUserMongodbErrorResponse.toObject());
             } else {
-              console.log(newUser);
               const registeredUserResponse = new BaseResponse('200', 'Query successful', newUser);
               res.json(registeredUserResponse.toObject());
             }
