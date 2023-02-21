@@ -12,6 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.interface";
 import { ConfirmationService, ConfirmEventType, Message } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 
 @Component({
@@ -35,16 +37,19 @@ export class UserDetailsComponent implements OnInit {
     address: [null, Validators.compose([Validators.required])],
   });
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService, private confirmationService: ConfirmationService) {
-    this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
-    this.userId = ''
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService,private sessionService: SessionService, private confirmationService: ConfirmationService, private cookieService: CookieService) {
+    // this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
+    this.userName = this.cookieService.get('session_user');
+    this.userId = '';
     this.user = {} as User;
     this.errorMessages = [];
 
     // service needs to be updated to call findUserByUserName()
-    this.userService.findUserById(this.userId).subscribe({
+    //verify that the user is logged in and exists
+    this.sessionService.verifyUsername(this.userName).subscribe({
       next: (res) => {
         this.user = res.data;
+        // console.log(this.user);
       },
       error: (e) => {
         console.log(e);
@@ -56,17 +61,20 @@ export class UserDetailsComponent implements OnInit {
         this.form.controls['email'].setValue(this.user.email);
         this.form.controls['address'].setValue(this.user.address);
 
-        this.userId = this.user._id ?? ''
-        console.log('oncomplete: ' + this.userId + '; ' + this.userName)
+        this.userId = this.user._id ?? '';
+        console.log('oncomplete: ' + "userID: "+ this.userId + ' ' + "username: " + this.userName);
       }
     })
    }
+
+
 
   ngOnInit(): void {
   }
 
   // Saves information entered by user
   saveUser(): void {
+    console.log("inside saveUser" + this.form.controls['firstName'].value);
     const updatedUser = {
       firstName: this.form.controls['firstName'].value,
       lastName: this.form.controls['lastName'].value,
@@ -77,6 +85,7 @@ export class UserDetailsComponent implements OnInit {
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (res) => {
+        console.log("inside userService method" + this.userId);
         this.router.navigate(['/users']);
       },
       error: (e) => {
@@ -94,13 +103,13 @@ export class UserDetailsComponent implements OnInit {
   }
 
   // Deactivate a user record
-  deactivateUser() {
+ deleteUser() {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this record?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.userService.deactivateUser(this.userName).subscribe({
+        this.userService.deleteUser(this.userId).subscribe({
           next: (res) => {
             console.log('User deleted successfully');
             this.router.navigate(["/"])
