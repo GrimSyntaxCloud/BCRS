@@ -417,20 +417,20 @@ router.post('/register', async (req, res) => {
           }
 
           //delete after testing is done
-          selectedSecurityQuestionsTest = [
-            {
-              questionText: "where is waldo?",
-              answerText: "at the mall"
-            },
-            {
-              questionText: "what is the capital of france?",
-              answerText: "paris"
-            },
-            {
-              questionText: "what is the capital of spain?",
-              answerText: "madrid"
-            }
-          ]
+          // selectedSecurityQuestionsTest = [
+          //   {
+          //     questionText: "where is waldo?",
+          //     answerText: "at the mall"
+          //   },
+          //   {
+          //     questionText: "what is the capital of france?",
+          //     answerText: "paris"
+          //   },
+          //   {
+          //     questionText: "what is the capital of spain?",
+          //     answerText: "madrid"
+          //   }
+          // ]
 
           //user object
           let registeredUser = {
@@ -442,7 +442,7 @@ router.post('/register', async (req, res) => {
             address: req.body.address,
             email: req.body.email,
             role: standardRole,
-            selectedSecurityQuestions: selectedSecurityQuestionsTest
+            selectedSecurityQuestions: req.body.selectedSecurityQuestions
           };
 
           //create a new user
