@@ -67,6 +67,7 @@ import { ErrorInterceptor } from './shared/error.interceptor';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { CartComponent } from './pages/cart/cart.component';
 // import { Chart } from 'chart.js';
 
 @NgModule({
@@ -93,6 +94,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     ProfileComponent,
     UserListComponent,
     UserCreateComponent,
+    CartComponent,
   ],
   imports: [
      // Angular Materials

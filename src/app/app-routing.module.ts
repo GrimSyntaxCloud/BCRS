@@ -28,6 +28,7 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { AboutComponent } from './pages/about/about.component';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 /**
  * TODO:
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: 'service-repair',
         component: ServiceRepairComponent
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       },
       {
         path: 'contact',
