@@ -1,3 +1,13 @@
+/*
+ Title: app-routing.module.js
+ Author: Professor Krasso
+ Date: 02/07/2023
+ Modified By: Andres Macias/Patrick Wolff/April Yang
+ Description: Has the routes for the app
+ */
+
+
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
@@ -18,6 +28,11 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { AboutComponent } from './pages/about/about.component';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 
+/**
+ * TODO:
+ * 1. Organize the routes in a logical order
+ * 2. Add the user create route
+ */
 
 const routes: Routes = [
   {
@@ -51,6 +66,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]  // for logged in user
       },
       {
+      /**
+       * TODO:
+       * 1. might have to change the path to 'users/:userId'
+       * 2. which means we have to change the code in the user-details.component.ts
+       */
       path: 'users/:userName',
       component: UserDetailsComponent,
       canActivate: [AuthGuard] // for logged in user
