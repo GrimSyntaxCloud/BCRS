@@ -31,7 +31,7 @@ Description: application base layout template
           <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
           <button mat-icon-button class="ml-xs">
             <mat-icon
-              matBadge="0"
+              matBadge="{{itemCount()}}"
               matBadgeColor="warn"
               class="shopping-cart"
               routerLink="/cart"

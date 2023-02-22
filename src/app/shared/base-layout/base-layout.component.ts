@@ -10,6 +10,7 @@ Description: application layout component
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { CartService } from '../services/cart.service';
 
 
 @Component({
@@ -27,7 +28,11 @@ export class BaseLayoutComponent implements OnInit {
 
   sessionUserName: string;
 
-  constructor(private cookieService: CookieService, private router: Router) {
+  constructor(
+    private cookieService: CookieService,
+    private router: Router,
+    private cartService: CartService
+  ) {
      // from login component
     this.sessionUserName = this.cookieService.get('sessionuser');
 
@@ -47,6 +52,11 @@ export class BaseLayoutComponent implements OnInit {
   profile() {
     const userName = this.cookieService.get('sessionuser')
     this.router.navigate(['/users/' + userName])
+  }
+
+  itemCount(){
+    return this.cartService.itemsCount();
+
   }
 
 }

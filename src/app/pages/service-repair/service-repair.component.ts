@@ -10,6 +10,9 @@ Description: service-repair component
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/product.interface';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { CartService } from 'src/app/shared/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -24,15 +27,29 @@ export class ServiceRepairComponent implements OnInit {
 
 
 
-  constructor(private productService: ProductService,) {
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private cartService: CartService
+
+
+  ) {
     // populate products that are listed in the product.service.ts to the html
     this.products = this.productService.getProducts();
 
-
   }
+
+addToCart(product: Product) {
+  this.cartService.addToCart(product);
+    window.alert('Your product has been added to the cart!');
+  }
+
+
 
   ngOnInit(): void {
 
   }
+
+
 
 }

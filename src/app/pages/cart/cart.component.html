@@ -1,1 +1,19 @@
-<p>cart works!</p>
+<!-- https://www.youtube.com/watch?v=855KrFfF9-w
+ https://medium.com/@moshevilner/creating-shopping-cart-using-angular8-c6a5d4a0f0b3
+ https://angular.io/start/start-forms
+ https://angular.io/start
+
+
+https://www.youtube.com/watch?v=W7X9YcJn1Jw
+
+https://www.youtube.com/watch?v=d_G0cs1G1Hs
+
+-->
+<h3>Cart</h3>
+
+<div class="cart-item" *ngFor="let item of items">
+  <span>{{ item.name }}</span>
+  <span>{{ item.price | currency }}</span>
+  <!-- <button (click)="removeItemFromCart()">Remove</button> -->
+  <button>Remove</button>
+</div>
