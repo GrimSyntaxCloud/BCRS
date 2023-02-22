@@ -25,15 +25,17 @@ export class LoginComponent implements OnInit {
   // create a property that contains a form group
   loginForm: FormGroup = this.fb.group({
     userName: [null, Validators.compose([Validators.required])],
-    password: [null, Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')])]
+    //pattern for password: at least 8 characters, at least one letter, at least one number
+    password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')])]
   });
 
   // create a property that contains an array of messages
-    errorMessages: Message[] = [];
+  errorMessages: Message[] = [];
 
 
 
-  constructor(private fb: FormBuilder, private router: Router, private cookieService: CookieService, private http: HttpClient, private sessionService: SessionService) { }
+  constructor(private fb: FormBuilder, private router: Router, private cookieService: CookieService, private http: HttpClient,
+    private sessionService: SessionService) { }
 
   ngOnInit(): void {
   }
@@ -51,14 +53,14 @@ export class LoginComponent implements OnInit {
     this.sessionService.login(userName, password).subscribe({
       next: (res) => {
         console.log(res);
-        this.cookieService.set('session_user', res.data.userName, 1);
+        this.cookieService.set('sessionuser', res.data.userName, 1);
         this.router.navigate(['']);
       },
       error: (e) => {
-       this.errorMessages = [
-        { severity: 'error', summary: 'Error', detail: e.message}
-      ]
-      console.log(e)
+        this.errorMessages = [
+          { severity: 'error', summary: 'Error', detail: e.message }
+        ]
+        console.log(e)
       }
     })
   }

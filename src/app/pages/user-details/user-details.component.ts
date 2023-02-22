@@ -39,7 +39,7 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService, private sessionService: SessionService, private confirmationService: ConfirmationService, private cookieService: CookieService) {
     // this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
-    this.userName = this.cookieService.get('session_user');
+    this.userName = this.cookieService.get('sessionuser');
     this.userId = '';
     this.user = {} as User;
     this.errorMessages = [];

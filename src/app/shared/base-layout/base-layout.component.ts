@@ -29,7 +29,7 @@ export class BaseLayoutComponent implements OnInit {
 
   constructor(private cookieService: CookieService, private router: Router) {
      // from login component
-    this.sessionUserName = this.cookieService.get('session_user');
+    this.sessionUserName = this.cookieService.get('sessionuser');
 
 
     this.year = Date.now();
@@ -45,7 +45,7 @@ export class BaseLayoutComponent implements OnInit {
   }
 
   profile() {
-    const userName = this.cookieService.get('session_user')
+    const userName = this.cookieService.get('sessionuser')
     this.router.navigate(['/users/' + userName])
   }
 

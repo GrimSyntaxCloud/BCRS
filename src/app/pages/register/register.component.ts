@@ -124,7 +124,7 @@ export class RegisterComponent implements OnInit {
 
   this.sessionService.register(this.user).subscribe({
     next: (res) => {
-      this.cookieService.set('session_user', credentials.userName, 1);
+      this.cookieService.set('sessionuser', credentials.userName, 1);
       this.router.navigate(['/']);
     },
     error: (err) => {

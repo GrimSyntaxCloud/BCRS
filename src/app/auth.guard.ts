@@ -28,8 +28,8 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-//store session_user cookie if available
-const sessionUser = this.cookieService.get('session_user');
+//store sessionuser cookie if available
+const sessionUser = this.cookieService.get('sessionuser');
    // if the user is authorized return true
   if(sessionUser) {
     return true;
