@@ -33,6 +33,8 @@ import { MatGridListModule } from '@angular/material/grid-list';//
 import { MatListModule } from '@angular/material/list';//
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+
+import { MatBadgeModule } from '@angular/material/badge';
 // import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
@@ -115,6 +117,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     MatListModule,
     MatStepperModule,
     MatSelectModule,
+    MatBadgeModule,
     // NgPrime Materials
     TableModule,
     MessageModule,

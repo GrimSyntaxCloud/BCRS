@@ -8,6 +8,9 @@ Description: service-repair component
 
 
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/models/product.interface';
+import { ProductService } from 'src/app/shared/services/product.service';
+
 
 @Component({
   selector: 'app-service-repair',
@@ -17,38 +20,15 @@ import { Component, OnInit } from '@angular/core';
 export class ServiceRepairComponent implements OnInit {
 
   descriptions!: Array<any>
-  cards: Array<any>;
+  products: Array<any>;
 
 
-  constructor() {
-    this.cards = [
-    {
-      title: 'Card Title 1',
-      price:'29.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
 
-    },
-    {
-      title: 'Card Title 2',
-      price:'39.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
-    },
-    {
-      title: 'Card Title 3',
-      price:'49.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
-    },
-    {
-      title: 'Card Title 4',
-      price:'59.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
-    },
+  constructor(private productService: ProductService,) {
+    // populate products that are listed in the product.service.ts to the html
+    this.products = this.productService.getProducts();
 
-  ];
+
   }
 
   ngOnInit(): void {

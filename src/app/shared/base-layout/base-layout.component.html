@@ -21,14 +21,18 @@ Description: application base layout template
 
         <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
-          <a class="navbar-link-signUp" routerLink="/session/register">Sign up</a>
+          <a class="navbar-link-signUp" routerLink="/session/register"
+            >Sign up</a
+          >
           <a class="navbar-link-logIn" routerLink="/session/login">Log in</a>
         </ng-container>
 
         <ng-container *ngIf="sessionUserName">
           <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
           <button mat-icon-button class="ml-xs">
-            <mat-icon class="shopping-cart">shopping_cart</mat-icon>
+            <mat-icon matBadge="15" matBadgeColor="warn" class="shopping-cart"
+              >shopping_cart</mat-icon
+            >
           </button>
 
           <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">

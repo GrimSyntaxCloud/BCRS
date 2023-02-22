@@ -28,7 +28,7 @@
       <!-- three columns in a row -->
       <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'15px'">
         <!-- loop over cards in the grid list-->
-        <mat-grid-tile *ngFor="let card of cards">
+        <mat-grid-tile *ngFor="let product of products">
           <!-- card for contains service repair information  -->
           <mat-card
             style="
@@ -38,7 +38,7 @@
             "
           >
             <mat-card-header style="display: block; text-align: center">{{
-              card.title
+              product.name
             }}</mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content>
@@ -51,13 +51,13 @@
                 "
               >
                 <mat-icon style="overflow: visible">attach_money</mat-icon>
-                <h1>{{ card.price }}</h1>
+                <h1>{{ product.price }}</h1>
               </div>
 
               <div>
                 <!-- loop over descriptions with different contents  -->
                 <p
-                  *ngFor="let item; as: index; of: card.descriptions"
+                  *ngFor="let item; as: index; of: product.descriptions"
                   style="text-align: center"
                 >
                   {{ item }}
@@ -79,7 +79,7 @@
                     margin-right: 0;
                   "
                 >
-                  {{ card.buttonText }}
+                  Choose
                 </button>
               </mat-card-actions>
             </mat-card-footer>
