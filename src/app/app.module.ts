@@ -24,8 +24,8 @@ import { MatTableModule } from '@angular/material/table'; //
 import { MatDividerModule } from '@angular/material/divider';//
 import { LoginComponent } from './pages/login/login.component'; //
 import { CookieService } from 'ngx-cookie-service';
-import {MatGridListModule} from '@angular/material/grid-list';//
-import {MatListModule} from '@angular/material/list';//
+import { MatGridListModule } from '@angular/material/grid-list';//
+import { MatListModule } from '@angular/material/list';//
 // import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
@@ -54,6 +54,7 @@ import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './shared/error.interceptor';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 // import { Chart } from 'chart.js';
 
 @NgModule({
@@ -77,7 +78,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ContactComponent,
     ErrorComponent,
     VerifyUsernameFormComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserListComponent
   ],
   imports: [
      // Angular Materials
