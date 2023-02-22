@@ -33,13 +33,15 @@ export class SecurityQuestionService {
      }
 
   // call createSecurityQuestion API
-  // http.get() request
+  // http.post() request
   createSecurityQuestion(newSecurityQuestion: SecurityQuestion): Observable<any>{
       return this.http.post('/api/security-questions', {
          text: newSecurityQuestion.text
        })
     }
 
+    // call updateSecurityQuestion API
+    // http.put() request
   updateSecurityQuestion(questionId: string, updatedSecurityQuestion: SecurityQuestion): Observable < any > {
       return this.http.put('/api/security-questions/' + questionId, {
         text: updatedSecurityQuestion.text
@@ -47,7 +49,7 @@ export class SecurityQuestionService {
     }
 
   // call deleteSecurityQuestion API
-  // http.get() request
+  // http.delete() request
   deleteSecurityQuestion(questionId: string): Observable<any>{
     return this.http.delete('/api/security-questions/' + questionId);
   }

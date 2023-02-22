@@ -1,5 +1,5 @@
 /*
-Title: security-questions.js
+Title: security-question.js
 Author: Professor Krasso
 Date: 02/07/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
