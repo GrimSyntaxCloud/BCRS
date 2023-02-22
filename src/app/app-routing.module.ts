@@ -27,6 +27,7 @@ import { ErrorComponent } from './pages/error/error.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { AboutComponent } from './pages/about/about.component';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
 /**
  * TODO:
@@ -109,6 +110,10 @@ const routes: Routes = [
         path: 'error-500',
         component: ErrorComponent,
       },
+      {
+        path: 'user-list',
+        component: UserListComponent
+      }
     ]
   },
   {
