@@ -46,13 +46,13 @@ export class ProductService {
        },
      {
       id:104,
-      name: 'PC Tune-up',
+      title: 'PC Tune-up',
       price:'89.99',
       descriptions:["10 times per year","Remote or free drop-off service", "24/7 Support"]
        },
       {
       id:105,
-      name: 'Keyboard Cleaning',
+      title: 'Keyboard Cleaning',
       price:'45.00',
       descriptions:["Unlimited keyboard cleaning per year","Free drop-off service", "24/7 Support"]
        },
