@@ -59,7 +59,7 @@ Description: application base layout template
                 <mat-icon>supervisor_account</mat-icon>
                 User List
               </button>
-              <button mat-menu-item (click)="profile()">
+              <button mat-menu-item routerLink="users/profile/{{ sessionUserName }}">
                 <mat-icon>person</mat-icon>
                 Profile
               </button>

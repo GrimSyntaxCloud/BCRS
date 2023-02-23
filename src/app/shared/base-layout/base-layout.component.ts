@@ -49,11 +49,6 @@ export class BaseLayoutComponent implements OnInit {
     this.router.navigate(['/']).then(() => { window.location.reload(); });
   }
 
-  profile() {
-    const userName = this.cookieService.get('sessionuser')
-    this.router.navigate(['/users/' + userName])
-  }
-
   itemCount(){
     return this.cartService.itemsCount();
 
