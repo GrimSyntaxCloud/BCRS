@@ -29,6 +29,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
 
 /**
  * TODO:
@@ -60,6 +61,14 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent
+      },
+      {
+        path: 'users',
+        component: UserListComponent
+      },
+      {
+        path: 'users/create/new',
+        component: UserCreateComponent
       },
       {
         path: 'security-questions',
@@ -115,10 +124,6 @@ const routes: Routes = [
         path: 'error-500',
         component: ErrorComponent,
       },
-      {
-        path: 'user-list',
-        component: UserListComponent
-      }
     ]
   },
   {

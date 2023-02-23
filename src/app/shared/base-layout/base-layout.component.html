@@ -55,6 +55,10 @@ Description: application base layout template
             </button>
 
             <mat-menu #configs="matMenu">
+              <button mat-menu-item routerLink="/users">
+                <mat-icon>supervisor_account</mat-icon>
+                User List
+              </button>
               <button mat-menu-item (click)="profile()">
                 <mat-icon>person</mat-icon>
                 Profile
