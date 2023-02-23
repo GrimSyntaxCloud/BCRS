@@ -52,10 +52,8 @@ router.get("/", async (req, res) => {
           console.log(findAllUsersMongodbErrorResponse.toObject());
           res.status(500).send(findAllUsersMongodbErrorResponse.toObject());
         } else {
-          const findAllUsersResponse = new BaseResponse(
-            200, `findAllUsers query was successful.`, users);
-          console.log(findAllUsersResponse.toObject());
-          res.json(findAllUsersResponse.toObject());
+          const findAllUsersResponse = new BaseResponse(200, `findAllUsers query was successful.`, users);
+          console.log(findAllUsersResponse.toObject()); res.json(findAllUsersResponse.toObject());
         }
       });
   } catch (e) {
