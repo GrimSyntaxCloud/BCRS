@@ -41,8 +41,8 @@ addToCart(product: Product) {
 
   // not sure function is correct
 removeItemFromCart(product: Product) {
-    return this.items.filter(function (item) {
-      return item !== product
+    return this.items.filter(function (name) {
+      return name !== name
     })
   }
 

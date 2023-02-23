@@ -22,25 +22,25 @@ export class ProductService {
      this.products = [
        {
       id:100,
-      name: 'Password Reset',
+      title: 'Password Reset',
       price:'39.99',
       descriptions:["Unlimited password reset per year","Remote service", "24/7 Support"]
     },
        {
       id:101,
-      name: 'Spyware Removal',
+      title: 'Spyware Removal',
       price:'99.99',
       descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"]
     },
     {
       id:102,
-      name: 'RAM Upgrade',
+      title: 'RAM Upgrade',
       price:'129.99',
       descriptions:["Three times per year","Free drop-off service", "24/7 Support"]
     },
     {
       id:103,
-      name: 'Software Installation',
+      title: 'Software Installation',
       price:'49.99',
       descriptions:["Unlimited software installation per year","Remote service", "24/7 Support"]
        },
@@ -58,7 +58,7 @@ export class ProductService {
        },
        {
       id:106,
-      name: 'Disk Clean-up',
+      title: 'Disk Clean-up',
       price:'149.99',
       descriptions:["Unlimited disk clean-up per year","Free drop-off service ", "24/7 Support"]
       },
