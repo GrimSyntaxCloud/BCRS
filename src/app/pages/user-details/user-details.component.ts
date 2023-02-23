@@ -12,9 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.interface";
 import { ConfirmationService, ConfirmEventType, Message } from 'primeng/api';
-import { CookieService } from 'ngx-cookie-service';
-import { SessionService } from 'src/app/shared/services/session.service';
-
 
 @Component({
   selector: 'app-user-details',
@@ -26,7 +23,6 @@ export class UserDetailsComponent implements OnInit {
 
   user: User;
   userId: string;
-  userName: string;
   errorMessages: Message[];
 
   form: FormGroup = this.fb.group({
@@ -37,19 +33,16 @@ export class UserDetailsComponent implements OnInit {
     address: [null, Validators.compose([Validators.required])],
   });
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService, private sessionService: SessionService, private confirmationService: ConfirmationService, private cookieService: CookieService) {
-    // this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
-    this.userName = this.cookieService.get('sessionuser');
-    this.userId = '';
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService, private confirmationService: ConfirmationService) {
+
+    this.userId = this.route.snapshot.paramMap.get('userId') ?? '';
     this.user = {} as User;
     this.errorMessages = [];
 
     // service needs to be updated to call findUserByUserName()
-    //verify that the user is logged in and exists
-    this.sessionService.verifyUsername(this.userName).subscribe({
+    this.userService.findUserById(this.userId).subscribe({
       next: (res) => {
         this.user = res.data;
-        // console.log(this.user);
       },
       error: (e) => {
         console.log(e);
@@ -61,8 +54,8 @@ export class UserDetailsComponent implements OnInit {
         this.form.controls['email'].setValue(this.user.email);
         this.form.controls['address'].setValue(this.user.address);
 
-        this.userId = this.user._id ?? '';
-        console.log('oncomplete: ' + "userID: " + this.userId + ' ' + "username: " + this.userName);
+        this.userId = this.userId ?? '';
+        console.log('oncomplete: ' + "userID: " + this.userId);
       }
     })
   }
@@ -99,7 +92,7 @@ export class UserDetailsComponent implements OnInit {
   }
   // Cancel the form and returns to home
   cancel(): void {
-    this.router.navigate(['/'])
+    this.router.navigate(['/users'])
   }
 
   // Deactivate a user record
@@ -114,7 +107,6 @@ export class UserDetailsComponent implements OnInit {
             console.log('User deleted successfully');
             // route to the home page and reload the page
             // deleteAll cookies
-            this.cookieService.deleteAll();
             this.router.navigate(['/']).then(() => { window.location.reload(); });
           },
           error: (e) => {
