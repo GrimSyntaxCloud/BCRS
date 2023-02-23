@@ -30,6 +30,7 @@ import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 /**
  * TODO:
@@ -71,6 +72,11 @@ const routes: Routes = [
         component: UserCreateComponent
       },
       {
+        path: 'users/profile/:userName',
+        component: ProfileComponent,
+        canActivate: [AuthGuard]  // for logged in user
+      },
+      {
         path: 'security-questions',
         component: SecurityQuestionListComponent,
         canActivate: [AuthGuard] // for logged in user
@@ -81,12 +87,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]  // for logged in user
       },
       {
-      /**
-       * TODO:
-       * 1. might have to change the path to 'users/:userId'
-       * 2. which means we have to change the code in the user-details.component.ts
-       */
-      path: 'users/:userName',
+      path: 'users/:userId',
       component: UserDetailsComponent,
       canActivate: [AuthGuard] // for logged in user
       }
