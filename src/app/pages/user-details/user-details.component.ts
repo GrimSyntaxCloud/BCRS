@@ -94,37 +94,4 @@ export class UserDetailsComponent implements OnInit {
   cancel(): void {
     this.router.navigate(['/users'])
   }
-
-  // Deactivate a user record
-  deleteUser() {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete this record?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.userService.deleteUser(this.userId).subscribe({
-          next: (res) => {
-            console.log('User deleted successfully');
-            // route to the home page and reload the page
-            // deleteAll cookies
-            this.router.navigate(['/']).then(() => { window.location.reload(); });
-          },
-          error: (e) => {
-            console.log(e);
-          }
-        })
-      },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            console.log('User rejected this operation');
-            break;
-          case ConfirmEventType.CANCEL:
-            console.log('User canceled this operation');
-            break;
-        }
-      }
-    });
-  }
-
 }
