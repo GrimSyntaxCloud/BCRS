@@ -1,3 +1,12 @@
+/*
+Title: user-create.component.ts
+Author: Professor Krasso
+Updated Date: 02/22/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: User create, allows admin to create new user
+*/
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/services/user.service';
