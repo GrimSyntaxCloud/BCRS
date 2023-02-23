@@ -16,6 +16,8 @@ const mongoose = require("mongoose");
 const SecurityQuestionsAPI = require("./routes/security-questions-api");
 const UserAPI = require("./routes/users-api");
 const SessionAPI = require("./routes/session-api");
+// const RolesAPI = require("./routes/role-api");
+//  const InvoiceAPI = require("./routes/invoice-api");
 
 // import MongoDB database connection string from config.json
 const config = require("./data/config.json");
@@ -64,7 +66,9 @@ const options = {
   apis: [
     "./server/routes/security-questions-api.js",
     "./server/routes/users-api.js",
-    "./server/routes/session-api.js"
+    "./server/routes/session-api.js",
+    // "./server/routes/role-api.js",
+    // "./server/routes/invoice-api.js",
   ],
 };
 
@@ -77,9 +81,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification)); //
 app.use("/api/security-questions", SecurityQuestionsAPI);
 app.use("/api/users", UserAPI);
 app.use("/api/session", SessionAPI);
+// app.use("/api/roles", RolesAPI);
+// app.use("/api/invoices", InvoiceAPI);
 /**
  * Database connection.
  */
+
 mongoose.connect(CONN)
   .then(
     () => {
