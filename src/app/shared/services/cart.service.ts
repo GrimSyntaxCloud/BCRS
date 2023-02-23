@@ -1,3 +1,13 @@
+/*
+Title: cart.service.ts
+Author: Professor Krasso
+Updated Date: 02/21/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: Service for cart management
+*/
+
+
+
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.interface';
 

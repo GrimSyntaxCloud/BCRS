@@ -26,7 +26,7 @@
   >
     <mat-card-content>
       <!-- three columns in a row -->
-      <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'15px'">
+      <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'5px'">
         <!-- loop over cards in the grid list-->
         <mat-grid-tile *ngFor="let product of products">
           <!-- card for contains service repair information  -->
@@ -35,11 +35,12 @@
               background-color: #f2f2f2;
               border-style: solid;
               border-color: #8492a6;
+              width: 280px;
             "
           >
-            <mat-card-header style="display: block; text-align: center">{{
-              product.name
-            }}</mat-card-header>
+            <mat-card-header style="display: block; text-align: center"
+              ><h2>{{ product.name }}</h2></mat-card-header
+            >
             <mat-divider></mat-divider>
             <mat-card-content>
               <div
@@ -50,8 +51,10 @@
                   display: flex;
                 "
               >
-                <mat-icon style="overflow: visible">attach_money</mat-icon>
-                <h1>{{ product.price }}</h1>
+                <mat-icon style="overflow: visible; margin-top: 7px"
+                  >attach_money</mat-icon
+                >
+                <h2 style="margin-top: 7px">{{ product.price }}</h2>
               </div>
 
               <div>
@@ -66,7 +69,14 @@
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-footer style="height: 50px; margin: 0px">
-              <mat-card-actions style="padding: 15px 0">
+              <mat-card-actions
+                style="
+                  padding: 15px 0;
+                  margin-left: 0;
+                  margin-right: 0;
+                  text-align: center;
+                "
+              >
                 <button
                   (click)="addToCart(product)"
                   mat-button
