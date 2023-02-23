@@ -19,9 +19,5 @@ export interface User {
   phoneNumber: string;
   address: string;
   email: string;
-  /**
-   * TODO:
-   * Might need to delete this..
-   */
   selectedSecurityQuestions?: SelectedSecurityQuestion[];
 }
