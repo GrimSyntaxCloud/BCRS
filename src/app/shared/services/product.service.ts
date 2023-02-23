@@ -15,10 +15,13 @@ import { Product } from '../models/product.interface';
 })
 export class ProductService {
 
-  descriptions!: Array<any>
+  // define products and descriptions types as array
   products: Array<any>
+  descriptions!: Array<any>
 
   constructor() {
+
+    // Create array of available products
      this.products = [
        {
       id:100,
@@ -62,16 +65,11 @@ export class ProductService {
       price:'149.99',
       descriptions:["Unlimited disk clean-up per year","Free drop-off service ", "24/7 Support"]
       },
-
   ];
-
-
   }
 
   // function to populate products in the service-repair component
   getProducts(): Product[]{
     return this.products;
  }
-
-
 }
