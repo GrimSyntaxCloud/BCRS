@@ -14,7 +14,7 @@ const BaseResponse = require("../services/base-response");
 const router = express.Router();
 
 /**
- * API: http://localhost:3000/api/users
+ * API: http://localhost:3000/api/roles
  * findAllRoles
  */
 /**
@@ -134,7 +134,7 @@ router.get("/:roleId", async (req, res) => {
 // deleteRole
 /**
  * @openapi
- * /api/role/{id}:
+ * /api/roles/{roleId}:
  *   delete:
  *     tags:
  *       - Roles
