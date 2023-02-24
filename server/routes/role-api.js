@@ -259,8 +259,7 @@ router.delete("/:roleId", async (req, res) => {
 
 /**
  * CreateRole
- */
-/** createRole
+ *
  * @openapi
  * /api/roles:
  *   post:
