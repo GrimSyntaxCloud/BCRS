@@ -31,7 +31,8 @@ Description: application base layout template
           <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
           <button mat-icon-button class="ml-xs">
             <mat-icon
-              matBadge="{{itemCount()}}"
+              matBadge="{{ itemCount() }}"
+              [matBadgeHidden]="itemCount() <= 0"
               matBadgeColor="warn"
               class="shopping-cart"
               routerLink="/cart"
@@ -59,7 +60,10 @@ Description: application base layout template
                 <mat-icon>supervisor_account</mat-icon>
                 User List
               </button>
-              <button mat-menu-item routerLink="users/profile/{{ sessionUserName }}">
+              <button
+                mat-menu-item
+                routerLink="users/profile/{{ sessionUserName }}"
+              >
                 <mat-icon>person</mat-icon>
                 Profile
               </button>

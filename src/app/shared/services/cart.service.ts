@@ -23,8 +23,18 @@ export class CartService {
   constructor() { }
 
 
-addToCart(product: Product) {
-    this.items.push(product);
+  addToCart(product: Product) {
+    let alreadyAdded = false;
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].id == product.id) {
+        alreadyAdded = true;
+        break;
+      }
+    }
+    if (!alreadyAdded) {
+      this.items.push(product);
+    }
+    return !alreadyAdded;
   }
 
   getItems() {
@@ -35,17 +45,11 @@ addToCart(product: Product) {
     return this.items.length;
   }
 
-  // removeCartItem(product: Product) {
-  //   return this.items.filter(function (item) {
-  //     return item !== product
-  //   })
-  // }
 
-  // not sure function is correct
+
 removeItemFromCart(product: Product) {
-    return this.items.filter(function (name) {
-      return name !== name
-    })
+  this.items = this.items.filter(item => item.id != product.id);
+  return this.items;
   }
 
   clearCart() {

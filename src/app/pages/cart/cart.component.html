@@ -14,6 +14,6 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
 <div class="cart-item" *ngFor="let item of items">
   <span>{{ item.title }}</span>
   <span>{{ item.price | currency }}</span>
-  <!-- <button (click)="removeItemFromCart()">Remove</button> -->
-  <button>Remove</button>
+  <button (click)="removeItemFromCart(item)">Remove</button>
+  <!-- <button>Remove</button> -->
 </div>

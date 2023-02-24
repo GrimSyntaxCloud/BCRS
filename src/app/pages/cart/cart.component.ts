@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/models/product.interface';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 
@@ -11,11 +12,17 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class CartComponent implements OnInit {
 
   items = this.cartService.getItems();
-  // item = this.cartService.removeItemFromCart();
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService) {
+    this.items = this.cartService.getItems();
+  }
 
   ngOnInit(): void {
+  }
+
+  removeItemFromCart(item: Product) {
+    this.items = this.cartService.removeItemFromCart(item);
+    return true;
   }
 
 }
