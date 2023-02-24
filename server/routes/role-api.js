@@ -257,4 +257,85 @@ router.delete("/:roleId", async (req, res) => {
   }
 });
 
+/**
+ * CreateRole
+ */
+/** createRole
+ * @openapi
+ * /api/roles:
+ *   post:
+ *     tags:
+ *       - Roles
+ *     description: API to create new role objects.
+ *     summary: Creates a new role object
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - text
+ *             properties:
+ *              role:
+ *                type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.post('/', async (req, res) => {
+  try
+  {
+    Role.findOne({'text': req.body.text}, function(err, role) {
+      if (err) {
+        console.log(err);
+        const findRoleMongodbError = new ErrorResponse(500, 'Internal server error', err);
+        res.status(500).send(findRoleMongodbError.toObject());
+      } else {
+        console.log(role);
+
+        if (!role) {
+
+          const newRole = {
+            text: req.body.text
+          }
+
+          Role.create(newRole, function(err, role)
+          {
+            if (err)
+            {
+              console.log(err);
+              const createRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+              res.status(500).send(createRoleMongodbErrorResponse.toObject());
+            }
+            else
+            {
+              console.log(role);
+              const createRoleResponse = new BaseResponse('200', 'Query successful', role);
+              res.json(createRoleResponse.toObject());
+            }
+          })
+        } else {
+          console.log(`Role: ${req.body.text} already exists`);
+          const roleAlreadyExists = new ErrorResponse(200, `Role '${req.body.text}' already exists. If you do not see the role in the list then it means it was disabled`, null);
+          res.status(200).send(roleAlreadyExists.toObject());
+        }
+      }
+    })
+  }
+  catch (e)
+  {
+    console.log(e);
+    const createRoleCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
+    res.status(500).send(createRoleCatchErrorResponse.toObject());
+  }
+});
+
+
+
+
+
 module.exports = router;

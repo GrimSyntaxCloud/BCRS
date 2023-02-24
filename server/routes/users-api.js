@@ -279,6 +279,7 @@ router.put("/:id", async (req, res) => {
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
+          'role.text': req.body.role,
           dateModified: new Date(),
         });
 
