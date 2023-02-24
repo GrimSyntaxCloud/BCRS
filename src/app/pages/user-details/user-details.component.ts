@@ -12,6 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.interface";
 import { ConfirmationService, ConfirmEventType, Message } from 'primeng/api';
+import { Role } from 'src/app/shared/models/role.interface';
+import { RoleService } from 'src/app/shared/services/role.service';
+
 
 @Component({
   selector: 'app-user-details',
