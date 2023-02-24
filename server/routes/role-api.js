@@ -333,8 +333,85 @@ router.post('/', async (req, res) => {
   }
 });
 
+/**
+ * UpdateRole
+ * @openapi
+ * /api/roles/{roleId}:
+ *   put:
+ *     tags:
+ *       - Roles
+ *     description: API to update role object
+ *     summary: Updates a role object
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The user's roleId
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - text
+ *             properties:
+ *              text:
+ *                type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.put('/:roleId', async(req, res) => {
+  try
+  {
+    Role.findOne({'_id': req.params.roleId}, function(err, role)
+    {
+      if (err)
+      {
+        console.log(err);
+        const updateRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        res.status(500).send(updateRoleMongodbErrorResponse.toObject());
+      }
+      else
+      {
+        console.log(role);
 
+        role.set({
+          text: req.body.text
+        });
 
+        role.save(function(err, updatedRole)
+        {
+          if (err)
+          {
+            console.log(err);
+            const updatedRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+            res.status(500).send(updatedRoleMongodbErrorResponse.toObject());
+          }
+          else
+          {
+            console.log(updatedRole);
+            const updatedRoleResponse = new BaseResponse('200', 'Query successful', updatedRole);
+            res.json(updatedRoleResponse.toObject());
+          }
+        })
+      }
+    })
+
+  }
+  catch (e)
+  {
+    console.log(e);
+    const updateRoleCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
+    res.status(500).send(updateRoleCatchErrorResponse.toObject());
+  }
+});
 
 
 module.exports = router;
