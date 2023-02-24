@@ -134,7 +134,7 @@ router.get("/:roleId", async (req, res) => {
 // deleteRole
 /**
  * @openapi
- * /api/roles/{id}:
+ * /api/roles/{roleId}:
  *   delete:
  *     tags:
  *       - Roles
