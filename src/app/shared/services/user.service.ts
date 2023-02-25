@@ -51,7 +51,8 @@ export class UserService {
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
-      email: user.email
+      email: user.email,
+      role: user.role?.text ?? 'standard'
     })
   }
 

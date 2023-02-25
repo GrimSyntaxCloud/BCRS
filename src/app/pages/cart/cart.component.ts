@@ -28,6 +28,8 @@ export class CartComponent implements OnInit {
    itemCount(){
     return this.cartService.itemsCount();
 
-  }
+   }
+
+
 
 }
