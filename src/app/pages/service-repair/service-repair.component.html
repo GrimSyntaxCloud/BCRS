@@ -67,8 +67,12 @@
                 </p>
               </div>
             </mat-card-content>
-            <mat-divider></mat-divider>
-            <mat-card-footer style="height: 50px; margin: 0px">
+            <!-- Choose button will show up when session user login  -->
+            <mat-divider *ngIf="sessionUserName"></mat-divider>
+            <mat-card-footer
+              style="height: 50px; margin: 0px"
+              *ngIf="sessionUserName"
+            >
               <mat-card-actions
                 style="
                   padding: 15px 0;

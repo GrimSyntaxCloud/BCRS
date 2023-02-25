@@ -22,15 +22,18 @@ export class CartService {
 
   constructor() { }
 
-
+  // one product only can be added to the shopping cart once
   addToCart(product: Product) {
     let alreadyAdded = false;
+    // loop over products to search if the product has already been added to the shopping cart
+    // if find the product has already been added to the shopping cart, then stop the search
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].id == product.id) {
+      if (this.items[i].id === product.id) {
         alreadyAdded = true;
         break;
       }
     }
+    // if the product has not been added to the shopping cart, then push the product to the shopping cart
     if (!alreadyAdded) {
       this.items.push(product);
     }
