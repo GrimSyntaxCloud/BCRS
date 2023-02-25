@@ -244,6 +244,8 @@ router.get("/:id", async (req, res) => {
  *                    type: string
  *                  email:
  *                   type: string
+ *                  role:
+ *                   type: string
  *                  address:
  *                    type: string
  *      responses:
