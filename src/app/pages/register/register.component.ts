@@ -41,12 +41,15 @@ export class RegisterComponent implements OnInit {
   contactForm: FormGroup = this.fb.group({
     firstName: [null, Validators.compose([Validators.required])],
     lastName: [null, Validators.compose([Validators.required])],
-    phoneNumber: [null, Validators.compose([Validators.required])],
+    // phone number must be a valid format of (xxx) xxx-xxxx and have 10 digits
+    phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^\\(\\d{3}\\)\\s\\d{3}-\\d{4}$')])],
     address: [null, Validators.compose([Validators.required])],
-    zip: [null, Validators.compose([Validators.required])],
+    // zip code must be a valid format of xxxxx or xxxxx-xxxx and have 5 digits
+    zip: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')])],
     city: [null, Validators.compose([Validators.required])],
     state: [null, Validators.compose([Validators.required])],
-    email: [null, Validators.compose([Validators.required])]
+    // email must be a valid format
+    email: [null, Validators.compose([Validators.required, Validators.email])],
   });
 
   //second form
@@ -62,8 +65,8 @@ export class RegisterComponent implements OnInit {
   //third form
   credentialsForm: FormGroup = this.fb.group({
     userName: [null, Validators.compose([Validators.required])],
-    // password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long
-    password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.{8,})')])]
+    // password must be 8 characters long, contain at least one letter and one number
+    password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')])],
   });
 
 
@@ -78,16 +81,16 @@ export class RegisterComponent implements OnInit {
     this.securityQuestionsService.findAllSecurityQuestions().subscribe({
       next: (res) => {
         this.securityQuestions = res.data;
-        console.log(this.securityQuestions);
       },
-      error: (err) => {
-        console.log(err);
+      error: (e) => {
+        console.log(e);
       }
     });
    }
 
   ngOnInit(): void {
   }
+
 
   register() {
     const contactInformation = this.contactForm.value;
@@ -108,7 +111,6 @@ export class RegisterComponent implements OnInit {
         answerText: securityQuestions.securityQuestionAnswer3
       }
     ]
-    console.log(credentials);
 
     this.user = {
       userName: credentials.userName,
@@ -120,7 +122,6 @@ export class RegisterComponent implements OnInit {
       email: contactInformation.email,
       selectedSecurityQuestions: this.selectedSecurityQuestions
   }
-  console.log(this.user);
 
   this.sessionService.register(this.user).subscribe({
     next: (res) => {
@@ -135,5 +136,9 @@ export class RegisterComponent implements OnInit {
       console.log(err);
     }
     });
+  }
+
+  removeSelectedSecurityQuestion(index: number) {
+    this.selectedSecurityQuestions.splice(index, 1);
   }
 }
