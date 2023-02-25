@@ -27,6 +27,7 @@ export class UserDetailsComponent implements OnInit {
   user: User;
   userId: string;
   errorMessages: Message[];
+  roles: Role[];
 
   form: FormGroup = this.fb.group({
     firstName: [null, Validators.compose([Validators.required])],
@@ -34,18 +35,29 @@ export class UserDetailsComponent implements OnInit {
     phoneNumber: [null, Validators.compose([Validators.required])],
     email: [null, Validators.compose([Validators.required, Validators.email])],
     address: [null, Validators.compose([Validators.required])],
+    role:[null,Validators.compose([Validators.required])]
   });
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private userService: UserService, private confirmationService: ConfirmationService) {
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private confirmationService: ConfirmationService,
+    private roleService: RoleService
+  ) {
 
     this.userId = this.route.snapshot.paramMap.get('userId') ?? '';
     this.user = {} as User;
     this.errorMessages = [];
+    this.roles = [];
 
     // service needs to be updated to call findUserByUserName()
     this.userService.findUserById(this.userId).subscribe({
       next: (res) => {
         this.user = res.data;
+        console.log('user object from findUserById call');
+        console.log(this.user);
       },
       error: (e) => {
         console.log(e);
@@ -56,9 +68,23 @@ export class UserDetailsComponent implements OnInit {
         this.form.controls['phoneNumber'].setValue(this.user.phoneNumber);
         this.form.controls['email'].setValue(this.user.email);
         this.form.controls['address'].setValue(this.user.address);
+        this.form.controls['role'].setValue(this.user.role?.text ?? 'standard');
 
-        this.userId = this.userId ?? '';
-        console.log('oncomplete: ' + "userID: " + this.userId);
+        console.log(this.user);
+
+        // this.userId = this.userId ?? '';
+        // console.log('oncomplete: ' + "userID: " + this.userId);
+
+        this.roleService.findAllRoles().subscribe({
+          next: (res) => {
+            this.roles = res.data;
+          },
+          error: (e) => {
+            console.log(e);
+          }
+
+        })
+
       }
     })
   }
@@ -76,8 +102,13 @@ export class UserDetailsComponent implements OnInit {
       lastName: this.form.controls['lastName'].value,
       phoneNumber: this.form.controls['phoneNumber'].value,
       email: this.form.controls['email'].value,
-      address: this.form.controls['address'].value
+      address: this.form.controls['address'].value,
+      role: {
+        text:this.form.controls['role'].value
+      }
     }
+
+    console.log(updatedUser);
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (res) => {
