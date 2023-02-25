@@ -25,25 +25,110 @@ router.post("/", async (req, res) => {
       priceAmount: req.body.priceAmount,
       laborAmount: req.body.laborAmount,
       lineItemTotal: req.body.lineItemTotal,
-      total: req.body.total
+      total: req.body.total,
     };
 
     console.log(newInvoice);
     Invoice.create(newInvoice, function (err, invoice) {
       if (err) {
         console.log(err);
-        const createInvoiceMongodbErrorResponse = new ErrorResponse("500", "Internal Server Error", err);
+        const createInvoiceMongodbErrorResponse = new ErrorResponse(
+          "500",
+          "Internal Server Error",
+          err
+        );
         res.status(500).send(createInvoiceMongodbErrorResponse.toObject());
       } else {
         console.log(invoice);
-        const createInvoiceMongodbSuccessResponse = new BaseResponse("200", "Query successful", invoice);
+        const createInvoiceMongodbSuccessResponse = new BaseResponse(
+          "200",
+          "Query successful",
+          invoice
+        );
         res.json(createInvoiceMongodbSuccessResponse.toObject());
       }
     });
   } catch (e) {
     console.log(e);
-    const createInvoiceCatchErrorResponse = new ErrorResponse("500", "Internal Server Error", e.message);
+    const createInvoiceCatchErrorResponse = new ErrorResponse(
+      "500",
+      "Internal Server Error",
+      e.message
+    );
     res.status(500).send(createInvoiceCatchErrorResponse.toObject());
+  }
+});
+
+// findPurchasesByService
+/**
+ * @openapi
+ * /api/invoices/purchases-graph:
+ *   get:
+ *     tags:
+ *       - Invoices
+ *     name: findPurchasesByService
+ *     description: Reads,retrieves all purchases by service.
+ *     summary: Returns all purchases by service.
+ *     operationId: findPurchasesByService
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Server exception
+ *       '501':
+ *         description: MongoDB exception
+ */
+router.get("/purchases-graph", async (req, res) => {
+  try {
+    Invoice.aggregate(
+      [
+        {
+          $unwind: "$lineItems",
+        },
+        {
+          $group: {
+            _id: {
+              title: "$lineItems.title",
+              price: "$lineItems.price",
+            },
+            count: {
+              $sum: 1,
+            },
+          },
+        },
+        {
+          $sort: {
+            "_id.title": 1,
+          },
+        },
+      ],
+      function (err, purchasesGraph) {
+        if (err) {
+          console.log(err);
+          const FindPurchasesByServiceGraphMongodbErrorResponse =
+            new ErrorResponse("500", "Internal server error", err);
+          res
+            .status(500)
+            .send(FindPurchasesByServiceGraphMongodbErrorResponse.toObject());
+        } else {
+          console.log(purchasesGraph);
+          const FindPurchasesByServiceGraphResponse = new BaseResponse(
+            "200",
+            "Query successful",
+            purchasesGraph
+          );
+          res.json(FindPurchasesByServiceGraphResponse.toObject());
+        }
+      }
+    );
+  } catch (e) {
+    console.log(e);
+    const FindPurchasesByServiceCatchErrorResponse = new ErrorResponse(
+      "500",
+      "Internal server error",
+      e.message
+    );
+    res.status(500).send(FindPurchasesByServiceCatchErrorResponse.toObject());
   }
 });
 

@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ServiceRepairComponent implements OnInit {
 
-  descriptions!: Array<any>
+  // descriptions!: Array<any>
   products: Array<any>;
 
 
@@ -40,9 +40,13 @@ export class ServiceRepairComponent implements OnInit {
   }
 
 addToCart(product: Product) {
-  this.cartService.addToCart(product);
+  let successfullyAdded = this.cartService.addToCart(product);
+  if (successfullyAdded) {
     window.alert('Your product has been added to the cart!');
+  } else {
+    window.alert("Product has already been added.");
   }
+ }
 
 
 
