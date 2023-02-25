@@ -29,7 +29,12 @@ Description: application base layout template
 
         <ng-container *ngIf="sessionUserName">
           <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
-          <button mat-icon-button class="ml-xs">
+          <button
+            mat-icon-button
+            class="ml-xs"
+            disabled="false"
+            *ngIf="itemCount() > 0"
+          >
             <mat-icon
               matBadge="{{ itemCount() }}"
               [matBadgeHidden]="itemCount() <= 0"
