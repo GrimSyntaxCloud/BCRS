@@ -41,34 +41,71 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
         Your Service Repair Orders
       </h1>
     </mat-card-header>
-
     <mat-card-content>
-      <div class="cart-item">
-        <ul style="text-align: center; padding: 0px; margin-left: 200px">
-          <li
-            *ngFor="let item of items"
-            style="display: flex; align-items: center"
-          >
-            <div style="width: 200px; text-align: left; font-family: Lato">
-              {{ item.title }}
-              <mat-divider></mat-divider>
-            </div>
-            <div style="width: 200px; text-align: left; font-family: Lato">
-              {{ item.price | currency }}
-              <mat-divider></mat-divider>
-            </div>
-            <div>
-              <button
-                mat-icon-button
-                (click)="removeItemFromCart(item)"
-                style="color: #e40002; width: 200px; text-align: left"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <!-- first card -->
+      <mat-card
+        style="width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 10px"
+      >
+        <div class="cart-item">
+          <ul style="text-align: center; padding: 0px; margin-left: 20px">
+            <li
+              *ngFor="let item of items"
+              style="display: flex; align-items: center"
+            >
+              <div style="width: 300px; text-align: left; font-family: Lato">
+                {{ item.title }}
+                <mat-divider></mat-divider>
+              </div>
+              <div style="width: 300px; text-align: left; font-family: Lato">
+                {{ item.price | currency }}
+                <mat-divider></mat-divider>
+              </div>
+              <div>
+                <button
+                  mat-icon-button
+                  (click)="removeItemFromCart(item)"
+                  style="color: #e40002; text-align: left"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </mat-card>
+      <!-- end first card -->
+      <!-- second card  -->
+      <mat-card
+        style="width: 90%; margin-left: 5%; margin-right: 5%; margin-top: 10px"
+      >
+        <div class="fees-list">
+          <div>
+            <p style="font-weight: bold">Standard Fees:</p>
+          </div>
+          <div>
+            <p>Labor Fee (one time charge):</p>
+          </div>
+          <ul>
+            <li
+              *ngFor="let item of items"
+              style="display: flex; align-items: center"
+            >
+              <!-- {{ item.title }}: {{ item.laborFee | currency }}
+              <mat-divider></mat-divider> -->
+
+              <div style="width: 300px; text-align: left; font-family: Lato">
+                {{ item.title }}
+                <mat-divider></mat-divider>
+              </div>
+              <div style="width: 300px; text-align: left; font-family: Lato">
+                {{ item.laborFee | currency }}
+                <mat-divider></mat-divider>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </mat-card>
+      <!-- end second card -->
     </mat-card-content>
   </mat-card>
 </ng-container>

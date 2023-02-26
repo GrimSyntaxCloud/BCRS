@@ -9,4 +9,5 @@ Description: line-item interface
 export interface LineItem{
   title: string;
   price: number;
+
 }
