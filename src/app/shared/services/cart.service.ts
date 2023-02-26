@@ -12,6 +12,8 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LineItem } from '../models/line-item.interface';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,17 @@ import { Observable } from 'rxjs';
 export class CartService {
 
   items: Product[] = [];
+  //lineItems = Array<LineItem>;
 
-  constructor() { }
+
+
+  constructor(
+   // private lineItems: LineItem[],
+    private ProductService: ProductService
+
+  ) {
+    //this.lineItems = [];
+  }
 
   // one product only can be added to the shopping cart once
   addToCart(product: Product) {
@@ -40,16 +51,51 @@ export class CartService {
     return !alreadyAdded;
   }
 
+  // get items for shopping cart
   getItems() {
     return this.items;
   }
 
+  // items count in shopping cart
   itemsCount() {
     return this.items.length;
   }
 
 
+  // setLineItems service / ?
+  // setLineItems(lineItems: LineItem[]): void {
+  //   lineItems = lineItems;
+  // }
 
+   // getLineItems service
+  // getLineItems(): LineItem[] {
+  //   return this.lineItems;
+  // }
+
+  // getLineItemTotal service
+  // getLineItemTotal(): number {
+  //   let lineItemTotal: number = 0;
+
+  //   for (let lineItem of this.products) {
+  //     lineItemTotal += lineItem.price;
+  //   }
+  //   return Number(lineItemTotal);
+  // }
+
+  getSubtotal(): any{
+    let subTotal: number = 0;
+    for (let i = 0; i < this.items.length; i++) {
+      subTotal += Number(this.items[i].price) + Number(this.items[i].laborFee);
+    }
+    return Number(subTotal);
+    // let itemTotalPrice += this.items.price + this.items.laborFee;
+
+    // for (let product)
+
+ }
+
+
+// remove one product from shopping cart
 removeItemFromCart(product: Product) {
   this.items = this.items.filter(item => item.id != product.id);
   return this.items;

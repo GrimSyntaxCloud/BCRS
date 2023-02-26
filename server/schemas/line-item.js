@@ -13,6 +13,7 @@ const Schema = mongoose.Schema;
 const lineItemSchema = new Schema({
   title: { type: String },
   price: { type: Number },
+  // laborFee:{ type: Number} // ?
 });
 
 // exports the lineItemSchema

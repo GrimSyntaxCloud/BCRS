@@ -15,13 +15,13 @@ export class Invoice {
   private orderDate: string;
   private LABOR_RATE: number = 50;
 
-  partsAmount: number;
-  laborHours: number;
+  //partsAmount: number;
+  //laborHours: number;
 
-  constructor(username?: string, partsAmount?: number, laborHours?: number) {
+  constructor(username?: string) {
     this.username = username || '';
-    this.partsAmount = partsAmount || 0;
-    this.laborHours = laborHours || 0;
+    // this.partsAmount = partsAmount || 0;
+    // this.laborHours = laborHours || 0;
     this.orderDate = new Date().toLocaleDateString();
     this.lineItems = [];
   }
@@ -38,7 +38,7 @@ export class Invoice {
     return this.lineItems;
   }
 
-  // shopping cart
+  // called in shopping cart for
   getLineItemTotal(): number{
     let total: number = 0;
     for (let lineItem of this.lineItems) {
@@ -49,7 +49,8 @@ export class Invoice {
 
 
   getLaborAmount(): number{
-    return Number(this.laborHours) * Number(this.LABOR_RATE);
+    //return Number(this.laborHours) * Number(this.LABOR_RATE);
+    return 0;
   }
 
   getOrderDate(): string{
@@ -57,12 +58,13 @@ export class Invoice {
   }
 
   getTotal(): number{
-    return Number(this.partsAmount) + Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
+    //return Number(this.partsAmount) + Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
+    return 0;
   }
 
   clear() {
-    this.partsAmount = 0;
-    this.laborHours = 0;
+    //this.partsAmount = 0;
+    //this.laborHours = 0;
     this.lineItems = [];
   }
 

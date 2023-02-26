@@ -126,10 +126,17 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
           "
         >
           <div class="subtotal">
-            <div>
-              <p style="font-weight: bold">Your subtotal:</p>
+            <div style="display: flex; align-items: center">
+              <p style="font-weight: bold; width: 550px">Your subtotal:</p>
+              <!-- </div>
+            <div style="display: flex; align-items: center"> -->
+              <p style="font-weight: bold">
+                {{ yourSubtotal | currency }}
+                <mat-divider></mat-divider>
+              </p>
             </div>
           </div>
+
           <!-- place order button -->
           <mat-card-actions
             style="
@@ -141,6 +148,7 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
           >
             <button
               mat-button
+              (click)="placeOrder()"
               style="
                 background-color: #ffb834;
                 border-radius: 5px;
