@@ -38,12 +38,12 @@ export class CartService {
     let alreadyAdded = false;
     // loop over products to search if the product has already been added to the shopping cart
     // if find the product has already been added to the shopping cart, then stop the search
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].id === product.id) {
-        alreadyAdded = true;
+      for (let item of this.items) {
+        if (item.id === product.id) {
+          alreadyAdded = true;
         break;
+        }
       }
-    }
     // if the product has not been added to the shopping cart, then push the product to the shopping cart
     if (!alreadyAdded) {
       this.items.push(product);
@@ -82,16 +82,14 @@ export class CartService {
   //   return Number(lineItemTotal);
   // }
 
+
+  // calculate the total cost of the order by adding up the each product price and labor fee
   getSubtotal(): any{
     let subTotal: number = 0;
-    for (let i = 0; i < this.items.length; i++) {
-      subTotal += Number(this.items[i].price) + Number(this.items[i].laborFee);
+    for (let item of this.items) {
+      subTotal += Number(item.price) + Number(item.laborFee);
     }
     return Number(subTotal);
-    // let itemTotalPrice += this.items.price + this.items.laborFee;
-
-    // for (let product)
-
  }
 
 
