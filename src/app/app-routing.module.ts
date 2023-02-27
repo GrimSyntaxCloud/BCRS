@@ -99,7 +99,7 @@ const routes: Routes = [
         canActivate: [AuthGuard] // for logged in user
       },
       {
-        path: 'roles/:userId',
+        path: 'roles/:roleId',
         component: RoleDetailsComponent,
         canActivate: [AuthGuard] // for logged in user
       }
