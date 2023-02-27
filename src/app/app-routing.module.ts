@@ -31,6 +31,8 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { RoleListComponent } from './pages/role-list/role-list.component';
+import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 
 /**
  * TODO:
@@ -90,6 +92,16 @@ const routes: Routes = [
       path: 'users/:userId',
       component: UserDetailsComponent,
       canActivate: [AuthGuard] // for logged in user
+      },
+      {
+        path: 'roles',
+        component: RoleListComponent,
+        canActivate: [AuthGuard] // for logged in user
+      },
+      {
+        path: 'roles/:userId',
+        component: RoleDetailsComponent,
+        canActivate: [AuthGuard] // for logged in user
       }
     ],
   },
