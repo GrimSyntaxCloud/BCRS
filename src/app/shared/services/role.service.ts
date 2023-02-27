@@ -44,8 +44,9 @@ export class RoleService {
   }
 
   // deleteRole Service
+  // http.delete() request
   deleteRole(roleId: string): Observable<any> {
-    return this.http.delete(`/api/role/${roleId}`);
+    return this.http.delete(`/api/roles/${roleId}`);
   }
 
   // findUserRole Service
