@@ -1,5 +1,5 @@
 /*
- Title: base-response.js
+ Title: error-response.js
  Author: Professor Krasso
  Date: 02/08/2023
  Modified By: Andres Macias/Patrick Wolff/April Yang

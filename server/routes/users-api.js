@@ -52,10 +52,8 @@ router.get("/", async (req, res) => {
           console.log(findAllUsersMongodbErrorResponse.toObject());
           res.status(500).send(findAllUsersMongodbErrorResponse.toObject());
         } else {
-          const findAllUsersResponse = new BaseResponse(
-            200, `findAllUsers query was successful.`, users);
-          console.log(findAllUsersResponse.toObject());
-          res.json(findAllUsersResponse.toObject());
+          const findAllUsersResponse = new BaseResponse(200, `findAllUsers query was successful.`, users);
+          console.log(findAllUsersResponse.toObject()); res.json(findAllUsersResponse.toObject());
         }
       });
   } catch (e) {
@@ -208,37 +206,8 @@ router.get("/:id", async (req, res) => {
 });
 
 // Add api for findUserByUsername
-router.get('/users/:userName', async(req, res) =>  {
-  /** try {
-    User.findOne({ _id: req.params.id }, function (err, user) {
-      if (err) {
-        console.log(err);
-        const findUserByIdMongodbErrorResponse = new BaseResponse(
-          500,
-          `${config.mongoServerError}:${err.message}`,
-          null
-        );
-        console.log(findUserByIdMongodbErrorResponse.toObject());
-        res.status(500).send(findUserByIdMongodbErrorResponse.toObject());
-      } else {
-        const findUserByIdResponse = new BaseResponse(
-          200,
-          `findUserByUserName query was successful.`,
-          user
-        );
-        res.json(findUserByIdResponse.toObject());
-      }
-    });
-  } catch (e) {
-    console.log(e);
-    const findByIdCatchErrorResponse = new ErrorResponse(
-      500,
-      "Internal server error",
-      e
-    );
-    res.status(500).send(findByIdCatchErrorResponse.toObject());
-  } */
-})
+// router.get('/users/:userName', async(req, res) =>  {
+// })
 
 /**
  * API: http://localhost:3000/api/users/{id}
@@ -275,6 +244,8 @@ router.get('/users/:userName', async(req, res) =>  {
  *                    type: string
  *                  email:
  *                   type: string
+ *                  role:
+ *                   type: string
  *                  address:
  *                    type: string
  *      responses:
@@ -310,6 +281,7 @@ router.put("/:id", async (req, res) => {
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
+          'role.text': req.body.role,
           dateModified: new Date(),
         });
 
@@ -528,5 +500,56 @@ router.get("/:userName/security-questions", async (req, res) => {
       .send(findSelectedSecurityQuestionsCatchErrorResponse.toObject());
   }
 });
+
+/**
+ * findUserRole
+ * @openapi
+ * /api/users/{userName}/role:
+ *  get:
+ *    tags:
+ *      - Users
+ *    description: API for returning a single user role object from MongoDB
+ *    summary: Returns a user role document
+ *    parameters:
+ *      - name: userName
+ *        in: path
+ *        required: true
+ *        description: The username requested by user
+ *        schema:
+ *          type: string
+ *    responses:
+ *      "200":
+ *        description: Query successful
+ *      "500":
+ *        description: Internal server error
+ *      "501":
+ *        description: MongoDB Exception
+ */
+router.get('/:userName/role', async (req, res) => {
+  try
+  {
+    User.findOne({'userName': req.params.userName}, function(err, user)
+    {
+      if (err)
+      {
+        console.log(err);
+        const findUserRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        res.status(500).send(findUserRoleMongodbErrorResponse.toObject());
+      }
+      else
+      {
+        console.log(user);
+        const findUserRoleResponse = new BaseResponse('200', 'Query successful', user.role);
+        res.json(findUserRoleResponse.toObject());
+      }
+    })
+  }
+  catch (e)
+  {
+    console.log(e);
+    const findUserRoleCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
+    res.status(500).send(findUserRoleCatchErrorResponse.toObject());
+  }
+})
 
 module.exports = router;

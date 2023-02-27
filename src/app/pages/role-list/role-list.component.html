@@ -1,0 +1,92 @@
+<!--
+Title: roles-list.component.html
+Author: Professor Krasso
+Date: 02/26/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: display list of roles
+-->
+
+<!-- use primeng  -->
+<p-confirmDialog [style]="{ width: '35vw' }" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<!-- page title -->
+<mat-card style="
+    width: 70%;
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-top: 30px;
+    margin-bottom: 150px;
+    background-color: #c0c0c0;
+  ">
+  <div fxLayout="column" fxLayoutGap="20px">
+    <div fxFlex>
+      <h1 class="title" style="background-color: #eeba30; text-align: center; margin-top: 20px">
+        Role Configuration Page! <br />
+        <span class="subtitle">
+          Fields marked with an asterisk(*) are required.
+        </span>
+      </h1>
+    </div>
+
+    <!-- enter and submit role or returns error messages-->
+
+    <div fxFlex>
+      <div fxLayout="column" class="pageDesign">
+        <mat-card>
+          <form [formGroup]="roleForm" (ngSubmit)="create(); roleForm.reset()">
+            <mat-form-field appearance="fill" class="w-100" style="width: 100%">
+              <mat-label style="width: 100%">Roles</mat-label>
+              <input type="text" matInput formControlName="text" required placeholder="Enter a role..."
+                style="width: 100%" />
+
+              <button type="submit" [disabled]="!roleForm.valid" mat-icon-button matSuffix>
+                <mat-icon color="primary" style="width: 36px; height: 36px; font-size: 36px" matSuffix>
+                  add_circle</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <mat-error *ngIf="
+                roleForm.controls['text'].hasError('required') &&
+                roleForm.controls['text'].touched
+              ">
+              role is a required field.
+            </mat-error>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- display roles with edit and delete button-->
+    <div fxFlex>
+      <p-table [value]="roles" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="
+                text-align: left;
+                font-family: lato;
+                font-size: 1rem;
+                padding-bottom: 10px;
+              ">
+              Roles
+            </th>
+            <th style="width: 8rem"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-role>
+          <tr>
+            <td style="padding-bottom: 10px; font-family: lato">
+              {{ role.text }}
+            </td>
+            <td style="text-align: center">
+              <button pButton pRipple type="button" routerLink="/roles/{{ role._id }}" icon="pi pi-pencil"
+                class="p-button-rounded p-button-text" style="color: #d3a625"></button>
+              <button pButton pRipple type="button" (click)="delete(role._id)" icon="pi pi-trash"
+                class="p-button-rounded p-button-text" style="color: #ae0001"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</mat-card>

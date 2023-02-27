@@ -1,3 +1,13 @@
+/*
+ Title: app-routing.module.js
+ Author: Professor Krasso
+ Date: 02/07/2023
+ Modified By: Andres Macias/Patrick Wolff/April Yang
+ Description: Has the routes for the app
+ */
+
+
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
@@ -17,7 +27,18 @@ import { ErrorComponent } from './pages/error/error.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { AboutComponent } from './pages/about/about.component';
 import { VerifyUsernameFormComponent } from './shared/forms/verify-username-form/verify-username-form.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { RoleListComponent } from './pages/role-list/role-list.component';
+import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 
+/**
+ * TODO:
+ * 1. Organize the routes in a logical order
+ * 2. Add the user create route
+ */
 
 const routes: Routes = [
   {
@@ -33,12 +54,29 @@ const routes: Routes = [
         component: ServiceRepairComponent
       },
       {
+        path: 'cart',
+        component: CartComponent
+      },
+      {
         path: 'contact',
         component: ContactComponent
       },
       {
         path: 'about',
         component: AboutComponent
+      },
+      {
+        path: 'users',
+        component: UserListComponent
+      },
+      {
+        path: 'users/create/new',
+        component: UserCreateComponent
+      },
+      {
+        path: 'users/profile/:userName',
+        component: ProfileComponent,
+        canActivate: [AuthGuard]  // for logged in user
       },
       {
         path: 'security-questions',
@@ -51,9 +89,19 @@ const routes: Routes = [
         canActivate: [AuthGuard]  // for logged in user
       },
       {
-      path: 'users/:userName',
+      path: 'users/:userId',
       component: UserDetailsComponent,
       canActivate: [AuthGuard] // for logged in user
+      },
+      {
+        path: 'roles',
+        component: RoleListComponent,
+        canActivate: [AuthGuard] // for logged in user
+      },
+      {
+        path: 'roles/:userId',
+        component: RoleDetailsComponent,
+        canActivate: [AuthGuard] // for logged in user
       }
     ],
   },

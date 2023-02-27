@@ -3,7 +3,7 @@ Title: selectedSecurityQuestion.js
 Author: Professor Krasso
 Date: 02/07/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: Creating role schema with mongoose
+Description: Creating selected security question schema with mongoose
 */
 
 const mongoose = require("mongoose");

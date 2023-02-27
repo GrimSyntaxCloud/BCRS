@@ -3,7 +3,7 @@ Title: security-question-list.component.ts
 Author: Professor Krasso
 Updated Date: 02/11/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
-Description:
+Description: security question list component
 */
 
 import { Component, OnInit } from '@angular/core';

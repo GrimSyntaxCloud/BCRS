@@ -1,16 +1,66 @@
-<div fxLayout="column" class="main-welcome">
+<!--
+Title: about.component.html
+Author: Professor Krasso
+Date: 02/20/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: About page template
+-->
+
+<div>
+  <h1
+    style="
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 50px;
+      font-weight: bold;
+    "
+  >
+    {{ aboutUs }}
+  </h1>
+</div>
+
+<!-- 2 column material design layout -->
+<div fxLayout="row wrap" style="margin-bottom: 100px">
   <div fxFlex>
-    <h1 class="title">
-      Who are at Bob's Computer repair shop <br />
-    </h1>
+    <!-- left column -->
+    <div fxLayout="column" style="text-align: center">
+      <div>
+        <img
+          class="aboutUsImg"
+          src="../../../assets/aboutImg.jpg"
+          alt="aboutUsImg"
+        />
+      </div>
+    </div>
   </div>
-
+  <!-- right column -->
   <div fxFlex>
-    <div class="task-container" fxLayout="row">
-      <p class="about-us-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem dignissimos optio ut, magnam aspernatur ipsam, nam cum assumenda accusantium natus sequi nisi nesciunt expedita deleniti, neque eos aut beatae. Ut. Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda commodi velit impedit. Culpa dolorum, sed corrupti voluptates, porro tempora cupiditate ipsam fugiat, in nostrum error. Aliquam reiciendis commodi iusto alias? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores est ipsam voluptatem nemo dolorem unde tenetur eos incidunt perspiciatis vel consequatur quod quaerat non, eius quidem praesentium eaque provident vitae?</p>
-
-      <p class="about-us-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nisi dignissimos, dolores laboriosam ullam natus obcaecati voluptate doloremque iure harum, dolorem quaerat! Recusandae ut sit mollitia expedita velit accusantium neque? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat sit illo a. Sunt provident officia quisquam placeat, voluptate reprehenderit quaerat ut, adipisci quia saepe qui laudantium voluptatum eum, iusto iure? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam vero animi voluptatum, cupiditate dicta commodi obcaecati distinctio quis illo, velit assumenda voluptatem. Non cum in veritatis sapiente mollitia sint quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. A corrupti veniam est eum dolore porro ipsa repellendus. Reprehenderit hic, laborum itaque, quaerat modi quas ipsam, voluptatibus numquam amet distinctio beatae!</p>
-
+    <div fxLayout="column">
+      <h1 class="appName">Bob's Computer Repair Shop</h1>
+      <div class="aboutApp">
+        <p>
+          Bob's Computer Repair shop is located in Pierce County and has been
+          established in 2017.
+          <br /><br />
+          Bob's Computer Repair Shop has grown to become one of the most trusted
+          and reputable computer repair services in the area, offering expert
+          computer service that is knowledgeable and friendly.
+          <br /><br />
+          We have years of experience troubleshooting, repairing, and providing
+          PC consulting to numerous clients. Our team is professional and
+          reliable, and we will work within your constraints. We always work
+          hard until you are satisfied, that's why every job done by Bob's
+          Computer Repair Shop is backed by a 30-day guarantee and 24/7 service
+          support.
+          <br /><br />
+          If you are satisfied with our service, please share your experience
+          with your relatives and friends. We will be very grateful and continue
+          to develop new services to better serve our community.
+          <br /><br />
+          We believe that Bob's Computer Repair Shop is your lifesaver(or
+          something), making your life simple and organized.(need to be edited)
+        </p>
+      </div>
     </div>
   </div>
 </div>

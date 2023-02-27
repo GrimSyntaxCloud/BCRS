@@ -21,25 +21,38 @@ Description: application base layout template
 
         <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
-          <a class="navbar-link-signUp" routerLink="/session/register">Sign up</a>
+          <a class="navbar-link-signUp" routerLink="/session/register"
+            >Sign up</a
+          >
           <a class="navbar-link-logIn" routerLink="/session/login">Log in</a>
         </ng-container>
 
         <ng-container *ngIf="sessionUserName">
           <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
-          <button mat-icon-button class="ml-xs">
-            <mat-icon class="shopping-cart">shopping_cart</mat-icon>
+          <button
+            mat-icon-button
+            class="ml-xs"
+            disabled="false"
+            *ngIf="itemCount() > 0"
+          >
+            <mat-icon
+              matBadge="{{ itemCount() }}"
+              [matBadgeHidden]="itemCount() <= 0"
+              matBadgeColor="warn"
+              class="shopping-cart"
+              routerLink="/cart"
+              >shopping_cart</mat-icon
+            >
           </button>
 
           <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
             <mat-icon class="profileIcon">person</mat-icon>
-            <!-- <p>Welcome {{ sessionUserName }}!</p> -->
           </button>
 
           <mat-menu #session="matMenu" x-position="before">
-            <p style="height: 30px">
-              {{ sessionUserName }}
-            </p>
+              <button mat-menu-item routerLink="users/profile/{{ sessionUserName }}">
+              Welcome {{ sessionUserName }}
+              </button>
             <mat-divider></mat-divider>
             <button mat-menu-item [matMenuTriggerFor]="configs">
               <mat-icon>settings</mat-icon>
@@ -47,10 +60,17 @@ Description: application base layout template
             </button>
 
             <mat-menu #configs="matMenu">
-              <button mat-menu-item (click)="profile()">
-                <mat-icon>person</mat-icon>
-                Profile
+              <!-- users list -->
+              <button mat-menu-item routerLink="/users">
+                <mat-icon>supervisor_account</mat-icon>
+                User List
               </button>
+              <!-- users list -->
+              <button mat-menu-item routerLink="/roles">
+                <mat-icon>admin_panel_settings</mat-icon>
+                Roles
+              </button>
+              <!-- security questions -->
               <button mat-menu-item routerLink="/security-questions">
                 <mat-icon>help</mat-icon>
                 Security Questions

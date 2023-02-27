@@ -1,3 +1,11 @@
+/*
+ Title: session-api.js
+ Author: Professor Krasso
+ Date: 02/07/2023
+ Modified By: Andres Macias/Patrick Wolff/April Yang
+ Description: Building session APIs
+ */
+
 const express = require("express");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");

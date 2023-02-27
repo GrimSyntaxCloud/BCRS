@@ -8,6 +8,13 @@ Description: service-repair component
 
 
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/models/product.interface';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { CartService } from 'src/app/shared/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
+
 
 @Component({
   selector: 'app-service-repair',
@@ -16,43 +23,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceRepairComponent implements OnInit {
 
-  descriptions!: Array<any>
-  cards: Array<any>;
+  // descriptions!: Array<any>
+  products: Array<any>;
+  sessionUserName: string;
 
 
-  constructor() {
-    this.cards = [
-    {
-      title: 'Card Title 1',
-      price:'29.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private cartService: CartService,
+    private cookieService: CookieService,
 
-    },
-    {
-      title: 'Card Title 2',
-      price:'39.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
-    },
-    {
-      title: 'Card Title 3',
-      price:'49.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
-    },
-    {
-      title: 'Card Title 4',
-      price:'59.99',
-      descriptions:["Unlimited spyware removal per year","Remote service", "24/7 Support"],
-      buttonText: 'Choose'
-    },
-
-  ];
+  ) {
+    // populate products that are listed in the product.service.ts to the html
+    this.products = this.productService.getProducts();
+    // only seesion user can add product to the shopping cart
+    this.sessionUserName = this.cookieService.get('sessionuser');
   }
+
+  // the product only can be added to the shopping cart once with alert messages
+addToCart(product: Product) {
+  let successfullyAdded = this.cartService.addToCart(product);
+  if (successfullyAdded) {
+    window.alert('Your product has been added to the cart!');
+  } else {
+    window.alert("Product has already been added.");
+  }
+ }
+
+
 
   ngOnInit(): void {
 
   }
+
+
 
 }

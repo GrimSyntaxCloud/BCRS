@@ -1,1 +1,131 @@
+<!--
+Title: user-create.component.html
+Author: Professor Krasso
+Date: 02/12/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: Allows an Admin role to create a new user
+-->
 
+<div fxLayout="column">
+    <mat-card class="mat-elevation-z0">
+        <mat-card-title style="text-align: center; font-weight: lighter;">Create User Form</mat-card-title>
+        <mat-card-subtitle style="text-align: center; font-weight: lighter;">
+        Fields marked with an asterisk (*) are required
+    </mat-card-subtitle>
+    <br />
+
+    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+
+    <form [formGroup]="form" (ngSubmit)="createUser()" (keydown.ener)="$event.preventDefault()" style="width: 50%; margin: 0 auto;">
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutGap="10px">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="userName"
+                        required />
+
+                    <mat-error class="error" *ngIf="form.controls['userName'].hasError('required') && form.controls['userName'].touched">
+                        Username is a required field.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input
+                        type="password"
+                        matInput
+                        formControlName="password"
+                        required />
+
+                    <mat-error class="error" *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">
+                        Password is a required field.
+                    </mat-error>
+
+                    <mat-error class="error" *ngIf="form.controls['password'].hasError('pattern') && form.controls['password'].touched">
+                        Password must be at least 8 characters, contain one letter, and one number.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="firstName"
+                        required />
+
+                        <mat-error class="error" *ngIf="form.controls['firstName'].hasError('required') && form.controls['firstName'].touched">
+                            First name is a required field.
+                        </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="lastName"
+                        required />
+
+                    <mat-error class="error" *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
+                        Last name is a required field.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Phone number</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="phoneNumber"
+                        required />
+
+                    <mat-error class="error" *ngIf="form.controls['phoneNumber'].hasError('required') && form.controls['phoneNumber'].touched">
+                        Phone number is a required field.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Email address</mat-label>
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="email"
+                        required />
+
+                    <mat-error class="error" *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">
+                        Email is a required field.
+                    </mat-error>
+
+                    <mat-error class="error" *ngIf="form.controls['email'].hasError('email') && form.controls['email'].touched">
+                        Invalid email format.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Address</mat-label>
+
+                    <textarea
+                        matInput
+                        required
+                        formControlName="address"
+                        placeholder="505 Main St Omaha, NE 68111"></textarea>
+
+                    <mat-error class="error" *ngIf="form.controls['address'].hasError('required') && form.controls['address'].touched">
+                        Address is a required field.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+
+        <br />
+        <mat-card-actions align="end">
+            <button mat-raised-button (click)="cancel()" color="accent">Cancel</button>
+            <button mat-raised-button [disabled]="!form.valid" color="primary">Submit</button>
+        </mat-card-actions>
+    </form>
+    </mat-card>
+</div>

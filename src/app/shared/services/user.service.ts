@@ -18,19 +18,20 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  // call findAllUsers API
+  // http.get() request
   findAllUsers(): Observable<any> {
     return this.http.get('/api/users');
   }
 
+  // call findUserById API
+  // http.get() request
   findUserById(userId: string): Observable<any> {
     return this.http.get('/api/users/' + userId);
   }
 
-  // add service for findByUsername
-  //findUserByUserName(userId: string): Observable<any> {
-    //return this.http.get('/api/users/' + userId);
-  //}
-
+  // call createUser API
+  // http.post() request
   createUser(user: User): Observable<any> {
     return this.http.post('/api/users/', {
       userName: user.userName,
@@ -43,26 +44,27 @@ export class UserService {
     })
   }
 
+  // call updateUser API
+  // http.put() request
   updateUser(userId: string, user: User): Observable<any> {
-    return this.http.put('/api/users' + userId, {
+    return this.http.put('/api/users/' + userId, {
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
-      email: user.email
+      email: user.email,
+      role: user.role?.text ?? 'standard'
     })
   }
 
+  // call deleteUser API
+  // http.delete() request
   deleteUser(userId: string): Observable<any> {
+      console.log("inside delete" + userId);
     return this.http.delete('/api/users/' + userId);
   }
 
-  deactivateUser(userName: string): Observable<any> {
-    console.log("inside deactivate")
-    console.log(userName)
-    return this.http.delete('/api/users/deactivate/' + userName);
-  }
-
-  // find user selected security questions
+  // call findUserByUserName API
+  // http.get() request
 findSelectedSecurityQuestions(username: string): Observable < any > {
   return this.http.get('/api/users/' + username + '/security-questions');
 }

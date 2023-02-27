@@ -7,6 +7,7 @@ Description: User interface
 */
 
 import { SelectedSecurityQuestion } from "./selected-security-question.interface";
+import { Role } from "./role.interface";
 
 
 
@@ -20,4 +21,5 @@ export interface User {
   address: string;
   email: string;
   selectedSecurityQuestions?: SelectedSecurityQuestion[];
+  role?: Role;
 }

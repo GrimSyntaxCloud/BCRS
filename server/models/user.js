@@ -31,5 +31,5 @@ const userSchema = new Schema(
   { collection: "users" } // pre-build collection in mongodb atlas
 );
 
-// exports user model
+// exports userSchema
 module.exports = mongoose.model("User", userSchema);
