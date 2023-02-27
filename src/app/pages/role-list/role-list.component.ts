@@ -1,3 +1,12 @@
+/*
+Title: role-list.component.ts
+Author: Professor Krasso
+Updated Date: 02/11/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: role list component
+*/
+
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
@@ -8,13 +17,14 @@ import { RoleService } from 'src/app/shared/services/role.service';
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
-  styleUrls: ['./role-list.component.css']
+  styleUrls: ['./role-list.component.css'],
+  providers: [ConfirmationService]
 })
 export class RoleListComponent implements OnInit {
 
+
   roles: Role[];
   errorMessages: Message[];
-
   roleForm: FormGroup = this.fb.group({
     text: [null, Validators.compose([Validators.required])]
   });
@@ -61,7 +71,7 @@ export class RoleListComponent implements OnInit {
     })
   }
 
-  delete(roleId: string) {
+  delete(roleId: string): void {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this role?',
       header: 'Confirmation',
@@ -70,7 +80,7 @@ export class RoleListComponent implements OnInit {
         this.roleService.deleteRole(roleId).subscribe({
           next: (res) => {
               console.log('role successfully deleted');
-              this.roles = this.roles.filter(role => role._id !== res.data._id);
+              this.roles = this.roles.filter(role => role._id !== roleId);
           },
           error: (e) => {
             console.log(e);
