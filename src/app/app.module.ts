@@ -69,6 +69,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
+import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 // import { Chart } from 'chart.js';
 
 @NgModule({
@@ -97,6 +98,7 @@ import { RoleListComponent } from './pages/role-list/role-list.component';
     UserCreateComponent,
     CartComponent,
     RoleListComponent,
+    RoleDetailsComponent,
   ],
   imports: [
      // Angular Materials
