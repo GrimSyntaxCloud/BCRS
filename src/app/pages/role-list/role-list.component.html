@@ -80,9 +80,9 @@ Description: display list of roles
             </td>
             <td style="text-align: center">
               <button pButton pRipple type="button" routerLink="/roles/{{ role._id }}" icon="pi pi-pencil"
-                style="background-color: #d3a625"></button>
+                class="p-button-rounded p-button-text" style="color: #d3a625"></button>
               <button pButton pRipple type="button" (click)="delete(role._id)" icon="pi pi-trash"
-                style="background-color: #ae0001"></button>
+                class="p-button-rounded p-button-text" style="color: #ae0001"></button>
             </td>
           </tr>
         </ng-template>

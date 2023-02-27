@@ -7,30 +7,21 @@ Description: Create, display security questions template
 -->
 
 <!-- use primeng  -->
-<p-confirmDialog
-  [style]="{ width: '35vw' }"
-  [baseZIndex]="10000"
-  rejectButtonStyleClass="p-button-text"
->
+<p-confirmDialog [style]="{ width: '35vw' }" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
 </p-confirmDialog>
 
 <!-- page title -->
-<mat-card
-  style="
+<mat-card style="
     width: 70%;
     margin-right: 15%;
     margin-left: 15%;
     margin-top: 30px;
     margin-bottom: 150px;
     background-color: #c0c0c0;
-  "
->
+  ">
   <div fxLayout="column" fxLayoutGap="20px">
     <div fxFlex>
-      <h1
-        class="title"
-        style="background-color: #eeba30; text-align: center; margin-top: 20px"
-      >
+      <h1 class="title" style="background-color: #eeba30; text-align: center; margin-top: 20px">
         Security Questions Configuration Page! <br />
         <span class="subtitle">
           Fields marked with an asterisk(*) are required.
@@ -46,37 +37,19 @@ Description: Create, display security questions template
           <form [formGroup]="sqForm" (ngSubmit)="create(); sqForm.reset()">
             <mat-form-field appearance="fill" class="w-100" style="width: 100%">
               <mat-label style="width: 100%">Security question</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="text"
-                required
-                placeholder="Enter a security question..."
-                style="width: 100%"
-              />
+              <input type="text" matInput formControlName="text" required placeholder="Enter a security question..."
+                style="width: 100%" />
 
-              <button
-                type="submit"
-                [disabled]="!sqForm.valid"
-                mat-icon-button
-                matSuffix
-              >
-                <mat-icon
-                  color="primary"
-                  style="width: 36px; height: 36px; font-size: 36px"
-                  matSuffix
-                >
-                  add_circle</mat-icon
-                >
+              <button type="submit" [disabled]="!sqForm.valid" mat-icon-button matSuffix>
+                <mat-icon color="primary" style="width: 36px; height: 36px; font-size: 36px" matSuffix>
+                  add_circle</mat-icon>
               </button>
             </mat-form-field>
 
-            <mat-error
-              *ngIf="
+            <mat-error *ngIf="
                 sqForm.controls['text'].hasError('required') &&
                 sqForm.controls['text'].touched
-              "
-            >
+              ">
               Security question is a required field.
             </mat-error>
           </form>
@@ -89,14 +62,12 @@ Description: Create, display security questions template
       <p-table [value]="securityQuestions" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
-            <th
-              style="
+            <th style="
                 text-align: left;
                 font-family: lato;
                 font-size: 1rem;
                 padding-bottom: 10px;
-              "
-            >
+              ">
               Questions
             </th>
             <th style="width: 8rem"></th>
@@ -109,22 +80,10 @@ Description: Create, display security questions template
               {{ sq.text }}
             </td>
             <td style="text-align: center">
-              <button
-                pButton
-                pRipple
-                type="button"
-                routerLink="/security-questions/{{ sq._id }}"
-                icon="pi pi-pencil"
-                style="background-color: #d3a625"
-              ></button>
-              <button
-                pButton
-                pRipple
-                type="button"
-                (click)="delete(sq._id)"
-                icon="pi pi-trash"
-                style="background-color: #ae0001"
-              ></button>
+              <button pButton pRipple type="button" routerLink="/security-questions/{{ sq._id }}" icon="pi pi-pencil"
+                class="p-button-rounded p-button-text" style="color: #d3a625"></button>
+              <button pButton pRipple type="button" (click)="delete(sq._id)" icon="pi pi-trash"
+                class="p-button-rounded p-button-text" style="color: #ae0001"></button>
             </td>
           </tr>
         </ng-template>

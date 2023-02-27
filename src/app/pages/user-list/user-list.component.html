@@ -47,8 +47,8 @@ Description: Displays list of users with the ability to
                     <td>{{user.email}}</td>
                     <td>{{user.address}}</td>
                     <td style="text-align: center;">
-                        <button pButton pRipple type="button" routerLink="/users/{{user._id}}" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-                        <button pButton pRipple type="button" (click)="delete(user._id)" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+                        <button pButton pRipple type="button" routerLink="/users/{{user._id}}" icon="pi pi-pencil" class="p-button-rounded p-button-text"  style="color: #d3a625"></button>
+                        <button pButton pRipple type="button" (click)="delete(user._id)" icon="pi pi-trash" class="p-button-rounded p-button-text" style="color: #ae0001"></button>
                     </td>
                 </tr>
             </ng-template>
