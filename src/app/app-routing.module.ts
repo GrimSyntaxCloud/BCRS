@@ -72,12 +72,19 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: UserListComponent
+        component: UserListComponent,
+        canActivate: [AuthGuard] // for logged in user
       },
       {
         path: 'users/create/new',
-        component: UserCreateComponent
+        component: UserCreateComponent,
+        canActivate: [AuthGuard] // for logged in user
       },
+      {
+        path: 'users/:userId',
+        component: UserDetailsComponent,
+        canActivate: [AuthGuard] // for logged in user
+        },
       {
         path: 'users/profile/:userName',
         component: ProfileComponent,
@@ -93,11 +100,7 @@ const routes: Routes = [
         component: SecurityQuestionDetailsComponent,
         canActivate: [AuthGuard]  // for logged in user
       },
-      {
-      path: 'users/:userId',
-      component: UserDetailsComponent,
-      canActivate: [AuthGuard] // for logged in user
-      },
+
       {
         path: 'roles',
         component: RoleListComponent,
