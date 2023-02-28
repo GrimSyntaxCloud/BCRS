@@ -33,6 +33,7 @@ import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
+import { PurchasesByServiceGraphComponent } from './pages/purchases-by-service-graph/purchases-by-service-graph.component';
 
 /**
  * TODO:
@@ -101,6 +102,11 @@ const routes: Routes = [
       {
         path: 'roles/:roleId',
         component: RoleDetailsComponent,
+        canActivate: [AuthGuard] // for logged in user
+      },
+      {
+        path: 'graph',
+        component: PurchasesByServiceGraphComponent,
         canActivate: [AuthGuard] // for logged in user
       }
     ],
