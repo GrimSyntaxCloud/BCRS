@@ -286,9 +286,8 @@ router.delete("/:roleId", async (req, res) => {
  *         description: MongoDB Exception
  */
 router.post('/', async (req, res) => {
-  try
-  {
-    Role.findOne({'text': req.body.text}, function(err, role) {
+  try {
+    Role.findOne({ 'text': req.body.text }, function (err, role) {
       if (err) {
         console.log(err);
         const findRoleMongodbError = new ErrorResponse(500, 'Internal server error', err);
@@ -302,16 +301,13 @@ router.post('/', async (req, res) => {
             text: req.body.text
           }
 
-          Role.create(newRole, function(err, role)
-          {
-            if (err)
-            {
+          Role.create(newRole, function (err, role) {
+            if (err) {
               console.log(err);
               const createRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
               res.status(500).send(createRoleMongodbErrorResponse.toObject());
             }
-            else
-            {
+            else {
               console.log(role);
               const createRoleResponse = new BaseResponse('200', 'Query successful', role);
               res.json(createRoleResponse.toObject());
@@ -325,8 +321,7 @@ router.post('/', async (req, res) => {
       }
     })
   }
-  catch (e)
-  {
+  catch (e) {
     console.log(e);
     const createRoleCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
     res.status(500).send(createRoleCatchErrorResponse.toObject());
@@ -367,35 +362,28 @@ router.post('/', async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.put('/:roleId', async(req, res) => {
-  try
-  {
-    Role.findOne({'_id': req.params.roleId}, function(err, role)
-    {
-      if (err)
-      {
+router.put('/:roleId', async (req, res) => {
+  try {
+    Role.findOne({ '_id': req.params.roleId }, function (err, role) {
+      if (err) {
         console.log(err);
         const updateRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
         res.status(500).send(updateRoleMongodbErrorResponse.toObject());
       }
-      else
-      {
+      else {
         console.log(role);
 
         role.set({
           text: req.body.text
         });
 
-        role.save(function(err, updatedRole)
-        {
-          if (err)
-          {
+        role.save(function (err, updatedRole) {
+          if (err) {
             console.log(err);
             const updatedRoleMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
             res.status(500).send(updatedRoleMongodbErrorResponse.toObject());
           }
-          else
-          {
+          else {
             console.log(updatedRole);
             const updatedRoleResponse = new BaseResponse('200', 'Query successful', updatedRole);
             res.json(updatedRoleResponse.toObject());
@@ -405,8 +393,7 @@ router.put('/:roleId', async(req, res) => {
     })
 
   }
-  catch (e)
-  {
+  catch (e) {
     console.log(e);
     const updateRoleCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
     res.status(500).send(updateRoleCatchErrorResponse.toObject());

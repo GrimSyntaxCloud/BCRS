@@ -60,7 +60,7 @@
               <div>
                 <!-- loop over descriptions with different contents  -->
                 <p
-                  *ngFor="let item; as: index; of: product.descriptions"
+                  *ngFor="let item of product.descriptions;"
                   style="text-align: center"
                 >
                   {{ item }}

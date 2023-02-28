@@ -35,7 +35,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 
 import { MatBadgeModule } from '@angular/material/badge';
-// import { MatCardActions } from '@angular/material/card';
+import { MatCardActions } from '@angular/material/card';
 
 /* -------- PrimeNg Materials -------- */
 import { TableModule } from 'primeng/table';
@@ -70,7 +70,10 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
-// import { Chart } from 'chart.js';
+import { PurchasesByServiceGraphComponent } from './pages/purchases-by-service-graph/purchases-by-service-graph.component';
+import { ChartModule } from 'primeng/chart';
+import { InvoiceSummaryDialogComponent } from './shared/invoice-summary-dialog/invoice-summary-dialog.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -99,6 +102,9 @@ import { RoleDetailsComponent } from './pages/role-details/role-details.componen
     CartComponent,
     RoleListComponent,
     RoleDetailsComponent,
+    PurchasesByServiceGraphComponent,
+    InvoiceSummaryDialogComponent
+
   ],
   imports: [
      // Angular Materials
@@ -130,6 +136,8 @@ import { RoleDetailsComponent } from './pages/role-details/role-details.componen
     MessagesModule,
     ButtonModule,
     ConfirmDialogModule,
+    ChartModule,
+    MatCheckboxModule
 
   ],
 

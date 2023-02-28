@@ -42,9 +42,21 @@ Description: User Details
             <mat-label>Last Name</mat-label>
             <input type="text" matInput formControlName="lastName" required />
 
-            <mat-error class="" error
+            <mat-error class="error"
               *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
               Last name is a required field.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Role</mat-label>
+           <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role.text">{{role.text}}</mat-option>
+           </mat-select>
+
+            <mat-error class="error"
+              *ngIf="form.controls['role'].hasError('required') && form.controls['role'].touched">
+             role is a required field.
             </mat-error>
           </mat-form-field>
 

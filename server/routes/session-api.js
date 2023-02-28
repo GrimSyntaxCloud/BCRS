@@ -306,7 +306,7 @@ router.post("/verify/users/:userName/security-questions", async (req, res) => {
  *       - name: userName
  *         in: path
  *         required: true
- *         scheme:
+ *         schema:
  *           type: string
  *         description: username of the user who's password is being changed.
  *     requestBody:

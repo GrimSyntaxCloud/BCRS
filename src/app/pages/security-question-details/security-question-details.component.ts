@@ -1,9 +1,18 @@
+/*
+Title: security-question-details.component.ts
+Author: Professor Krasso
+Updated Date: 02/22/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: User create, allows admin to create new user
+*/
+
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SecurityQuestionService } from 'src/app/shared/services/security-question.service';
 import { Message } from 'primeng/api';
 import { SecurityQuestion } from 'src/app/shared/models/security-question.interface';
-import { FormGroup,FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -41,13 +50,13 @@ export class SecurityQuestionDetailsComponent implements OnInit {
         this.editForm.controls['text'].setValue(this.question.text);
       }
     })
-     }
+  }
 
   ngOnInit(): void {
   }
 
 
-  save(): void{
+  save(): void {
     const updatedSecurityQuestion: SecurityQuestion = {
       text: this.editForm.controls['text'].value
     }
@@ -58,7 +67,7 @@ export class SecurityQuestionDetailsComponent implements OnInit {
       },
       error: (e) => {
         this.errorMessage = [
-          {severity:'error', summary: 'Error', detail: e.message}
+          { severity: 'error', summary: 'Error', detail: e.message }
         ]
         console.log('Error occurred while saving the updated security question')
       }
@@ -66,7 +75,7 @@ export class SecurityQuestionDetailsComponent implements OnInit {
     })
   }
 
-  cancel(): void{
+  cancel(): void {
     this.router.navigate(['/security-questions'])
   }
 

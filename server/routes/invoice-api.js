@@ -16,7 +16,58 @@ const Invoice = require("../models/invoice");
  * createInvoice
  * localhost:3000/api/invoices
  */
-router.post("/", async (req, res) => {
+/**
+@openapi
+ * /api/invoices/{userName}:
+ *   post:
+ *     tags:
+ *       - Invoices
+ *     description: API to create a new invoice
+ *     summary: Creates a new invoice
+ *     operationId: createInvoice
+ *     parameters:
+ *      - name: userName
+ *        in: path
+ *        description: userName of the user who created the invoice
+ *        required: true
+ *        schema:
+ *          type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             properties:
+ *              lineItems:
+ *                type: object
+ *                properties:
+ *                   title:
+ *                     type: string
+ *                   price:
+ *                     type: number
+ *              price:
+ *                type: number
+ *              partsAmount:
+ *                type: number
+ *              priceAmount:
+ *                type: number
+ *              laborAmount:
+ *                type: number
+ *              lineItemTotal:
+ *                type: number
+ *              total:
+ *                type: number
+ *
+ *
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.post("/:userName", async (req, res) => {
   try {
     const newInvoice = {
       userName: req.params.userName,
