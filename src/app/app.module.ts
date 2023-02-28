@@ -102,6 +102,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CartComponent,
     RoleListComponent,
     RoleDetailsComponent,
+    PurchasesByServiceGraphComponent,
+    InvoiceSummaryDialogComponent
+
   ],
   imports: [
      // Angular Materials
