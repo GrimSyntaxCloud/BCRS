@@ -15,13 +15,13 @@ export class Invoice {
   private orderDate: string;
   private LABOR_RATE: number = 50;
 
-  //partsAmount: number;
-  //laborHours: number;
+  partsAmount: number;
+  laborHours: number;
 
-  constructor(username?: string) {
+  constructor(username?: string, partsAmount?: number, laborHours?: number) {
     this.username = username || '';
-    // this.partsAmount = partsAmount || 0;
-    // this.laborHours = laborHours || 0;
+    this.partsAmount = partsAmount || 0;
+    this.laborHours = laborHours || 0;
     this.orderDate = new Date().toLocaleDateString();
     this.lineItems = [];
   }
@@ -49,8 +49,7 @@ export class Invoice {
 
 
   getLaborAmount(): number{
-    //return Number(this.laborHours) * Number(this.LABOR_RATE);
-    return 0;
+    return Number(this.laborHours) * Number(this.LABOR_RATE);
   }
 
   getOrderDate(): string{
@@ -58,13 +57,12 @@ export class Invoice {
   }
 
   getTotal(): number{
-    //return Number(this.partsAmount) + Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
-    return 0;
+    return Number(this.partsAmount) + Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
   }
 
   clear() {
-    //this.partsAmount = 0;
-    //this.laborHours = 0;
+    this.partsAmount = 0;
+    this.laborHours = 0;
     this.lineItems = [];
   }
 
