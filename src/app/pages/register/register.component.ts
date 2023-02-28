@@ -41,8 +41,8 @@ export class RegisterComponent implements OnInit {
   contactForm: FormGroup = this.fb.group({
     firstName: [null, Validators.compose([Validators.required])],
     lastName: [null, Validators.compose([Validators.required])],
-    // phone number must be a valid format of (xxx) xxx-xxxx and have 10 digits
-    phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^\\(\\d{3}\\)\\s\\d{3}-\\d{4}$')])],
+    // phone number must be a valid format of xxx-xxx-xxxx and have 10 digits
+    phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')])],
     address: [null, Validators.compose([Validators.required])],
     // zip code must be a valid format of xxxxx or xxxxx-xxxx and have 5 digits
     zip: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')])],
