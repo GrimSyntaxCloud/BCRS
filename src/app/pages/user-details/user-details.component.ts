@@ -72,9 +72,6 @@ export class UserDetailsComponent implements OnInit {
 
         console.log(this.user);
 
-        // this.userId = this.userId ?? '';
-        // console.log('oncomplete: ' + "userID: " + this.userId);
-
         this.roleService.findAllRoles().subscribe({
           next: (res) => {
             this.roles = res.data;
