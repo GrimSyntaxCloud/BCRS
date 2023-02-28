@@ -16,7 +16,7 @@ import { Product } from '../models/product.interface';
 export class ProductService {
 
   // define products and descriptions types as array
-  products: Array<any>
+  products: Product[];
   descriptions!: Array<any>
 
   constructor() {
@@ -26,49 +26,49 @@ export class ProductService {
        {
       id:100,
       title: 'Password Reset',
-      price:'39.99',
+      price: 39.99,
       descriptions: ["Unlimited password reset per year", "Remote service", "24/7 Support"],
       // laborFee:'30.00'
     },
        {
       id:101,
       title: 'Spyware Removal',
-      price:'99.99',
+      price: 99.99,
       descriptions: ["Unlimited spyware removal per year", "Remote service", "24/7 Support"],
       // laborFee:'50.00'
     },
     {
       id:102,
       title: 'RAM Upgrade',
-      price:'129.99',
+      price: 129.99,
       descriptions: ["Three times per year", "Free drop-off service", "24/7 Support"],
       // laborFee:'50.00'
     },
     {
       id:103,
       title: 'Software Installation',
-      price:'49.99',
+      price: 49.99,
       descriptions: ["Unlimited software installation per year", "Remote service", "24/7 Support"],
       // laborFee:'30.00'
     },
      {
       id:104,
       title: 'PC Tune-up',
-      price:'89.99',
+      price: 89.99,
       descriptions: ["10 times per year", "Remote or free drop-off service", "24/7 Support"],
       // laborFee:'50.00'
        },
       {
       id:105,
       title: 'Keyboard Cleaning',
-      price:'45.00',
+      price: 45.00,
       descriptions: ["Unlimited keyboard cleaning per year", "Free drop-off service", "24/7 Support"],
       // laborFee:'30.00'
        },
        {
       id:106,
       title: 'Disk Clean-up',
-      price:'149.99',
+      price: 149.99,
       descriptions: ["Unlimited disk clean-up per year", "Free drop-off service ", "24/7 Support"],
       // laborFee:'50.00'
       },
