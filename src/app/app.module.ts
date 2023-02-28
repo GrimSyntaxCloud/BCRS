@@ -70,6 +70,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
+import { InvoiceSummaryDialogComponent } from './shared/invoice-summary-dialog/invoice-summary-dialog.component';
 // import { Chart } from 'chart.js';
 
 @NgModule({
@@ -99,6 +100,7 @@ import { RoleDetailsComponent } from './pages/role-details/role-details.componen
     CartComponent,
     RoleListComponent,
     RoleDetailsComponent,
+    InvoiceSummaryDialogComponent
   ],
   imports: [
      // Angular Materials

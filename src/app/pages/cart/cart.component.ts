@@ -42,7 +42,7 @@ export class CartComponent implements OnInit {
 
   // getUsername service
   // getUsername(): string {
-  //   return this.usernam
+  //   return this.username
   // }
 
     // setLineItems service
