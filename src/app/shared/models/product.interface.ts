@@ -8,9 +8,8 @@ Description: product interface
 */
 
 export interface Product {
-    id: number;
-    title: string;
-    price: number;
+  id: number;
+  title: string;
+  price: number;
   descriptions: [];
-  laborFee: number;
 }
