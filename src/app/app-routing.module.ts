@@ -115,6 +115,11 @@ const routes: Routes = [
         path: 'graph',
         component: PurchasesByServiceGraphComponent,
         canActivate: [AuthGuard] // for logged in user
+      },
+      {
+        path: 'cart/:userName',
+        component: CartComponent,
+        canActivate: [AuthGuard] // for logged in user
       }
     ],
   },
