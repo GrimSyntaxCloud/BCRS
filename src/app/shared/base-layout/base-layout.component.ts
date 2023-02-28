@@ -20,13 +20,10 @@ import { CartService } from '../services/cart.service';
 })
 export class BaseLayoutComponent implements OnInit {
 
-
-
-
-
   year: number = Date.now();
 
   sessionUserName: string;
+
 
   constructor(
     private cookieService: CookieService,
@@ -35,7 +32,6 @@ export class BaseLayoutComponent implements OnInit {
   ) {
      // from login component
     this.sessionUserName = this.cookieService.get('sessionuser');
-
 
     this.year = Date.now();
   }
