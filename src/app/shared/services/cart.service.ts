@@ -12,38 +12,34 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductService } from './product.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  // this stores the items in the shopping cart
   items: Product[] = [];
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   // one product only can be added to the shopping cart once
   addToCart(product: Product) {
-    let alreadyAdded = false;
-    // loop over products to search if the product has already been added to the shopping cart
-    // if find the product has already been added to the shopping cart, then stop the search
-      for (let item of this.items) {
-        if (item.id === product.id) {
-          alreadyAdded = true;
-        break;
-        }
-      }
-    // if the product has not been added to the shopping cart, then push the product to the shopping cart
-    if (!alreadyAdded) {
-      this.items.push(product);
+    if (this.items.includes(product)) {
+      return this.items;
     }
-    return !alreadyAdded;
+    else {
+      this.items.push(product);
+     console.log(this.items);
+      return this.items;
+    }
+
   }
 
   // get items for shopping cart
   getItems() {
-    return this.items;
+       return this.items;
   }
 
   // items count in shopping cart
@@ -63,7 +59,15 @@ export class CartService {
 
 // remove one product from shopping cart
 removeItemFromCart(product: Product) {
+  // remove the item from the cart cookie
+    this.items = JSON.parse(this.cookieService.get('cartItems'));
+
+    
   this.items = this.items.filter(item => item.id != product.id);
+  console.log('inside remove from cart', this.items);
+
+  // update the cart cookie with the new list
+  this.cookieService.set('cartItems', JSON.stringify(this.items));
   return this.items;
   }
 
