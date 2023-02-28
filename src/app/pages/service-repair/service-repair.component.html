@@ -9,82 +9,61 @@
 <div fxLayout="column" class="main-welcome">
   <h1 class="title">
     Our Service Repair<br />
-    <span class="subtitle"
-      >Premium service and 24/7 support will save your time and solve your
-      problems.</span
-    >
+    <span class="subtitle">Premium service and 24/7 support will save your time and solve your
+      problems.</span>
   </h1>
   <!-- container -->
-  <mat-card
-    style="
+  <mat-card style="
       width: 90%;
       margin-left: 5%;
       margin-right: 5%;
       margin-bottom: 100px;
       height: 100%;
-    "
-  >
+    ">
     <mat-card-content>
       <!-- three columns in a row -->
       <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'5px'">
         <!-- loop over cards in the grid list-->
         <mat-grid-tile *ngFor="let product of products">
           <!-- card for contains service repair information  -->
-          <mat-card
-            style="
+          <mat-card style="
               background-color: #f2f2f2;
               border-style: solid;
               border-color: #8492a6;
               width: 280px;
-            "
-          >
-            <mat-card-header style="display: block; text-align: center"
-              ><h2>{{ product.title }}</h2></mat-card-header
-            >
+            ">
+            <mat-card-header style="display: block; text-align: center">
+              <h2>{{ product.title }}</h2>
+            </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content>
-              <div
-                style="
+              <div style="
                   margin-left: 30%;
                   margin-right: 40%;
                   margin-top: 20px;
                   display: flex;
-                "
-              >
-                <mat-icon style="overflow: visible; margin-top: 7px"
-                  >attach_money</mat-icon
-                >
+                ">
+                <mat-icon style="overflow: visible; margin-top: 7px">attach_money</mat-icon>
                 <h2 style="margin-top: 7px">{{ product.price }}</h2>
               </div>
 
               <div>
                 <!-- loop over descriptions with different contents  -->
-                <p
-                  *ngFor="let item of product.descriptions;"
-                  style="text-align: center"
-                >
+                <p *ngFor="let item of product.descriptions;" style="text-align: center">
                   {{ item }}
                 </p>
               </div>
             </mat-card-content>
             <!-- Choose button will show up when session user login  -->
             <mat-divider *ngIf="sessionUserName"></mat-divider>
-            <mat-card-footer
-              style="height: 50px; margin: 0px"
-              *ngIf="sessionUserName"
-            >
-              <mat-card-actions
-                style="
+            <mat-card-footer style="height: 50px; margin: 0px" *ngIf="sessionUserName">
+              <mat-card-actions style="
                   padding: 15px 0;
                   margin-left: 0;
                   margin-right: 0;
                   text-align: center;
-                "
-              >
-                <button
-                  (click)="addToCart(product)"
-                  mat-button
-                  style="
+                ">
+                <button (click)="addToCart(product)" mat-button style="
                     background-color: #ffb834;
                     border-radius: 5px;
                     color: white;
@@ -92,8 +71,7 @@
                     align-items: center;
                     margin-left: 0;
                     margin-right: 0;
-                  "
-                >
+                  ">
                   Choose
                 </button>
               </mat-card-actions>
