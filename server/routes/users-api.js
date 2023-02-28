@@ -205,9 +205,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Add api for findUserByUsername
-// router.get('/users/:userName', async(req, res) =>  {
-// })
 
 /**
  * API: http://localhost:3000/api/users/{id}
@@ -224,7 +221,7 @@ router.get("/:id", async (req, res) => {
  *      parameters:
  *          - name: id
  *            in: path
- *            description: the id of the employee to update
+ *            description: the id of the user to update
  *            required: true
  *            schema:
  *              type: string
@@ -234,8 +231,6 @@ router.get("/:id", async (req, res) => {
  *            application/json:
  *              schema:
  *                properties:
- *                  password:
- *                    type: string
  *                  firstName:
  *                    type: string
  *                  lastName:
@@ -271,13 +266,10 @@ router.put("/:id", async (req, res) => {
       } else {
         console.log(user);
 
-        let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
-
 
         user.set({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          password: hashedPassword,
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
