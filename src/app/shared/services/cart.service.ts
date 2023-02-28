@@ -12,7 +12,6 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LineItem } from '../models/line-item.interface';
 import { ProductService } from './product.service';
 
 @Injectable({
@@ -21,17 +20,8 @@ import { ProductService } from './product.service';
 export class CartService {
 
   items: Product[] = [];
-  //lineItems = Array<LineItem>;
 
-
-
-  constructor(
-   // private lineItems: LineItem[],
-    private ProductService: ProductService
-
-  ) {
-    //this.lineItems = [];
-  }
+  constructor() { }
 
   // one product only can be added to the shopping cart once
   addToCart(product: Product) {
@@ -61,33 +51,11 @@ export class CartService {
     return this.items.length;
   }
 
-
-  // setLineItems service / ?
-  // setLineItems(lineItems: LineItem[]): void {
-  //   lineItems = lineItems;
-  // }
-
-   // getLineItems service
-  // getLineItems(): LineItem[] {
-  //   return this.lineItems;
-  // }
-
-  // getLineItemTotal service
-  // getLineItemTotal(): number {
-  //   let lineItemTotal: number = 0;
-
-  //   for (let lineItem of this.products) {
-  //     lineItemTotal += lineItem.price;
-  //   }
-  //   return Number(lineItemTotal);
-  // }
-
-
   // calculate the total cost of the order by adding up the each product price and labor fee
   getSubtotal(): any{
     let subTotal: number = 0;
     for (let item of this.items) {
-      subTotal += Number(item.price) + Number(item.laborFee);
+      subTotal += Number(item.price);
     }
     return Number(subTotal);
  }
