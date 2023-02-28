@@ -55,6 +55,17 @@ export class CartComponent implements OnInit {
   }
 
 
+  // getUsername service
+  // getUsername(): string {
+  //   return this.username
+  // }
+
+    // setLineItems service
+  setLineItems(lineItems: LineItem[]): void {
+    //this.lineItems = lineItems;
+  }
+
+
 
  // remove items from ths shopping cart, then re-calculate the subtotal for the order
   removeItemFromCart(item: Product) {
