@@ -10,7 +10,7 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
 
 -->
 
-<ng-container *ngIf="itemCount() > 0">
+<ng-container>
   <mat-card style="
       width: 60%;
       margin-top: 70px;
@@ -73,6 +73,7 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
             margin-right: 5%;
             margin-top: 10px;
           ">
+          <!-- standard fees -->
           <div class="fees-list">
             <div>
               <p style="font-weight: bold">Standard Fees:</p>
@@ -86,10 +87,6 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
                   {{ item.title }}
                   <mat-divider></mat-divider>
                 </div>
-                <!-- <div style="width: 300px; text-align: left; font-family: Lato">
-                  {{ item.laborFee | currency }}
-                  <mat-divider></mat-divider>
-                </div> -->
               </li>
             </ul>
           </div>
