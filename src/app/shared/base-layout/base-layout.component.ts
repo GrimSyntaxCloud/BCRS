@@ -23,7 +23,8 @@ export class BaseLayoutComponent implements OnInit {
   year: number = Date.now();
 
   sessionUserName: string;
-
+  sessionUserCart: string;
+  sessionUserCartCount: number;
 
   constructor(
     private cookieService: CookieService,
@@ -32,6 +33,10 @@ export class BaseLayoutComponent implements OnInit {
   ) {
      // from login component
     this.sessionUserName = this.cookieService.get('sessionuser');
+
+    // from cart component
+    this.sessionUserCart = this.cookieService.get('cartItems');
+    this.sessionUserCartCount = Number(this.cookieService.get('cartCount'));
 
     this.year = Date.now();
   }
