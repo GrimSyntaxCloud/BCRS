@@ -34,6 +34,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 import { PurchasesByServiceGraphComponent } from './pages/purchases-by-service-graph/purchases-by-service-graph.component';
+import { InvoiceSummaryDialogComponent } from './shared/invoice-summary-dialog/invoice-summary-dialog.component';
+
+
 
 /**
  * TODO:
@@ -55,8 +58,9 @@ const routes: Routes = [
         component: ServiceRepairComponent
       },
       {
-        path: 'cart',
-        component: CartComponent
+        path: 'cart/:userName',
+        component: CartComponent,
+        canActivate: [AuthGuard] // for logged in user
       },
       {
         path: 'contact',
@@ -134,6 +138,10 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ResetPasswordFormComponent,
+      },
+      {
+        path: 'invoices/:userName',
+        component: InvoiceSummaryDialogComponent,
       },
       {
         path: 'not-found',
