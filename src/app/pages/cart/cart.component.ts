@@ -55,18 +55,6 @@ export class CartComponent implements OnInit {
   }
 
 
-  // getUsername service
-  // getUsername(): string {
-  //   return this.username
-  // }
-
-    // setLineItems service
-  setLineItems(lineItems: LineItem[]): void {
-    //this.lineItems = lineItems;
-  }
-
-
-
  // remove items from ths shopping cart, then re-calculate the subtotal for the order
   removeItemFromCart(item: Product) {
     this.items = this.cartService.removeItemFromCart(item);
@@ -78,14 +66,8 @@ export class CartComponent implements OnInit {
   // itemCount function to count every item is in the shopping cart.
    itemCount(){
     return this.cartService.itemsCount();
-
    }
 
-  // place order to generate invoice
-//  placeOrder(): void {
-//     console.log("place order in cart component");
-//     this.invoiceService.placeOrder(this.items);
-//   }
 
 generateInvoice() {
   console.log('generateInvoice() this.invoice');
