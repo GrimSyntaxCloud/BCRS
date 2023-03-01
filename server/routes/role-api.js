@@ -58,7 +58,7 @@ router.get("/", async (req, res) => {
           );
           res.json(findAllRolesResponse.toObject());
         }
-      });
+      })
   } catch (e) {
     console.log(e);
     const findAllRolesCatchErrorResponse = new ErrorResponse(

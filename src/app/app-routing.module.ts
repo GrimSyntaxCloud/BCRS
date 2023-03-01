@@ -74,7 +74,7 @@ const routes: Routes = [
       {
         path: 'users',
         component: UserListComponent,
-        canActivate: [AuthGuard] // for logged in user
+        canActivate: [RoleGuard] // for logged in user
       },
       {
         path: 'users/create/new',
@@ -105,7 +105,7 @@ const routes: Routes = [
       {
         path: 'roles',
         component: RoleListComponent,
-        canActivate: [AuthGuard] // for logged in user
+        canActivate: [RoleGuard] // for logged in user
       },
       {
         path: 'roles/:roleId',
