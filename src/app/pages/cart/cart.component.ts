@@ -11,16 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { InvoiceSummaryDialogComponent } from 'src/app/shared/invoice-summary-dialog/invoice-summary-dialog.component';
 
 
-/**
- * TODO:
- * 1. prevent the data from clearing when the user refreshes the page
- *  - pages that need to be fixed: cart component and cart service.
- * 2. When the user submits the order, the cart should be cleared.
- *  - the cookies should be reset to empty.
- *  - the user should be redirected to the services page.
- */
-
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -48,6 +38,7 @@ export class CartComponent implements OnInit {
   ) {
 
     this.username = this.cookieService.get('sessionuser') || '';
+    // get the cart items from the cookie and parse them to JSON
     this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
     this.invoice = {} as Invoice;
     this.errorMessages = [];
@@ -59,7 +50,6 @@ export class CartComponent implements OnInit {
     this.yourSubtotal = this.cartService.getSubtotal();
 
     this.invoice = new Invoice(this.username);
-    console.log(this.items, 'hi');
   }
 
   ngOnInit(): void {
@@ -108,6 +98,12 @@ export class CartComponent implements OnInit {
               console.log('invoice created');
               this.clearLineItems();
               this.invoice.clear();
+              //delete cookies
+              this.cookieService.delete('cartItems');
+              this.cookieService.delete('cartCount');
+              this.items = [];
+              // refresh the page then navigate to the service repair page
+              this.router.navigate(['/service-repair']).then(() => { window.location.reload() });
               this.successMessages = [
                 { severity: 'success', summary: 'Service Repair Invoice Created', detail: 'Your order has been processed successfully.' }
               ]
