@@ -1,3 +1,13 @@
+/*
+Title: role.guard.ts
+Author: Professor Krasso
+Updated Date: 02/25/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: manage roles
+*/
+
+
+
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, Observable } from 'rxjs';

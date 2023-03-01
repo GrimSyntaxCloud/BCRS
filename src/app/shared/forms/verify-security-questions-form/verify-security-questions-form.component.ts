@@ -49,7 +49,7 @@ export class VerifySecurityQuestionsFormComponent implements OnInit {
     this.errorMessages = [];
     this.verifySecurityQuestionsModel = {} as VerifySecurityQuestionModel;
     this.selectedSecurityQuestions = [];
-
+      // findSelectedSecurityQuestions from userService
     this.userService.findSelectedSecurityQuestions(this.username).subscribe({
       next: (res) => {
         this.selectedSecurityQuestions = res.data;
@@ -72,7 +72,7 @@ export class VerifySecurityQuestionsFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+// function verifySecurityQuestions for
   verifySecurityQuestions() {
     this.verifySecurityQuestionsModel.answerToQuestion1 = this.form.controls['answerToSecurityQuestion1'].value;
     this.verifySecurityQuestionsModel.answerToQuestion2 = this.form.controls['answerToSecurityQuestion2'].value;

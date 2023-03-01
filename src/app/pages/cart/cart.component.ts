@@ -1,3 +1,12 @@
+/*
+ Title: cart.component.ts
+ Author: Professor Krasso
+ Updated Date: 02/21/2023
+ Modified By: Andres Macias/Patrick Wolff/April Yang
+ Description: shopping cart page component
+ */
+
+
 import { Component, OnInit } from '@angular/core';
 import { LineItem } from 'src/app/shared/models/line-item.interface';
 import { CartService } from 'src/app/shared/services/cart.service';
@@ -69,6 +78,7 @@ export class CartComponent implements OnInit {
    }
 
 
+// function generateInvoice work for Generate Invoice button to open the invoice dialog
 generateInvoice() {
   console.log('generateInvoice() this.invoice');
   console.log(this.invoice);

@@ -1,3 +1,11 @@
+/*
+Title: main.ts
+Author: Professor Krasso
+Date: 02/12/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: app main component
+*/
+
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 

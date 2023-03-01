@@ -7,7 +7,11 @@ Description: Invoice model
 */
 
 // import line-item.interface
+import { CartService } from "../services/cart.service";
+import { ProductService } from "../services/product.service";
 import { LineItem } from "./line-item.interface";
+import { Product } from "./product.interface";
+
 
 export class Invoice {
   private username: string;
@@ -24,6 +28,7 @@ export class Invoice {
     this.laborHours = laborHours || 0;
     this.orderDate = new Date().toLocaleDateString();
     this.lineItems = [];
+
   }
 
   getUsername(): string{
@@ -38,7 +43,7 @@ export class Invoice {
     return this.lineItems;
   }
 
-  // called in shopping cart for
+  // called in shopping cart for lineItem total price
   getLineItemTotal(): number{
     let total: number = 0;
     for (let lineItem of this.lineItems) {

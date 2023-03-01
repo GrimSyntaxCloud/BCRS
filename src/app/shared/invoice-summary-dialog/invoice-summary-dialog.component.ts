@@ -1,3 +1,11 @@
+/*
+Title: invoice-summary-dialog.component.ts
+Author: Professor Krasso
+Date: 02/20/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: invoice-summary-dialog component
+*/
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Invoice } from '../models/invoice';
