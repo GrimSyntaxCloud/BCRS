@@ -28,7 +28,6 @@ export class ServiceRepairComponent implements OnInit {
   // descriptions!: Array<any>
   username: string;
   products: Product[]; //this is the items in the cart
-  currentCount: number;
   errorMessages: Message[];
   successMessages: Message[];
 
@@ -45,7 +44,6 @@ export class ServiceRepairComponent implements OnInit {
     this.products = [];
     this.errorMessages = [];
     this.successMessages = [];
-    this.currentCount = Number(this.cookieService.get('cartCount') || 0);
 
     // only session user can add product to the shopping cart
     this.sessionUserName = this.cookieService.get('sessionuser');
@@ -55,15 +53,7 @@ export class ServiceRepairComponent implements OnInit {
 
   // the product only can be added to the shopping cart once with alert messages
   addToCart(product: Product) {
-    this.currentCount = this.cartService.itemsCount() + 1;
 
-
-    //set cookie for the cart items
-    this.cookieService.set('cartItems', JSON.stringify(this.cartService.addToCart(product)), 1);
-    //set cookie for the cart count
-    this.cookieService.set('cartCount', JSON.stringify(this.currentCount), 1);
-
-    // used to add the product to the shopping cart
     this.cartService.addToCart(product);
   }
 
