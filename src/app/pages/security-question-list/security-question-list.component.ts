@@ -29,7 +29,7 @@ export class SecurityQuestionListComponent implements OnInit {
     private fb: FormBuilder) {
 
     this.securityQuestions = [];
-
+     // findAllSecurityQuestions from securityQuestionService
     this.securityQuestionService.findAllSecurityQuestions().subscribe({
       next: (res) => {
         this.securityQuestions = res.data;
@@ -43,6 +43,7 @@ export class SecurityQuestionListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // function for createSecurityQuestion
   create(): void {
     const sqText = this.sqForm.controls['text'].value;
 
@@ -63,6 +64,7 @@ export class SecurityQuestionListComponent implements OnInit {
     })
   }
 
+  // function for deleteSecurityQuestion by id
   delete(sqId: string): void{
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this record?',

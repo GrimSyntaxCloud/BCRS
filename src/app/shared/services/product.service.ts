@@ -29,6 +29,7 @@ export class ProductService {
       price: 39.99,
       descriptions: ["Unlimited password reset per year", "Remote service", "24/7 Support"],
       // laborFee:'30.00'
+      laborHours:'1'
     },
        {
       id:101,
@@ -36,6 +37,7 @@ export class ProductService {
       price: 99.99,
       descriptions: ["Unlimited spyware removal per year", "Remote service", "24/7 Support"],
       // laborFee:'50.00'
+      laborHours:'2'
     },
     {
       id:102,
@@ -43,6 +45,7 @@ export class ProductService {
       price: 129.99,
       descriptions: ["Three times per year", "Free drop-off service", "24/7 Support"],
       // laborFee:'50.00'
+      laborHours:'2'
     },
     {
       id:103,
@@ -50,6 +53,7 @@ export class ProductService {
       price: 49.99,
       descriptions: ["Unlimited software installation per year", "Remote service", "24/7 Support"],
       // laborFee:'30.00'
+      laborHours:'1'
     },
      {
       id:104,
@@ -57,6 +61,7 @@ export class ProductService {
       price: 89.99,
       descriptions: ["10 times per year", "Remote or free drop-off service", "24/7 Support"],
       // laborFee:'50.00'
+      laborHours:'2'
        },
       {
       id:105,
@@ -64,6 +69,7 @@ export class ProductService {
       price: 45.00,
       descriptions: ["Unlimited keyboard cleaning per year", "Free drop-off service", "24/7 Support"],
       // laborFee:'30.00'
+      laborHours:'1'
        },
        {
       id:106,
@@ -71,6 +77,7 @@ export class ProductService {
       price: 149.99,
       descriptions: ["Unlimited disk clean-up per year", "Free drop-off service ", "24/7 Support"],
       // laborFee:'50.00'
+      laborHours:'2'
       },
   ];
   }

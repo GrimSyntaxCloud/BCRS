@@ -6,52 +6,59 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Displays invoice for customer
 -->
 
+<!-- main container -->
 <div fxLayout="column">
+  <!-- begin card container -->
   <mat-card class="mat-elevation-z0">
-    <mat-card-title mat-dialog-title style="text-align: center;">
+    <mat-card-title mat-dialog-title style="text-align: center">
       {{ username }} please confirm your order
     </mat-card-title>
-    <mat-card-subtitle style="text-align: center;">
+    <mat-card-subtitle style="text-align: center">
       Order date: {{ orderDate | date }}
     </mat-card-subtitle>
 
     <mat-card-content mat-dialog-content>
-
       <div fxLayout="column" fxLayoutGap="10px">
-
         <div fxFlex>
+          <!-- start card container -->
           <mat-card>
             <mat-card-title>Services</mat-card-title>
             <mat-card-content>
+              <!-- for loop lineItem, display lineItem title and price -->
               <div *ngFor="let lineItem of invoice.getLineItems()">
                 <mat-list>
                   <mat-list-item>
-                    {{lineItem.title}}:
+                    {{ lineItem.title }}:
                     <div fxFlex></div>
-                    {{lineItem.price | currency}}
+                    {{ lineItem.price | currency }}
                   </mat-list-item>
                 </mat-list>
               </div>
             </mat-card-content>
           </mat-card>
+          <!-- end card container -->
         </div>
 
         <div fxFlex>
+          <!-- begin card container -->
           <mat-card>
             <mat-card-title>Standard Fees</mat-card-title>
             <mat-card-content>
               <mat-list>
-                <mat-list-item>
-                  Labor @ 50/hr:
+                <mat-list-item *ngFor="let lineItem of invoice.getLineItems()">
+                  Labor ({{ lineItem.title }}): {{ lineItem.laborHours }} hours
+                  @ 50/hr:
                   <div fxFlex></div>
-                  {{ labor | currency }}
+                  {{ lineItem.laborHours * 50 | currency }}
                 </mat-list-item>
               </mat-list>
             </mat-card-content>
           </mat-card>
+          <!-- end card container -->
         </div>
 
         <div fxFlex>
+          <!-- begin card container -->
           <mat-card>
             <mat-card-content>
               <mat-list>
@@ -63,15 +70,19 @@ Description: Displays invoice for customer
               </mat-list>
             </mat-card-content>
           </mat-card>
+          <!-- end card container -->
         </div>
 
         <br />
       </div>
     </mat-card-content>
   </mat-card>
+  <!-- end card container -->
 </div>
 
 <div mat-dialog-actions align="end">
   <button mat-raised-button matDialogClose="cancel">Cancel</button>
-  <button mat-raised-button color="primary" matDialogClose="confirm">confirm Order</button>
+  <button mat-raised-button color="primary" matDialogClose="confirm">
+    confirm Order
+  </button>
 </div>

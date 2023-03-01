@@ -39,6 +39,7 @@ export class SecurityQuestionDetailsComponent implements OnInit {
     this.errorMessage = [];
     this.questionId = this.route.snapshot.paramMap.get('questionId') ?? '';
 
+    // findSecurityQuestionById from securityQuestionService
     this.securityQuestionService.findSecurityQuestionById(this.questionId).subscribe({
       next: (res) => {
         this.question = res.data;
@@ -56,6 +57,7 @@ export class SecurityQuestionDetailsComponent implements OnInit {
   }
 
 
+  // save updatedSecurityQuestion into securityQuestionService
   save(): void {
     const updatedSecurityQuestion: SecurityQuestion = {
       text: this.editForm.controls['text'].value

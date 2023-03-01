@@ -1,3 +1,11 @@
+/*
+ Title: purchases-by-service.component.ts
+ Author: Professor Krasso
+ Date: 02/25/2023
+ Modified By: Andres Macias/Patrick Wolff/April Yang
+ Description: purchases-by-service page component
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 

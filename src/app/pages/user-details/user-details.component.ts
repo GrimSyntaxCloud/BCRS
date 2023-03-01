@@ -43,7 +43,6 @@ export class UserDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private confirmationService: ConfirmationService,
     private roleService: RoleService
   ) {
 
@@ -79,9 +78,7 @@ export class UserDetailsComponent implements OnInit {
           error: (e) => {
             console.log(e);
           }
-
         })
-
       }
     })
   }

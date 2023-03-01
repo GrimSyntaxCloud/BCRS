@@ -65,6 +65,7 @@ export class CartComponent implements OnInit {
   }
 
 
+// function generateInvoice work for Generate Invoice button to open the invoice dialog
   generateInvoice() {
     console.log('generateInvoice() this.invoice');
     console.log(this.invoice);

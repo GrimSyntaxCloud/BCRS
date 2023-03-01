@@ -37,6 +37,7 @@ export class VerifyUsernameFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // verifyUsername by sessionService
   verifyUser() {
     const username = this.form.controls['username'].value;
 

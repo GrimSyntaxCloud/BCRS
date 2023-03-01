@@ -11,5 +11,6 @@ export interface Product {
   id: number;
   title: string;
   price: number;
+  laborHours: number;
   descriptions: Array<string>;
 }
