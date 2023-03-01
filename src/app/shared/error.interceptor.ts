@@ -1,3 +1,12 @@
+/*
+Title: error.interceptor.ts
+Author: Professor Krasso
+Updated Date: 02/10/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: error interceptor for display 404 and 500 error pages
+*/
+
+
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,

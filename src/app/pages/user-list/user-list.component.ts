@@ -36,6 +36,7 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // delete user by id
   delete(userId: string) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this user record?',

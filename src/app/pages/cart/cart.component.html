@@ -1,16 +1,14 @@
-<!-- https://www.youtube.com/watch?v=855KrFfF9-w
- https://medium.com/@moshevilner/creating-shopping-cart-using-angular8-c6a5d4a0f0b3
- https://angular.io/start/start-forms
- https://angular.io/start
-
-
-https://www.youtube.com/watch?v=W7X9YcJn1Jw
-
-https://www.youtube.com/watch?v=d_G0cs1G1Hs
-
+<!--
+Title: cart.component.html
+Author: Professor Krasso
+Date: 02/21/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: shopping cart page template
+Reference: https://www.youtube.com/watch?v=d_G0cs1G1Hs
+https://angular.io/start
 -->
 
-<ng-container *ngIf="itemCount() > 0">
+<ng-container>
   <mat-card style="
       width: 60%;
       margin-top: 70px;
@@ -19,19 +17,24 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
       margin-bottom: 100px;
       height: 50%;
       padding: 0px;
-    ">
-    <mat-card-header style="
+    "
+  >
+    <mat-card-header
+      style="
         background-color: #740001;
         display: block;
         text-align: center;
         height: 50px;
-      ">
-      <h1 style="
+      "
+    >
+      <h1
+        style="
           color: white;
           margin-bottom: 0px;
           padding-top: 5px;
           padding-bottom: 5px;
-        ">
+        "
+      >
         Your Service Repair Orders
       </h1>
     </mat-card-header>
@@ -39,15 +42,20 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
     <mat-card style="margin-bottom: 30px">
       <mat-card-content>
         <!-- first card -->
-        <mat-card style="
+        <mat-card
+          style="
             width: 90%;
             margin-left: 5%;
             margin-right: 5%;
             margin-top: 10px;
-          ">
+          "
+        >
           <div class="cart-item">
             <ul style="text-align: center; padding: 0px; margin-left: 20px">
-              <li *ngFor="let item of items" style="display: flex; align-items: center">
+              <li
+                *ngFor="let item of items"
+                style="display: flex; align-items: center"
+              >
                 <div style="width: 300px; text-align: left; font-family: Lato">
                   {{ item.title }}
                   <mat-divider></mat-divider>
@@ -57,7 +65,11 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
                   <mat-divider></mat-divider>
                 </div>
                 <div>
-                  <button mat-icon-button (click)="removeItemFromCart(item)" style="color: #e40002; text-align: left">
+                  <button
+                    mat-icon-button
+                    (click)="removeItemFromCart(item)"
+                    style="color: #e40002; text-align: left"
+                  >
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
@@ -67,12 +79,14 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
         </mat-card>
         <!-- end first card -->
         <!-- second card  -->
-        <mat-card style="
+        <mat-card
+          style="
             width: 90%;
             margin-left: 5%;
             margin-right: 5%;
             margin-top: 10px;
           ">
+          <!-- standard fees -->
           <div class="fees-list">
             <div>
               <p style="font-weight: bold">Standard Fees:</p>
@@ -81,28 +95,29 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
               <p>Labor Fee (one time charge):</p>
             </div>
             <ul>
-              <li *ngFor="let item of items" style="display: flex; align-items: center">
+              <li
+                *ngFor="let item of items"
+                style="display: flex; align-items: center"
+              >
                 <div style="width: 300px; text-align: left; font-family: Lato">
                   {{ item.title }}
                   <mat-divider></mat-divider>
                 </div>
-                <!-- <div style="width: 300px; text-align: left; font-family: Lato">
-                  {{ item.laborFee | currency }}
-                  <mat-divider></mat-divider>
-                </div> -->
               </li>
             </ul>
           </div>
         </mat-card>
         <!-- end second card -->
         <!-- third card -->
-        <mat-card style="
+        <mat-card
+          style="
             width: 90%;
             margin-left: 5%;
             margin-right: 5%;
             margin-top: 10px;
             margin-bottom: 30px;
-          ">
+          "
+        >
           <div class="subtotal">
             <div style="display: flex; align-items: center">
               <p style="font-weight: bold; width: 550px">Your subtotal:</p>
@@ -116,13 +131,17 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
           </div>
 
           <!-- place order button -->
-          <mat-card-actions style="
+          <mat-card-actions
+            style="
               padding: 15px 0;
               margin-left: 0;
               margin-right: 0;
               text-align: right;
-            ">
-            <button mat-button style="
+            "
+          >
+            <button
+              mat-button
+              style="
                 background-color: #ffb834;
                 border-radius: 5px;
                 color: white;
@@ -130,7 +149,9 @@ https://www.youtube.com/watch?v=d_G0cs1G1Hs
                 align-items: center;
                 margin-left: 0;
                 margin-right: 0;
-              " (click)="generateInvoice()">
+              "
+              (click)="generateInvoice()"
+            >
               Generate Invoice
             </button>
           </mat-card-actions>

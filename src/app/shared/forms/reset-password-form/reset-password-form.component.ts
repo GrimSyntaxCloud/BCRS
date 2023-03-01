@@ -43,6 +43,7 @@ export class ResetPasswordFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // function updatePassword for sessionuser
   updatePassword() {
     const password = this.form.controls['password'].value;
 

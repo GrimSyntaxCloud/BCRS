@@ -40,7 +40,7 @@ const saltRounds = 10; // default salt rounds for hashing algorithm
  *       '501':
  *         description: MongoDB Exception
  */
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     User.find({})
       .where("isDisabled")
@@ -104,7 +104,7 @@ router.get("/", async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
 
@@ -173,7 +173,7 @@ router.post("/", async (req, res) => {
  *          description: MongoDB Exception
  */
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
@@ -205,9 +205,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Add api for findUserByUsername
-// router.get('/users/:userName', async(req, res) =>  {
-// })
 
 /**
  * API: http://localhost:3000/api/users/{id}
@@ -224,7 +221,7 @@ router.get("/:id", async (req, res) => {
  *      parameters:
  *          - name: id
  *            in: path
- *            description: the id of the employee to update
+ *            description: the id of the user to update
  *            required: true
  *            schema:
  *              type: string
@@ -234,8 +231,6 @@ router.get("/:id", async (req, res) => {
  *            application/json:
  *              schema:
  *                properties:
- *                  password:
- *                    type: string
  *                  firstName:
  *                    type: string
  *                  lastName:
@@ -257,9 +252,9 @@ router.get("/:id", async (req, res) => {
  *              description: MongoDB Exception
  */
 
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-    User.findOne({ _id: req.params.id }, function (err, user) {
+    User.findOne({ '_id': req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
         const updateUserByIdMongodbErrorResponse = new ErrorResponse(
@@ -271,13 +266,10 @@ router.put("/:id", async (req, res) => {
       } else {
         console.log(user);
 
-        let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash the password
-
 
         user.set({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          password: hashedPassword,
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
@@ -334,9 +326,9 @@ router.put("/:id", async (req, res) => {
  *              description: MongoDB Exception
  */
 
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
-    User.findOne({ _id: req.params.id }, function (err, user) {
+    User.findOne({ '_id': req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
         const deleteUserMongodbErrorResponse = new ErrorResponse(
@@ -466,7 +458,7 @@ router.delete("/deactivate/:userName", async (req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.get("/:userName/security-questions", async (req, res) => {
+router.get('/:userName/security-questions', async (req, res) => {
   try {
     // find a userName with security questions were saved in the database,  or return an error message
     User.findOne({ userName: req.params.userName }, function (err, user) {

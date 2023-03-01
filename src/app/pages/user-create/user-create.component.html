@@ -16,7 +16,7 @@ Description: Allows an Admin role to create a new user
 
     <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
 
-    <form [formGroup]="form" (ngSubmit)="createUser()" (keydown.ener)="$event.preventDefault()" style="width: 50%; margin: 0 auto;">
+    <form [formGroup]="form" (ngSubmit)="createUser()" (keydown.enter)="$event.preventDefault()" style="width: 50%; margin: 0 auto;">
         <mat-card-content>
             <div fxLayout="column" fxLayoutGap="10px">
                 <mat-form-field appearance="fill">

@@ -24,7 +24,6 @@ export class BaseLayoutComponent implements OnInit {
 
   sessionUserName: string;
 
-
   constructor(
     private cookieService: CookieService,
     private router: Router,
@@ -32,6 +31,7 @@ export class BaseLayoutComponent implements OnInit {
   ) {
      // from login component
     this.sessionUserName = this.cookieService.get('sessionuser');
+
 
     this.year = Date.now();
   }
@@ -47,7 +47,6 @@ export class BaseLayoutComponent implements OnInit {
 
   itemCount(){
     return this.cartService.itemsCount();
-
   }
 
 }

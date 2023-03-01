@@ -25,5 +25,5 @@ class ErrorResponse {
   }
 }
 
-// exports BaseResponse
+// exports ErrorResponse
 module.exports = ErrorResponse;

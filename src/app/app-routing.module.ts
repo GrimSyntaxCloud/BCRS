@@ -35,6 +35,7 @@ import { RoleListComponent } from './pages/role-list/role-list.component';
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 import { PurchasesByServiceGraphComponent } from './pages/purchases-by-service-graph/purchases-by-service-graph.component';
 import { InvoiceSummaryDialogComponent } from './shared/invoice-summary-dialog/invoice-summary-dialog.component';
+import { RoleGuard } from './shared/role.guard';
 
 
 
@@ -72,12 +73,19 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        component: UserListComponent
+        component: UserListComponent,
+        canActivate: [RoleGuard] // for logged in user
       },
       {
         path: 'users/create/new',
-        component: UserCreateComponent
+        component: UserCreateComponent,
+        canActivate: [AuthGuard] // for logged in user
       },
+      {
+        path: 'users/:userId',
+        component: UserDetailsComponent,
+        canActivate: [AuthGuard] // for logged in user
+        },
       {
         path: 'users/profile/:userName',
         component: ProfileComponent,
@@ -93,15 +101,11 @@ const routes: Routes = [
         component: SecurityQuestionDetailsComponent,
         canActivate: [AuthGuard]  // for logged in user
       },
-      {
-      path: 'users/:userId',
-      component: UserDetailsComponent,
-      canActivate: [AuthGuard] // for logged in user
-      },
+
       {
         path: 'roles',
         component: RoleListComponent,
-        canActivate: [AuthGuard] // for logged in user
+        canActivate: [RoleGuard] // for logged in user
       },
       {
         path: 'roles/:roleId',
@@ -111,6 +115,11 @@ const routes: Routes = [
       {
         path: 'graph',
         component: PurchasesByServiceGraphComponent,
+        canActivate: [RoleGuard] // for logged in user
+      },
+      {
+        path: 'cart/:userName',
+        component: CartComponent,
         canActivate: [AuthGuard] // for logged in user
       }
     ],
