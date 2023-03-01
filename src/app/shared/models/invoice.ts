@@ -37,6 +37,10 @@ export class Invoice {
 
   setLineItems(lineItems: LineItem[]): void{
     this.lineItems = lineItems;
+    this.laborHours = 0;
+    for (let i = 0; i < lineItems.length; i++) {
+      this.laborHours += Number(lineItems[i].laborHours);
+    }
   }
 
   getLineItems(): LineItem[]{
@@ -47,7 +51,7 @@ export class Invoice {
   getLineItemTotal(): number{
     let total: number = 0;
     for (let lineItem of this.lineItems) {
-      total += lineItem.price;
+      total += Number(lineItem.price);
     }
     return Number(total);
   }
@@ -62,7 +66,7 @@ export class Invoice {
   }
 
   getTotal(): number{
-    return Number(this.partsAmount) + Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
+    return Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
   }
 
   clear() {
