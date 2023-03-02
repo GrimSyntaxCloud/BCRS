@@ -62,7 +62,9 @@ export class CartComponent implements OnInit {
     this.yourSubtotal = this.cartService.getSubtotal();
 
     return true;
-  }
+
+    }
+
 
 
 // function generateInvoice work for Generate Invoice button to open the invoice dialog
@@ -131,5 +133,19 @@ export class CartComponent implements OnInit {
   clearLineItems() {
     this.lineItems = [];
   }
+
+  itemCount(){
+    return this.cartService.itemsCount();
+
+  }
+
+  async clearCart() {
+    this.items = [];
+    // return this.items;
+    await this.router.navigate(['/service-repair']);
+    window.location.reload();
+  }
+
+
 
 }

@@ -13,6 +13,7 @@ import { Product } from '../models/product.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +23,18 @@ export class CartService {
   // this stores the items in the shopping cart
   items: Product[] = [];
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private router: Router) { }
 
   // one product only can be added to the shopping cart once
   addToCart(product: Product) {
     // check if the product is already in the cart and if so, do not add it again to the cart
     // if not, add the product to the cart
     if (this.items && this.items.length > 0 && this.items.find(item => item.id === product.id)) {
+      alert(product.title + ' is already in your shopping cart, please check it out.');
       return this.items;
     }
     else {
-      // alert(product.title + ' has been added to the cart');
+      alert(product.title + ' has been added to your shopping cart.');
       this.items.push(product);
       this.cookieService.set('cartItems', JSON.stringify(this.items));
       return this.items;
@@ -77,12 +79,14 @@ export class CartService {
     // update the cart cookie with the new list
     this.cookieService.set('cartItems', JSON.stringify(this.items));
 
-    return this.items;
+    return this.items
+
   }
 
-  clearCart() {
+ clearCart() {
     this.items = [];
     return this.items;
-  }
+ }
+
 
 }

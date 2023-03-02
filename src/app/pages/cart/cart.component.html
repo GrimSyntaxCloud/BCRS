@@ -8,8 +8,9 @@ Reference: https://www.youtube.com/watch?v=d_G0cs1G1Hs
 https://angular.io/start
 -->
 
-<ng-container>
-  <mat-card style="
+<ng-container *ngIf="itemCount() > 0 || clearCart()">
+  <mat-card
+    style="
       width: 60%;
       margin-top: 70px;
       margin-left: 20%;
@@ -85,7 +86,8 @@ https://angular.io/start
             margin-left: 5%;
             margin-right: 5%;
             margin-top: 10px;
-          ">
+          "
+        >
           <!-- standard fees -->
           <div class="fees-list">
             <div>
