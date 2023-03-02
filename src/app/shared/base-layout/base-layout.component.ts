@@ -32,6 +32,12 @@ export class BaseLayoutComponent implements OnInit {
      // from login component
     this.sessionUserName = this.cookieService.get('sessionuser');
 
+    // if the cart cookie exists, do nothing, otherwise, create an empty cart cookie
+    if (!this.cookieService.check('cartItems')) {
+      this.cookieService.set('cartItems', '[]', 5);
+    }
+
+
 
     this.year = Date.now();
   }
@@ -46,7 +52,8 @@ export class BaseLayoutComponent implements OnInit {
   }
 
   itemCount(){
-    return this.cartService.itemsCount();
+    let cartCount = JSON.parse(this.cookieService.get('cartItems')) || [];
+    return cartCount.length;
   }
 
 }
