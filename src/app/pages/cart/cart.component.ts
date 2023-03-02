@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
 
     this.username = this.cookieService.get('sessionuser') || '';
     // get the cart items from the cookie and parse them to JSON
-    this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
+    this.items = JSON.parse(this.cookieService.get('cartItems')) || '[]';
     this.invoice = {} as Invoice;
     this.errorMessages = [];
     this.successMessages = [];
@@ -60,8 +60,6 @@ export class CartComponent implements OnInit {
   removeItemFromCart(item: Product) {
     this.items = this.cartService.removeItemFromCart(item);
     this.yourSubtotal = this.cartService.getSubtotal();
-
-    return true;
 
     }
 
@@ -135,7 +133,8 @@ export class CartComponent implements OnInit {
   }
 
   itemCount(){
-    return this.cartService.itemsCount();
+    let cartCount = JSON.parse(this.cookieService.get('cartItems')) || '[]';
+    return cartCount.length;
 
   }
 
