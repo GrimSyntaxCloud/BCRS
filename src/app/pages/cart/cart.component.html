@@ -107,6 +107,24 @@ https://angular.io/start
                 </div>
               </li>
             </ul>
+            <!--**********************
+
+              section for adjusting labor fee and parts fee if the user has the role admin
+
+            *************************************-->
+            <div *ngIf="role === 'admin'">
+              <form [formGroup]="adjustedFeesForm" fxLayout="column" style="width: 30%">
+                <mat-form-field appearance="outline" fxFlex >
+                  <mat-label>Labor Fee Adjustment </mat-label>
+                    <input type="number" matInput formControlName="laborFee" >
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                  <mat-label>Parts Fee Adjustment</mat-label>
+                    <input type="number" matInput formControlName="partsFee">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="updateFees()">Adjust Fees</button>
+              </form>
+              </div>
           </div>
         </mat-card>
         <!-- end second card -->
