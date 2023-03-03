@@ -5,13 +5,20 @@ Date: 02/25/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: purchases-by-service page template
 -->
-
+<mat-card style="
+    width: 70%;
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-top: 30px;
+    margin-bottom: 150px;
+    background-color: #c0c0c0;
+  ">
 <div fxLayout="column" fxLayoutGap="20px">
   <div fxFlex>
     <h1>
       Welcome to the Purchases by Service Page!
       <br />
-      <span> You can hide or show items by selecting their label. </span>
+      <h3>You can hide or show items by selecting their label.</h3>
     </h1>
   </div>
 </div>
@@ -19,3 +26,4 @@ Description: purchases-by-service page template
 <div fxFlex>
   <p-chart height="450" width="450" type="pie" [data]="data"></p-chart>
 </div>
+</mat-card>

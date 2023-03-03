@@ -46,10 +46,20 @@ Description: Update Security Question
 
       <mat-card-actions align="end">
         <!-- cancel and save buttons -->
-        <button mat-raised-button (click)="cancel()" color="accent">
+        <button
+          mat-raised-button
+          (click)="cancel()"
+          style="background-color: #eeba30; color: white"
+        >
           Cancel
         </button>
-        <button mat-raised-button (click)="save()" color="primary">Save</button>
+        <button
+          mat-raised-button
+          (click)="save()"
+          style="background-color: #ae0001; color: white"
+        >
+          Save
+        </button>
       </mat-card-actions>
     </form>
   </mat-card>

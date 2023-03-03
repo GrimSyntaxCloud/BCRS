@@ -10,7 +10,10 @@ Description: Displays invoice for customer
 <div fxLayout="column">
   <!-- begin card container -->
   <mat-card class="mat-elevation-z0">
-    <mat-card-title mat-dialog-title style="text-align: center">
+    <mat-card-title
+      mat-dialog-title
+      style="text-align: center; background-color: #c0c0c0"
+    >
       {{ username }} please confirm your order
     </mat-card-title>
     <mat-card-subtitle style="text-align: center">
@@ -60,6 +63,30 @@ Description: Displays invoice for customer
         <div fxFlex>
           <!-- begin card container -->
           <mat-card>
+            <mat-card-title>Adjustments</mat-card-title>
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item>
+                  Labor: Extra hours @ 50/hr:
+                  <div fxFlex></div>
+                  {{adjustedLabor | currency}}
+                </mat-list-item>
+              </mat-list>
+              <mat-list>
+                <mat-list-item>
+                 Parts
+                  <div fxFlex></div>
+                  {{adjustedParts | currency}}
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
+          <!-- end card container -->
+        </div>
+
+        <div fxFlex>
+          <!-- begin card container -->
+          <mat-card>
             <mat-card-content>
               <mat-list>
                 <mat-list-item>
@@ -81,8 +108,18 @@ Description: Displays invoice for customer
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-raised-button matDialogClose="cancel">Cancel</button>
-  <button mat-raised-button color="primary" matDialogClose="confirm">
-    confirm Order
+  <button
+    mat-raised-button
+    matDialogClose="cancel"
+    style="background-color: #eeba30; color: white"
+  >
+    Cancel
+  </button>
+  <button
+    mat-raised-button
+    matDialogClose="confirm"
+    style="background-color: #e40002; color: white"
+  >
+    Confirm Order
   </button>
 </div>
