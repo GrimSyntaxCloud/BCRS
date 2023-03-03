@@ -22,12 +22,17 @@ export class Invoice {
   partsAmount: number;
   laborHours: number;
 
-  constructor(username?: string, partsAmount?: number, laborHours?: number) {
+  adjustedLabor: number;
+  adjustedParts: number;
+
+  constructor(username?: string, partsAmount?: number, laborHours?: number, adjustedParts?: number, adjustedLabor?: number) {
     this.username = username || '';
     this.partsAmount = partsAmount || 0;
     this.laborHours = laborHours || 0;
     this.orderDate = new Date().toLocaleDateString();
     this.lineItems = [];
+    this.adjustedLabor = adjustedLabor || 0;
+    this.adjustedParts = adjustedParts || 0;
 
   }
 
@@ -65,8 +70,14 @@ export class Invoice {
     return this.orderDate;
   }
 
+  getAdjustedFees(adjustedLabor: number, adjustedParts: number): void{
+   this.adjustedLabor = adjustedLabor;
+    this.adjustedParts = adjustedParts;
+  }
+
+
   getTotal(): number{
-    return Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
+    return Number(this.getLaborAmount()) + Number(this.getLineItemTotal() + Number(this.adjustedLabor + this.adjustedParts));
   }
 
   clear() {
