@@ -6,7 +6,7 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: register/signup page
 -->
 
-<mat-card fxFlex>
+<mat-card fxFlex style="margin-bottom: 50px">
   <mat-card-header>
     <mat-card-title>
       <h1 class="title">Account Registration Form</h1>
@@ -15,207 +15,333 @@ Description: register/signup page
       <h3>Create an account</h3>
     </mat-card-subtitle>
   </mat-card-header>
-<mat-card-content fxLayout="column" fxLayoutGap="10px">
-  <mat-stepper orientation="horizontal" #stepper linear>
-    <!--  contact form -->
-    <mat-step [stepControl]="contactForm" errorMessage="Contact information is required">
-      <form [formGroup]="contactForm">
-        <ng-template matStepLabel>Contact Information</ng-template>
-        <br>
+  <mat-card-content fxLayout="column" fxLayoutGap="10px">
+    <mat-stepper orientation="horizontal" #stepper linear>
+      <!--  contact form -->
+      <mat-step
+        [stepControl]="contactForm"
+        errorMessage="Contact information is required"
+      >
+        <form [formGroup]="contactForm">
+          <ng-template matStepLabel>Contact Information</ng-template>
+          <br />
 
-        <mat-list>
-          <mat-list-item>
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>First name</mat-label>
-              <input type="text" matInput required formControlName="firstName">
-              <mat-error >
-                First name is required
-              </mat-error>
-            </mat-form-field>
+          <mat-list>
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>First name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="firstName"
+                />
+                <mat-error> First name is required </mat-error>
+              </mat-form-field>
 
-            &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Last name</mat-label>
-              <input type="text" matInput required formControlName="lastName">
-              <mat-error>Last name is required</mat-error>
-            </mat-form-field>
+              &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Last name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="lastName"
+                />
+                <mat-error>Last name is required</mat-error>
+              </mat-form-field>
 
-            &nbsp;
-          </mat-list-item>
-          <br> <br>
-          <mat-list-item>
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Email Address</mat-label>
-              <input type="email" matInput required formControlName="email">
-              <mat-error *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">Email address is required</mat-error>
+              &nbsp;
+            </mat-list-item>
+            <br />
+            <br />
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Email Address</mat-label>
+                <input type="email" matInput required formControlName="email" />
+                <mat-error
+                  *ngIf="
+                    contactForm.controls['email'].hasError('required') &&
+                    contactForm.controls['email'].touched
+                  "
+                  >Email address is required</mat-error
+                >
 
-              <mat-error *ngIf="contactForm.controls['email'].hasError('email') && contactForm.controls['email'].touched">Invalid email format</mat-error>
-            </mat-form-field>
+                <mat-error
+                  *ngIf="
+                    contactForm.controls['email'].hasError('email') &&
+                    contactForm.controls['email'].touched
+                  "
+                  >Invalid email format</mat-error
+                >
+              </mat-form-field>
 
-            &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Phone number</mat-label>
-              <input type="tel" matInput required formControlName="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-              <mat-error *ngIf="contactForm.controls['phoneNumber'].hasError('required') && contactForm.controls['phoneNumber'].touched">Phone number is required</mat-error>
+              &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Phone number</mat-label>
+                <input
+                  type="tel"
+                  matInput
+                  required
+                  formControlName="phoneNumber"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                />
+                <mat-error
+                  *ngIf="
+                    contactForm.controls['phoneNumber'].hasError('required') &&
+                    contactForm.controls['phoneNumber'].touched
+                  "
+                  >Phone number is required</mat-error
+                >
 
-              <mat-error *ngIf="contactForm.controls['phoneNumber'].hasError('pattern') && contactForm.controls['phoneNumber'].touched">Invalid phone number format. (xxx) xxx-xxxx and have 10 digits</mat-error>
-            </mat-form-field>
-          </mat-list-item>
+                <mat-error
+                  *ngIf="
+                    contactForm.controls['phoneNumber'].hasError('pattern') &&
+                    contactForm.controls['phoneNumber'].touched
+                  "
+                  >Invalid phone number format. (xxx) xxx-xxxx and have 10
+                  digits</mat-error
+                >
+              </mat-form-field>
+            </mat-list-item>
 
-          <br><br>
-          <mat-list-item>
-            &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Address</mat-label>
-              <input type="text" matInput required formControlName="address">
-              <mat-error>Address is required</mat-error>
-            </mat-form-field>
-          </mat-list-item>
-          <br><br>
-          <mat-list-item>
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Zip</mat-label>
-              <input type="text" matInput required formControlName="zip">
-              <mat-error *ngIf="contactForm.controls['zip'].hasError('required') && contactForm.controls['zip'].touched">Zip is required</mat-error>
+            <br /><br />
+            <mat-list-item>
+              &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Address</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="address"
+                />
+                <mat-error>Address is required</mat-error>
+              </mat-form-field>
+            </mat-list-item>
+            <br /><br />
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Zip</mat-label>
+                <input type="text" matInput required formControlName="zip" />
+                <mat-error
+                  *ngIf="
+                    contactForm.controls['zip'].hasError('required') &&
+                    contactForm.controls['zip'].touched
+                  "
+                  >Zip is required</mat-error
+                >
 
-              <mat-error *ngIf="contactForm.controls['zip'].hasError('pattern') && contactForm.controls['zip'].touched"> Must be a valid format of xxxxx or xxxxx-xxxx and have 5 digits</mat-error>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>City</mat-label>
-              <input type="text" matInput required formControlName="city">
-              <mat-error>City is required</mat-error>
-            </mat-form-field>
-            &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>State</mat-label>
-              <input type="text" matInput required formControlName="state">
-              <mat-error>State is required</mat-error>
-            </mat-form-field>
-          </mat-list-item>
-        </mat-list>
+                <mat-error
+                  *ngIf="
+                    contactForm.controls['zip'].hasError('pattern') &&
+                    contactForm.controls['zip'].touched
+                  "
+                >
+                  Must be a valid format of xxxxx or xxxxx-xxxx and have 5
+                  digits</mat-error
+                >
+              </mat-form-field>
+              &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>City</mat-label>
+                <input type="text" matInput required formControlName="city" />
+                <mat-error>City is required</mat-error>
+              </mat-form-field>
+              &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>State</mat-label>
+                <input type="text" matInput required formControlName="state" />
+                <mat-error>State is required</mat-error>
+              </mat-form-field>
+            </mat-list-item>
+          </mat-list>
 
-        <div fxLayoutAlign="end">
-          <button class="btn-primary" mat-raised-button matStepperNext>Next</button>
-        </div>
+          <div fxLayoutAlign="end">
+            <button class="btn-primary" mat-raised-button matStepperNext>
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Security Questions -->
+      <mat-step
+        [stepControl]="securityQuestionsForm"
+        errorMessage="Security Questions are required"
+      >
+        <form [formGroup]="securityQuestionsForm">
+          <ng-template matStepLabel>Security Questions</ng-template>
 
-      </form>
-    </mat-step>
-    <!-- Security Questions -->
-    <mat-step [stepControl]="securityQuestionsForm" errorMessage="Security Questions are required">
-      <form [formGroup]="securityQuestionsForm">
-        <ng-template matStepLabel>Security Questions</ng-template>
+          <br />
 
-        <br>
+          <mat-list>
+            <!-- question 1 -->
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Security Question</mat-label>
+                <mat-select required formControlName="securityQuestion1">
+                  <mat-option
+                    *ngFor="let question of securityQuestions"
+                    [value]="question.text"
+                  >
+                    {{ question.text }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Security question is required</mat-error>
+              </mat-form-field>
 
-        <mat-list>
-          <!-- question 1 -->
-          <mat-list-item>
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Security Question</mat-label>
-             <mat-select required formControlName="securityQuestion1">
-              <mat-option *ngFor="let question of securityQuestions" [value]="question.text">
-                    {{question.text}}
-              </mat-option>
-              </mat-select>
-              <mat-error>Security question is required</mat-error>
-            </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Answer</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="securityQuestionAnswer1"
+                />
+                <mat-error>required field</mat-error>
+              </mat-form-field>
+            </mat-list-item>
 
-            &nbsp; &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Answer</mat-label>
-              <input type="text" matInput required formControlName="securityQuestionAnswer1">
-              <mat-error>required field</mat-error>
-            </mat-form-field>
-          </mat-list-item>
+            <br /><br />
+            <!-- question 2 -->
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Security Question</mat-label>
+                <mat-select required formControlName="securityQuestion2">
+                  <mat-option
+                    *ngFor="let question of securityQuestions"
+                    [value]="question.text"
+                  >
+                    {{ question.text }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Security question is required</mat-error>
+              </mat-form-field>
 
-          <br><br>
-          <!-- question 2 -->
-          <mat-list-item>
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Security Question</mat-label>
-             <mat-select required formControlName="securityQuestion2">
-              <mat-option *ngFor="let question of securityQuestions" [value]="question.text">
-                {{question.text}}
-              </mat-option>
-              </mat-select>
-              <mat-error>Security question is required</mat-error>
-            </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Answer</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="securityQuestionAnswer2"
+                />
+                <mat-error>required field</mat-error>
+              </mat-form-field>
+            </mat-list-item>
 
-            &nbsp; &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Answer</mat-label>
-              <input type="text" matInput required formControlName="securityQuestionAnswer2">
-              <mat-error>required field</mat-error>
-            </mat-form-field>
-          </mat-list-item>
+            <br /><br />
+            <!-- question 3 -->
+            <mat-list-item>
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Security Question</mat-label>
+                <mat-select required formControlName="securityQuestion3">
+                  <mat-option
+                    *ngFor="let question of securityQuestions"
+                    [value]="question.text"
+                  >
+                    {{ question.text }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Security question is required</mat-error>
+              </mat-form-field>
 
-          <br><br>
-          <!-- question 3 -->
-          <mat-list-item>
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Security Question</mat-label>
-             <mat-select required formControlName="securityQuestion3">
-              <mat-option *ngFor="let question of securityQuestions" [value]="question.text">
-                {{question.text}}
-              </mat-option>
-              </mat-select>
-              <mat-error>Security question is required</mat-error>
-            </mat-form-field>
+              &nbsp; &nbsp;
+              <mat-form-field fxFlex appearance="fill">
+                <mat-label>Answer</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="securityQuestionAnswer3"
+                />
+                <mat-error>required field</mat-error>
+              </mat-form-field>
+            </mat-list-item>
+          </mat-list>
 
-            &nbsp; &nbsp;
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Answer</mat-label>
-              <input type="text" matInput required formControlName="securityQuestionAnswer3">
-              <mat-error>required field</mat-error>
-            </mat-form-field>
-          </mat-list-item>
-        </mat-list>
+          <div fxLayoutAlign="end">
+            <button
+              mat-raised-button
+              matStepperPrevious
+              style="background-color: #c0c0c0; color: white"
+            >
+              Back
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn-primary" mat-raised-button matStepperNext>
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
 
-        <div fxLayoutAlign="end">
-          <button mat-raised-button matStepperPrevious>Back</button>
-          &nbsp;&nbsp;
-          <button class="btn-primary" mat-raised-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
+      <!-- Credentials -->
+      <mat-step [stepControl]="credentialsForm">
+        <form [formGroup]="credentialsForm">
+          <ng-template matStepLabel>Credentials</ng-template>
+          <br />
 
-    <!-- Credentials -->
-    <mat-step [stepControl]="credentialsForm">
-      <form [formGroup]="credentialsForm">
-        <ng-template matStepLabel>Credentials</ng-template>
-          <br>
-
-          <p-messages [value]="errorMessages" [enableService]="false"></p-messages>
+          <p-messages
+            [value]="errorMessages"
+            [enableService]="false"
+          ></p-messages>
           <mat-list>
             <mat-list-item>
               <mat-form-field fxFlex appearance="fill">
                 <mat-label>Username</mat-label>
-                <input type="text" matInput required formControlName="userName">
+                <input
+                  type="text"
+                  matInput
+                  required
+                  formControlName="userName"
+                />
                 <mat-error>Username is required</mat-error>
               </mat-form-field>
             </mat-list-item>
-            <br><br>
+            <br /><br />
             <mat-list-item>
               <mat-form-field fxFlex appearance="fill">
                 <mat-label>Password</mat-label>
-                <input type="password" matInput required formControlName="password">
+                <input
+                  type="password"
+                  matInput
+                  required
+                  formControlName="password"
+                />
                 <mat-error>Password is required</mat-error>
 
-                <mat-error>Password must be at least 8 characters, contain one letter, and one number</mat-error>
+                <mat-error
+                  >Password must be at least 8 characters, contain one letter,
+                  and one number</mat-error
+                >
               </mat-form-field>
             </mat-list-item>
           </mat-list>
-          <br>
+          <br />
 
           <div fxLayoutAlign="end">
-            <button mat-raised-button matStepperPrevious>Back</button>
+            <button
+              mat-raised-button
+              matStepperPrevious
+              style="background-color: #c0c0c0; color: white"
+            >
+              Back
+            </button>
             &nbsp;&nbsp;
-            <button class="btn-primary" mat-raised-button (click)="register()" [disabled]="!credentialsForm.valid">Register</button>
+            <button
+              class="btn-primary"
+              mat-raised-button
+              (click)="register()"
+              [disabled]="!credentialsForm.valid"
+            >
+              Register
+            </button>
           </div>
-      </form>
-    </mat-step>
-  </mat-stepper>
-</mat-card-content>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </mat-card-content>
 </mat-card>
-

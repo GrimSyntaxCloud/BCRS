@@ -40,7 +40,7 @@ Description: application base layout template
               [matBadgeHidden]="itemCount() <= 0"
               matBadgeColor="warn"
               class="shopping-cart"
-              routerLink="/cart/{{sessionUserName}}"
+              routerLink="/cart/{{ sessionUserName }}"
               >shopping_cart</mat-icon
             >
           </button>
@@ -50,9 +50,17 @@ Description: application base layout template
           </button>
 
           <mat-menu #session="matMenu" x-position="before">
-              <button mat-menu-item routerLink="users/profile/{{ sessionUserName }}">
+            <button
+              mat-menu-item
+              routerLink="users/profile/{{ sessionUserName }}"
+              style="
+                background-color: #c0c0c0;
+                text-align: center;
+                font-weight: bold;
+              "
+            >
               Welcome {{ sessionUserName }}
-              </button>
+            </button>
             <mat-divider></mat-divider>
             <button mat-menu-item [matMenuTriggerFor]="configs">
               <mat-icon>settings</mat-icon>
@@ -70,11 +78,11 @@ Description: application base layout template
                 <mat-icon>admin_panel_settings</mat-icon>
                 Roles
               </button>
-                <!-- security questions -->
-                <button mat-menu-item routerLink="/graph">
-                  <mat-icon>pie_chart</mat-icon>
-                  Chart
-                </button>
+              <!-- security questions -->
+              <button mat-menu-item routerLink="/graph">
+                <mat-icon>pie_chart</mat-icon>
+                Chart
+              </button>
               <!-- security questions -->
               <button mat-menu-item routerLink="/security-questions">
                 <mat-icon>help</mat-icon>
