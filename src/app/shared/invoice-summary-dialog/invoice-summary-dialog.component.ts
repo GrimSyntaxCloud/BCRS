@@ -22,6 +22,8 @@ orderDate: string;
 total: number;
 labor: number;
 parts: number;
+adjustedLabor: number;
+adjustedParts: number;
 
 
 
@@ -30,8 +32,10 @@ parts: number;
     this.username = data.username;
     this.orderDate = data.orderDate;
     this.total = 0;
-    this.labor = 0;
-    this.parts = 0;
+    //if this labor is undefined or null, set it to 0 else set it to the value
+    this.adjustedLabor = data.laborFee || 0;
+    this.adjustedParts = data.partsFee || 0;
+    this.setAdjustedFees();
 
     this.username = this.invoice.getUsername();
     this.orderDate = this.invoice.getOrderDate();
@@ -39,10 +43,14 @@ parts: number;
     this.labor = this.invoice.getLaborAmount();
     this.total = this.invoice.getTotal();
 
-    console.log(this.invoice);
+    console.log("HELLO FROM INVOICE SUMMARY DIALOG COMPONENT  ", this.total);
    }
 
   ngOnInit(): void {
   }
+
+  setAdjustedFees(){
+    this.invoice.getAdjustedFees(this.adjustedLabor, this.adjustedParts);
+   }
 
 }
