@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="28aeed26-ae0b-491d-8e5f-4d13cb25828b" activeEnvironment="Default" name="BCRS" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="8aea460d-0327-4b9f-bd71-d53e8e928e61" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:3000" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:3000</con:endpoint></con:endpoints><con:resource name="register" path="/api/session/register" id="5d484255-1fe7-4fc6-93de-9e249e995941"><con:settings/><con:parameters/><con:method name="registerUser" id="a7733a6a-50a8-4c02-bbc5-31930cf0e2ed" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:reg="http://localhost/api/session/register">reg:Response</con:element></con:representation><con:request name="Request 1" id="c3ce7467-83e1-4040-b5eb-d9194a8d675b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:3000</con:endpoint><con:request>{
+  "userName": "meep2",
+  "password": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "phoneNumber": "string",
+  "address": "string",
+  "email": "string",
+  "selectedSecurityQuestions": [
+    {
+      "questionText1": "string",
+      "answerText1": "string",
+      "questionText2": "string",
+      "answerText2": "string",
+      "questionText3": "string",
+      "answerText3": "string",
+      "isDisabled": true
+    }
+  ]
+}</con:request><con:originalUri>http://localhost/api/session/register</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="resetUserPassword" path="/api/session/users/water22/reset-password" id="8a18d2bf-e6f2-490e-b19b-4d5631e0eb53"><con:settings/><con:parameters/><con:method name="Method 1" id="02440a17-0062-4a6d-a268-f6e90416fa10" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:res="http://localhost/api/session/water22/reset-password">res:Response</con:element></con:representation><con:request name="Request 1" id="7d22f532-a0a0-49f4-aab3-570e39f2dc5d" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:3000</con:endpoint><con:request>{
+  "password": "password02"
+}</con:request><con:originalUri>http://localhost/api/session/water22/reset-password</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
