@@ -42,6 +42,7 @@ export class UserListComponent implements OnInit {
       message: 'Are you sure that you want to delete this user record?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
+
       accept: () => {
         this.userService.deleteUser(userId).subscribe({
           next: (res) => {
