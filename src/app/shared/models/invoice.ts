@@ -62,23 +62,28 @@ export class Invoice {
   }
 
 
+  // function for calculating labor amount by labor hours times labor rate.
   getLaborAmount(): number{
     return Number(this.laborHours) * Number(this.LABOR_RATE);
   }
 
+  // function for gaining the current date on invoice page
   getOrderDate(): string{
     return this.orderDate;
   }
 
+  // function for declaring the invoice adjusted labor and adjusted parts
   getAdjustedFees(adjustedLabor: number, adjustedParts: number): void{
    this.adjustedLabor = adjustedLabor;
     this.adjustedParts = adjustedParts;
   }
 
 
+  // function for calculating the total charge by adding up labor amount, lineItemTotal, adjusted labor fees and parts fees
   getTotal(): number{
     return Number(this.getLaborAmount()) + Number(this.getLineItemTotal() + Number(this.adjustedLabor + this.adjustedParts));
   }
+
 
   clear() {
     this.partsAmount = 0;
