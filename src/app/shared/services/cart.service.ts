@@ -67,7 +67,7 @@ export class CartService {
   }
 
 
-  // remove one product from shopping cart
+  // remove one product from the shopping cart
   removeItemFromCart(product: Product) {
 
     this.items = this.items.filter(item => item.id != product.id);
@@ -83,7 +83,7 @@ export class CartService {
   }
 
   updateCartCookies() {
-    // update the cart cookie with the new list
+    // update the cart cookie with the new list. if user doesn't log out, the cookie will keep the items in the shopping cart for 5 days.
     this.cookieService.set('cartItems', JSON.stringify(this.items), 5);
 
     //update the cookie count

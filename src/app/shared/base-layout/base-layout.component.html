@@ -12,7 +12,7 @@ Description: application base layout template
   <header>
     <nav class="navbarA">
       <mat-toolbar-row class="logoBar">
-        <!-- logo bar wiht sign up and log in link-->
+        <!-- logo bar with sign up and log in link-->
         <button class="logo" routerLink="/" mat-button>
           Bob's Computer Repair Shop
         </button>
@@ -33,13 +33,14 @@ Description: application base layout template
             mat-icon-button
             class="ml-xs"
             disabled="false"
+            class="shopping-cart"
             *ngIf="itemCount() > 0"
           >
             <mat-icon
               matBadge="{{ itemCount() }}"
               [matBadgeHidden]="itemCount() <= 0"
               matBadgeColor="warn"
-              class="shopping-cart"
+
               routerLink="/cart/{{ sessionUserName }}"
               >shopping_cart</mat-icon
             >
@@ -69,6 +70,7 @@ Description: application base layout template
 
             <mat-menu #configs="matMenu">
               <!-- users list -->
+              <ng-container *ngIf="role === 'admin'">
               <button mat-menu-item routerLink="/users">
                 <mat-icon>supervisor_account</mat-icon>
                 User List
@@ -83,6 +85,7 @@ Description: application base layout template
                 <mat-icon>pie_chart</mat-icon>
                 Chart
               </button>
+            </ng-container>
               <!-- security questions -->
               <button mat-menu-item routerLink="/security-questions">
                 <mat-icon>help</mat-icon>

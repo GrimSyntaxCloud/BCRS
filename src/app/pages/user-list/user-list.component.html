@@ -61,13 +61,13 @@ Description: Displays list of users with the ability to
 
         <ng-template pTemplate="body" let-user>
           <tr>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.phoneNumber }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.address }}</td>
-            <td>{{ user.role.text }}</td>
-            <td style="text-align: center; padding: 5px">
+            <td style="padding: 12px">{{ user.firstName }}</td>
+            <td style="padding: 12px">{{ user.lastName }}</td>
+            <td style="padding: 12px">{{ user.phoneNumber }}</td>
+            <td style="padding: 12px">{{ user.email }}</td>
+            <td style="padding: 12px">{{ user.address }}</td>
+            <td style="padding: 12px">{{ user.role.text }}</td>
+            <td style="padding: 12px">
               <button
                 pButton
                 pRipple

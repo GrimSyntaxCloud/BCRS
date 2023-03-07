@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
+import { SessionService } from '../services/session.service';
 
 
 @Component({
@@ -23,20 +24,34 @@ export class BaseLayoutComponent implements OnInit {
   year: number = Date.now();
 
   sessionUserName: string;
+  role: string;
 
   constructor(
     private cookieService: CookieService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private sessionService: SessionService
   ) {
      // from login component
     this.sessionUserName = this.cookieService.get('sessionuser');
+    this.role = 'standard';
 
     // if the cart cookie exists, do nothing, otherwise, create an empty cart cookie
     if (!this.cookieService.check('cartItems')) {
       this.cookieService.set('cartItems', '[]', 5);
     }
 
+    if (this.sessionUserName !== '') {
+    this.sessionService.verifyUsername(this.sessionUserName).subscribe({
+      next: (res) => {
+        this.role = res.data.role.text;
+        console.log(this.role);
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
+  }
 
 
     this.year = Date.now();

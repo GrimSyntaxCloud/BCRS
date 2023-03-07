@@ -176,15 +176,17 @@ export class CartComponent implements OnInit {
     this.lineItems = [];
   }
 
+  // use cookies to keep the cartItems (the shopping cart and items) persisting on the page reload.
   itemCount(){
     let cartCount = JSON.parse(this.cookieService.get('cartItems')) || '[]';
     return cartCount.length;
 
   }
 
+
+ // When remove all items in the cart, the page will be navigate to the service repair page
   async clearCart() {
     this.items = [];
-    // return this.items;
     await this.router.navigate(['/service-repair']);
     window.location.reload();
   }

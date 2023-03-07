@@ -1,1 +1,125 @@
-<p>profile works!</p>
+<!--
+Title: profile.component.html
+Author: Professor Krasso
+Date: 02/12/2023
+Modified By: Andres Macias/Patrick Wolff/April Yang
+Description: Profile details
+-->
+
+<p-confirmDialog [style]="{ width: '35vw' }" [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<div fxLayout="column">
+  <mat-card class="mat-elevation-z0" style="margin-bottom: 45px">
+    <mat-card-title style="text-align: center; font-weight: lighter">
+      <img src="../assets/profileicon.png" alt="Profile icon" />
+      <br />
+      User Profile
+    </mat-card-title>
+    <mat-card-subtitle style="text-align: center; font-weight: lighter">
+      {{ user.firstName }} {{ user.lastName }}
+    </mat-card-subtitle>
+    <br />
+
+    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+
+    <form [formGroup]="form" (ngSubmit)="saveUser()" (keydown.enter)="$event.preventDefault()"
+      style="width: 50%; margin: 0 auto">
+
+      <button pButton pRipple type="button" (click)="toggleForm()" icon="pi pi-pencil"
+        class="p-button-rounded p-button-text" id="toggleFormIcon" style="color: #d3a625"></button>
+      <mat-card-content>
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName" required />
+            <mat-error class="error" *ngIf="
+                form.controls['firstName'].hasError('required') &&
+                form.controls['firstName'].touched
+              ">
+              First name is a required field.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName" required />
+
+            <mat-error class="error" *ngIf="
+                form.controls['lastName'].hasError('required') &&
+                form.controls['lastName'].touched
+              ">
+              Last name is a required field.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input type="text" matInput formControlName="phoneNumber" required />
+
+            <mat-error
+                  *ngIf="
+                    form.controls['phoneNumber'].hasError('required') &&
+                    form.controls['phoneNumber'].touched
+                  "
+                  >Phone number is required</mat-error
+                >
+
+                <mat-error
+                  *ngIf="
+                    form.controls['phoneNumber'].hasError('pattern') &&
+                    form.controls['phoneNumber'].touched
+                  "
+                  >Invalid phone number format. (xxx) xxx-xxxx and have 10
+                  digits</mat-error
+                >
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Email address</mat-label>
+            <input type="text" matInput formControlName="email" required />
+
+            <mat-error class="error" *ngIf="
+                form.controls['email'].hasError('required') &&
+                form.controls['email'].touched
+              ">
+              Email is a required field.
+            </mat-error>
+
+            <mat-error class="error" *ngIf="
+                form.controls['email'].hasError('email') &&
+                form.controls['email'].touched
+              ">
+              Invalid email format
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+
+            <textarea matInput required formControlName="address"
+              placeholder="505 Main Street Omaha, Nebraska 68111"></textarea>
+
+            <mat-error class="error" *ngIf="
+                form.controls['address'].hasError('required') &&
+                form.controls['address'].touched
+              ">
+              Address is a required field.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <ng-container *ngIf="!form.disabled">
+      <mat-card-actions align="end">
+        <button mat-raised-button (click)="cancel()">
+          Cancel
+        </button>
+        <button class="btn-primary" mat-raised-button [disabled]="!form.valid || form.disabled">
+          Submit
+        </button>
+      </mat-card-actions>
+    </ng-container>
+    </form>
+  </mat-card>
+</div>
