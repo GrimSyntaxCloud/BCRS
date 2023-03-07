@@ -56,8 +56,6 @@ Description: verify username form template
               mat-raised-button
               routerLink="/session/login"
               style="
-                background-color: #eeba30;
-                color: white;
                 font-family: Lato;
                 font-weight: bold;
               "
@@ -68,9 +66,8 @@ Description: verify username form template
             <button
               mat-raised-button
               [disabled]="!form.valid"
+              class="btn-primary"
               style="
-                background-color: #e40002;
-                color: white;
                 font-family: Lato;
                 font-weight: bold;
               "
