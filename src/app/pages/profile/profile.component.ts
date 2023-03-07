@@ -32,10 +32,7 @@ export class ProfileComponent implements OnInit {
     lastName: [null, Validators.compose([Validators.required])],
     phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')])],
     email: [null, Validators.compose([Validators.required, Validators.email])],
-    address: [null, Validators.compose([Validators.required])],
-    zip: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')])],
-    city: [null, Validators.compose([Validators.required])],
-    state: [null, Validators.compose([Validators.required])],
+    address: [null, Validators.compose([Validators.required])]
   });
 
   constructor(
@@ -67,7 +64,6 @@ export class ProfileComponent implements OnInit {
         this.form.controls['phoneNumber'].setValue(this.user.phoneNumber);
         this.form.controls['email'].setValue(this.user.email);
         this.form.controls['address'].setValue(this.user.address);
-
       }
     });
   }
@@ -85,7 +81,7 @@ export class ProfileComponent implements OnInit {
       lastName: this.form.controls['lastName'].value,
       phoneNumber: this.form.controls['phoneNumber'].value,
       email: this.form.controls['email'].value,
-      address: this.form.controls['address'].value + " " + this.form.controls['city'].value + " " + this.form.controls['state'].value + " " + this.form.controls['zip'].value,
+      address: this.form.controls['address'].value,
       role: {
         text: this.user.role?.text ?? '',
       }
