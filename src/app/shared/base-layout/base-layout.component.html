@@ -69,6 +69,7 @@ Description: application base layout template
 
             <mat-menu #configs="matMenu">
               <!-- users list -->
+              <ng-container *ngIf="role === 'admin'">
               <button mat-menu-item routerLink="/users">
                 <mat-icon>supervisor_account</mat-icon>
                 User List
@@ -83,6 +84,7 @@ Description: application base layout template
                 <mat-icon>pie_chart</mat-icon>
                 Chart
               </button>
+            </ng-container>
               <!-- security questions -->
               <button mat-menu-item routerLink="/security-questions">
                 <mat-icon>help</mat-icon>
