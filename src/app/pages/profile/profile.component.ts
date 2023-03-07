@@ -83,7 +83,11 @@ export class ProfileComponent implements OnInit {
       phoneNumber: this.form.controls['phoneNumber'].value,
       email: this.form.controls['email'].value,
       address: this.form.controls['address'].value,
+      role: {
+        text: this.user.role?.text ?? '',
+      }
     }
+
     console.log(this.user._id);
     console.log(updatedUser);
 
