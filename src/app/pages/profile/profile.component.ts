@@ -30,9 +30,12 @@ export class ProfileComponent implements OnInit {
   form: FormGroup = this.fb.group({
     firstName: [null, Validators.compose([Validators.required])],
     lastName: [null, Validators.compose([Validators.required])],
-    phoneNumber: [null, Validators.compose([Validators.required])],
+    phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')])],
     email: [null, Validators.compose([Validators.required, Validators.email])],
     address: [null, Validators.compose([Validators.required])],
+    zip: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')])],
+    city: [null, Validators.compose([Validators.required])],
+    state: [null, Validators.compose([Validators.required])],
   });
 
   constructor(
@@ -82,7 +85,7 @@ export class ProfileComponent implements OnInit {
       lastName: this.form.controls['lastName'].value,
       phoneNumber: this.form.controls['phoneNumber'].value,
       email: this.form.controls['email'].value,
-      address: this.form.controls['address'].value,
+      address: this.form.controls['address'].value + " " + this.form.controls['city'].value + " " + this.form.controls['state'].value + " " + this.form.controls['zip'].value,
       role: {
         text: this.user.role?.text ?? '',
       }
@@ -96,6 +99,7 @@ export class ProfileComponent implements OnInit {
         console.log("inside userService method" + this.userId);
         // reload the window
         this.router.navigate(['/users/profile/' + this.user.userName]);
+        this.form.disable();
       },
       error: (e) => {
         this.errorMessages = [
