@@ -13,7 +13,6 @@ import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.interface";
 import { ConfirmationService, Message } from 'primeng/api';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile',
@@ -24,8 +23,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProfileComponent implements OnInit {
 
   user: User;
+  userName: string;
   userId: string;
-  firstName: string;
   errorMessages: Message[];
 
   form: FormGroup = this.fb.group({
@@ -41,21 +40,20 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private cookieService: CookieService,
     private sessionService: SessionService
   ) {
 
-    this.userId = this.route.snapshot.paramMap.get('userId') ?? '';
+    this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
     this.user = {} as User;
-    this.firstName = this.cookieService.get('sessionuser') || '';
     this.errorMessages = [];
+    this.userId = this.user._id?.toString() ?? '';
+    this.form.disable();
 
     // service needs to be updated to call findUserByUserName()
-    this.userService.findUserById(this.userId).subscribe({
+    this.sessionService.verifyUsername(this.userName).subscribe({
       next: (res) => {
         this.user = res.data;
-        console.log('user object from findUserById call');
-        console.log(this.user);
+        this.userId = res.data._id;
       },
       error: (e) => {
         console.log(e);
@@ -66,11 +64,9 @@ export class ProfileComponent implements OnInit {
         this.form.controls['phoneNumber'].setValue(this.user.phoneNumber);
         this.form.controls['email'].setValue(this.user.email);
         this.form.controls['address'].setValue(this.user.address);
-        this.form.controls['role'].setValue(this.user.role?.text ?? 'standard');
 
-        console.log(this.user);
       }
-    })
+    });
   }
 
 
@@ -88,13 +84,14 @@ export class ProfileComponent implements OnInit {
       email: this.form.controls['email'].value,
       address: this.form.controls['address'].value,
     }
-
+    console.log(this.user._id);
     console.log(updatedUser);
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (res) => {
         console.log("inside userService method" + this.userId);
-        this.router.navigate(['/']);
+        // reload the window
+        this.router.navigate(['/users/profile/' + this.user.userName]);
       },
       error: (e) => {
         this.errorMessages = [
@@ -107,6 +104,19 @@ export class ProfileComponent implements OnInit {
   }
   // Cancel the form and returns to home
   cancel(): void {
-    this.router.navigate(['/'])
+    this.router.navigate(['/users/profile/' + this.user.userName])
+    this.form.disable();
   }
+
+  toggleForm(): void {
+    // toggle the form status
+    if (this.form.disabled) {
+
+    this.form.enable();
+    } else {
+    this.form.disable();
+    }
+  }
+
+
 }
