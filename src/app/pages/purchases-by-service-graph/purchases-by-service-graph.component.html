@@ -14,16 +14,12 @@ Description: purchases-by-service page template
     background-color: #c0c0c0;
   ">
 <div fxLayout="column" fxLayoutGap="20px">
-  <div fxFlex>
-    <h1>
-      Welcome to the Purchases by Service Page!
-      <br />
-      <h3>You can hide or show items by selecting their label.</h3>
-    </h1>
-  </div>
-</div>
-
-<div fxFlex>
-  <p-chart height="450" width="450" type="pie" [data]="data"></p-chart>
+  <h1>Purchases by Service</h1>
+  <p>Counts come from the latest 50 shared sample invoices. Select a chart label to hide or show a service.</p>
+  <p-chart type="pie" [data]="data" style="display: block; width: 100%; max-width: 450px; margin: auto"></p-chart>
+  <table aria-label="Sample service purchase counts">
+    <thead><tr><th scope="col">Service</th><th scope="col">Count</th></tr></thead>
+    <tbody><tr *ngFor="let purchase of purchases"><td>{{ purchase._id.title }}</td><td>{{ purchase.count }}</td></tr></tbody>
+  </table>
 </div>
 </mat-card>

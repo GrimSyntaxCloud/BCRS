@@ -78,18 +78,15 @@ const routes: Routes = [
       },
       {
         path: 'users/create/new',
-        component: UserCreateComponent,
-        canActivate: [AuthGuard] // for logged in user
+        redirectTo: '/users', pathMatch: 'full' // for logged in user
       },
       {
         path: 'users/:userId',
-        component: UserDetailsComponent,
-        canActivate: [AuthGuard] // for logged in user
+        redirectTo: '/users', pathMatch: 'full' // for logged in user
         },
       {
         path: 'users/profile/:userName',
-        component: ProfileComponent,
-        canActivate: [AuthGuard]  // for logged in user
+        redirectTo: '/users', pathMatch: 'full'  // for logged in user
       },
       {
         path: 'security-questions',
@@ -98,8 +95,7 @@ const routes: Routes = [
       },
       {
         path: 'security-questions/:questionId',
-        component: SecurityQuestionDetailsComponent,
-        canActivate: [AuthGuard]  // for logged in user
+        redirectTo: '/security-questions', pathMatch: 'full'  // for logged in user
       },
 
       {
@@ -109,8 +105,7 @@ const routes: Routes = [
       },
       {
         path: 'roles/:roleId',
-        component: RoleDetailsComponent,
-        canActivate: [AuthGuard] // for logged in user
+        redirectTo: '/roles', pathMatch: 'full' // for logged in user
       },
       {
         path: 'graph',
@@ -134,19 +129,19 @@ const routes: Routes = [
       },
       {
         path: 'register',
-        component: RegisterComponent
+        redirectTo: 'login', pathMatch: 'full' // RegisterComponent
       },
       {
         path: 'forgot',
-        component: VerifyUsernameFormComponent,
+        redirectTo: 'login', pathMatch: 'full' // VerifyUsernameFormComponent,
       },
       {
         path: 'verify-security-questions',
-        component: VerifySecurityQuestionsFormComponent,
+        redirectTo: 'login', pathMatch: 'full' // VerifySecurityQuestionsFormComponent,
       },
       {
         path: 'reset-password',
-        component: ResetPasswordFormComponent,
+        redirectTo: 'login', pathMatch: 'full' // ResetPasswordFormComponent,
       },
       {
         path: 'invoices/:userName',

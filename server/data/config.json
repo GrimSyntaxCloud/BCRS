@@ -1,5 +1,4 @@
 {
-  "dbConn": "mongodb+srv://bob-computer-repair-shop_user:s3cret@cluster0.vvn3y4f.mongodb.net/BobComputerRepairShop?retryWrites=true&w=majority",
   "serverError": "Internal Server Error",
   "mongoServerError": "MongoDB Server Error"
 }

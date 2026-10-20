@@ -67,7 +67,7 @@ export class BaseLayoutComponent implements OnInit {
   }
 
   itemCount(){
-    let cartCount = JSON.parse(this.cookieService.get('cartItems')) || [];
+    let cartCount = JSON.parse(this.cookieService.get('cartItems') || '[]');
     return cartCount.length;
   }
 

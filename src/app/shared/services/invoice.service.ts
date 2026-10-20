@@ -28,7 +28,9 @@ export class InvoiceService {
       partsAmount: invoice.partsAmount,
       laborAmount: invoice.getLaborAmount(),
       lineItemTotal: invoice.getLineItemTotal(),
-      total: invoice.getTotal()
+      total: invoice.getTotal(),
+      adjustedLabor: invoice.adjustedLabor,
+      adjustedParts: invoice.adjustedParts
     });
   }
 

@@ -27,21 +27,14 @@ Description: Displays list of users with the ability to
       <h1 class="title">
         User's Configuration Page!<br />
         <span class="subtitle">
-          To add new record select the Add User button.
+          Read-only fictional sample users.
         </span>
       </h1>
     </div>
 
     <!-- first column -->
     <div fxFlex>
-      <button
-        mat-raised-button
-        routerLink="/users/create/new"
-        style="background-color: #eeba30; height: 50px; font-size: 18px"
-        class="w-100"
-      >
-        Add User
-      </button>
+
     </div>
 
     <!-- second column -->
@@ -68,24 +61,8 @@ Description: Displays list of users with the ability to
             <td style="padding: 12px">{{ user.address }}</td>
             <td style="padding: 12px">{{ user.role.text }}</td>
             <td style="padding: 12px">
-              <button
-                pButton
-                pRipple
-                type="button"
-                routerLink="/users/{{ user._id }}"
-                icon="pi pi-pencil"
-                class="p-button-rounded p-button-text"
-                style="color: #d3a625"
-              ></button>
-              <button
-                pButton
-                pRipple
-                type="button"
-                (click)="delete(user._id)"
-                icon="pi pi-trash"
-                class="p-button-rounded p-button-text"
-                style="color: #ae0001"
-              ></button>
+
+
             </td>
           </tr>
         </ng-template>

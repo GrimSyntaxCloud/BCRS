@@ -1,0 +1,13 @@
+{
+  "name": "bcrs-azure-demo-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "functions.js",
+  "engines": { "node": "22.x" },
+  "scripts": { "test": "node --test test/*.test.js" },
+  "dependencies": {
+    "@azure/functions": "4.16.5",
+    "mongoose": "8.24.5"
+  },
+  "devDependencies": { "mongodb-memory-server": "11.3.0" }
+}

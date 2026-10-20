@@ -1,3 +1,11 @@
+# BCRS — fictional portfolio demo
+
+Azure Static Web Apps Free hosts the Angular frontend and managed Node.js API.
+Open the shared demo to try sample invoices; account screens are read-only examples.
+No original Atlas data is used. [Setup, free-tier limits and local development](docs/azure-demo.md).
+
+Team project by Andres Macias, Patrick Wolff, and April Yang.
+
 # Bcrs
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
