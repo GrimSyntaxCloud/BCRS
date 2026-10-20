@@ -21,7 +21,7 @@ Description: application base layout template
 
         <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
-
+          <a class="navbar-link-logIn" routerLink="/session/login">Open demo</a>
         </ng-container>
 
         <ng-container *ngIf="sessionUserName">
