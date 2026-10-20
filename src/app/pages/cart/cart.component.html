@@ -17,12 +17,9 @@ https://angular.io/start
 <ng-container *ngIf="items.length > 0">
   <mat-card
     style="
-      width: 60%;
-      margin-top: 70px;
-      margin-left: 20%;
-      margin-right: 20%;
-      margin-bottom: 100px;
-      height: 50%;
+      width: calc(100% - 32px);
+      max-width: 800px;
+      margin: 48px auto 100px;
       padding: 0px;
     "
   >
@@ -123,7 +120,7 @@ https://angular.io/start
               <form
                 [formGroup]="adjustedFeesForm"
                 fxLayout="column"
-                style="width: 30%"
+                style="width: 100%; max-width: 360px"
               >
                 <mat-form-field appearance="outline" fxFlex>
                   <mat-label>Additional labor hours (0–40) </mat-label>
