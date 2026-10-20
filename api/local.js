@@ -4,7 +4,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { HttpRequest } = require('@azure/functions');
 const { createHandler } = require('./handler');
-const handler = createHandler();
+const handler = createHandler({ secure: false });
 const root = path.resolve(__dirname, '../dist/bcrs');
 const mime = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf' };
 const server = http.createServer(async (req, res) => {

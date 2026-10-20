@@ -1,67 +1,25 @@
-/*
-Title: login-component.ts
-Author: Professor Krasso
-Updated Date: 02/10/2023
-Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: login component
-*/
-
-
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// Original login component by Professor Krasso; adapted by the BCRS team.
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { Message } from 'primeng/api';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent implements OnInit {
-
-  // create a property that contains a form group
-  loginForm: FormGroup = this.fb.group({
-    userName: [null, Validators.compose([Validators.required])],
-    //pattern for password: at least 8 characters, at least one letter, at least one number
-    password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')])]
-  });
-
-  // create a property that contains an array of messages
+@Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.css'] })
+export class LoginComponent {
+  loginForm = this.fb.group({ userName: ['', Validators.required], password: ['', Validators.required] });
   errorMessages: Message[] = [];
-
-
-
-  constructor(private fb: FormBuilder, private router: Router, private cookieService: CookieService, private http: HttpClient,
-    private sessionService: SessionService) { }
-
-  ngOnInit(): void {
-  }
-
-  /**
-   * Description: login function
-   * userName: comes from the form input
-   * password: comes from the form input
-   * details: calls the session service to login
-   */
-  login() {
-    const userName = 'demo';
-    const password = '';
-
-    this.sessionService.login(userName, password).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.cookieService.set('sessionuser', res.data.userName, 1);
-        this.router.navigate(['']).then(() => window.location.reload());
-      },
-      error: (e) => {
-        this.errorMessages = [
-          { severity: 'error', summary: 'Error', detail: e.message }
-        ]
-        console.log(e)
-      }
-    })
+  busy = false;
+  constructor(private fb: FormBuilder, private router: Router, private cookies: CookieService, private session: SessionService) {}
+  login(guest = false) {
+    if (this.busy || (!guest && this.loginForm.invalid)) return;
+    this.busy = true;
+    const request = guest ? this.session.guest() : this.session.login(this.loginForm.value.userName || '', this.loginForm.value.password || '');
+    request.subscribe({ next: res => {
+      // This is a display hint only. The API verifies its HttpOnly session cookie.
+      this.cookies.set('sessionuser', res.data.userName, 1, '/', undefined, location.protocol === 'https:', 'Strict');
+      this.cookies.set('cartItems', '[]', 1, '/');
+      this.router.navigate(['/']).then(() => location.reload());
+    }, error: e => { this.busy = false; this.errorMessages = [{ severity: 'error', summary: 'Unable to sign in', detail: e.message }]; } });
   }
 }

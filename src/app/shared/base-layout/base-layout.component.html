@@ -21,7 +21,8 @@ Description: application base layout template
 
         <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
-          <a class="navbar-link-logIn" routerLink="/session/login">Open demo</a>
+          <a class="navbar-link-logIn" routerLink="/session/login">Sign in</a>
+          <a class="navbar-link-logIn" routerLink="/session/register">Register</a>
         </ng-container>
 
         <ng-container *ngIf="sessionUserName">
@@ -44,14 +45,14 @@ Description: application base layout template
             >
           </button>
 
-          <button aria-label="Demo account menu" [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
+          <button aria-label="Account menu" [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
             <mat-icon class="profileIcon">person</mat-icon>
           </button>
 
           <mat-menu #session="matMenu" x-position="before">
             <button
               mat-menu-item
-              routerLink="users/profile/{{ sessionUserName }}"
+              [routerLink]="guest ? '/users' : '/users/profile/' + sessionUserName"
               style="
                 background-color: #c0c0c0;
                 text-align: center;
@@ -61,7 +62,9 @@ Description: application base layout template
               Welcome {{ sessionUserName }}
             </button>
             <mat-divider></mat-divider>
-            <button mat-menu-item [matMenuTriggerFor]="configs">
+            <button mat-menu-item routerLink="/invoices">My invoices</button>
+            <button mat-menu-item routerLink="/graph">Purchases chart</button>
+            <button *ngIf="guest" mat-menu-item [matMenuTriggerFor]="configs">
               <mat-icon>settings</mat-icon>
               Configurations
             </button>
@@ -111,7 +114,8 @@ Description: application base layout template
     </nav>
   </header>
 
-  <p role="note" style="padding: 14px; margin: 0; background: #fff4d2; color: #222; text-align: center">Shared fictional demo · sample invoices only · latest 50 invoices retained · no real orders or payments. Account and security examples are read-only.</p>
+  <p role="note" style="padding: 14px; margin: 0; background: #fff4d2; color: #222; text-align: center">Full-stack portfolio demo · register with fictional details or try the shared guest account · no real orders or payments.</p>
+  <p *ngIf="logoutError" role="alert">{{ logoutError }}</p>
   <div class="content">
     <router-outlet></router-outlet>
   </div>

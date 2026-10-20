@@ -9,8 +9,8 @@ Description: styling for verify-security-questions-form template
 
 
 .login-card {
-  margin: 10em auto;
-  width: 30em;
+  margin: 40px auto;
+  width: min(30em, calc(100% - 32px));
 }
 
 

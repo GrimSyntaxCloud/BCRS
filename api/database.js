@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { seedInvoices } = require('./demo');
+const { seedInvoices, users } = require('./demo');
 let ready;
 async function database() {
   if (!ready) ready = (async () => {
@@ -13,6 +13,8 @@ async function database() {
     const collection = db.collection('demo');
     await collection.updateOne({ _id: 'shared-demo' },
       { $setOnInsert: { invoices: seedInvoices() } }, { upsert: true });
+    await collection.updateOne({ _id: 'shared-demo' }, { $set: { userName: 'demo', guest: true, profile: { firstName: users[0].firstName, lastName: users[0].lastName, email: users[0].email, phoneNumber: users[0].phoneNumber, address: users[0].address } } });
+    await collection.updateOne({ _id: 'account-registry' }, { $setOnInsert: { names: [] } }, { upsert: true });
     return { db, collection };
   })().catch(error => { ready = undefined; throw error; });
   return ready;

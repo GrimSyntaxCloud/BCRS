@@ -1,126 +1,41 @@
-/*
-Title: profile.component.ts
-Author: Professor Krasso
-Updated Date: 02/11/2023
-Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: User Profile Information
-*/
-
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from "../../shared/services/user.service";
-import { User } from "../../shared/models/user.interface";
-import { ConfirmationService, Message } from 'primeng/api';
+// Profile editing adapted from the original BCRS team component.
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { SessionService } from 'src/app/shared/services/session.service';
-
-@Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
-  providers: [ConfirmationService]
-})
-export class ProfileComponent implements OnInit {
-
-  user: User;
-  userName: string;
-  userId: string;
-  errorMessages: Message[];
-
-  form: FormGroup = this.fb.group({
-    firstName: [null, Validators.compose([Validators.required])],
-    lastName: [null, Validators.compose([Validators.required])],
-    phoneNumber: [null, Validators.compose([Validators.required, Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')])],
-    email: [null, Validators.compose([Validators.required, Validators.email])],
-    address: [null, Validators.compose([Validators.required])]
-  });
-
-  constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router,
-    private userService: UserService,
-    private sessionService: SessionService
-  ) {
-
-    this.userName = this.route.snapshot.paramMap.get('userName') ?? '';
-    this.user = {} as User;
-    this.errorMessages = [];
-    this.userId = this.user._id?.toString() ?? '';
-    this.form.disable();
-
-    // service needs to be updated to call findUserByUserName()
-    this.sessionService.verifyUsername(this.userName).subscribe({
-      next: (res) => {
-        this.user = res.data;
-        this.userId = res.data._id;
-      },
-      error: (e) => {
-        console.log(e);
-      },
-      complete: () => {
-        this.form.controls['firstName'].setValue(this.user.firstName);
-        this.form.controls['lastName'].setValue(this.user.lastName);
-        this.form.controls['phoneNumber'].setValue(this.user.phoneNumber);
-        this.form.controls['email'].setValue(this.user.email);
-        this.form.controls['address'].setValue(this.user.address);
-      }
-    });
+import { Message } from 'primeng/api';
+@Component({ selector: 'app-profile', templateUrl: './profile.component.html', styleUrls: ['./profile.component.css'] })
+export class ProfileComponent {
+  userName = '';
+  guest = false;
+  busy = false;
+  errorMessages: Message[] = [];
+  form = this.fb.group({ firstName: ['', [Validators.required, Validators.maxLength(60)]], lastName: ['', [Validators.required, Validators.maxLength(60)]], email: ['', [Validators.email, Validators.maxLength(120)]], phoneNumber: ['', Validators.maxLength(30)], address: ['', Validators.maxLength(240)] });
+  passwordForm = this.fb.group({ currentPassword: ['', Validators.required], newPassword: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(128)]] });
+  deletePassword = '';
+  deleteConfirmed = false;
+  constructor(private fb: FormBuilder, private session: SessionService, private cookies: CookieService, private router: Router) {
+    this.session.me().subscribe({ next: res => { this.userName = res.data.userName; this.guest = res.data.guest; this.form.patchValue(res.data); }, error: e => this.error(e) });
   }
-
-
-
-  ngOnInit(): void {
+  error(e: any) { this.busy = false; this.errorMessages = [{ severity: 'error', summary: 'Unable to save', detail: e.message }]; }
+  saveUser() {
+    if (this.busy || this.form.invalid) return;
+    this.busy = true;
+    this.session.saveProfile(this.form.value).subscribe({ next: () => { this.busy = false; this.errorMessages = [{ severity: 'success', summary: 'Saved', detail: 'Your profile was saved to the database.' }]; }, error: e => this.error(e) });
   }
-
-  // Saves information entered by user
-  saveUser(): void {
-    console.log("inside saveUser" + this.form.controls['firstName'].value);
-    const updatedUser = {
-      firstName: this.form.controls['firstName'].value,
-      lastName: this.form.controls['lastName'].value,
-      phoneNumber: this.form.controls['phoneNumber'].value,
-      email: this.form.controls['email'].value,
-      address: this.form.controls['address'].value,
-      role: {
-        text: this.user.role?.text ?? '',
-      }
-    }
-
-    console.log(this.user._id);
-    console.log(updatedUser);
-
-    this.userService.updateUser(this.userId, updatedUser).subscribe({
-      next: (res) => {
-        console.log("inside userService method" + this.userId);
-        // reload the window
-        this.router.navigate(['/users/profile/' + this.user.userName]);
-        this.form.disable();
-      },
-      error: (e) => {
-        this.errorMessages = [
-          { severity: 'error', summary: 'Error', detail: e.message }
-        ]
-        console.log(`Node.js server error; httpCode:${e.httpCode};message:${e.message}`)
-        console.log(e);
-      }
-    })
+  finish() {
+    this.cookies.delete('sessionuser', '/'); this.cookies.delete('cartItems', '/');
+    this.router.navigate(['/session/login']).then(() => location.reload());
   }
-  // Cancel the form and returns to home
-  cancel(): void {
-    this.router.navigate(['/users/profile/' + this.user.userName])
-    this.form.disable();
+  changePassword() {
+    if (this.busy || this.passwordForm.invalid) return;
+    this.busy = true;
+    this.session.changePassword(this.passwordForm.value.currentPassword || '', this.passwordForm.value.newPassword || '').subscribe({ next: () => this.finish(), error: e => this.error(e) });
   }
-
-  toggleForm(): void {
-    // toggle the form status
-    if (this.form.disabled) {
-
-    this.form.enable();
-    } else {
-    this.form.disable();
-    }
+  deleteAccount() {
+    if (this.busy || !this.deleteConfirmed || !this.deletePassword) return;
+    this.busy = true;
+    this.session.deleteAccount(this.deletePassword).subscribe({ next: () => this.finish(), error: e => this.error(e) });
   }
-
-
 }

@@ -1,125 +1,28 @@
-<!--
-Title: profile.component.html
-Author: Professor Krasso
-Date: 02/12/2023
-Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: Profile details
--->
-
-<p-confirmDialog [style]="{ width: '35vw' }" [baseZIndex]="10000"
-  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-
-<div fxLayout="column">
-  <mat-card class="mat-elevation-z0" style="margin-bottom: 45px">
-    <mat-card-title style="text-align: center; font-weight: lighter">
-      <img src="../assets/profileicon.png" alt="Profile icon" />
-      <br />
-      User Profile
-    </mat-card-title>
-    <mat-card-subtitle style="text-align: center; font-weight: lighter">
-      {{ user.firstName }} {{ user.lastName }}
-    </mat-card-subtitle>
-    <br />
-
-    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
-
-    <form [formGroup]="form" (ngSubmit)="saveUser()" (keydown.enter)="$event.preventDefault()"
-      style="width: 50%; margin: 0 auto">
-
-      <button pButton pRipple type="button" (click)="toggleForm()" icon="pi pi-pencil"
-        class="p-button-rounded p-button-text" id="toggleFormIcon" style="color: #d3a625"></button>
-      <mat-card-content>
-        <div fxLayout="column" fxLayoutGap="10px">
-          <mat-form-field appearance="fill">
-            <mat-label>First Name</mat-label>
-            <input type="text" matInput formControlName="firstName" required />
-            <mat-error class="error" *ngIf="
-                form.controls['firstName'].hasError('required') &&
-                form.controls['firstName'].touched
-              ">
-              First name is a required field.
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Last Name</mat-label>
-            <input type="text" matInput formControlName="lastName" required />
-
-            <mat-error class="error" *ngIf="
-                form.controls['lastName'].hasError('required') &&
-                form.controls['lastName'].touched
-              ">
-              Last name is a required field.
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Phone number</mat-label>
-            <input type="text" matInput formControlName="phoneNumber" required />
-
-            <mat-error
-                  *ngIf="
-                    form.controls['phoneNumber'].hasError('required') &&
-                    form.controls['phoneNumber'].touched
-                  "
-                  >Phone number is required</mat-error
-                >
-
-                <mat-error
-                  *ngIf="
-                    form.controls['phoneNumber'].hasError('pattern') &&
-                    form.controls['phoneNumber'].touched
-                  "
-                  >Invalid phone number format. (xxx) xxx-xxxx and have 10
-                  digits</mat-error
-                >
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Email address</mat-label>
-            <input type="text" matInput formControlName="email" required />
-
-            <mat-error class="error" *ngIf="
-                form.controls['email'].hasError('required') &&
-                form.controls['email'].touched
-              ">
-              Email is a required field.
-            </mat-error>
-
-            <mat-error class="error" *ngIf="
-                form.controls['email'].hasError('email') &&
-                form.controls['email'].touched
-              ">
-              Invalid email format
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Address</mat-label>
-
-            <textarea matInput required formControlName="address"
-              placeholder="505 Main Street Omaha, Nebraska 68111"></textarea>
-
-            <mat-error class="error" *ngIf="
-                form.controls['address'].hasError('required') &&
-                form.controls['address'].touched
-              ">
-              Address is a required field.
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-
-      <ng-container *ngIf="!form.disabled">
-      <mat-card-actions align="end">
-        <button mat-raised-button (click)="cancel()">
-          Cancel
-        </button>
-        <button class="btn-primary" mat-raised-button [disabled]="!form.valid || form.disabled">
-          Submit
-        </button>
-      </mat-card-actions>
-    </ng-container>
+<mat-card class="account-card">
+  <mat-card-title>My profile — {{ userName }}</mat-card-title>
+  <p>Changes persist in Cosmos DB and are visible only to your signed-in account. Use fictional details in this portfolio demo.</p>
+  <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+  <p *ngIf="guest">The shared guest profile is read-only. <a routerLink="/session/register">Register to edit your own account.</a></p>
+  <ng-container *ngIf="!guest">
+    <form [formGroup]="form" (ngSubmit)="saveUser()" fxLayout="column" fxLayoutGap="12px">
+      <mat-form-field appearance="fill"><mat-label>First name</mat-label><input matInput formControlName="firstName" required maxlength="60"></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>Last name</mat-label><input matInput formControlName="lastName" required maxlength="60"></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>Example email (optional)</mat-label><input matInput formControlName="email" type="email" maxlength="120" placeholder="demo@example.com"></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>Fictional phone (optional)</mat-label><input matInput formControlName="phoneNumber" maxlength="30"></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>Fictional address (optional)</mat-label><textarea matInput formControlName="address" maxlength="240"></textarea></mat-form-field>
+      <button mat-raised-button class="btn-primary" type="submit" [disabled]="busy || form.invalid">Save profile</button>
     </form>
-  </mat-card>
-</div>
+    <h2>Change password</h2>
+    <p>This signs you out of all sessions. Sign in again with your new password.</p>
+    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" fxLayout="column" fxLayoutGap="12px">
+      <mat-form-field appearance="fill"><mat-label>Current password</mat-label><input matInput type="password" autocomplete="current-password" formControlName="currentPassword" required></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>New password</mat-label><input matInput type="password" autocomplete="new-password" formControlName="newPassword" required maxlength="128"><mat-hint>At least 12 characters</mat-hint></mat-form-field>
+      <button mat-stroked-button type="submit" [disabled]="busy || passwordForm.invalid">Change password and sign out</button>
+    </form>
+    <h2>Delete my demo account</h2>
+    <p>This permanently deletes your profile and all your invoices.</p>
+    <mat-form-field appearance="fill"><mat-label>Password to delete account</mat-label><input matInput type="password" [(ngModel)]="deletePassword" autocomplete="current-password"></mat-form-field>
+    <p><mat-checkbox [(ngModel)]="deleteConfirmed">I want to delete my account and invoices.</mat-checkbox></p>
+    <button mat-stroked-button color="warn" (click)="deleteAccount()" [disabled]="busy || !deleteConfirmed || !deletePassword">Delete my account</button>
+  </ng-container>
+</mat-card>

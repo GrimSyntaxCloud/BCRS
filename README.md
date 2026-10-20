@@ -1,7 +1,7 @@
 # BCRS — fictional portfolio demo
 
 Azure Static Web Apps Free hosts the Angular frontend and managed Node.js API.
-Open the shared demo to try sample invoices; account screens are read-only examples.
+Register a fictional account to try persistent profiles, secure sign-in, and your own invoices and purchases chart. An optional guest account previews shared sample invoices and fictional administration screens.
 No original Atlas data is used. [Setup, free-tier limits and local development](docs/azure-demo.md).
 
 Team project by Andres Macias, Patrick Wolff, and April Yang.
