@@ -43,7 +43,6 @@ adjustedParts: number;
     this.labor = this.invoice.getLaborAmount();
     this.total = this.invoice.getTotal();
 
-    console.log("HELLO FROM INVOICE SUMMARY DIALOG COMPONENT  ", this.total);
    }
 
   ngOnInit(): void {

@@ -16,9 +16,11 @@ import { InvoiceService } from 'src/app/shared/services/invoice.service';
 })
 export class PurchasesByServiceGraphComponent implements OnInit {
 
+  loading = true;
+  error = '';
   purchases: any;
   data: any;
-  itemCount: string[];
+  itemCount: number[];
   labels: string[];
 
   constructor(private invoiceService: InvoiceService) {
@@ -31,11 +33,9 @@ export class PurchasesByServiceGraphComponent implements OnInit {
     this.invoiceService.findPurchasesByServiceGraph().subscribe({
     next: (res) => {
       this.purchases = res.data;
-      console.log(this.purchases);
+      this.loading = false;
 
       for(const item of this.purchases) {
-        console.log('item object')
-        console.log(item._id);
 
         let title = item._id.title;
         let count = item.count;
@@ -72,11 +72,10 @@ export class PurchasesByServiceGraphComponent implements OnInit {
         ]
    };
   //  verify the data object structure matches the primeng pie chart format
-  console.log('data object')
-  console.log(this.data);
     },
     error: (e) => {
-      console.log(e);
+      this.loading = false;
+      this.error = e.message;
     }
 
   });

@@ -8,7 +8,13 @@ Reference: https://www.youtube.com/watch?v=d_G0cs1G1Hs
 https://angular.io/start
 -->
 
-<ng-container *ngIf="itemCount() > 0 || clearCart()">
+<p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+<mat-card *ngIf="!items.length" style="max-width: 700px; margin: 48px auto; padding: 24px">
+  <h1>Your cart is empty</h1>
+  <p>Choose a repair service to create a sample invoice.</p>
+  <a mat-raised-button routerLink="/service-repair">Browse repair services</a>
+</mat-card>
+<ng-container *ngIf="items.length > 0">
   <mat-card
     style="
       width: 60%;
@@ -69,6 +75,7 @@ https://angular.io/start
                   <button
                     mat-icon-button
                     (click)="removeItemFromCart(item)"
+                    [disabled]="busy" [attr.aria-label]="'Remove ' + item.title"
                     style="color: #e40002; text-align: left"
                   >
                     <mat-icon>delete</mat-icon>
@@ -94,7 +101,7 @@ https://angular.io/start
               <p style="font-weight: bold">Standard Fees:</p>
             </div>
             <div>
-              <p>Labor Fee (one time charge):</p>
+              <p>Labor at $50 per hour:</p>
             </div>
             <ul>
               <li
@@ -102,7 +109,7 @@ https://angular.io/start
                 style="display: flex; align-items: center"
               >
                 <div style="width: 300px; text-align: left; font-family: Lato">
-                  {{ item.title }}
+                  {{ item.title }} · {{ item.laborHours }} {{ item.laborHours === 1 ? 'hour' : 'hours' }} · {{ item.laborHours * 50 | currency }}
                   <mat-divider></mat-divider>
                 </div>
               </li>
@@ -119,11 +126,11 @@ https://angular.io/start
                 style="width: 30%"
               >
                 <mat-form-field appearance="outline" fxFlex>
-                  <mat-label>Labor Fee Adjustment </mat-label>
+                  <mat-label>Additional labor hours (0–40) </mat-label>
                   <input type="number" matInput formControlName="laborFee" />
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex>
-                  <mat-label>Parts Fee Adjustment</mat-label>
+                  <mat-label>Additional parts ($0–$5,000)</mat-label>
                   <input type="number" matInput formControlName="partsFee" />
                 </mat-form-field>
                 <button
@@ -133,6 +140,7 @@ https://angular.io/start
                     color: white;
                     font-family: Lato;
                   "
+                  type="button" [disabled]="busy || adjustedFeesForm.invalid"
                   (click)="updateFees()"
                 >
                   Adjust Fees
@@ -154,7 +162,7 @@ https://angular.io/start
         >
           <div class="subtotal">
             <div style="display: flex; align-items: center">
-              <p style="font-weight: bold; width: 550px">Your subtotal:</p>
+              <p style="font-weight: bold; width: 550px">Estimated invoice total:</p>
               <!-- </div>
             <div style="display: flex; align-items: center"> -->
               <p style="font-weight: bold">
@@ -184,6 +192,7 @@ https://angular.io/start
                 margin-left: 0;
                 margin-right: 0;
               "
+              [disabled]="busy || !username"
               (click)="generateInvoice()"
             >
               Generate Invoice

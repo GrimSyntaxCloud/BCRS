@@ -1,35 +1,118 @@
-# BCRS — fictional portfolio demo
+# BCRS — Bob’s Computer Repair Shop
 
-Azure Static Web Apps Free hosts the Angular frontend and managed Node.js API.
-Register a fictional account to try persistent profiles, secure sign-in, and your own invoices and purchases chart. An optional guest account previews shared sample invoices and fictional administration screens.
-No original Atlas data is used. [Setup, free-tier limits and local development](docs/azure-demo.md).
+A full-stack computer repair shop demo with registration, account profiles,
+service selection, saved invoices, and a purchases chart. The Angular interface
+calls a Node.js API; accounts and invoices persist in Azure Cosmos DB through its
+MongoDB-compatible API.
 
-Team project by Andres Macias, Patrick Wolff, and April Yang.
+**[Open the live demo](https://brave-river-09cd8f10f.6.azurestaticapps.net)** ·
+[Portfolio](https://grimsyntaxcloud.github.io/projects/bcrs/)
 
-# Bcrs
+Originally a team coursework project by **Andres Macias, Patrick Wolff, and
+April Yang**, using teaching material by Professor Krasso. Contributor credits
+remain in the source. The portfolio version adapts the project for Azure hosting
+and adds isolated demo accounts and automated deployment checks.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+## Try it
 
-## Development server
+1. Register with fictional names and a unique demo password (at least 12 characters).
+2. Edit your profile, choose a repair service, and open your cart.
+3. Review and save a sample invoice, then visit **My invoices** and the purchases chart.
+4. Sign out and back in to see the saved data. You can change your password or
+   delete your account and its invoices from your profile.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+You can also open the guest demo without registering. Guest visitors share sample
+invoices and can browse read-only fictional administration records. Registered
+accounts have their own profiles and invoices. No real repair orders, payments,
+or email messages are sent.
 
-## Code scaffolding
+## How it works
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```text
+Angular browser app → /api → Node.js Azure Functions → Cosmos DB (MongoDB API)
+```
 
-## Build
+- **Frontend:** Angular 14, TypeScript, Angular Material, PrimeNG, and Chart.js.
+  Forms collect input, services call the API, and route guards check the session.
+- **API:** `api/handler.js` handles sessions, profiles, and invoices. The API checks
+  authorization independently of the frontend and calculates prices from its own
+  service catalog rather than trusting browser totals.
+- **Accounts:** passwords are salted scrypt hashes. Random session tokens use
+  HttpOnly cookies; the database stores only token hashes. Password changes revoke
+  existing sessions. Registered users cannot read another account’s invoices.
+- **Storage:** database `bcrs-demo`, collection `demo`. Each account document owns
+  its profile, sessions, and invoices. A separate registry document reserves
+  usernames and bounds registrations; a guest document holds the shared samples.
+- **Deployment:** GitHub Actions tests, builds, and packages pull requests. An
+  enabled deployment from `main` publishes to Azure Static Web Apps and checks a
+  real database ping. CI does not create cloud resources.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Location | Purpose |
+| --- | --- |
+| `src/app/pages/`, `src/app/shared/` | Screens, forms, models, and Angular services |
+| `api/accounts.js` | Password hashing, sessions, and account validation |
+| `api/demo.js` | Fictional data, service prices, and invoice calculations |
+| `api/database.js` | Cosmos/MongoDB connection and initial demo records |
+| `api/test/` | Database integration tests and disposable local preview |
+| `infra/`, `.github/workflows/azure.yml` | Azure configuration and CI/CD |
 
-## Running unit tests
+## Run locally without Azure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Use **Node.js 22**, npm, and Chrome/Chromium for the browser tests.
 
-## Running end-to-end tests
+```sh
+npm ci
+npm ci --prefix api
+npm run build
+npm run preview
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Open **http://127.0.0.1:3000**. The preview starts a disposable local MongoDB
+process, seeds fictional records, and runs the same API handler used on Azure.
+It downloads a MongoDB binary on first use, so that first run needs internet
+access. Stop it with Ctrl+C; its data is temporary. No Azure credentials or cloud
+subscription are needed.
 
-## Further help
+To use your own **local** MongoDB instead, create the `demo` collection in a
+`bcrs-demo` database, copy `.env.example` to `.env`, and run:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```sh
+npm run build
+node --env-file=.env api/local.js
+```
+
+That database persists between runs. `npm start` runs only the Angular development
+server; it is not a complete backend/database setup. See
+[the setup guide](docs/azure-demo.md) for deployment and environment details.
+
+## Verify changes
+
+```sh
+npm run test:api
+npm run test:ui
+npm run build
+npm run package:azure
+```
+
+API tests use disposable MongoDB and cover registration, session revocation,
+account isolation, invoice validation, concurrent requests, and capacity limits.
+Browser tests cover cart recovery, catalog prices, totals, and persistence.
+Packaging includes only the built site and the API’s production dependencies.
+
+## Credentials and demo boundaries
+
+- Azure holds `MONGODB_URI` in server-only application settings. GitHub Actions
+  holds the deployment token in `AZURE_STATIC_WEB_APPS_API_TOKEN`. Neither belongs
+  in source code, browser configuration, screenshots, or logs. `.env` is ignored.
+- The demo accepts up to 100 accounts and retains each account’s latest 50 invoices.
+  Use fictional details. Email recovery and a production administration system
+  are not implemented; the guest admin screens are examples only.
+- Azure uses Static Web Apps Free and a 400 RU/s collection in the shared Cosmos
+  free-tier account. Keep the subscription spending limit enabled. Free Trial
+  expiration can make the live demo unavailable; local development remains available.
+- Angular 14 has outstanding dependency advisories. This review is not a security
+  certification; upgrading the frontend framework and its UI libraries remains
+  separate modernization work. The deployed API has an independent dependency lockfile.
+- The retired Atlas-backed server has been removed from the current source.
+  See [the setup guide](docs/azure-demo.md#original-database) for the status of
+  historical credentials; the app does not connect to the original Atlas database.

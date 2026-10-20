@@ -49,7 +49,7 @@ Description: Displays invoice for customer
             <mat-card-content>
               <mat-list>
                 <mat-list-item *ngFor="let lineItem of invoice.getLineItems()">
-                  Labor ({{ lineItem.title }}): {{ lineItem.laborHours }} hours
+                  Labor ({{ lineItem.title }}): {{ lineItem.laborHours }} {{ lineItem.laborHours === 1 ? 'hour' : 'hours' }}
                   @ 50/hr:
                   <div fxFlex></div>
                   {{ lineItem.laborHours * 50 | currency }}

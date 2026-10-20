@@ -84,7 +84,8 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
       if (method === 'PUT' && path === '/session/profile') {
         if (user.guest) return reply(403, 'Register an account to edit your profile.');
         const details = A.profile(body);
-        await collection.updateOne({ _id: user._id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } }, { $set: { profile: details } });
+        const updated = await collection.updateOne({ _id: user._id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } }, { $set: { profile: details } });
+        if (!updated.matchedCount) return reply(401, 'Please sign in again.');
         return reply(200, 'Profile saved.', A.publicUser({ ...user, profile: details }));
       }
       if (method === 'POST' && ['/session/password', '/session/delete-account'].includes(path)) {
@@ -124,7 +125,8 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
         return reply(200, 'Sample invoice saved. No order or payment was placed.', invoice);
       }
       if (method === 'DELETE' && /^\/invoices\/[a-f0-9-]{36}$/.test(path)) {
-        const result = await collection.updateOne({ _id: user._id }, { $pull: { invoices: { _id: path.split('/').pop() } } });
+        const result = await collection.updateOne({ _id: user._id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } }, { $pull: { invoices: { _id: path.split('/').pop() } } });
+        if (!result.matchedCount) return reply(401, 'Please sign in again.');
         return result.modifiedCount ? reply(200, 'Sample invoice removed.') : reply(404, 'Sample invoice not found.');
       }
       return reply(404, 'API route not found.');
