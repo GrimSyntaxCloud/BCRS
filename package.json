@@ -11,7 +11,9 @@
     "dev": "ng build && node ./server/index.js",
     "render-deploy": "ng build --configuration=production",
     "test:api": "npm --prefix api test",
-    "package:azure": "node scripts/package-azure.mjs"
+    "package:azure": "node scripts/package-azure.mjs",
+    "preview": "node api/test/preview.cjs",
+    "test:ui": "ng test --watch=false --browsers=ChromeHeadless"
   },
   "engines": {
     "node": "22.x"
@@ -29,16 +31,11 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
-    "bcryptjs": "^2.4.3",
     "chart.js": "^4.2.1",
-    "express": "^4.18.1",
-    "mongoose": "^6.5.2",
     "ngx-cookie-service": "^14.0.1",
     "primeicons": "^6.0.1",
     "primeng": "^14.2.3",
     "rxjs": "~7.5.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^4.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

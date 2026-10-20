@@ -28,6 +28,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm ci --prefix api --no-audit --no-fund
       - run: npm run test:api
+      - run: npm run test:ui
       - run: npm run build
       - run: az bicep build --file infra/main.bicep --outfile /tmp/bcrs-arm.json
       - run: npm run package:azure

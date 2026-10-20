@@ -81,7 +81,7 @@ export class Invoice {
 
   // function for calculating the total charge by adding up labor amount, lineItemTotal, adjusted labor fees and parts fees
   getTotal(): number{
-    return Number(this.getLaborAmount()) + Number(this.getLineItemTotal() + Number(this.adjustedLabor + this.adjustedParts));
+    return Math.round((this.getLaborAmount() + this.getLineItemTotal() + this.adjustedLabor + this.adjustedParts) * 100) / 100;
   }
 
 

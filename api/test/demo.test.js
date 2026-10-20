@@ -145,3 +145,27 @@ test('rejects cross-site writes, oversized input and throttles; database errors 
   const response = await call('GET', '/health', undefined, '', broken);
   assert.equal(response.status, 503); assert(!JSON.stringify(response).includes('secret-host-and-key'));
 });
+
+test('logout during a profile write or invoice delete cannot report success or change data', async () => {
+  const registered = await call('POST', '/session/register', registration('write-race'));
+  let sessionCookie = cookie(registered);
+  const saved = await call('POST', '/invoices/write-race', { lineItems: [{ id: 100 }] }, sessionCookie);
+  const invoiceId = saved.jsonBody.data._id;
+  const revokingCollection = new Proxy(collection, {
+    get(target, key) {
+      if (key === 'findOne') return async (...args) => {
+        const user = await target.findOne(...args);
+        if (user?._id === 'user:write-race') await target.updateOne({ _id: user._id }, { $set: { sessions: [] } });
+        return user;
+      };
+      const value = target[key];
+      return typeof value === 'function' ? value.bind(target) : value;
+    },
+  });
+  const racing = createHandler({ prepare: async () => ({ db, collection: revokingCollection }) });
+  assert.equal((await call('PUT', '/session/profile', { firstName: 'Must not save', lastName: 'Customer' }, sessionCookie, racing)).status, 401);
+  assert.equal((await collection.findOne({ _id: 'user:write-race' })).profile.firstName, 'Fictional');
+  sessionCookie = cookie(await call('POST', '/session/login', { userName: 'write-race', password: pass }));
+  assert.equal((await call('DELETE', `/invoices/${invoiceId}`, undefined, sessionCookie, racing)).status, 401);
+  assert.equal((await collection.findOne({ _id: 'user:write-race' })).invoices.length, 1);
+});

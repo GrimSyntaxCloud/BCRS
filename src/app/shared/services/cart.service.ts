@@ -1,104 +1,56 @@
-/*
-Title: cart.service.ts
-Author: Professor Krasso
-Updated Date: 02/21/2023
-Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: Service for cart management
-*/
-
-
-
+/* Original cart service by Professor Krasso; modified by Andres Macias,
+   Patrick Wolff, and April Yang. */
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.interface';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { ProductService } from './product.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CartService {
-
-  // this stores the items in the shopping cart
   items: Product[] = [];
+  constructor(private cookies: CookieService, private catalog: ProductService) {}
 
-  constructor(private cookieService: CookieService, private router: Router) { }
+  getItems(): Product[] {
+    try {
+      const stored: unknown = JSON.parse(this.cookies.get('cartItems') || '[]');
+      if (!Array.isArray(stored)) throw new Error('Invalid cart');
+      // Cookies select catalog IDs only; stale or edited prices are not trusted.
+      const ids = new Set(stored.filter(item => item && typeof item.id === 'number').map(item => item.id));
+      this.items = this.catalog.getProducts().filter(item => ids.has(item.id));
+    } catch { this.items = []; }
+    return this.items;
+  }
 
-  // one product only can be added to the shopping cart once
-  addToCart(product: Product) {
-    // get the items from the cookie and store them in the items array
-    this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
-
-    if (this.items && this.items.length > 0 && this.items.find(item => item.id === product.id)) {
-      alert(product.title + ' is already in your shopping cart, please check it out.');
-
-      this.updateCartCookies();
-      return this.items;
-    }
-    else {
-      alert(product.title + ' has been added to your shopping cart.');
+  addToCart(product: Product): Product[] {
+    this.getItems();
+    if (this.items.some(item => item.id === product.id)) {
+      alert(product.title + ' is already in your shopping cart.');
+    } else {
       this.items.push(product);
-
-      // update the cart cookie with the new list
       this.updateCartCookies();
-
-      return this.items;
+      alert(product.title + ' has been added to your shopping cart.');
     }
-  }
-
-  // get items for shopping cart
-  getItems() {
     return this.items;
   }
 
-
-  // calculate the total cost of the order by adding up the each product price and labor fee
-  getSubtotal(): any {
-    let subTotal: number = 0;
-
-    // get the items from the cookie and store them in the items array
-    this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
-
-    for (let item of this.items) {
-      subTotal += Number(item.price);
-    }
-    return Number(subTotal);
+  getSubtotal(): number {
+    return Math.round(this.getItems().reduce((total, item) => total + item.price + item.laborHours * 50, 0) * 100) / 100;
   }
 
-
-  // remove one product from the shopping cart
-  removeItemFromCart(product: Product) {
-
-    this.items = this.items.filter(item => item.id != product.id);
-    console.log('inside remove from cart', this.items);
-
-
-    // update the cart cookie with the new list
-    // this.cookieService.set('cartItems', JSON.stringify(this.items));
+  removeItemFromCart(product: Product): Product[] {
+    this.items = this.getItems().filter(item => item.id !== product.id);
     this.updateCartCookies();
-
-    return this.items
-
-  }
-
-  updateCartCookies() {
-    // update the cart cookie with the new list. if user doesn't log out, the cookie will keep the items in the shopping cart for 5 days.
-    this.cookieService.set('cartItems', JSON.stringify(this.items), 5);
-
-    //update the cookie count
-    this.cookieService.set('cartCount', JSON.stringify(this.items.length), 5);
-
-
-  }
-
-
-
-
-  clearCart() {
-    this.items = [];
     return this.items;
   }
 
+  updateCartCookies(): void {
+    this.cookies.set('cartItems', JSON.stringify(this.items), 5, '/', undefined, location.protocol === 'https:', 'Strict');
+    this.cookies.set('cartCount', String(this.items.length), 5, '/', undefined, location.protocol === 'https:', 'Strict');
+  }
 
+  clearCart(): Product[] {
+    this.items = [];
+    this.updateCartCookies();
+    return this.items;
+  }
 }

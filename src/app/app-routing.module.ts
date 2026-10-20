@@ -147,7 +147,7 @@ const routes: Routes = [
       },
       {
         path: 'invoices/:userName',
-        component: InvoiceSummaryDialogComponent,
+        redirectTo: '/invoices', pathMatch: 'full',
       },
       {
         path: 'not-found',

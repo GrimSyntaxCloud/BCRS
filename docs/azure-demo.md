@@ -83,7 +83,10 @@ Use Node 22. Run `npm ci`, `npm ci --prefix api`, `npm run build`,
 and `npm run test:api`. Tests use an ephemeral local MongoDB process and fictional
 data, not the original Atlas database.
 
-For a local preview, set `MONGODB_URI` and `MONGODB_DATABASE=bcrs-demo` as server
+For a disposable local preview, run `npm run preview` after building. It starts
+a temporary MongoDB and removes it on shutdown. No Azure credentials are needed.
+
+For a persistent local database, create the `demo` collection first and set `MONGODB_URI` and `MONGODB_DATABASE=bcrs-demo` as server
 environment variables, then run `node api/local.js`. For a private `.env`, use
 `node --env-file=.env api/local.js`. Never commit `.env`.
 
@@ -93,8 +96,11 @@ This is a portfolio demo, not a production account or commerce system.
 ## Original database
 
 No original MongoDB Atlas data was accessed or copied. The original database
-connection string is removed from the current configuration, but remains in Git
-history. Its owner should rotate/revoke those old credentials if still active.
-Legacy model/route source remains for coursework reference and is not deployed.
+credentials were removed from the published `main` and `dev` histories on
+October 20, 2026. Merged PR references, cached commits, and old clones may retain
+copies. Revocation remains unconfirmed because the owning Atlas account has not
+been identified; its owner should revoke any still-active credentials. The
+retired server models and routes are removed from current source; the deployed
+backend is `api/`.
 
 Original project contributors: Andres Macias, Patrick Wolff, and April Yang.

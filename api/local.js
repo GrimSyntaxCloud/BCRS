@@ -38,3 +38,5 @@ const server = http.createServer(async (req, res) => {
 });
 server.listen(process.env.PORT || 3000, process.env.HOST || '127.0.0.1',
   () => console.log('BCRS local demo ready.'));
+
+module.exports = server;
