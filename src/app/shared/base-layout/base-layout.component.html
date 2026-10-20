@@ -31,6 +31,8 @@ Description: application base layout template
             class="ml-xs"
             disabled="false"
             class="shopping-cart"
+            aria-label="Open sample cart"
+            routerLink="/cart/{{ sessionUserName }}"
             *ngIf="itemCount() > 0"
           >
             <mat-icon
@@ -38,12 +40,11 @@ Description: application base layout template
               [matBadgeHidden]="itemCount() <= 0"
               matBadgeColor="warn"
 
-              routerLink="/cart/{{ sessionUserName }}"
               >shopping_cart</mat-icon
             >
           </button>
 
-          <button [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
+          <button aria-label="Demo account menu" [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
             <mat-icon class="profileIcon">person</mat-icon>
           </button>
 
