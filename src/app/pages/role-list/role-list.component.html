@@ -23,7 +23,7 @@ Description: display list of roles
       <h1 class="title" style="background-color: #eeba30; text-align: center; margin-top: 20px">
         Role Configuration Page! <br />
         <span class="subtitle">
-          Fields marked with an asterisk(*) are required.
+          Read-only fictional examples. No personal information is stored.
         </span>
       </h1>
     </div>
@@ -33,25 +33,7 @@ Description: display list of roles
     <div fxFlex>
       <div fxLayout="column" class="pageDesign">
         <mat-card>
-          <form [formGroup]="roleForm" (ngSubmit)="create(); roleForm.reset()">
-            <mat-form-field appearance="fill" class="w-100" style="width: 100%">
-              <mat-label style="width: 100%">Roles</mat-label>
-              <input type="text" matInput formControlName="text" required placeholder="Enter a role..."
-                style="width: 100%" />
 
-              <button type="submit" [disabled]="!roleForm.valid" mat-icon-button matSuffix>
-                <mat-icon color="primary" style="width: 36px; height: 36px; font-size: 36px" matSuffix>
-                  add_circle</mat-icon>
-              </button>
-            </mat-form-field>
-
-            <mat-error *ngIf="
-                roleForm.controls['text'].hasError('required') &&
-                roleForm.controls['text'].touched
-              ">
-              role is a required field.
-            </mat-error>
-          </form>
         </mat-card>
       </div>
     </div>
@@ -79,10 +61,8 @@ Description: display list of roles
               {{ role.text }}
             </td>
             <td style="text-align: center">
-              <button pButton pRipple type="button" routerLink="/roles/{{ role._id }}" icon="pi pi-pencil"
-                class="p-button-rounded p-button-text" style="color: #d3a625"></button>
-              <button pButton pRipple type="button" (click)="delete(role._id)" icon="pi pi-trash"
-                class="p-button-rounded p-button-text" style="color: #ae0001"></button>
+
+
             </td>
           </tr>
         </ng-template>

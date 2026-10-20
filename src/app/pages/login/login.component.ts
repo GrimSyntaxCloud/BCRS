@@ -47,14 +47,14 @@ export class LoginComponent implements OnInit {
    * details: calls the session service to login
    */
   login() {
-    const userName = this.loginForm.controls['userName'].value;
-    const password = this.loginForm.controls['password'].value;
+    const userName = 'demo';
+    const password = '';
 
     this.sessionService.login(userName, password).subscribe({
       next: (res) => {
         console.log(res);
         this.cookieService.set('sessionuser', res.data.userName, 1);
-        this.router.navigate(['']);
+        this.router.navigate(['']).then(() => window.location.reload());
       },
       error: (e) => {
         this.errorMessages = [

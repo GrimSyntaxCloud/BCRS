@@ -21,10 +21,7 @@ Description: application base layout template
 
         <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
-          <a class="navbar-link-signUp" routerLink="/session/register"
-            >Sign up</a
-          >
-          <a class="navbar-link-logIn" routerLink="/session/login">Log in</a>
+
         </ng-container>
 
         <ng-container *ngIf="sessionUserName">
@@ -113,6 +110,7 @@ Description: application base layout template
     </nav>
   </header>
 
+  <p role="note" style="padding: 14px; margin: 0; background: #fff4d2; color: #222; text-align: center">Shared fictional demo · sample invoices only · latest 50 invoices retained · no real orders or payments. Account and security examples are read-only.</p>
   <div class="content">
     <router-outlet></router-outlet>
   </div>

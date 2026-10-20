@@ -24,7 +24,7 @@ Description: Create, display security questions template
       <h1 class="title" style="background-color: #eeba30; text-align: center; margin-top: 20px">
         Security Questions Configuration Page! <br />
         <span class="subtitle">
-          Fields marked with an asterisk(*) are required.
+          Read-only fictional examples. No personal information is stored.
         </span>
       </h1>
     </div>
@@ -34,25 +34,7 @@ Description: Create, display security questions template
     <div fxFlex>
       <div fxLayout="column" class="pageDesign">
         <mat-card>
-          <form [formGroup]="sqForm" (ngSubmit)="create(); sqForm.reset()">
-            <mat-form-field appearance="fill" class="w-100" style="width: 100%">
-              <mat-label style="width: 100%">Security question</mat-label>
-              <input type="text" matInput formControlName="text" required placeholder="Enter a security question..."
-                style="width: 100%" />
 
-              <button type="submit" [disabled]="!sqForm.valid" mat-icon-button matSuffix>
-                <mat-icon color="primary" style="width: 36px; height: 36px; font-size: 36px" matSuffix>
-                  add_circle</mat-icon>
-              </button>
-            </mat-form-field>
-
-            <mat-error *ngIf="
-                sqForm.controls['text'].hasError('required') &&
-                sqForm.controls['text'].touched
-              ">
-              Security question is a required field.
-            </mat-error>
-          </form>
         </mat-card>
       </div>
     </div>
@@ -80,10 +62,8 @@ Description: Create, display security questions template
               {{ sq.text }}
             </td>
             <td style="text-align: center">
-              <button pButton pRipple type="button" routerLink="/security-questions/{{ sq._id }}" icon="pi pi-pencil"
-                class="p-button-rounded p-button-text" style="color: #d3a625"></button>
-              <button pButton pRipple type="button" (click)="delete(sq._id)" icon="pi pi-trash"
-                class="p-button-rounded p-button-text" style="color: #ae0001"></button>
+
+
             </td>
           </tr>
         </ng-template>

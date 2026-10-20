@@ -28,7 +28,7 @@ export class CartService {
   // one product only can be added to the shopping cart once
   addToCart(product: Product) {
     // get the items from the cookie and store them in the items array
-    this.items = JSON.parse(this.cookieService.get('cartItems')) || '[]';
+    this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
 
     if (this.items && this.items.length > 0 && this.items.find(item => item.id === product.id)) {
       alert(product.title + ' is already in your shopping cart, please check it out.');
@@ -58,7 +58,7 @@ export class CartService {
     let subTotal: number = 0;
 
     // get the items from the cookie and store them in the items array
-    this.items = JSON.parse(this.cookieService.get('cartItems')) || 0;
+    this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
 
     for (let item of this.items) {
       subTotal += Number(item.price);

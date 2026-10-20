@@ -53,7 +53,7 @@ export class CartComponent implements OnInit {
 
     this.username = this.cookieService.get('sessionuser') || '';
     // get the cart items from the cookie and parse them to JSON
-    this.items = JSON.parse(this.cookieService.get('cartItems')) || '[]';
+    this.items = JSON.parse(this.cookieService.get('cartItems') || '[]');
     this.invoice = {} as Invoice;
     this.errorMessages = [];
     this.successMessages = [];
@@ -116,6 +116,7 @@ export class CartComponent implements OnInit {
     console.log('generateInvoice() this.products');
     console.log(this.items);
 
+    this.lineItems = [];
     for (let item of this.items) {
       this.lineItems.push(item);
     }
@@ -150,11 +151,11 @@ export class CartComponent implements OnInit {
               // refresh the page then navigate to the service repair page
               this.router.navigate(['/service-repair']).then(() => { window.location.reload() });
               this.successMessages = [
-                { severity: 'success', summary: 'Service Repair Invoice Created', detail: 'Your order has been processed successfully.' }
+                { severity: 'success', summary: 'Service Repair Invoice Created', detail: 'Your sample invoice was saved. No order or payment was placed.' }
               ]
             },
             error: (e) => {
-              console.log(e);
+              this.errorMessages = [{ severity: 'error', summary: 'Invoice not saved', detail: e.message }];
             }
           })
         }
@@ -178,7 +179,7 @@ export class CartComponent implements OnInit {
 
   // use cookies to keep the cartItems (the shopping cart and items) persisting on the page reload.
   itemCount(){
-    let cartCount = JSON.parse(this.cookieService.get('cartItems')) || '[]';
+    let cartCount = JSON.parse(this.cookieService.get('cartItems') || '[]');
     return cartCount.length;
 
   }
