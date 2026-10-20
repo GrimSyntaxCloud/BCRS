@@ -26,16 +26,17 @@
   >
     <mat-card-content>
       <!-- three columns in a row -->
-      <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'5px'">
+      <div class="service-grid">
         <!-- loop over cards in the grid list-->
-        <mat-grid-tile *ngFor="let product of products">
+        <div *ngFor="let product of products">
           <!-- card for contains service repair information  -->
           <mat-card
             style="
               background-color: #f2f2f2;
               border-style: solid;
               border-color: #8492a6;
-              width: 280px;
+              height: 100%;
+              box-sizing: border-box;
             "
           >
             <mat-card-header style="display: block; text-align: center">
@@ -102,8 +103,8 @@
             </mat-card-footer>
           </mat-card>
           <!-- end card -->
-        </mat-grid-tile>
-      </mat-grid-list>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
