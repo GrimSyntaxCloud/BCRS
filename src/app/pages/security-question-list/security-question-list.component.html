@@ -19,8 +19,8 @@ Description: Create, display security questions template
     margin-bottom: 150px;
     background-color: #c0c0c0;
   ">
-  <div fxLayout="column" fxLayoutGap="20px">
-    <div fxFlex>
+  <div class="layout-column gap-20">
+    <div class="flex-grow">
       <h1 class="title" style="background-color: #eeba30; text-align: center; margin-top: 20px">
         Security Questions Configuration Page! <br />
         <span class="subtitle">
@@ -31,8 +31,8 @@ Description: Create, display security questions template
 
     <!-- enter and submit security question form or returns error messages-->
 
-    <div fxFlex>
-      <div fxLayout="column" class="pageDesign">
+    <div class="flex-grow">
+      <div class="layout-column pageDesign">
         <mat-card>
 
         </mat-card>
@@ -40,7 +40,7 @@ Description: Create, display security questions template
     </div>
 
     <!-- display security questions with edit and delete button-->
-    <div fxFlex>
+    <div class="flex-grow">
       <p-table [value]="securityQuestions" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>

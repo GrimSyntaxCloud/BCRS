@@ -27,6 +27,8 @@ jobs:
             api/package-lock.json
       - run: npm ci --no-audit --no-fund
       - run: npm ci --prefix api --no-audit --no-fund
+      - run: npm audit --audit-level=low
+      - run: npm audit --prefix api --audit-level=low
       - run: npm run test:api
       - run: npm run test:ui
       - run: npm run build

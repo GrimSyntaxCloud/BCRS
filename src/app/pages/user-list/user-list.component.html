@@ -22,8 +22,8 @@ Description: Displays list of users with the ability to
     rejectButtonStyleClass="p-button-text"
   ></p-confirmDialog>
 
-  <div fxLayout="column" fxLayoutGap="20px">
-    <div fxFlex>
+  <div class="layout-column gap-20">
+    <div class="flex-grow">
       <h1 class="title">
         User's Configuration Page!<br />
         <span class="subtitle">
@@ -33,12 +33,12 @@ Description: Displays list of users with the ability to
     </div>
 
     <!-- first column -->
-    <div fxFlex>
+    <div class="flex-grow">
 
     </div>
 
     <!-- second column -->
-    <div fxFlex>
+    <div class="flex-grow">
       <p-table [value]="users" responsiveLayout="=scroll">
         <ng-template pTemplate="header">
           <tr>

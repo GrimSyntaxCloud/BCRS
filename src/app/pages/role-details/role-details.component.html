@@ -7,7 +7,7 @@ Description: Update role Question
 -->
 
 <!-- page title -->
-<div fxLayout="column">
+<div class="layout-column">
   <mat-card class="mat-elevation-z8">
     <mat-card-title style="text-align: center; font-weight: lighter"
       >Update Role Form</mat-card-title
@@ -17,7 +17,7 @@ Description: Update role Question
     </mat-card-subtitle>
     <br />
     <!-- displays error message -->
-    <p-messages [(value)]="errorMessage" [enableService]="false"></p-messages>
+    <app-messages [(value)]="errorMessage" [enableService]="false"></app-messages>
     <!-- saves updated role or returns error message-->
     <form
       [formGroup]="editForm"
@@ -25,7 +25,7 @@ Description: Update role Question
       style="width: 50%; margin: 0 auto"
     >
       <mat-card-content>
-        <div fxLayout="column" fxLayoutGap="10px">
+        <div class="layout-column gap-10">
           <mat-form-field appearance="fill">
             <mat-label>Role</mat-label>
             <input type="text" matInput formControlName="text" required />

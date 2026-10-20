@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
-@Component({ selector: 'app-base-layout', templateUrl: './base-layout.component.html', styleUrls: ['./base-layout.component.css'] })
+@Component({
+  standalone: false, selector: 'app-base-layout', templateUrl: './base-layout.component.html', styleUrls: ['./base-layout.component.css'] })
 export class BaseLayoutComponent {
   year = Date.now();
   sessionUserName = '';

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-delete-record-dialog',
   templateUrl: './delete-record-dialog.component.html',
   styleUrls: ['./delete-record-dialog.component.css']

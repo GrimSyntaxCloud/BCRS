@@ -1,0 +1,2 @@
+.invoice-line { display: flex; align-items: center; gap: 16px; white-space: normal; }
+mat-list-item { height: auto; min-height: 48px; }

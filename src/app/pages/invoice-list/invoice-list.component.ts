@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-@Component({ selector: 'app-invoice-list', template: `
+@Component({
+  standalone: false, selector: 'app-invoice-list', template: `
 <mat-card style="max-width: 900px; margin: 32px auto; padding: 24px">
   <mat-card-title>My sample invoices</mat-card-title>
   <p>The latest 50 invoices are saved for your account. Guest invoices are shared. No real orders or payments are placed.</p>

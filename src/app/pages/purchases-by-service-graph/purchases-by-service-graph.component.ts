@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 
 @Component({
+  standalone: false,
   selector: 'app-purchases-by-service-graph',
   templateUrl: './purchases-by-service-graph.component.html',
   styleUrls: ['./purchases-by-service-graph.component.css']

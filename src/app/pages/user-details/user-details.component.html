@@ -12,7 +12,7 @@ Description: User Details
   rejectButtonStyleClass="p-button-text"
 ></p-confirmDialog>
 
-<div fxLayout="column">
+<div class="layout-column">
   <mat-card class="mat-elevation-z0" style="margin-bottom: 45px">
     <mat-card-title style="text-align: center; font-weight: lighter">
       <img src="../assets/profileicon.png" alt="Profile icon" />
@@ -24,7 +24,7 @@ Description: User Details
     </mat-card-subtitle>
     <br />
 
-    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+    <app-messages [(value)]="errorMessages" [enableService]="false"></app-messages>
 
     <form
       [formGroup]="form"
@@ -33,7 +33,7 @@ Description: User Details
       style="width: 50%; margin: 0 auto"
     >
       <mat-card-content>
-        <div fxLayout="column" fxLayoutGap="10px">
+        <div class="layout-column gap-10">
           <mat-form-field appearance="fill">
             <mat-label>First Name</mat-label>
             <input type="text" matInput formControlName="firstName" required />

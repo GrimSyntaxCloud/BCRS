@@ -168,13 +168,12 @@ const routes: Routes = [
 
 @NgModule({
   /**
-   * Description: UseHash: true, enableTracing: false, scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy'
+   * Description: UseHash: true, enableTracing: false, scrollPositionRestoration: 'enabled'
    * UseHash: true - This is used to enable the hash location strategy.
    * enableTracing: false - This is used to enable the router events.
    * scrollPositionRestoration: 'enabled' - This is used to enable the scroll position restoration.
-  * relativeLinkResolution: 'legacy' - This is used to enable the legacy relative link resolution. Because of this, the router will use the first route that matches the URL.
    */
-  imports: [RouterModule.forRoot(routes, { useHash: true, enableTracing: false, scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, enableTracing: false, scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

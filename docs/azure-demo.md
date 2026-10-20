@@ -79,7 +79,7 @@ The account key grants server-side access to this shared Cosmos account; keep it
 
 ## Local development
 
-Use Node 22. Run `npm ci`, `npm ci --prefix api`, `npm run build`,
+Use Node 22.12 or newer within Node 22. Run `npm ci`, `npm ci --prefix api`, `npm run build`,
 and `npm run test:api`. Tests use an ephemeral local MongoDB process and fictional
 data, not the original Atlas database.
 
@@ -90,7 +90,7 @@ For a persistent local database, create the `demo` collection first and set `MON
 environment variables, then run `node api/local.js`. For a private `.env`, use
 `node --env-file=.env api/local.js`. Never commit `.env`.
 
-The original Angular 14 frontend and its build dependencies are legacy software.
+The frontend now uses patched Angular 21 LTS and compatible UI libraries.
 This is a portfolio demo, not a production account or commerce system.
 
 ## Original database

@@ -2,8 +2,8 @@
   <mat-card-title>Sign in to BCRS</mat-card-title>
   <mat-card-content>
     <p>Use your registered demo account to manage your profile and sample invoices.</p>
-    <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
-    <form [formGroup]="loginForm" (ngSubmit)="login()" fxLayout="column" fxLayoutGap="16px">
+    <app-messages [(value)]="errorMessages" [enableService]="false"></app-messages>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="layout-column gap-16">
       <mat-form-field appearance="fill"><mat-label>Username</mat-label><input matInput formControlName="userName" autocomplete="username" required maxlength="32"></mat-form-field>
       <mat-form-field appearance="fill"><mat-label>Password</mat-label><input matInput formControlName="password" type="password" autocomplete="current-password" required maxlength="128"></mat-form-field>
       <button mat-raised-button class="btn-primary" type="submit" [disabled]="busy || loginForm.invalid">Sign in</button>

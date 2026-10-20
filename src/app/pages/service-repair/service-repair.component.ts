@@ -9,7 +9,7 @@ Description: service-repair component
 
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/product.interface';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions as Message } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -19,6 +19,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 
 
 @Component({
+  standalone: false,
   selector: 'app-service-repair',
   templateUrl: './service-repair.component.html',
   styleUrls: ['./service-repair.component.css']

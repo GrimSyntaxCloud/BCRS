@@ -12,7 +12,7 @@ Description: verify-security-question-form component
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions as Message } from 'primeng/api';
 import { SelectedSecurityQuestion } from '../../models/selected-security-question.interface';
 import { VerifySecurityQuestionModel } from '../../models/verify-security-question.interface';
 import { UserService } from '../../services/user.service';
@@ -20,6 +20,7 @@ import { SessionService } from '../../services/session.service';
 
 
 @Component({
+  standalone: false,
   selector: 'app-verify-security-questions-form',
   templateUrl: './verify-security-questions-form.component.html',
   styleUrls: ['./verify-security-questions-form.component.css']
