@@ -9,11 +9,12 @@
     "test": "ng test",
     "server": "nodemon ./server/index.js",
     "dev": "ng build && node ./server/index.js",
-    "render-deploy": "ng build --configuration=production"
+    "render-deploy": "ng build --configuration=production",
+    "test:api": "npm --prefix api test",
+    "package:azure": "node scripts/package-azure.mjs"
   },
   "engines": {
-    "node": "19.4.0",
-    "npm": "9.2.0"
+    "node": "22.x"
   },
   "private": true,
   "dependencies": {

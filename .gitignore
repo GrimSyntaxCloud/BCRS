@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/dist/
+/api/node_modules/
+/release/
+/bcrs.zip
+.env
+.cache/
