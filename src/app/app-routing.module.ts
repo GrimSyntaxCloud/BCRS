@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
 import { LoginComponent } from "./pages/login/login.component";
+import { InvoiceListComponent } from './pages/invoice-list/invoice-list.component';
 import { AuthGuard } from './auth.guard';
 import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component';
 import { SecurityQuestionListComponent } from './pages/security-question-list/security-question-list.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
     path: '',
     component: BaseLayoutComponent,
     children: [
+      { path: 'invoices', component: InvoiceListComponent, canActivate: [AuthGuard] },
       {
         path: '',
         component: HomeComponent
@@ -86,7 +88,7 @@ const routes: Routes = [
         },
       {
         path: 'users/profile/:userName',
-        redirectTo: '/users', pathMatch: 'full'  // for logged in user
+        component: ProfileComponent, canActivate: [AuthGuard]  // for logged in user
       },
       {
         path: 'security-questions',
@@ -110,7 +112,7 @@ const routes: Routes = [
       {
         path: 'graph',
         component: PurchasesByServiceGraphComponent,
-        canActivate: [RoleGuard] // for logged in user
+        canActivate: [AuthGuard] // for logged in user
       },
       {
         path: 'cart/:userName',
@@ -129,7 +131,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
-        redirectTo: 'login', pathMatch: 'full' // RegisterComponent
+        component: RegisterComponent
       },
       {
         path: 'forgot',

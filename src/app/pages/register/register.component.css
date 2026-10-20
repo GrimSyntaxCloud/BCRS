@@ -1,0 +1,2 @@
+.account-card { max-width: 540px; margin: 40px auto; padding: 28px; }
+@media (max-width: 600px) { .account-card { margin: 16px; padding: 20px; } }

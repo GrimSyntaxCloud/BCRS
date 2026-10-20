@@ -1,74 +1,28 @@
-/*
-Title: base-layout.component.ts
-Author: Professor Krasso
-Date: 02/09/2023
-Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: application layout component
-*/
-
-
-import { Component, OnInit } from '@angular/core';
+// Original layout by Professor Krasso and the BCRS team.
+import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { CartService } from '../services/cart.service';
 import { SessionService } from '../services/session.service';
-
-
-@Component({
-  selector: 'app-base-layout',
-  templateUrl: './base-layout.component.html',
-  styleUrls: ['./base-layout.component.css']
-})
-export class BaseLayoutComponent implements OnInit {
-
-  year: number = Date.now();
-
-  sessionUserName: string;
-  role: string;
-
-  constructor(
-    private cookieService: CookieService,
-    private router: Router,
-    private cartService: CartService,
-    private sessionService: SessionService
-  ) {
-     // from login component
-    this.sessionUserName = this.cookieService.get('sessionuser');
-    this.role = 'standard';
-
-    // if the cart cookie exists, do nothing, otherwise, create an empty cart cookie
-    if (!this.cookieService.check('cartItems')) {
-      this.cookieService.set('cartItems', '[]', 5);
-    }
-
-    if (this.sessionUserName !== '') {
-    this.sessionService.verifyUsername(this.sessionUserName).subscribe({
-      next: (res) => {
-        this.role = res.data.role.text;
-        console.log(this.role);
-      },
-      error: (e) => {
-        console.log(e);
-      }
-    });
+@Component({ selector: 'app-base-layout', templateUrl: './base-layout.component.html', styleUrls: ['./base-layout.component.css'] })
+export class BaseLayoutComponent {
+  year = Date.now();
+  sessionUserName = '';
+  role = 'standard';
+  guest = false;
+  logoutError = '';
+  constructor(private cookies: CookieService, private router: Router, private session: SessionService) {
+    this.session.me().subscribe({ next: res => {
+      this.sessionUserName = res.data.userName; this.role = res.data.role.text; this.guest = res.data.guest;
+      this.cookies.set('sessionuser', res.data.userName, 1, '/', undefined, location.protocol === 'https:', 'Strict');
+    }, error: () => { this.cookies.delete('sessionuser', '/'); } });
   }
-
-
-    this.year = Date.now();
-  }
-
-  ngOnInit(): void {
-  }
-
-    // logout function deletes all cookies and navigate user to the home page by reloading the window
   logout() {
-    this.cookieService.deleteAll();
-    this.router.navigate(['/']).then(() => { window.location.reload(); });
+    this.session.logout().subscribe({ next: () => {
+      this.cookies.delete('sessionuser', '/'); this.cookies.delete('cartItems', '/');
+      this.router.navigate(['/session/login']).then(() => location.reload());
+    }, error: e => { this.logoutError = e.message; } });
   }
-
-  itemCount(){
-    let cartCount = JSON.parse(this.cookieService.get('cartItems') || '[]');
-    return cartCount.length;
+  itemCount() {
+    try { const items = JSON.parse(this.cookies.get('cartItems') || '[]'); return Array.isArray(items) ? items.length : 0; } catch { return 0; }
   }
-
 }

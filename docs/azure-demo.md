@@ -1,10 +1,37 @@
 # BCRS fictional demo on Azure
 
-This deployment preserves the repair catalog, cart, invoice preview, persistent
-sample invoices, and purchases chart. User, role, and security-question screens
-show read-only fictional examples. Registration, recovery, password changes and
-account edits are disabled in the UI and rejected independently by the API.
-Opening the demo is not authentication. There are no real orders or payments.
+This is a full-stack portfolio application: visitors register a fictional account,
+sign in, edit their profile, change their password, create/read/delete invoices,
+and view their own purchases chart. Accounts and invoices persist in Cosmos DB.
+The optional guest account shares fictional invoices and read-only administration
+examples. Guest access never lists or changes registered accounts.
+There are no real orders or payments. Email recovery is not configured; the
+original unauthenticated password-reset/security-answer routes remain disabled.
+
+## Authentication and account boundaries
+
+- Passwords use salted scrypt (`N=65536, r=8, p=2`, 64-byte output), following an
+  [OWASP recommended configuration](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html).
+  Plaintext passwords are never stored or returned. Password length is 12–128
+  characters, with an additional 128-byte maximum enforced by the API.
+- Sessions use random 256-bit tokens in `HttpOnly; Secure; SameSite=Strict` cookies,
+  scoped to `/api`, with an eight-hour expiry. Only token hashes are stored.
+  Up to three sessions per registered account are retained. Logout revokes a
+  token; password changes revoke all tokens. Local preview omits `Secure` only.
+- The legacy `sessionuser` cookie is a display hint, never authorization. Route
+  guards check the server session; every protected API independently checks it.
+- The API derives invoice ownership and roles from the server session, ignores
+  client-supplied roles/totals, and allowlists editable profile fields. Registered
+  users receive `standard` access. The guest's administrator label is only a
+  preview of fictional seed records, with no access to registered accounts.
+- Writes require a custom same-origin request header and JSON bodies. No
+  cross-origin CORS access is granted. Requests identified as cross-site fail.
+- Password operations are limited to two concurrent hashes and 20 per minute
+  per warm instance. Ten login attempts per account per 15 minutes are enforced
+  in the database across instances. Successful sign-in resets that account limit.
+- Profile changes, password changes, and account deletion require a valid
+  session. Password changes/deletion also verify the current password. Deleting
+  an account removes its invoices and releases its reserved username.
 
 ## Data and costs
 
@@ -14,10 +41,18 @@ Opening the demo is not authentication. There are no real orders or payments.
 - Database `bcrs-demo`, collection `demo`, dedicated throughput **400 RU/s**.
   Nodebucket uses 400 RU/s separately: aggregate **800 RU/s**, within the existing
   **1,000 RU/s** account cap and free allowance.
-- One fixed document retains the latest **50** invoices using an atomic bounded
-  append. Invoice content comes from the fixed service catalog; arbitrary names,
-  descriptions, email addresses, passwords and security answers are not stored.
-  Pricing is recalculated server-side. Adjustment amounts and request sizes are bounded.
+- At most **100 registered accounts**, each retaining its latest **50** invoices,
+  plus a shared guest account with 50 invoices. An atomic registry reserves
+  canonical usernames and enforces the account cap without a second collection.
+  Profile fields, sessions, request sizes and invoice item counts are bounded.
+  No arbitrary invoice descriptions or security answers are stored. Prices are
+  recalculated from the catalog on the server.
+- Registered accounts persist until their owner deletes them or the demo is
+  reset. Use fictional details and a unique demo password. No real email is
+  needed for registration. At capacity, new registrations receive a clear error;
+  existing accounts continue working. On an uncertain registration failure, the
+  reserved username is retained conservatively; an operator can reconcile any
+  orphan reservation after checking whether its account document exists.
 - The API throttles each warm instance to 120 requests/minute. This is not a
   distributed rate limit; Cosmos throughput and bounded storage are separate safeguards.
 - Total free-tier Cosmos storage is 25 GB across the account. The deployment uses

@@ -13,6 +13,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 /* -------- Angular Materials -------- */
 import { AppRoutingModule } from './app-routing.module';//
+import { InvoiceListComponent } from './pages/invoice-list/invoice-list.component';
 import { AppComponent } from './app.component';//
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';//
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'; //
@@ -78,6 +79,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
+    InvoiceListComponent,
     HomeComponent,
     AuthLayoutComponent,
     BaseLayoutComponent,

@@ -1,44 +1,11 @@
-/*
-Title: auth.guard.ts
-Author: Professor Krasso
-Date: 02/07/2023
-Modified By: Andres Macias/Patrick Wolff/April Yang
-Description: Use cookie service to guard user login
-*/
-
-
-
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
-
-
-
-@Injectable({
-  providedIn: 'root'
-})
-
-  // use guard to authorize the valid user to log in
+import { CanActivate, Router } from '@angular/router';
+import { catchError, map, of } from 'rxjs';
+import { SessionService } from './shared/services/session.service';
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-
-  constructor(private router: Router, private cookieService: CookieService){}
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-//store sessionuser cookie if available
-const sessionUser = this.cookieService.get('sessionuser');
-   // if the user is authorized return true
-  if(sessionUser) {
-    return true;
-
-  }else{
-  // navigate user to login page if the user is not authorized
-  this.router.navigate(['/session/login']);
-  return false;
-
-  }
+  constructor(private router: Router, private session: SessionService) {}
+  canActivate() {
+    return this.session.me().pipe(map(() => true), catchError(() => of(this.router.createUrlTree(['/session/login']))));
   }
 }

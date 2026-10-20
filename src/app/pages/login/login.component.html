@@ -1,9 +1,16 @@
 <mat-card class="login-card">
-  <mat-card-title>Try the BCRS demo</mat-card-title>
+  <mat-card-title>Sign in to BCRS</mat-card-title>
   <mat-card-content>
-    <p>Explore a fictional computer repair shop as the demo administrator. Everyone shares the latest 50 sample invoices.</p>
-    <p>This is a public demo, not a private account. No password, registration, real order, or payment is required.</p>
+    <p>Use your registered demo account to manage your profile and sample invoices.</p>
     <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
-    <button mat-raised-button class="btn-primary" (click)="login()">Open shared demo</button>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" fxLayout="column" fxLayoutGap="16px">
+      <mat-form-field appearance="fill"><mat-label>Username</mat-label><input matInput formControlName="userName" autocomplete="username" required maxlength="32"></mat-form-field>
+      <mat-form-field appearance="fill"><mat-label>Password</mat-label><input matInput formControlName="password" type="password" autocomplete="current-password" required maxlength="128"></mat-form-field>
+      <button mat-raised-button class="btn-primary" type="submit" [disabled]="busy || loginForm.invalid">Sign in</button>
+    </form>
+    <p><a routerLink="/session/register">Create a demo account</a></p>
+    <mat-divider></mat-divider>
+    <p>Just exploring? The guest account shares sample invoices and previews fictional administration screens.</p>
+    <button mat-stroked-button (click)="login(true)" [disabled]="busy">Try guest demo</button>
   </mat-card-content>
 </mat-card>
