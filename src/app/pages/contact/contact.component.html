@@ -7,16 +7,16 @@ Description: Contact page template
 -->
 
 <!-- main container-->
-<div fxLayout="column" class="main-welcome">
-  <div fxFlex>
+<div class="layout-column main-welcome">
+  <div class="flex-grow">
     <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">
       {{ contactUs }}
     </h1>
   </div>
   <!-- row with two cards  -->
-  <div fxLayout="row wrap" style="margin-left: 12%">
-    <div fxFlex>
-      <div fxFlex="row" style="text-align: center">
+  <div style="margin-left: 12%" class="layout-row-wrap">
+    <div class="flex-grow">
+      <div style="text-align: center" class="flex-grow">
         <!-- left card -->
         <mat-card class="addressCard">
           <mat-card-content class="card-title-icon">
@@ -31,8 +31,8 @@ Description: Contact page template
       </div>
     </div>
 
-    <div fxFlex>
-      <div fxFlex="row" style="text-align: center">
+    <div class="flex-grow">
+      <div style="text-align: center" class="flex-grow">
         <!-- right card -->
         <mat-card class="phoneCard">
           <mat-card-title class="card-title-icon">
@@ -50,7 +50,7 @@ Description: Contact page template
   </div>
 
   <br /><br /><br /><br />
-  <div fxLayout="column">
+  <div class="layout-column">
     <p style="text-align: center; font-family: Lato">
       Need more help？Our knowledgeable agents will help you!
     </p>

@@ -11,12 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.interface";
-import { ConfirmationService, ConfirmEventType, Message } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, ToastMessageOptions as Message } from 'primeng/api';
 import { Role } from 'src/app/shared/models/role.interface';
 import { RoleService } from 'src/app/shared/services/role.service';
 
 
 @Component({
+  standalone: false,
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css'],

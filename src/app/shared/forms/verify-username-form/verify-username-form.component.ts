@@ -9,12 +9,13 @@ Description: verify-username-form component
 
 
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions as Message } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 
 @Component({
+  standalone: false,
   selector: 'app-verify-username-form',
   templateUrl: './verify-username-form.component.html',
   styleUrls: ['./verify-username-form.component.css']

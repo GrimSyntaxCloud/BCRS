@@ -6,7 +6,7 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: application base layout template
 -->
 
-<div fxLayout="column">
+<div class="layout-column">
   <!-- navigation -->
   <!-- navbarA for user is logged in -->
   <header>
@@ -29,9 +29,7 @@ Description: application base layout template
           <!-- shopping_cart icon should show up when a register user login: localhost:4200/#/session/:userId -->
           <button
             mat-icon-button
-            class="ml-xs"
-            disabled="false"
-            class="shopping-cart"
+            class="ml-xs shopping-cart"
             aria-label="Open sample cart"
             routerLink="/cart/{{ sessionUserName }}"
             *ngIf="itemCount() > 0"
@@ -121,7 +119,7 @@ Description: application base layout template
   </div>
 
   <!-- footer -->
-  <div fxFlex>
+  <div class="flex-grow">
     <footer class="footer">
       <mat-toolbar class="footer-content">
         <span class="copyRight">

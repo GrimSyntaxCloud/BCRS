@@ -13,6 +13,7 @@ import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 
 
 @Component({
+  standalone: false,
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],

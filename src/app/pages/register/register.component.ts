@@ -4,8 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { Message } from 'primeng/api';
-@Component({ selector: 'app-register', templateUrl: './register.component.html', styleUrls: ['./register.component.css'] })
+import { ToastMessageOptions as Message } from 'primeng/api';
+@Component({
+  standalone: false, selector: 'app-register', templateUrl: './register.component.html', styleUrls: ['./register.component.css'] })
 export class RegisterComponent {
   form = this.fb.group({
     userName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9_-]{3,32}')]],

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { Product } from 'src/app/shared/models/product.interface';
 import { Invoice } from 'src/app/shared/models/invoice';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions as Message } from 'primeng/api';
 import { Router } from '@angular/router';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +11,8 @@ import { InvoiceSummaryDialogComponent } from 'src/app/shared/invoice-summary-di
 import { SessionService } from 'src/app/shared/services/session.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
-@Component({ selector: 'app-cart', templateUrl: './cart.component.html', styleUrls: ['./cart.component.css'] })
+@Component({
+  standalone: false, selector: 'app-cart', templateUrl: './cart.component.html', styleUrls: ['./cart.component.css'] })
 export class CartComponent {
   username = '';
   items: Product[];

@@ -32,7 +32,7 @@ or email messages are sent.
 Angular browser app → /api → Node.js Azure Functions → Cosmos DB (MongoDB API)
 ```
 
-- **Frontend:** Angular 14, TypeScript, Angular Material, PrimeNG, and Chart.js.
+- **Frontend:** Angular 21 (LTS), TypeScript, Angular Material, PrimeNG, and Chart.js.
   Forms collect input, services call the API, and route guards check the session.
 - **API:** `api/handler.js` handles sessions, profiles, and invoices. The API checks
   authorization independently of the frontend and calculates prices from its own
@@ -58,7 +58,7 @@ Angular browser app → /api → Node.js Azure Functions → Cosmos DB (MongoDB 
 
 ## Run locally without Azure
 
-Use **Node.js 22**, npm, and Chrome/Chromium for the browser tests.
+Use **Node.js 22.12 or newer within Node 22**, and npm.
 
 ```sh
 npm ci
@@ -88,6 +88,8 @@ server; it is not a complete backend/database setup. See
 ## Verify changes
 
 ```sh
+npm audit
+npm audit --prefix api
 npm run test:api
 npm run test:ui
 npm run build
@@ -96,8 +98,19 @@ npm run package:azure
 
 API tests use disposable MongoDB and cover registration, session revocation,
 account isolation, invoice validation, concurrent requests, and capacity limits.
-Browser tests cover cart recovery, catalog prices, totals, and persistence.
+Vitest tests cover cart recovery, catalog prices, totals, persistence, and real
+Angular/Material/PrimeNG template rendering. Tests use jsdom; Chrome is not required.
 Packaging includes only the built site and the API’s production dependencies.
+
+## Framework maintenance
+
+The frontend uses Angular 21.2, Material/CDK 21.2, PrimeNG 21, TypeScript 5.9,
+and Angular’s application builder. Native CSS replaces retired Flex Layout.
+NgModules, zone-based updates, the original routes, and the existing API remain.
+The build output stays in `dist/bcrs`, preserving local and Azure packaging.
+
+The npm overrides pin Vite 7.3.7 and the Angular CLI’s MCP SDK 1.32.1 to
+patched compatible versions. Recheck those overrides when upgrading the CLI.
 
 ## Credentials and demo boundaries
 
@@ -110,9 +123,9 @@ Packaging includes only the built site and the API’s production dependencies.
 - Azure uses Static Web Apps Free and a 400 RU/s collection in the shared Cosmos
   free-tier account. Keep the subscription spending limit enabled. Free Trial
   expiration can make the live demo unavailable; local development remains available.
-- Angular 14 has outstanding dependency advisories. This review is not a security
-  certification; upgrading the frontend framework and its UI libraries remains
-  separate modernization work. The deployed API has an independent dependency lockfile.
+- Angular 21 and its UI libraries use patched, locked dependencies. CI audits the
+  complete frontend toolchain and the independently locked API. A clean audit
+  covers known dependency advisories, not every possible application vulnerability.
 - The retired Atlas-backed server has been removed from the current source.
   See [the setup guide](docs/azure-demo.md#original-database) for the status of
   historical credentials; the app does not connect to the original Atlas database.

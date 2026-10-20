@@ -10,12 +10,13 @@ Description: User create, allows admin to create new user
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SecurityQuestionService } from 'src/app/shared/services/security-question.service';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions as Message } from 'primeng/api';
 import { SecurityQuestion } from 'src/app/shared/models/security-question.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
+  standalone: false,
   selector: 'app-security-question-details',
   templateUrl: './security-question-details.component.html',
   styleUrls: ['./security-question-details.component.css']

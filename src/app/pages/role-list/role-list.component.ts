@@ -11,10 +11,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { Role } from 'src/app/shared/models/role.interface';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions as Message } from 'primeng/api';
 import { RoleService } from 'src/app/shared/services/role.service';
 
 @Component({
+  standalone: false,
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
   styleUrls: ['./role-list.component.css'],

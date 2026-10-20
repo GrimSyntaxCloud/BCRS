@@ -8,8 +8,8 @@ Description: Verify security questions form template
 
 <!-- http://localhost:4200/#/session/verify-security-questions -->
 
-<div fxLayout="row wrap" fxLayoutAlign="center start">
-  <div fxFlex.gt-sm="55" fxFlex="100">
+<div class="layout-row-wrap align-center-start">
+  <div class="flex-gt-sm-55 flex-full">
     <br /><br />
 
     <mat-card
@@ -28,10 +28,10 @@ Description: Verify security questions form template
       </mat-card-title>
       <br /><br />
 
-      <p-messages
+      <app-messages
         [(value)]="errorMessages"
         [enableService]="false"
-      ></p-messages>
+      ></app-messages>
 
       <form
         *ngIf="selectedSecurityQuestions"
@@ -39,9 +39,9 @@ Description: Verify security questions form template
         (ngSubmit)="verifySecurityQuestions()"
         #usernameForm
       >
-        <mat-card-content fxLayout="column">
+        <mat-card-content class="layout-column">
           <!-- verifySecurityQuestionsModel.question1 -->
-          <mat-form-field fxFlex appearance="fill">
+          <mat-form-field appearance="fill" class="flex-grow">
             <mat-label>{{ verifySecurityQuestionsModel.question1 }}</mat-label>
             <input
               matInput
@@ -61,7 +61,7 @@ Description: Verify security questions form template
           </mat-form-field>
 
           <!-- verifySecurityQuestionsModel.question2 -->
-          <mat-form-field fxFlex appearance="fill">
+          <mat-form-field appearance="fill" class="flex-grow">
             <mat-label>{{ verifySecurityQuestionsModel.question2 }}</mat-label>
             <input
               matInput
@@ -81,7 +81,7 @@ Description: Verify security questions form template
           </mat-form-field>
 
           <!-- verifySecurityQuestionsModel.question3 -->
-          <mat-form-field fxFlex appearance="fill">
+          <mat-form-field appearance="fill" class="flex-grow">
             <mat-label>{{ verifySecurityQuestionsModel.question3 }}</mat-label>
             <input
               matInput
@@ -102,7 +102,7 @@ Description: Verify security questions form template
 
           <br /><br /><br />
 
-          <div fxFlex fxLayoutAlign="end" class="p5">
+          <div class="flex-grow align-end p5">
             <button
               mat-raised-button
               routerLink="/session/login"

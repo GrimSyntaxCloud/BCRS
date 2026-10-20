@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SessionService } from '../../services/session.service';
 
 @Component({
+  standalone: false,
   selector: 'app-reset-password-form',
   templateUrl: './reset-password-form.component.html',
   styleUrls: ['./reset-password-form.component.css']

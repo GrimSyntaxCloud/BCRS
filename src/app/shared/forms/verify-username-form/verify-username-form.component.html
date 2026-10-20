@@ -6,8 +6,8 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: verify username form template
 -->
 <!-- main container -->
-<div fxLayout="row wrap" fxLayoutAlign="center start">
-  <div fxFlex.gt-sm="55" fxFlex="100">
+<div class="layout-row-wrap align-center-start">
+  <div class="flex-gt-sm-55 flex-full">
     <br /><br />
     <!-- begin card container -->
     <mat-card
@@ -27,14 +27,14 @@ Description: verify username form template
 
       <br /><br />
 
-      <p-messages
+      <app-messages
         [(value)]="errorMessages"
         [enableService]="false"
-      ></p-messages>
+      ></app-messages>
 
       <form [formGroup]="form" (ngSubmit)="verifyUser()" #usernameFrom>
-        <mat-card-content fxLayout="column">
-          <mat-form-field fxFlex appearance="fill">
+        <mat-card-content class="layout-column">
+          <mat-form-field appearance="fill" class="flex-grow">
             <mat-label>Username</mat-label>
             <input matInput required formControlName="username" />
 
@@ -51,7 +51,7 @@ Description: verify username form template
 
           <br /><br />
 
-          <div fxFlex fxLayoutAlign="end" class="p5">
+          <div class="flex-grow align-end p5">
             <button
               mat-raised-button
               routerLink="/session/login"

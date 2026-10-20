@@ -13,6 +13,7 @@ import { SecurityQuestion } from 'src/app/shared/models/security-question.interf
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
+  standalone: false,
   selector: 'app-security-question-list',
   templateUrl: './security-question-list.component.html',
   styleUrls: ['./security-question-list.component.css'],

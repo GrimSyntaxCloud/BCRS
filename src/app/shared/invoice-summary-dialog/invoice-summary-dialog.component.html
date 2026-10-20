@@ -7,7 +7,7 @@ Description: Displays invoice for customer
 -->
 
 <!-- main container -->
-<div fxLayout="column">
+<div class="layout-column">
   <!-- begin card container -->
   <mat-card class="mat-elevation-z0">
     <mat-card-title
@@ -21,8 +21,8 @@ Description: Displays invoice for customer
     </mat-card-subtitle>
 
     <mat-card-content mat-dialog-content>
-      <div fxLayout="column" fxLayoutGap="10px">
-        <div fxFlex>
+      <div class="layout-column gap-10">
+        <div class="flex-grow">
           <!-- start card container -->
           <mat-card>
             <mat-card-title>Services</mat-card-title>
@@ -30,11 +30,11 @@ Description: Displays invoice for customer
               <!-- for loop lineItem, display lineItem title and price -->
               <div *ngFor="let lineItem of invoice.getLineItems()">
                 <mat-list>
-                  <mat-list-item>
+                  <mat-list-item><span matListItemTitle class="invoice-line">
                     {{ lineItem.title }}:
-                    <div fxFlex></div>
+                    <span class="flex-grow"></span>
                     {{ lineItem.price | currency }}
-                  </mat-list-item>
+                  </span></mat-list-item>
                 </mat-list>
               </div>
             </mat-card-content>
@@ -42,58 +42,58 @@ Description: Displays invoice for customer
           <!-- end card container -->
         </div>
 
-        <div fxFlex>
+        <div class="flex-grow">
           <!-- begin card container -->
           <mat-card>
             <mat-card-title>Standard Fees</mat-card-title>
             <mat-card-content>
               <mat-list>
-                <mat-list-item *ngFor="let lineItem of invoice.getLineItems()">
+                <mat-list-item *ngFor="let lineItem of invoice.getLineItems()"><span matListItemTitle class="invoice-line">
                   Labor ({{ lineItem.title }}): {{ lineItem.laborHours }} {{ lineItem.laborHours === 1 ? 'hour' : 'hours' }}
                   @ 50/hr:
-                  <div fxFlex></div>
+                  <span class="flex-grow"></span>
                   {{ lineItem.laborHours * 50 | currency }}
-                </mat-list-item>
+                </span></mat-list-item>
               </mat-list>
             </mat-card-content>
           </mat-card>
           <!-- end card container -->
         </div>
 
-        <div fxFlex>
+        <div class="flex-grow">
           <!-- begin card container -->
           <mat-card>
             <mat-card-title>Adjustments</mat-card-title>
             <mat-card-content>
               <mat-list>
-                <mat-list-item>
+                <mat-list-item><span matListItemTitle class="invoice-line">
                   Labor: Extra hours @ 50/hr:
-                  <div fxFlex></div>
+                  <span class="flex-grow"></span>
                   {{adjustedLabor | currency}}
-                </mat-list-item>
+                </span></mat-list-item>
               </mat-list>
               <mat-list>
-                <mat-list-item>
+                <mat-list-item><span matListItemTitle class="invoice-line">
                  Parts
-                  <div fxFlex></div>
+                  <span class="flex-grow"></span>
                   {{adjustedParts | currency}}
-                </mat-list-item>
+                </span></mat-list-item>
               </mat-list>
             </mat-card-content>
           </mat-card>
           <!-- end card container -->
         </div>
 
-        <div fxFlex>
+        <div class="flex-grow">
           <!-- begin card container -->
           <mat-card>
             <mat-card-content>
               <mat-list>
-                <mat-list-item>
+                <mat-list-item><span matListItemTitle class="invoice-line">
                   &nbsp;
-                  <div fxFlex></div>
+                  <span class="flex-grow"></span>
                   Total charges: {{ total | currency }}
-                </mat-list-item>
+                </span></mat-list-item>
               </mat-list>
             </mat-card-content>
           </mat-card>

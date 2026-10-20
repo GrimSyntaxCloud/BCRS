@@ -8,7 +8,7 @@ Reference: https://www.youtube.com/watch?v=d_G0cs1G1Hs
 https://angular.io/start
 -->
 
-<p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+<app-messages [(value)]="errorMessages" [enableService]="false"></app-messages>
 <mat-card *ngIf="!items.length" style="max-width: 700px; margin: 48px auto; padding: 24px">
   <h1>Your cart is empty</h1>
   <p>Choose a repair service to create a sample invoice.</p>
@@ -119,14 +119,13 @@ https://angular.io/start
             <div *ngIf="role === 'admin'">
               <form
                 [formGroup]="adjustedFeesForm"
-                fxLayout="column"
                 style="width: 100%; max-width: 360px"
-              >
-                <mat-form-field appearance="outline" fxFlex>
+               class="layout-column">
+                <mat-form-field appearance="outline" class="flex-grow">
                   <mat-label>Additional labor hours (0–40) </mat-label>
                   <input type="number" matInput formControlName="laborFee" />
                 </mat-form-field>
-                <mat-form-field appearance="outline" fxFlex>
+                <mat-form-field appearance="outline" class="flex-grow">
                   <mat-label>Additional parts ($0–$5,000)</mat-label>
                   <input type="number" matInput formControlName="partsFee" />
                 </mat-form-field>

@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Invoice } from '../models/invoice';
 
 @Component({
+  standalone: false,
   selector: 'app-invoice-summary-dialog',
   templateUrl: './invoice-summary-dialog.component.html',
   styleUrls: ['./invoice-summary-dialog.component.css']

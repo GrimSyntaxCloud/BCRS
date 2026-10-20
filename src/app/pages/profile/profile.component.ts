@@ -4,8 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { Message } from 'primeng/api';
-@Component({ selector: 'app-profile', templateUrl: './profile.component.html', styleUrls: ['./profile.component.css'] })
+import { ToastMessageOptions as Message } from 'primeng/api';
+@Component({
+  standalone: false, selector: 'app-profile', templateUrl: './profile.component.html', styleUrls: ['./profile.component.css'] })
 export class ProfileComponent {
   userName = '';
   guest = false;

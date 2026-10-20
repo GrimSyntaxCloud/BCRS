@@ -7,7 +7,7 @@
  */
 
 
-import { NgModule } from '@angular/core';
+import { NgModule, provideZoneChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 
@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';//
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';//
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'; //
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //
-import { FlexLayoutModule } from '@angular/flex-layout'; //
 import { MatToolbarModule } from '@angular/material/toolbar';//
 import { MatButtonModule } from '@angular/material/button';//
 import { MatIconModule } from '@angular/material/icon';//
@@ -41,7 +40,9 @@ import { MatCardActions } from '@angular/material/card';
 /* -------- PrimeNg Materials -------- */
 import { TableModule } from 'primeng/table';
 import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
+import { AppMessagesComponent } from './shared/app-messages.component';
+import { providePrimeNG } from 'primeng/config';
+import Material from '@primeuix/themes/material';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -78,6 +79,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
+    AppMessagesComponent,
     AppComponent,
     InvoiceListComponent,
     HomeComponent,
@@ -85,7 +87,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BaseLayoutComponent,
     LoginComponent,
     SecurityQuestionListComponent,
-    AuthLayoutComponent,
     SecurityQuestionDetailsComponent,
     UserDetailsComponent,
     DeleteRecordDialogComponent,
@@ -113,7 +114,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -135,7 +135,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     // NgPrime Materials
     TableModule,
     MessageModule,
-    MessagesModule,
     ButtonModule,
     ConfirmDialogModule,
     ChartModule,
@@ -144,6 +143,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
 
   providers: [
+      provideZoneChangeDetection(),
+      providePrimeNG({ theme: { preset: Material, options: { darkModeSelector: false } } }),
       CookieService,
       {
         provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
