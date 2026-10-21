@@ -1,6 +1,8 @@
+const { randomUUID } = require('node:crypto');
 const { database } = require('./database');
 const { users, roles, questions, invoiceFrom, purchases } = require('./demo');
 const A = require('./accounts');
+const R = require('./retention');
 function createHandler({ prepare = database, limit = 120, authLimit = 20, now = Date.now, secure = true, accountLimit = 100 } = {}) {
   let windowStart = now(), count = 0, authCount = 0, hashing = 0;
   const reply = (status, message, data = null, cookie) => ({
@@ -14,6 +16,7 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
     try { return await work(); } finally { hashing--; }
   }
   return async request => {
+    if (process.env.DEMO_MAINTENANCE === 'true') return reply(503, 'Demo maintenance in progress.');
     const time = now();
     if (time - windowStart >= 60000) { windowStart = time; count = 0; authCount = 0; }
     if (++count > limit) return reply(429, 'The demo is busy. Try again in a minute.');
@@ -40,6 +43,7 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
         return { ...reply(200, 'Healthy.'), jsonBody: { status: 'ok' } };
       }
       const { collection } = await prepare();
+      await R.cleanup(collection, time);
       if (method === 'POST' && path === '/session/register') {
         const name = A.username(body.userName);
         if (['demo', 'sample-customer', 'admin'].includes(name)) return reply(409, 'That username is unavailable.');
@@ -47,9 +51,10 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
         const hash = await hashWork(() => A.hashPassword(A.password(body.password)));
         // Atomic name reservation enforces uniqueness and a hard account bound
         // across function instances without a second collection or paid throughput.
-        const reserved = await collection.updateOne({ _id: 'account-registry', names: { $ne: name }, [`names.${accountLimit - 1}`]: { $exists: false } }, { $push: { names: name } });
+        const reservation = { id: randomUUID(), createdAt: time };
+        const reserved = await collection.updateOne({ _id: 'account-registry', names: { $ne: name }, [`names.${accountLimit - 1}`]: { $exists: false } }, { $push: { names: name }, $set: { [`reservations.${name}`]: reservation } });
         if (!reserved.modifiedCount) return reply(409, 'That username is unavailable or this demo has reached its account capacity.');
-        const user = { _id: `user:${name}`, userName: name, profile: details, passwordHash: hash, sessions: [], invoices: [], createdAt: time, authAttempts: 0, authWindow: time };
+        const user = { _id: `user:${name}`, userName: name, profile: details, passwordHash: hash, sessions: [], invoices: [], createdAt: time, expiresAt: time + R.RETENTION_MS, isDemo: false, authAttempts: 0, authWindow: time };
         // On an uncertain database failure, retain the reservation rather than
         // allowing an unbounded number of accounts. No secret is logged.
         await collection.insertOne(user);
@@ -69,7 +74,7 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
           if (!attempt.modifiedCount) return reply(429, 'Too many sign-in attempts. Try again in 15 minutes.');
         }
         const valid = await hashWork(() => A.verifyPassword(body.password, user?.passwordHash));
-        if (!valid || !user) return reply(401, 'Username or password is incorrect.');
+        if (!valid || !R.active(user, time)) return reply(401, 'Username or password is incorrect, or this demo account expired.');
         const cookie = await A.issueSession(collection, user, time, secure, user.passwordHash);
         await collection.updateOne({ _id: user._id }, { $set: { authAttempts: 0, authWindow: time } });
         return reply(200, 'Signed in.', A.publicUser(user), cookie);
@@ -80,6 +85,7 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
         return reply(200, 'Signed out.', null, A.sessionCookie('', secure, 0));
       }
       const { user, session } = await A.authenticate(request, collection, time);
+      user.invoices = R.visibleInvoices(user.invoices, time);
       if (method === 'GET' && (path === '/session/me' || path === `/session/verify/users/${user.userName}`)) return reply(200, 'Your account.', A.publicUser(user));
       if (method === 'PUT' && path === '/session/profile') {
         if (user.guest) return reply(403, 'Register an account to edit your profile.');
@@ -95,7 +101,7 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
           if (path === '/session/delete-account') {
             const removed = await collection.deleteOne({ _id: user._id, passwordHash: user.passwordHash });
             if (!removed.deletedCount) return reply(409, 'Account changed. Sign in again.');
-            await collection.updateOne({ _id: 'account-registry' }, { $pull: { names: user.userName } });
+            await collection.updateOne({ _id: 'account-registry' }, { $pull: { names: user.userName }, $unset: { [`reservations.${user.userName}`]: '' } });
             return reply(200, 'Account and invoices deleted.', null, A.sessionCookie('', secure, 0));
           }
           const hash = await A.hashPassword(A.password(body.newPassword));
@@ -119,12 +125,16 @@ function createHandler({ prepare = database, limit = 120, authLimit = 20, now = 
       if (method === 'GET' && ['/invoices', '/invoices/purchases-graph'].includes(path)) return reply(200, 'Your latest 50 sample invoices.', path.endsWith('purchases-graph') ? purchases(user.invoices) : user.invoices);
       if (method === 'POST' && path.startsWith('/invoices/')) {
         if (path !== `/invoices/${user.userName}`) return reply(403, 'You can only save your own invoices.');
-        const invoice = { ...invoiceFrom(body), userName: user.userName };
-        const result = await collection.updateOne({ _id: user._id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } }, { $push: { invoices: { $each: [invoice], $slice: -50 } } });
+        const invoice = { ...invoiceFrom(body), userName: user.userName, createdAt: time, expiresAt: Math.min(time + R.RETENTION_MS, user.guest ? Infinity : (user.expiresAt ?? Infinity)), isDemo: false };
+        const filter = { _id: user._id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } };
+        if (user.guest) filter['invoices.49'] = { $exists: false };
+        const result = await collection.updateOne(filter, { $push: { invoices: user.guest ? invoice : { $each: [invoice], $slice: -50 } } });
+        if (user.guest && !result.matchedCount) return reply(409, 'The shared demo is full or your session expired. Permanent examples are retained.');
         if (!result.matchedCount) return reply(401, 'Please sign in again.');
         return reply(200, 'Sample invoice saved. No order or payment was placed.', invoice);
       }
       if (method === 'DELETE' && /^\/invoices\/[a-f0-9-]{36}$/.test(path)) {
+        if (user.invoices.some(invoice => invoice._id === path.split('/').pop() && invoice.isDemo === true)) return reply(403, 'Permanent sample invoices are kept for visitors.');
         const result = await collection.updateOne({ _id: user._id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } }, { $pull: { invoices: { _id: path.split('/').pop() } } });
         if (!result.matchedCount) return reply(401, 'Please sign in again.');
         return result.modifiedCount ? reply(200, 'Sample invoice removed.') : reply(404, 'Sample invoice not found.');

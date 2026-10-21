@@ -40,7 +40,7 @@ Angular browser app → /api → Node.js Azure Functions → Cosmos DB (MongoDB 
 - **Accounts:** passwords are salted scrypt hashes. Random session tokens use
   HttpOnly cookies; the database stores only token hashes. Password changes revoke
   existing sessions. Registered users cannot read another account’s invoices.
-- **Storage:** database `bcrs-demo`, collection `demo`. Each account document owns
+- **Storage:** Azure database `portfolio-demos`, collection `bcrs_demo` (local defaults remain `bcrs-demo` / `demo`). Each account document owns
   its profile, sessions, and invoices. A separate registry document reserves
   usernames and bounds registrations; a guest document holds the shared samples.
 - **Deployment:** GitHub Actions tests, builds, and packages pull requests. An
@@ -120,7 +120,7 @@ patched compatible versions. Recheck those overrides when upgrading the CLI.
 - The demo accepts up to 100 accounts and retains each account’s latest 50 invoices.
   Use fictional details. Email recovery and a production administration system
   are not implemented; the guest admin screens are examples only.
-- Azure uses Static Web Apps Free and a 400 RU/s collection in the shared Cosmos
+- Azure uses Static Web Apps Free and a shared 400 RU/s database pool in the Cosmos
   free-tier account. Keep the subscription spending limit enabled. Free Trial
   expiration can make the live demo unavailable; local development remains available.
 - Angular 21 and its UI libraries use patched, locked dependencies. CI audits the
@@ -129,3 +129,13 @@ patched compatible versions. Recheck those overrides when upgrading the CLI.
 - The retired Atlas-backed server has been removed from the current source.
   See [the setup guide](docs/azure-demo.md#original-database) for the status of
   historical credentials; the app does not connect to the original Atlas database.
+
+## Shared demo database and 96-hour retention
+
+Azure uses `portfolio-demos`, a single **400 RU/s manual shared pool** for Nodebucket, BCRS, and Pets-R-Us. Collections share capacity, while separate MongoDB roles restrict each app to its own collections. The account remains free-tier, single-region, capped at 1,000 RU/s; the subscription spending limit stays enabled. Do not upgrade the trial when it expires. The infrastructure template references an existing pool and requires a private scoped credential; it does not create dedicated allocations.
+
+Visitor data expires 96 hours after creation. Edits and task moves do not renew the deadline. BCRS accounts and their invoices expire together; invoices added to its shared guest preview have their own deadline. Nodebucket keeps its employee board and permanent sample task. Server-owned `isDemo` flags protect the fictional samples from cleanup and deletion.
+
+The API rejects expired data at the deadline. `.github/workflows/cleanup.yml` also runs hourly using the `azure` environment secret `DEMO_CLEANUP_MONGODB_URI` and repository variable `DEMO_CLEANUP_ENABLED=true`. It logs counts only. GitHub can delay schedules or disable them after 60 days of repository inactivity, so physical deletion happens on the next successful cleanup, usually within an hour; API requests provide another cleanup opportunity. Check Actions when maintaining the demo.
+
+`DEMO_MAINTENANCE=true` returns HTTP 503 before database access during backups or migration. Existing unclassified visitor data receives a one-time 96-hour grace period during migration. Database credentials stay in server application settings and protected Actions secrets, never frontend code or committed configuration. Local setup instructions and local database defaults above remain unchanged.

@@ -1,7 +1,7 @@
 <mat-card class="account-card">
   <mat-card-title>Create a demo account</mat-card-title>
   <p>Registration saves an account in the database. You can sign back in, edit your profile, and create your own sample invoices.</p>
-  <p>Use fictional names and a password you do not use elsewhere. No email or payment is needed. Keep your password: email recovery is not configured for this demo.</p>
+  <p>Use fictional names and a password you do not use elsewhere. Your account and invoices expire 96 hours after registration. No email or payment is needed. Keep your password: email recovery is not configured for this demo.</p>
   <app-messages [(value)]="errorMessages" [enableService]="false"></app-messages>
   <form [formGroup]="form" (ngSubmit)="register()" class="layout-column gap-16">
     <mat-form-field appearance="fill"><mat-label>Username</mat-label><input matInput formControlName="userName" autocomplete="username" required maxlength="32"><mat-hint>3–32 letters, numbers, underscores or hyphens</mat-hint></mat-form-field>
