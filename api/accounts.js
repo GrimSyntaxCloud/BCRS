@@ -1,6 +1,7 @@
 const { randomBytes, scrypt, timingSafeEqual, createHash } = require('node:crypto');
 const { promisify } = require('node:util');
 const derive = promisify(scrypt);
+const { active } = require('./retention');
 const SESSION_MS = 8 * 60 * 60 * 1000;
 const digest = value => createHash('sha256').update(value).digest('hex');
 function fail(status, message) { throw Object.assign(new Error(message), { status }); }
@@ -50,7 +51,7 @@ async function authenticate(request, collection, time) {
   if (!session) fail(401, 'Please sign in to continue.');
   const id = session.userName === 'demo' ? 'shared-demo' : `user:${session.userName}`;
   const user = await collection.findOne({ _id: id, sessions: { $elemMatch: { hash: session.hash, expiresAt: { $gt: time } } } });
-  if (!user) fail(401, 'Your session has expired. Please sign in again.');
+  if (!active(user, time)) fail(401, 'Your demo account or session has expired. Please register again.');
   return { user, session };
 }
 async function issueSession(collection, user, time, secure, passwordHash) {
@@ -58,7 +59,8 @@ async function issueSession(collection, user, time, secure, passwordHash) {
   const filter = { _id: user._id };
   // A concurrent password change must invalidate a login using the old password.
   if (passwordHash) filter.passwordHash = passwordHash;
-  const result = await collection.updateOne(filter, { $push: { sessions: { $each: [{ hash: digest(token), expiresAt: time + SESSION_MS }], $slice: user.guest ? -100 : -3 } } });
+  if (!user.guest && user.expiresAt !== undefined) filter.expiresAt = { $gt: time };
+  const result = await collection.updateOne(filter, { $push: { sessions: { $each: [{ hash: digest(token), expiresAt: Math.min(time + SESSION_MS, user.guest ? Infinity : (user.expiresAt ?? Infinity)) }], $slice: user.guest ? -100 : -3 } } });
   if (!result.matchedCount) fail(401, 'Please sign in again.');
   return sessionCookie(token, secure);
 }

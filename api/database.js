@@ -10,7 +10,7 @@ async function database() {
       maxPoolSize: 5, serverSelectionTimeoutMS: 15000,
     });
     const db = mongoose.connection.db;
-    const collection = db.collection('demo');
+    const collection = db.collection(process.env.MONGODB_COLLECTION || 'demo');
     await collection.updateOne({ _id: 'shared-demo' },
       { $setOnInsert: { invoices: seedInvoices() } }, { upsert: true });
     await collection.updateOne({ _id: 'shared-demo' }, { $set: { userName: 'demo', guest: true, profile: { firstName: users[0].firstName, lastName: users[0].lastName, email: users[0].email, phoneNumber: users[0].phoneNumber, address: users[0].address } } });

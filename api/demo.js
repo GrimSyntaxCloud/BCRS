@@ -49,7 +49,7 @@ function invoiceFrom(body) {
 }
 function seedInvoices() {
   return [invoiceFrom({ lineItems: [{ id: 100 }, { id: 105 }] }),
-    invoiceFrom({ lineItems: [{ id: 102 }] })];
+    invoiceFrom({ lineItems: [{ id: 102 }] })].map((invoice, index) => ({ ...invoice, _id: `00000000-0000-4000-8000-00000000000${index + 1}`, isDemo: true }));
 }
 function purchases(invoices) {
   const groups = new Map();

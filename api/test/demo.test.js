@@ -169,3 +169,40 @@ test('logout during a profile write or invoice delete cannot report success or c
   assert.equal((await call('DELETE', `/invoices/${invoiceId}`, undefined, sessionCookie, racing)).status, 401);
   assert.equal((await collection.findOne({ _id: 'user:write-race' })).invoices.length, 1);
 });
+
+test('fixed 96-hour expiry removes visitors and guest additions, preserves seeds, and frees names', async () => {
+  const R = require('../retention');
+  const time = Date.now();
+  let clock = time;
+  const isolated = db.collection('retention');
+  await isolated.insertMany([
+    { _id: 'shared-demo', userName: 'demo', guest: true, isDemo: true, profile: users[0], invoices: seedInvoices(), sessions: [] },
+    { _id: 'account-registry', names: [] },
+  ]);
+  const target = createHandler({ prepare: async () => ({ db, collection: isolated }), now: () => clock, limit: 1000, authLimit: 1000 });
+  const result = await call('POST','/session/register',{...registration('expiryuser'),isDemo:true,expiresAt:9999999999999},'',target);
+  assert.equal(result.status,201);
+  let token = cookie(result);
+  const registered = await isolated.findOne({_id:'user:expiryuser'});
+  assert.equal(registered.isDemo,false);
+  assert.equal(registered.expiresAt,time+R.RETENTION_MS);
+  await call('PUT','/session/profile',{firstName:'Edited',lastName:'Sample'},token,target);
+  assert.equal((await isolated.findOne({_id:'user:expiryuser'})).expiresAt,registered.expiresAt);
+  const guestResult = await call('POST','/session/guest',{},'',target);
+  const guestToken = cookie(guestResult);
+  const invoice = await call('POST','/invoices/demo',{lineItems:[{id:100}]},guestToken,target);
+  assert.equal(invoice.status,200);
+  assert.equal(invoice.jsonBody.data.isDemo,false);
+  const seed = (await isolated.findOne({_id:'shared-demo'})).invoices[0];
+  assert.equal((await call('DELETE',`/invoices/${seed._id}`,undefined,guestToken,target)).status,403);
+  clock=time+R.RETENTION_MS-1;
+  const login = await call('POST','/session/login',{userName:'expiryuser',password:pass},'',target);
+  assert.equal(login.status,200);token=cookie(login);
+  clock++;
+  assert.equal((await call('GET','/session/me',undefined,token,target)).status,401);
+  assert.equal(await isolated.countDocuments({_id:'user:expiryuser'}),0);
+  assert.equal((await isolated.findOne({_id:'shared-demo'})).invoices.length,2);
+  assert.deepEqual((await isolated.findOne({_id:'account-registry'})).names,[]);
+  assert.equal((await call('POST','/session/register',registration('expiryuser'),'',target)).status,201);
+  assert.equal((await R.cleanup(isolated,clock)).accountsDeleted,0);
+});
