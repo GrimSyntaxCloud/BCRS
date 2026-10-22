@@ -6,10 +6,10 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: User list component
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { User } from '../../shared/models/user.interface';
 import { UserService } from '../../shared/services/user.service';
-import { ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { ConfirmationService } from '../../shared/services/confirmation.service';
 
 
 @Component({
@@ -17,6 +17,7 @@ import { ConfirmationService, ConfirmEventType } from 'primeng/api';
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [ConfirmationService]
 })
 export class UserListComponent implements OnInit {
@@ -55,15 +56,8 @@ export class UserListComponent implements OnInit {
           }
         })
       },
-      reject: (type: any) => {
-        switch(type) {
-          case ConfirmEventType.REJECT:
-            console.log('User rejected this operation');
-            break;
-          case ConfirmEventType.CANCEL:
-            console.log('User canceled this operation');
-            break;
-        }
+      reject: () => {
+        console.log('User canceled this operation');
       }
     });
   }

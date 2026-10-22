@@ -19,7 +19,7 @@ Description: purchases-by-service page template
   <p *ngIf="loading" role="status">Loading your purchases…</p>
   <p *ngIf="error" role="alert">{{ error }}</p>
   <p *ngIf="!loading && !error && !purchases.length">No purchases yet. <a routerLink="/service-repair">Choose a repair service</a> and save a sample invoice to see your chart.</p>
-  <p-chart *ngIf="!loading && !error && purchases.length" type="pie" [data]="data" style="display: block; width: 100%; max-width: 450px; margin: auto"></p-chart>
+  <app-pie-chart *ngIf="!loading && !error && purchases.length" [data]="data" style="display: block; width: 100%; max-width: 450px; margin: auto"></app-pie-chart>
   <table *ngIf="purchases.length" aria-label="Sample service purchase counts">
     <thead><tr><th scope="col">Service</th><th scope="col">Count</th></tr></thead>
     <tbody><tr *ngFor="let purchase of purchases"><td>{{ purchase._id.title }}</td><td>{{ purchase.count }}</td></tr></tbody>

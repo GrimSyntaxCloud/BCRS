@@ -8,7 +8,7 @@ Description: reset-password-form component
 
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -18,6 +18,7 @@ import { SessionService } from '../../services/session.service';
   standalone: false,
   selector: 'app-reset-password-form',
   templateUrl: './reset-password-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./reset-password-form.component.css']
 })
 export class ResetPasswordFormComponent implements OnInit {

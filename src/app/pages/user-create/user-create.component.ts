@@ -7,10 +7,10 @@ Description: User create, allows admin to create new user
 */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/services/user.service';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 import { User } from '../../shared/models/user.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -18,6 +18,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   standalone: false,
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {

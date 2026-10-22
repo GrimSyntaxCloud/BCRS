@@ -1,12 +1,13 @@
 // Original registration by Professor Krasso and the BCRS team.
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SessionService } from 'src/app/shared/services/session.service';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 @Component({
-  standalone: false, selector: 'app-register', templateUrl: './register.component.html', styleUrls: ['./register.component.css'] })
+  standalone: false, selector: 'app-register', templateUrl: './register.component.html', changeDetection: ChangeDetectionStrategy.Eager,
+ styleUrls: ['./register.component.css'] })
 export class RegisterComponent {
   form = this.fb.group({
     userName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9_-]{3,32}')]],

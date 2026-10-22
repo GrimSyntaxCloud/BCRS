@@ -6,13 +6,14 @@
  Description: purchases-by-service page component
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 
 @Component({
   standalone: false,
   selector: 'app-purchases-by-service-graph',
   templateUrl: './purchases-by-service-graph.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./purchases-by-service-graph.component.css']
 })
 export class PurchasesByServiceGraphComponent implements OnInit {
@@ -45,7 +46,7 @@ export class PurchasesByServiceGraphComponent implements OnInit {
         this.itemCount.push(count);
       }
 
-      // build the object for the primeng pie chart
+      // build the object for the Chart.js pie chart
       this.data = {
         labels: this.labels,
         datasets: [
@@ -72,7 +73,7 @@ export class PurchasesByServiceGraphComponent implements OnInit {
           },
         ]
    };
-  //  verify the data object structure matches the primeng pie chart format
+  //  verify the data object structure matches the Chart.js pie chart format
     },
     error: (e) => {
       this.loading = false;

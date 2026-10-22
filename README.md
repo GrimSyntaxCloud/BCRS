@@ -32,7 +32,7 @@ or email messages are sent.
 Angular browser app → /api → Node.js Azure Functions → Cosmos DB (MongoDB API)
 ```
 
-- **Frontend:** Angular 21 (LTS), TypeScript, Angular Material, PrimeNG, and Chart.js.
+- **Frontend:** Angular 22, TypeScript, Angular Material and Chart.js.
   Forms collect input, services call the API, and route guards check the session.
 - **API:** `api/handler.js` handles sessions, profiles, and invoices. The API checks
   authorization independently of the frontend and calculates prices from its own
@@ -58,7 +58,7 @@ Angular browser app → /api → Node.js Azure Functions → Cosmos DB (MongoDB 
 
 ## Run locally without Azure
 
-Use **Node.js 22.12 or newer within Node 22**, and npm.
+Use **Node.js 22.22.3 or newer within Node 22**, and npm.
 
 ```sh
 npm ci
@@ -100,17 +100,17 @@ npm run package:azure
 API tests use disposable MongoDB and cover registration, session revocation,
 account isolation, invoice validation, concurrent requests, and capacity limits.
 Vitest tests cover cart recovery, catalog prices, totals, persistence, and real
-Angular/Material/PrimeNG template rendering. Tests use jsdom; Chrome is not required.
+Angular/Material template rendering. Tests use jsdom; Chrome is not required.
 Packaging includes only the built site and the API’s production dependencies.
 
 ## Framework maintenance
 
-The frontend uses Angular 21.2, Material/CDK 21.2, PrimeNG 21, TypeScript 5.9,
+The frontend uses Angular 22.2, Material/CDK 22.2, TypeScript 6.0,
 and Angular’s application builder. Native CSS replaces retired Flex Layout.
 NgModules, zone-based updates, the original routes, and the existing API remain.
 The build output stays in `dist/bcrs`, preserving local and Azure packaging.
 
-The npm overrides pin Vite 7.3.7 and the Angular CLI’s MCP SDK 1.32.1 to
+The npm overrides pin Vite 8.3.5 and the Angular CLI’s MCP SDK 1.32.1 to
 patched compatible versions. Recheck those overrides when upgrading the CLI.
 
 ## Credentials and demo boundaries
@@ -124,7 +124,7 @@ patched compatible versions. Recheck those overrides when upgrading the CLI.
 - Azure uses Static Web Apps Free and a shared 400 RU/s database pool in the Cosmos
   free-tier account. Keep the subscription spending limit enabled. Free Trial
   expiration can make the live demo unavailable; local development remains available.
-- Angular 21 and its UI libraries use patched, locked dependencies. CI audits the
+- Angular 22 and its UI libraries use patched, locked dependencies. CI audits the
   complete frontend toolchain and the independently locked API. A clean audit
   covers known dependency advisories, not every possible application vulnerability.
 - The retired Atlas-backed server has been removed from the current source.
@@ -140,3 +140,11 @@ Visitor data expires 96 hours after creation. Edits and task moves do not renew 
 The API rejects expired data at the deadline. `.github/workflows/cleanup.yml` also runs hourly using the `azure` environment secret `DEMO_CLEANUP_MONGODB_URI` and repository variable `DEMO_CLEANUP_ENABLED=true`. It logs counts only. GitHub can delay schedules or disable them after 60 days of repository inactivity, so physical deletion happens on the next successful cleanup, usually within an hour; API requests provide another cleanup opportunity. Check Actions when maintaining the demo.
 
 `DEMO_MAINTENANCE=true` returns HTTP 503 before database access during backups or migration. Existing unclassified visitor data receives a one-time 96-hour grace period during migration. Database credentials stay in server application settings and protected Actions secrets, never frontend code or committed configuration. Local setup instructions and local database defaults above remain unchanged.
+
+### Coordinated frontend updates
+
+Use Node.js 22.22.3 or newer in the Node 22 release line. The frontend uses Angular 22 with TypeScript 6.0; Angular, Material/CDK, and (where used) ngx-cookie-service must stay compatible. Dependabot groups their minor/patch updates. Future framework majors require a reviewed `ng update` migration, and TypeScript 6.1+ is deferred until the Angular compiler supports it. Other compatible updates and security scanning remain enabled.
+
+Before merging an upgrade, require the pull-request workflow to pass dependency audits, existing tests, and the production build. Main-branch deployment also waits for those checks. The hosting tier, backend, demo seed data, and 96-hour visitor-data cleanup are unchanged.
+
+PrimeNG has been removed: inline messages use Angular templates, tables use semantic HTML, confirmations use Angular Material, and BCRS charts use Chart.js directly. These replacements require no license key, paid account, or annual renewal.

@@ -1,9 +1,9 @@
 // Original cart by Professor Krasso and the BCRS team.
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { Product } from 'src/app/shared/models/product.interface';
 import { Invoice } from 'src/app/shared/models/invoice';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 import { Router } from '@angular/router';
 import { InvoiceService } from 'src/app/shared/services/invoice.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +12,8 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  standalone: false, selector: 'app-cart', templateUrl: './cart.component.html', styleUrls: ['./cart.component.css'] })
+  standalone: false, selector: 'app-cart', templateUrl: './cart.component.html', changeDetection: ChangeDetectionStrategy.Eager,
+ styleUrls: ['./cart.component.css'] })
 export class CartComponent {
   username = '';
   items: Product[];

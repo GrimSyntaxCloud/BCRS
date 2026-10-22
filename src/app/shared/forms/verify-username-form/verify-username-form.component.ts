@@ -8,8 +8,8 @@ Description: verify-username-form component
 
 
 
-import { Component, OnInit } from '@angular/core';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { AppMessage as Message } from '../../app-messages.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
@@ -18,6 +18,7 @@ import { SessionService } from '../../services/session.service';
   standalone: false,
   selector: 'app-verify-username-form',
   templateUrl: './verify-username-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./verify-username-form.component.css']
 })
 export class VerifyUsernameFormComponent implements OnInit {
