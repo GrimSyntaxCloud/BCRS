@@ -8,195 +8,95 @@ Reference: https://www.youtube.com/watch?v=d_G0cs1G1Hs
 https://angular.io/start
 -->
 
+<!-- Presentation refresh; pricing, quantities, fees and invoice actions are unchanged. -->
+<section class="page-heading">
+  <p class="eyebrow">ONE STEP CLOSER TO FIXED</p>
+  <h1>Your repair plan.</h1>
+  <p>Review your services and labor before creating a sample invoice.</p>
+</section>
 <app-messages [(value)]="errorMessages" [enableService]="false"></app-messages>
-<mat-card *ngIf="!items.length" style="max-width: 700px; margin: 48px auto; padding: 24px">
-  <h1>Your cart is empty</h1>
+<mat-card *ngIf="!items.length" class="empty-cart"
+  ><mat-icon>shopping_bag</mat-icon>
+  <h2>Your cart is empty</h2>
   <p>Choose a repair service to create a sample invoice.</p>
-  <a mat-raised-button routerLink="/service-repair">Browse repair services</a>
-</mat-card>
-<ng-container *ngIf="items.length > 0">
-  <mat-card
-    style="
-      width: calc(100% - 32px);
-      max-width: 800px;
-      margin: 48px auto 100px;
-      padding: 0px;
-    "
-  >
-    <mat-card-header
-      style="
-        background-color: #740001;
-        display: block;
-        text-align: center;
-        height: 50px;
-      "
-    >
-      <h1
-        style="
-          color: white;
-          margin-bottom: 0px;
-          padding-top: 5px;
-          padding-bottom: 5px;
-        "
-      >
-        Your Service Repair Orders
-      </h1>
-    </mat-card-header>
-
-    <mat-card style="margin-bottom: 30px">
-      <mat-card-content>
-        <!-- first card -->
-        <mat-card
-          style="
-            width: 90%;
-            margin-left: 5%;
-            margin-right: 5%;
-            margin-top: 10px;
-          "
+  <a class="neo-button primary" routerLink="/service-repair"
+    >Browse repair services <mat-icon>arrow_forward</mat-icon></a
+  ></mat-card
+>
+<div *ngIf="items.length > 0" class="cart-grid">
+  <div class="cart-main">
+    <mat-card class="cart-panel"
+      ><p class="eyebrow">THE SERVICES</p>
+      <h2>A little TLC, itemized.</h2>
+      <div class="cart-row" *ngFor="let item of items">
+        <span>{{ item.title }}</span
+        ><strong>{{ item.price | currency }}</strong
+        ><button
+          mat-icon-button
+          (click)="removeItemFromCart(item)"
+          [disabled]="busy"
+          [attr.aria-label]="'Remove ' + item.title"
         >
-          <div class="cart-item">
-            <ul style="text-align: center; padding: 0px; margin-left: 20px">
-              <li
-                *ngFor="let item of items"
-                style="display: flex; align-items: center"
-              >
-                <div style="width: 300px; text-align: left; font-family: Lato">
-                  {{ item.title }}
-                  <mat-divider></mat-divider>
-                </div>
-                <div style="width: 300px; text-align: left; font-family: Lato">
-                  {{ item.price | currency }}
-                  <mat-divider></mat-divider>
-                </div>
-                <div>
-                  <button
-                    mat-icon-button
-                    (click)="removeItemFromCart(item)"
-                    [disabled]="busy" [attr.aria-label]="'Remove ' + item.title"
-                    style="color: #e40002; text-align: left"
-                  >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </mat-card>
-        <!-- end first card -->
-        <!-- second card  -->
-        <mat-card
-          style="
-            width: 90%;
-            margin-left: 5%;
-            margin-right: 5%;
-            margin-top: 10px;
-          "
-        >
-          <!-- standard fees -->
-          <div class="fees-list">
-            <div>
-              <p style="font-weight: bold">Standard Fees:</p>
-            </div>
-            <div>
-              <p>Labor at $50 per hour:</p>
-            </div>
-            <ul>
-              <li
-                *ngFor="let item of items"
-                style="display: flex; align-items: center"
-              >
-                <div style="width: 300px; text-align: left; font-family: Lato">
-                  {{ item.title }} · {{ item.laborHours }} {{ item.laborHours === 1 ? 'hour' : 'hours' }} · {{ item.laborHours * 50 | currency }}
-                  <mat-divider></mat-divider>
-                </div>
-              </li>
-            </ul>
-            <!--**********************
-
-              section for adjusting labor fee and parts fee if the user has the role admin
-
-            *************************************-->
-            <div *ngIf="role === 'admin'">
-              <form
-                [formGroup]="adjustedFeesForm"
-                style="width: 100%; max-width: 360px"
-               class="layout-column">
-                <mat-form-field appearance="outline" class="flex-grow">
-                  <mat-label>Additional labor hours (0–40) </mat-label>
-                  <input type="number" matInput formControlName="laborFee" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="flex-grow">
-                  <mat-label>Additional parts ($0–$5,000)</mat-label>
-                  <input type="number" matInput formControlName="partsFee" />
-                </mat-form-field>
-                <button
-                  mat-raised-button
-                  style="
-                    background-color: #000000;
-                    color: white;
-                    font-family: Lato;
-                  "
-                  type="button" [disabled]="busy || adjustedFeesForm.invalid"
-                  (click)="updateFees()"
-                >
-                  Adjust Fees
-                </button>
-              </form>
-            </div>
-          </div>
-        </mat-card>
-        <!-- end second card -->
-        <!-- third card -->
-        <mat-card
-          style="
-            width: 90%;
-            margin-left: 5%;
-            margin-right: 5%;
-            margin-top: 10px;
-            margin-bottom: 30px;
-          "
-        >
-          <div class="subtotal">
-            <div style="display: flex; align-items: center">
-              <p style="font-weight: bold; width: 550px">Estimated invoice total:</p>
-              <!-- </div>
-            <div style="display: flex; align-items: center"> -->
-              <p style="font-weight: bold">
-                {{ yourSubtotal | currency }}
-                <mat-divider></mat-divider>
-              </p>
-            </div>
-          </div>
-
-          <!-- place order button -->
-          <mat-card-actions
-            style="
-              padding: 15px 0;
-              margin-left: 0;
-              margin-right: 0;
-              text-align: right;
-            "
+          <mat-icon>close</mat-icon>
+        </button>
+      </div></mat-card
+    ><mat-card class="cart-panel"
+      ><p class="eyebrow">THE HANDS-ON PART</p>
+      <h2>Standard labor.</h2>
+      <p class="labor-note">Labor at $50 per hour.</p>
+      <div class="labor-row" *ngFor="let item of items">
+        <div>
+          {{ item.title
+          }}<small
+            >{{ item.laborHours }}
+            {{ item.laborHours === 1 ? "hour" : "hours" }}</small
           >
-            <button
-              mat-button
-              style="
-                background-color: #ffb834;
-                border-radius: 5px;
-                color: white;
-                font-family: Lato;
-                align-items: center;
-                margin-left: 0;
-                margin-right: 0;
-              "
-              [disabled]="busy || !username"
-              (click)="generateInvoice()"
-            >
-              Generate Invoice
-            </button>
-          </mat-card-actions>
-        </mat-card>
-        <!-- end third card -->
-      </mat-card-content>
-    </mat-card>
-  </mat-card>
-</ng-container>
+        </div>
+        <strong>{{ item.laborHours * 50 | currency }}</strong>
+      </div>
+      <div *ngIf="role === 'admin'" class="adjust-fees">
+        <h3>Additional fees</h3>
+        <form [formGroup]="adjustedFeesForm" class="layout-column">
+          <mat-form-field appearance="outline"
+            ><mat-label>Additional labor hours (0–40)</mat-label
+            ><input
+              type="number"
+              matInput
+              formControlName="laborFee" /></mat-form-field
+          ><mat-form-field appearance="outline"
+            ><mat-label>Additional parts ($0–$5,000)</mat-label
+            ><input
+              type="number"
+              matInput
+              formControlName="partsFee" /></mat-form-field
+          ><button
+            mat-stroked-button
+            type="button"
+            [disabled]="busy || adjustedFeesForm.invalid"
+            (click)="updateFees()"
+          >
+            Adjust Fees
+          </button>
+        </form>
+      </div></mat-card
+    >
+  </div>
+  <mat-card class="cart-summary"
+    ><span class="summary-icon"><mat-icon>receipt_long</mat-icon></span>
+    <p class="eyebrow">YOUR ESTIMATE</p>
+    <h2>{{ yourSubtotal | currency }}</h2>
+    <p>Services, labor, and any additional fees. All in one place.</p>
+    <mat-divider></mat-divider
+    ><button
+      mat-raised-button
+      class="btn-primary"
+      [disabled]="busy || !username"
+      (click)="generateInvoice()"
+    >
+      Generate Invoice <mat-icon>arrow_forward</mat-icon>
+    </button>
+    <p class="summary-note">
+      A sample invoice only.<br />No payment. No real order.
+    </p></mat-card
+  >
+</div>

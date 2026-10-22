@@ -6,43 +6,136 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Home page template
 -->
 
-<!-- main container -->
-<div class="layout-column main-welcome">
-  <div class="container">
-    <h1 class="title">Welcome to Bob's Computer Repair Shop<br /></h1>
+<!-- Original project: Andres Macias, Patrick Wolff, April Yang. -->
+<section class="repair-hero">
+  <div class="hero-copy">
+    <p class="eyebrow">
+      <span class="status-dot"></span> SMALL SHOP. BIG FIXES.
+    </p>
+    <h1>A little care.<br />A lot more<br /><span>computer.</span></h1>
+    <p class="hero-description">
+      Life runs on your computer. We keep it running beautifully—with thoughtful
+      repairs, honest help, and a human on the other side.
+    </p>
+    <div class="hero-actions">
+      <a class="neo-button primary" routerLink="/service-repair"
+        >Find your fix <mat-icon>arrow_outward</mat-icon></a
+      ><a class="text-link" routerLink="/about"
+        >Meet your repair shop <span>↗</span></a
+      >
+    </div>
+    <div class="hero-assurance">
+      <span class="mini-icon"><mat-icon>verified_user</mat-icon></span>
+      <p>
+        Good people. Great repairs.<br /><strong
+          >Your neighborhood tech support, since 2017.</strong
+        >
+      </p>
+    </div>
   </div>
-  <!-- start card container -->
-  <main class="services">
-    <div class="layout-row align-center-center gap-20">
-      <div class="flex-half">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Services</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              We offer a wide range of services to meet your needs. We can fix
-              your computer, build you a new one, or even help you with your
-              network.
-            </p>
-            <img
-              src="assets/home/services.png"
-              alt="services"
-              style="width: 100%"
-            />
-          </mat-card-content>
-          <mat-card-actions>
-            <button
-              class="btn-primary"
-              mat-raised-button
-              routerLink="/service-repair"
-            >
-              Learn More
-            </button>
-          </mat-card-actions>
-        </mat-card>
+  <div class="workbench" aria-hidden="true">
+    <div class="bench-label">
+      <span>BOB'S WORKBENCH</span><span>EST. 2017</span>
+    </div>
+    <div class="device-scene">
+      <div class="floating-label">
+        <span class="status-dot"></span> A fresh start for your tech
+      </div>
+      <div class="computer">
+        <div class="screen-bezel">
+          <div class="computer-screen">
+            <div class="screen-top">
+              <span class="screen-dots">● ● ●</span
+              ><span>BOB'S / REPAIR STUDIO</span>
+            </div>
+            <div class="screen-smile"><span></span><span></span><i></i></div>
+            <div class="screen-message">Good as new.</div>
+            <div class="screen-progress"><span></span></div>
+            <div class="screen-caption">A LITTLE TLC GOES A LONG WAY.</div>
+          </div>
+        </div>
+        <div class="computer-bottom">
+          <span class="computer-brand">b.</span>
+          <div class="vent">||||||||||||</div>
+          <span class="power-light"></span>
+        </div>
+      </div>
+      <div class="computer-neck"></div>
+      <div class="computer-foot"></div>
+      <div class="keyboard">
+        <div class="keyboard-keys"></div>
+        <div class="keyboard-space"></div>
+      </div>
+      <div class="mouse"><span></span></div>
+      <div class="care-seal">
+        <mat-icon>favorite</mat-icon><span>REPAIRED<br />WITH CARE</span>
       </div>
     </div>
-  </main>
-  <!-- end card container  -->
+    <div class="bench-footer">
+      <span>01 / BACK TO YOUR BEST</span><span class="bench-cross">＋</span>
+    </div>
+  </div>
+</section>
+<div class="care-strip">
+  <span><mat-icon>handshake</mat-icon> Friendly, human support</span
+  ><span><mat-icon>construction</mat-icon> Repairs made simple</span
+  ><span><mat-icon>task_alt</mat-icon> A 30-day guarantee</span>
 </div>
+<section class="home-services">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">LESS DOWNTIME. MORE YOU.</p>
+      <h2>A fix for the everyday.<br />And the unexpected.</h2>
+    </div>
+    <a class="text-link" routerLink="/service-repair"
+      >Explore all services <span>↗</span></a
+    >
+  </div>
+  <div class="service-teasers">
+    <a class="teaser" routerLink="/service-repair"
+      ><span class="tile-icon"><mat-icon>laptop_mac</mat-icon></span
+      ><span class="teaser-number">01</span>
+      <h3>Back up & running.</h3>
+      <p>
+        From sluggish startups to stubborn software, let's get your computer
+        feeling like itself again.
+      </p>
+      <span class="teaser-link"
+        >Computer repairs <mat-icon>arrow_forward</mat-icon></span
+      ></a
+    ><a class="teaser" routerLink="/service-repair"
+      ><span class="tile-icon"><mat-icon>shield</mat-icon></span
+      ><span class="teaser-number">02</span>
+      <h3>A little peace of mind.</h3>
+      <p>
+        Protect what matters with virus removal, password resets, and a cleaner,
+        healthier computer.
+      </p>
+      <span class="teaser-link"
+        >Security & peace of mind <mat-icon>arrow_forward</mat-icon></span
+      ></a
+    ><a class="teaser" routerLink="/service-repair"
+      ><span class="tile-icon"
+        ><mat-icon>settings_input_component</mat-icon></span
+      ><span class="teaser-number">03</span>
+      <h3>Make it work for you.</h3>
+      <p>
+        Hardware upgrades and software installations, with patient guidance
+        every step of the way.
+      </p>
+      <span class="teaser-link"
+        >Setup & upgrades <mat-icon>arrow_forward</mat-icon></span
+      ></a
+    >
+  </div>
+</section>
+<section class="help-banner">
+  <div>
+    <p class="eyebrow">TECH TROUBLES? YOU'RE IN GOOD HANDS.</p>
+    <h2>Let's take a look together.</h2>
+    <p>No jargon. No judgment. Just the help you need.</p>
+  </div>
+  <a class="neo-button primary" routerLink="/contact"
+    >Talk to Bob's <mat-icon>arrow_outward</mat-icon></a
+  >
+</section>

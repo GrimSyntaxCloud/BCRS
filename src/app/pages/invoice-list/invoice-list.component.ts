@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   standalone: false, selector: 'app-invoice-list', template: `
 <mat-card style="max-width: 900px; margin: 32px auto; padding: 24px">
+  <p class="eyebrow">THE PAPER TRAIL</p>
   <mat-card-title>My sample invoices</mat-card-title>
   <p>The latest 50 invoices are saved for your account. Guest invoices are shared. No real orders or payments are placed.</p>
   <p role="alert" *ngIf="error">{{ error }}</p>

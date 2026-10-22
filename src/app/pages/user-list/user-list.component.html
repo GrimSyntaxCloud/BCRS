@@ -6,70 +6,30 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Displays list of users with the ability to
               create, update, and delete
 -->
+
 <mat-card
-  style="
-    width: 70%;
-    margin-right: 15%;
-    margin-left: 15%;
-    margin-top: 30px;
-    margin-bottom: 150px;
-    background-color: #c0c0c0;
-  "
+  ><p class="eyebrow">DEMO CONFIGURATIONS</p>
+  <h1>The people behind the profiles.</h1>
+  <p>Read-only fictional sample users.</p>
+  <p-table [value]="users" responsiveLayout="scroll"
+    ><ng-template pTemplate="header"
+      ><tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+      </tr></ng-template
+    ><ng-template pTemplate="body" let-user
+      ><tr>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.role.text }}</td>
+      </tr></ng-template
+    ></p-table
+  ></mat-card
 >
-  <p-confirmDialog
-    [style]="{ width: '35vw' }"
-    [baseZIndex]="10000"
-    rejectButtonStyleClass="p-button-text"
-  ></p-confirmDialog>
-
-  <div class="layout-column gap-20">
-    <div class="flex-grow">
-      <h1 class="title">
-        User's Configuration Page!<br />
-        <span class="subtitle">
-          Read-only fictional sample users.
-        </span>
-      </h1>
-    </div>
-
-    <!-- first column -->
-    <div class="flex-grow">
-
-    </div>
-
-    <!-- second column -->
-    <div class="flex-grow">
-      <p-table [value]="users" responsiveLayout="=scroll">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Role</th>
-            <th style="width: 8rem"></th>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-user>
-          <tr>
-            <td style="padding: 12px">{{ user.firstName }}</td>
-            <td style="padding: 12px">{{ user.lastName }}</td>
-            <td style="padding: 12px">{{ user.phoneNumber }}</td>
-            <td style="padding: 12px">{{ user.email }}</td>
-            <td style="padding: 12px">{{ user.address }}</td>
-            <td style="padding: 12px">{{ user.role.text }}</td>
-            <td style="padding: 12px">
-
-
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
-  <br />
-  <br />
-  <br />
-</mat-card>

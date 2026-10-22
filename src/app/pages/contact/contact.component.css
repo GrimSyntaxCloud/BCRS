@@ -6,18 +6,84 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: styling for contact page
 */
 
-
-.addressCard{
-    background: #E0E0E0;
-    width: 70%;
-    font-family: Lato;
-    height: 100%;
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  margin: 12px 0 35px;
 }
-
-
-.phoneCard{
-    background: #E0E0E0;
-    width: 70%;
-    font-family: Lato;
-    height: 100%;
+.contact-card {
+  padding: 35px;
+}
+.contact-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  color: var(--accent);
+  box-shadow: var(--inset);
+  border-radius: 18px;
+  margin-bottom: 30px;
+}
+.contact-card h2 {
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 18px 0 24px;
+}
+.contact-card > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+}
+.contact-caption {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-top: 25px;
+}
+dl {
+  font-size: 13px;
+  margin: 0;
+}
+dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+dt {
+  color: var(--muted);
+}
+dd {
+  margin: 0;
+  font-weight: 600;
+}
+.contact-demo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0 0 65px;
+}
+.contact-demo mat-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .contact-card {
+    padding: 28px;
+  }
+  .contact-card h2 {
+    font-size: 28px;
+  }
+  .contact-demo {
+    align-items: start;
+  }
 }

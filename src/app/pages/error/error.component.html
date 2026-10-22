@@ -6,32 +6,15 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: error 500 page template
 -->
 
-<!-- Angular flex layout -->
-<div class="layout-column">
-  <!-- Begin error 500 container -->
-  <mat-card class="error500Card">
-    <mat-card-title>
-      <h1 class="error500">ERROR 500</h1>
-    </mat-card-title>
-    <mat-card-content>
-      <div>
-        <img
-          class="error500Img"
-          src="../../../assets/error-500.jpg"
-          alt="error500"
-        />
-        <span>
-          <!-- Return link to home page -->
-          <a class="returnLink" href=" " routerLink="/">Return</a>
-        </span>
-      </div>
-      <br />
-      <p class="error500Meg">Oops, something went wrong.</p>
-      <p class="error500Meg">
-        Please return to home or feel free to contact us if the problem
-        persists.
-      </p>
-    </mat-card-content>
-  </mat-card>
-  <!-- End error 500 container -->
-</div>
+<section class="empty-state">
+  <span class="empty-state-icon"><mat-icon>build_circle</mat-icon></span>
+  <p class="eyebrow">500 / SOMETHING NEEDS A FIX</p>
+  <h1>Even we need a tune-up.</h1>
+  <p>
+    Oops, something went wrong. Please return home<br />or contact us if the
+    problem persists.
+  </p>
+  <a class="neo-button primary" routerLink="/"
+    >Return home <mat-icon>arrow_forward</mat-icon></a
+  >
+</section>

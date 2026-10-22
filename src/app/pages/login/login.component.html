@@ -1,16 +1,56 @@
 <mat-card class="login-card">
+  <p class="eyebrow">WELCOME BACK</p>
   <mat-card-title>Sign in to BCRS</mat-card-title>
   <mat-card-content>
-    <p>Use your registered demo account to manage your profile and sample invoices.</p>
-    <app-messages [(value)]="errorMessages" [enableService]="false"></app-messages>
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="layout-column gap-16">
-      <mat-form-field appearance="fill"><mat-label>Username</mat-label><input matInput formControlName="userName" autocomplete="username" required maxlength="32"></mat-form-field>
-      <mat-form-field appearance="fill"><mat-label>Password</mat-label><input matInput formControlName="password" type="password" autocomplete="current-password" required maxlength="128"></mat-form-field>
-      <button mat-raised-button class="btn-primary" type="submit" [disabled]="busy || loginForm.invalid">Sign in</button>
+    <p>
+      Use your registered demo account to manage your profile and sample
+      invoices.
+    </p>
+    <app-messages
+      [(value)]="errorMessages"
+      [enableService]="false"
+    ></app-messages>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()"
+      class="layout-column gap-16"
+    >
+      <mat-form-field appearance="fill"
+        ><mat-label>Username</mat-label
+        ><input
+          matInput
+          formControlName="userName"
+          autocomplete="username"
+          required
+          maxlength="32"
+      /></mat-form-field>
+      <mat-form-field appearance="fill"
+        ><mat-label>Password</mat-label
+        ><input
+          matInput
+          formControlName="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          maxlength="128"
+      /></mat-form-field>
+      <button
+        mat-raised-button
+        class="btn-primary"
+        type="submit"
+        [disabled]="busy || loginForm.invalid"
+      >
+        Sign in
+      </button>
     </form>
     <p><a routerLink="/session/register">Create a demo account</a></p>
     <mat-divider></mat-divider>
-    <p>Just exploring? The guest account shares sample invoices and previews fictional administration screens.</p>
-    <button mat-stroked-button (click)="login(true)" [disabled]="busy">Try guest demo</button>
+    <p>
+      Just exploring? The guest account shares sample invoices and previews
+      fictional administration screens.
+    </p>
+    <button mat-stroked-button (click)="login(true)" [disabled]="busy">
+      Try guest demo
+    </button>
   </mat-card-content>
 </mat-card>

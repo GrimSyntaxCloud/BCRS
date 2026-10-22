@@ -6,105 +6,56 @@
   Description: service-repair page.
 -->
 
-<div class="layout-column main-welcome">
-  <h1 class="title">
-    Our Service Repair<br />
-    <span class="subtitle"
-      >Premium service and 24/7 support will save your time and solve your
-      problems.</span
+<!-- Services and cart behavior retain the original product model. -->
+<section class="page-heading">
+  <p class="eyebrow">THE REPAIR MENU</p>
+  <h1>Good tech.<br />Better care.</h1>
+  <p>
+    A tune-up, a fresh start, or a second chance. Find the right repair for your
+    computer, with straightforward service pricing.
+  </p>
+</section>
+<div class="service-info">
+  <mat-icon>info_outline</mat-icon>
+  <p>
+    Service prices are shown below. Labor is $50 per hour and is itemized in
+    your cart.<span *ngIf="!sessionUserName">
+      <a routerLink="/session/login">Sign in</a> to choose services.</span
     >
-  </h1>
-  <!-- container -->
-  <mat-card
-    style="
-      width: 90%;
-      margin-left: 5%;
-      margin-right: 5%;
-      margin-bottom: 100px;
-      height: 100%;
-    "
-  >
-    <mat-card-content>
-      <!-- three columns in a row -->
-      <div class="service-grid">
-        <!-- loop over cards in the grid list-->
-        <div *ngFor="let product of products">
-          <!-- card for contains service repair information  -->
-          <mat-card
-            style="
-              background-color: #f2f2f2;
-              border-style: solid;
-              border-color: #8492a6;
-              height: 100%;
-              box-sizing: border-box;
-            "
-          >
-            <mat-card-header style="display: block; text-align: center">
-              <h2>{{ product.title }}</h2>
-            </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content>
-              <div
-                style="
-                  margin-left: 30%;
-                  margin-right: 40%;
-                  margin-top: 20px;
-                  display: flex;
-                "
-              >
-                <mat-icon style="overflow: visible; margin-top: 7px"
-                  >attach_money</mat-icon
-                >
-                <h2 style="margin-top: 7px">
-                  {{ product.price | number : "1.2-2" }}
-                </h2>
-              </div>
-
-              <div>
-                <!-- loop over descriptions with different contents  -->
-                <p
-                  *ngFor="let item of product.descriptions"
-                  style="text-align: center"
-                >
-                  {{ item }}
-                </p>
-              </div>
-            </mat-card-content>
-            <!-- Choose button will show up when session user login  -->
-            <mat-divider *ngIf="sessionUserName"></mat-divider>
-            <mat-card-footer
-              style="height: 50px; margin: 0px"
-              *ngIf="sessionUserName"
-            >
-              <mat-card-actions
-                style="
-                  padding: 15px 0;
-                  margin-left: 0;
-                  margin-right: 0;
-                  text-align: center;
-                "
-              >
-                <button
-                  (click)="addToCart(product)"
-                  mat-button
-                  style="
-                    background-color: #ffb834;
-                    border-radius: 5px;
-                    color: white;
-                    font-family: Lato;
-                    align-items: center;
-                    margin-left: 0;
-                    margin-right: 0;
-                  "
-                >
-                  Choose
-                </button>
-              </mat-card-actions>
-            </mat-card-footer>
-          </mat-card>
-          <!-- end card -->
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  </p>
 </div>
+<section class="service-grid" aria-label="Repair services">
+  <mat-card class="repair-card" *ngFor="let product of products; let i = index"
+    ><div class="repair-card-top">
+      <span class="repair-icon"
+        ><mat-icon>{{
+          [
+            "lock_reset",
+            "shield",
+            "memory",
+            "install_desktop",
+            "speed",
+            "keyboard",
+            "storage",
+          ][i % 7]
+        }}</mat-icon></span
+      ><span class="repair-number">0{{ i + 1 }}</span>
+    </div>
+    <h2>{{ product.title }}</h2>
+    <div class="service-price">
+      {{ product.price | currency }}<span> / service</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="service-details">
+      <p *ngFor="let item of product.descriptions">{{ item }}</p>
+    </div>
+    <button
+      *ngIf="sessionUserName"
+      mat-raised-button
+      class="btn-primary"
+      (click)="addToCart(product)"
+    >
+      Choose <mat-icon>add</mat-icon>
+    </button></mat-card
+  >
+</section>

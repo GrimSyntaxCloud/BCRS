@@ -1,2 +1,135 @@
-
-
+.cart-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 30px;
+  margin: 10px 0 65px;
+  align-items: start;
+}
+.cart-main {
+  display: grid;
+  gap: 30px;
+}
+.cart-panel {
+  padding: 28px;
+}
+.cart-panel h2 {
+  font-size: 25px;
+  margin: 14px 0 24px;
+}
+.cart-row {
+  display: grid;
+  grid-template-columns: 1fr auto 40px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.cart-row strong,
+.labor-row strong {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.cart-row button {
+  color: var(--accent);
+}
+.labor-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+.labor-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.labor-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
+}
+.cart-summary {
+  padding: 28px;
+}
+.summary-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  box-shadow: var(--inset);
+  border-radius: 15px;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.cart-summary h2 {
+  font-size: 43px;
+  letter-spacing: -0.05em;
+  margin: 17px 0;
+}
+.cart-summary > p:not(.eyebrow) {
+  font-size: 12px;
+  color: var(--muted);
+}
+.cart-summary button {
+  margin-top: 25px;
+  width: 100%;
+}
+.cart-summary .summary-note {
+  font-size: 10px !important;
+  text-align: center;
+  margin-bottom: 0;
+}
+.adjust-fees {
+  padding-top: 18px;
+}
+.adjust-fees h3 {
+  font-size: 16px;
+  margin-bottom: 22px;
+}
+.empty-cart {
+  max-width: 650px;
+  margin: 0 auto 65px;
+  padding: 40px;
+  text-align: center;
+  align-items: center;
+}
+.empty-cart > mat-icon {
+  color: var(--accent);
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+  margin-bottom: 15px;
+}
+.empty-cart h2 {
+  font-size: 28px;
+}
+.empty-cart p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+@media (max-width: 800px) {
+  .cart-grid {
+    grid-template-columns: 1fr;
+  }
+  .cart-panel,
+  .cart-summary {
+    padding: 24px;
+  }
+  .cart-row {
+    gap: 6px;
+    font-size: 12px;
+    grid-template-columns: 1fr auto 34px;
+  }
+  .cart-row button {
+    width: 34px;
+    height: 34px;
+    padding: 5px;
+  }
+  .empty-cart {
+    padding: 30px 24px;
+  }
+}

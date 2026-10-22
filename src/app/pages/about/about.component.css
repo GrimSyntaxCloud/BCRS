@@ -6,27 +6,91 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: styling for about page
 */
 
-
-.aboutUsImg{
-    max-width: 350px;
-    border-radius: 15%;
-    border: 8px solid #D3A625;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 10));
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+.shop-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+  margin: 12px 0 55px;
 }
-
-.appName{
-  text-align: center;
-  font-family: Lato;
-  color: #ae0001;
-  font-weight: bold;
+.story-image {
+  padding: 18px;
+  border-radius: 28px;
+  box-shadow: var(--raised);
 }
-
-.aboutApp{
-   text-align: left;
-   padding-right: 30px;
-   font-size: medium;
+.story-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.95;
+  object-fit: cover;
+  filter: saturate(0.65);
+  border-radius: 17px;
+}
+.story-caption {
+  padding: 22px 8px 8px;
+}
+.story-caption span {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.story-caption strong {
+  display: block;
+  font-size: 17px;
+  margin-top: 7px;
+  font-weight: 600;
+}
+.story-copy h2 {
+  font-size: 38px;
+  line-height: 1.15;
+  margin: 18px 0 22px;
+}
+.story-copy p:not(.eyebrow) {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.story-copy .neo-button {
+  margin-top: 17px;
+}
+.story-note {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 32px;
+  box-shadow: var(--inset);
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+.story-note mat-icon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.story-note p {
+  font-size: 12px;
+  margin: 0;
+  color: var(--muted);
+}
+.story-note strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+@media (max-width: 700px) {
+  .shop-story {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .story-image img {
+    aspect-ratio: 1.1;
+  }
+  .story-copy h2 {
+    font-size: 32px;
+  }
+  .story-note {
+    padding: 24px;
+  }
+  .story-note p {
+    font-size: 11px;
+  }
 }
