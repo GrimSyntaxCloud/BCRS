@@ -6,24 +6,105 @@ Modified By: Andres Macias/Patrick Wolff
 Description: Styling for service-repair component
 */
 
-
-.main-welcome {
-  margin-top: 30px;
-}
-
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding: 12px 0 70px;
 }
-
-.title {
-  text-align: center;
-  font-weight: lighter;
+.repair-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
 }
-
-.subtitle {
-  text-align: center;
-  font-family: lato;
+.repair-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 23px;
+}
+.repair-icon {
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  color: var(--accent);
+  box-shadow: var(--inset);
+}
+.repair-number {
   font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+h2 {
+  font-size: 20px;
+  margin: 0 0 15px;
+}
+.service-price {
+  font-size: 26px;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.service-price span {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.service-details {
+  flex: 1;
+  padding: 12px 0;
+}
+.service-details p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 8px 0;
+}
+.service-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-block: 1px solid var(--line);
+  margin: 0 0 32px;
+  padding: 12px 0;
+  color: var(--muted);
+}
+.service-info mat-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+.service-info p {
+  font-size: 11px;
+  margin: 0;
+}
+.service-info a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.repair-card button {
+  margin-top: 15px;
+}
+@media (max-width: 900px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .repair-card {
+    padding: 26px;
+  }
+  .service-info {
+    align-items: start;
+  }
+  .service-info p {
+    font-size: 12px;
+  }
 }

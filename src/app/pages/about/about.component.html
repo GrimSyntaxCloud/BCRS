@@ -6,61 +6,52 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: About page template
 -->
 
-<div>
-  <h1
-    style="
-      text-align: center;
-      margin-top: 60px;
-      margin-bottom: 50px;
-      font-weight: bold;
-    "
-  >
-    {{ aboutUs }}
-  </h1>
-</div>
-
-<!-- 2 column material design layout -->
-<div style="margin-bottom: 100px" class="layout-row-wrap">
-  <div class="flex-grow">
-    <!-- left column -->
-    <div style="text-align: center" class="layout-column">
-      <div>
-        <img
-          class="aboutUsImg"
-          src="../../../assets/aboutImg.jpg"
-          alt="aboutUsImg"
-        />
-      </div>
+<!-- Original shop story by the BCRS project team. -->
+<section class="page-heading">
+  <p class="eyebrow">YOUR NEIGHBORHOOD REPAIR SHOP</p>
+  <h1>More human.<br />Less tech headache.</h1>
+  <p>
+    Good repairs start with good people. We bring a little patience and a lot of
+    care to everything we fix.
+  </p>
+</section>
+<section class="shop-story">
+  <div class="story-image">
+    <img src="assets/about-technician.png" alt="Illustrated technician repairing a laptop" />
+    <div class="story-caption">
+      <span>PIERCE COUNTY, WASHINGTON</span
+      ><strong>Here to help. Since 2017.</strong>
     </div>
   </div>
-  <!-- right column -->
-  <div class="flex-grow">
-    <div class="layout-column">
-      <h1 class="appName">Bob's Computer Repair Shop</h1>
-      <div class="aboutApp">
-        <p>
-          Bob's Computer Repair shop is located in Pierce County and has been
-          established in 2017.
-          <br /><br />
-          Bob's Computer Repair Shop has grown to become one of the most trusted
-          and reputable computer repair services in the area, offering expert
-          computer service that is knowledgeable and friendly.
-          <br /><br />
-          We have years of experience troubleshooting, repairing, and providing
-          PC consulting to numerous clients. Our team is professional and
-          reliable, and we will work within your constraints. We always work
-          hard until you are satisfied, that's why every job done by Bob's
-          Computer Repair Shop is backed by a 30-day guarantee and 24/7 service
-          support.
-          <br /><br />
-          If you are satisfied with our service, please share your experience
-          with your relatives and friends. We will be very grateful and continue
-          to develop new services to better serve our community.
-          <br /><br />
-          We believe that Bob's Computer Repair Shop is your lifesaver, making
-          your life simple and organized.
-        </p>
-      </div>
-    </div>
+  <div class="story-copy">
+    <p class="eyebrow">HELLO, WE'RE BOB'S.</p>
+    <h2>Small shop.<br />A personal touch.</h2>
+    <p>
+      Bob's Computer Repair Shop is located in Pierce County and was established
+      in 2017. We've grown into one of the area's trusted computer repair
+      services by keeping things simple: knowledgeable help, friendly people,
+      and work we stand behind.
+    </p>
+    <p>
+      We troubleshoot, repair, and provide PC consulting with your needs in
+      mind. Our team works within your constraints, and every job is backed by a
+      30-day guarantee and 24/7 service support.
+    </p>
+    <p>
+      We believe technology should make life simpler. Whether it's a quick
+      tune-up or something more complicated, we're here to help you get back to
+      what matters.
+    </p>
+    <a class="neo-button primary" routerLink="/service-repair"
+      >Explore our services <mat-icon>arrow_outward</mat-icon></a
+    >
   </div>
+</section>
+<div class="story-note">
+  <mat-icon>favorite_border</mat-icon>
+  <p>
+    Happy with your repair? Share your experience with friends and family.<br /><strong
+      >Our community is what keeps this little shop going.</strong
+    >
+  </p>
 </div>

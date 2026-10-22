@@ -6,23 +6,37 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: application base layout template
 -->
 
-<div class="layout-column">
+<div class="site-shell">
+  <a
+    class="skip-link"
+    href=""
+    (click)="$event.preventDefault(); mainContent.focus()"
+    >Skip to content</a
+  >
   <!-- navigation -->
   <!-- navbarA for user is logged in -->
   <header>
-    <nav class="navbarA">
+    <nav class="navbarA" aria-label="Main navigation">
       <mat-toolbar-row class="logoBar">
         <!-- logo bar with sign up and log in link-->
-        <button class="logo" routerLink="/" mat-button>
-          Bob's Computer Repair Shop
-        </button>
+        <a
+          class="logo"
+          routerLink="/"
+          aria-label="Bob's Computer Repair Shop home"
+          ><span class="brand-mark">b<span>.</span></span
+          ><span class="brand-copy"
+            >bob's<span>COMPUTER REPAIR SHOP</span></span
+          ></a
+        >
         <!-- routerLink for sign up and log in -->
         <span class="example-spacer"></span>
 
         <!-- signup and login buttons should show up when got to localhost:4200/ -->
         <ng-container *ngIf="!sessionUserName">
           <a class="navbar-link-logIn" routerLink="/session/login">Sign in</a>
-          <a class="navbar-link-logIn" routerLink="/session/register">Register</a>
+          <a class="navbar-link-logIn" routerLink="/session/register"
+            >Register</a
+          >
         </ng-container>
 
         <ng-container *ngIf="sessionUserName">
@@ -38,24 +52,26 @@ Description: application base layout template
               matBadge="{{ itemCount() }}"
               [matBadgeHidden]="itemCount() <= 0"
               matBadgeColor="warn"
-
               >shopping_cart</mat-icon
             >
           </button>
 
-          <button aria-label="Account menu" [matMenuTriggerFor]="session" mat-icon-button class="ml-xs">
+          <button
+            aria-label="Account menu"
+            [matMenuTriggerFor]="session"
+            mat-icon-button
+            class="ml-xs"
+          >
             <mat-icon class="profileIcon">person</mat-icon>
           </button>
 
           <mat-menu #session="matMenu" x-position="before">
             <button
               mat-menu-item
-              [routerLink]="guest ? '/users' : '/users/profile/' + sessionUserName"
-              style="
-                background-color: #c0c0c0;
-                text-align: center;
-                font-weight: bold;
+              [routerLink]="
+                guest ? '/users' : '/users/profile/' + sessionUserName
               "
+              class="account-menu-title"
             >
               Welcome {{ sessionUserName }}
             </button>
@@ -70,21 +86,21 @@ Description: application base layout template
             <mat-menu #configs="matMenu">
               <!-- users list -->
               <ng-container *ngIf="role === 'admin'">
-              <button mat-menu-item routerLink="/users">
-                <mat-icon>supervisor_account</mat-icon>
-                User List
-              </button>
-              <!-- users list -->
-              <button mat-menu-item routerLink="/roles">
-                <mat-icon>admin_panel_settings</mat-icon>
-                Roles
-              </button>
-              <!-- security questions -->
-              <button mat-menu-item routerLink="/graph">
-                <mat-icon>pie_chart</mat-icon>
-                Chart
-              </button>
-            </ng-container>
+                <button mat-menu-item routerLink="/users">
+                  <mat-icon>supervisor_account</mat-icon>
+                  User List
+                </button>
+                <!-- users list -->
+                <button mat-menu-item routerLink="/roles">
+                  <mat-icon>admin_panel_settings</mat-icon>
+                  Roles
+                </button>
+                <!-- security questions -->
+                <button mat-menu-item routerLink="/graph">
+                  <mat-icon>pie_chart</mat-icon>
+                  Chart
+                </button>
+              </ng-container>
               <!-- security questions -->
               <button mat-menu-item routerLink="/security-questions">
                 <mat-icon>help</mat-icon>
@@ -102,32 +118,66 @@ Description: application base layout template
 
       <!-- slogen bar with page links -->
       <mat-toolbar-row class="slogenBar">
-        <span class="slogen">Amazing Help!</span>
+        <span class="slogen"
+          ><span class="status-dot"></span> A LITTLE CARE GOES A LONG WAY.</span
+        >
         <span class="example-spacer"></span>
-        <a class="navbar-link" routerLink="/">Home</a>
-        <a class="navbar-link" routerLink="/service-repair">Service Repair</a>
-        <a class="navbar-link" routerLink="/contact">Contact Us</a>
-        <a class="navbar-link" routerLink="/about">About</a>
+        <a
+          class="navbar-link"
+          routerLink="/"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+        <a
+          class="navbar-link"
+          routerLink="/service-repair"
+          routerLinkActive="is-active"
+          >Service Repair</a
+        >
+        <a
+          class="navbar-link"
+          routerLink="/contact"
+          routerLinkActive="is-active"
+          >Contact Us</a
+        >
+        <a class="navbar-link" routerLink="/about" routerLinkActive="is-active"
+          >About</a
+        >
       </mat-toolbar-row>
     </nav>
   </header>
 
-  <p role="note" style="padding: 14px; margin: 0; background: #fff4d2; color: #222; text-align: center">Full-stack portfolio demo · register with fictional details or try the shared guest account · visitor data expires after 96 hours; permanent samples stay · no real orders or payments.</p>
+  <details class="demo-note">
+    <summary>
+      <span class="demo-pill">PORTFOLIO DEMO</span
+      ><span>Real features. Fictional details.</span
+      ><span class="demo-more"
+        >How to explore <span aria-hidden="true">＋</span></span
+      >
+    </summary>
+    <p>
+      Register with fictional details or try the shared guest account. Visitor
+      data expires after 96 hours; permanent samples stay. No real orders or
+      payments.
+    </p>
+  </details>
   <p *ngIf="logoutError" role="alert">{{ logoutError }}</p>
-  <div class="content">
+  <main #mainContent id="main-content" class="content" tabindex="-1">
     <router-outlet></router-outlet>
-  </div>
+  </main>
 
-  <!-- footer -->
-  <div class="flex-grow">
-    <footer class="footer">
-      <mat-toolbar class="footer-content">
-        <span class="copyRight">
-          &copy; Copyright {{ year | date : "yyyy" }} Bob's Computer Repair Shop
-        </span>
-        <span class="example-spacer"></span>
-        <p class="contributors">Andres Macias/Patrick Wolff/April Yang</p>
-      </mat-toolbar>
-    </footer>
-  </div>
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="brand-mark">b<span>.</span></span>
+      <div>
+        <strong>Good tech deserves a second chance.</strong>
+        <p>Bob's Computer Repair Shop · Established 2017</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; {{ year | date: "yyyy" }} Bob's Computer Repair Shop</span
+      ><span>Built by Andres Macias, Patrick Wolff & April Yang</span>
+    </div>
+  </footer>
 </div>

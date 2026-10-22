@@ -6,68 +6,19 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Create, display security questions template
 -->
 
-<!-- use primeng  -->
-<p-confirmDialog [style]="{ width: '35vw' }" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
-</p-confirmDialog>
-
-<!-- page title -->
-<mat-card style="
-    width: 70%;
-    margin-right: 15%;
-    margin-left: 15%;
-    margin-top: 30px;
-    margin-bottom: 150px;
-    background-color: #c0c0c0;
-  ">
-  <div class="layout-column gap-20">
-    <div class="flex-grow">
-      <h1 class="title" style="background-color: #eeba30; text-align: center; margin-top: 20px">
-        Security Questions Configuration Page! <br />
-        <span class="subtitle">
-          Read-only fictional examples. No personal information is stored.
-        </span>
-      </h1>
-    </div>
-
-    <!-- enter and submit security question form or returns error messages-->
-
-    <div class="flex-grow">
-      <div class="layout-column pageDesign">
-        <mat-card>
-
-        </mat-card>
-      </div>
-    </div>
-
-    <!-- display security questions with edit and delete button-->
-    <div class="flex-grow">
-      <p-table [value]="securityQuestions" responsiveLayout="scroll">
-        <ng-template pTemplate="header">
-          <tr>
-            <th style="
-                text-align: left;
-                font-family: lato;
-                font-size: 1rem;
-                padding-bottom: 10px;
-              ">
-              Questions
-            </th>
-            <th style="width: 8rem"></th>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-sq>
-          <tr>
-            <td style="padding-bottom: 10px; font-family: lato">
-              {{ sq.text }}
-            </td>
-            <td style="text-align: center">
-
-
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
-</mat-card>
+<mat-card
+  ><p class="eyebrow">DEMO CONFIGURATIONS</p>
+  <h1>Security questions.</h1>
+  <p>Read-only fictional examples. No personal information is stored.</p>
+  <p-table [value]="securityQuestions" responsiveLayout="scroll"
+    ><ng-template pTemplate="header"
+      ><tr>
+        <th>Question</th>
+      </tr></ng-template
+    ><ng-template pTemplate="body" let-sq
+      ><tr>
+        <td>{{ sq.text }}</td>
+      </tr></ng-template
+    ></p-table
+  ></mat-card
+>

@@ -6,119 +6,48 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Displays invoice for customer
 -->
 
-<!-- main container -->
-<div class="layout-column">
-  <!-- begin card container -->
-  <mat-card class="mat-elevation-z0">
-    <mat-card-title
-      mat-dialog-title
-      style="text-align: center; background-color: #c0c0c0"
-    >
-      {{ username }} — review sample invoice
-    </mat-card-title>
-    <mat-card-subtitle style="text-align: center">
-      Order date: {{ orderDate | date }}
-    </mat-card-subtitle>
-
-    <mat-card-content mat-dialog-content>
-      <div class="layout-column gap-10">
-        <div class="flex-grow">
-          <!-- start card container -->
-          <mat-card>
-            <mat-card-title>Services</mat-card-title>
-            <mat-card-content>
-              <!-- for loop lineItem, display lineItem title and price -->
-              <div *ngFor="let lineItem of invoice.getLineItems()">
-                <mat-list>
-                  <mat-list-item><span matListItemTitle class="invoice-line">
-                    {{ lineItem.title }}:
-                    <span class="flex-grow"></span>
-                    {{ lineItem.price | currency }}
-                  </span></mat-list-item>
-                </mat-list>
-              </div>
-            </mat-card-content>
-          </mat-card>
-          <!-- end card container -->
-        </div>
-
-        <div class="flex-grow">
-          <!-- begin card container -->
-          <mat-card>
-            <mat-card-title>Standard Fees</mat-card-title>
-            <mat-card-content>
-              <mat-list>
-                <mat-list-item *ngFor="let lineItem of invoice.getLineItems()"><span matListItemTitle class="invoice-line">
-                  Labor ({{ lineItem.title }}): {{ lineItem.laborHours }} {{ lineItem.laborHours === 1 ? 'hour' : 'hours' }}
-                  @ 50/hr:
-                  <span class="flex-grow"></span>
-                  {{ lineItem.laborHours * 50 | currency }}
-                </span></mat-list-item>
-              </mat-list>
-            </mat-card-content>
-          </mat-card>
-          <!-- end card container -->
-        </div>
-
-        <div class="flex-grow">
-          <!-- begin card container -->
-          <mat-card>
-            <mat-card-title>Adjustments</mat-card-title>
-            <mat-card-content>
-              <mat-list>
-                <mat-list-item><span matListItemTitle class="invoice-line">
-                  Labor: Extra hours @ 50/hr:
-                  <span class="flex-grow"></span>
-                  {{adjustedLabor | currency}}
-                </span></mat-list-item>
-              </mat-list>
-              <mat-list>
-                <mat-list-item><span matListItemTitle class="invoice-line">
-                 Parts
-                  <span class="flex-grow"></span>
-                  {{adjustedParts | currency}}
-                </span></mat-list-item>
-              </mat-list>
-            </mat-card-content>
-          </mat-card>
-          <!-- end card container -->
-        </div>
-
-        <div class="flex-grow">
-          <!-- begin card container -->
-          <mat-card>
-            <mat-card-content>
-              <mat-list>
-                <mat-list-item><span matListItemTitle class="invoice-line">
-                  &nbsp;
-                  <span class="flex-grow"></span>
-                  Total charges: {{ total | currency }}
-                </span></mat-list-item>
-              </mat-list>
-            </mat-card-content>
-          </mat-card>
-          <!-- end card container -->
-        </div>
-
-        <br />
-      </div>
-    </mat-card-content>
-  </mat-card>
-  <!-- end card container -->
-</div>
-
-<div mat-dialog-actions align="end">
-  <button
-    mat-raised-button
-    matDialogClose="cancel"
-  >
-    Cancel
-  </button>
-  <button
-    mat-raised-button
-    matDialogClose="confirm"
-    class="btn-primary"
-  >
+<h2 mat-dialog-title>Review your sample invoice</h2>
+<mat-dialog-content
+  ><p class="invoice-meta">{{ username }} · {{ orderDate | date }}</p>
+  <section class="invoice-section">
+    <h3>Services</h3>
+    <div class="invoice-row" *ngFor="let lineItem of invoice.getLineItems()">
+      <span>{{ lineItem.title }}</span
+      ><strong>{{ lineItem.price | currency }}</strong>
+    </div>
+  </section>
+  <section class="invoice-section">
+    <h3>Standard fees</h3>
+    <div class="invoice-row" *ngFor="let lineItem of invoice.getLineItems()">
+      <span
+        >{{ lineItem.title
+        }}<small
+          >Labor: {{ lineItem.laborHours }}
+          {{ lineItem.laborHours === 1 ? "hour" : "hours" }} at $50/hr</small
+        ></span
+      ><strong>{{ lineItem.laborHours * 50 | currency }}</strong>
+    </div>
+  </section>
+  <section class="invoice-section">
+    <h3>Adjustments</h3>
+    <div class="invoice-row">
+      <span>Additional labor</span
+      ><strong>{{ adjustedLabor | currency }}</strong>
+    </div>
+    <div class="invoice-row">
+      <span>Additional parts</span
+      ><strong>{{ adjustedParts | currency }}</strong>
+    </div>
+  </section>
+  <div class="invoice-total">
+    <span>Total charges</span><strong>{{ total | currency }}</strong>
+  </div>
+  <p class="invoice-disclaimer">
+    Demo invoice only. No real order or payment is placed.
+  </p></mat-dialog-content
+><mat-dialog-actions align="end"
+  ><button mat-stroked-button matDialogClose="cancel">Cancel</button
+  ><button mat-raised-button matDialogClose="confirm" class="btn-primary">
     Save sample invoice
-  </button>
-</div>
+  </button></mat-dialog-actions
+>

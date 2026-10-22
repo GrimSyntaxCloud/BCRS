@@ -6,53 +6,42 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: Contact page template
 -->
 
-<!-- main container-->
-<div class="layout-column main-welcome">
-  <div class="flex-grow">
-    <h1 style="text-align: center; margin-top: 30px; margin-bottom: 50px">
-      {{ contactUs }}
-    </h1>
-  </div>
-  <!-- row with two cards  -->
-  <div style="margin-left: 12%" class="layout-row-wrap">
-    <div class="flex-grow">
-      <div style="text-align: center" class="flex-grow">
-        <!-- left card -->
-        <mat-card class="addressCard">
-          <mat-card-content class="card-title-icon">
-            <mat-icon color="primary">navigation</mat-icon>
-          </mat-card-content>
-          <br />
-          <mat-card-content>
-            <p>99909 56th Avenue NE</p>
-            <p>Olympia, WA</p>
-          </mat-card-content>
-        </mat-card>
+<section class="page-heading">
+  <p class="eyebrow">A REAL PERSON ON THE OTHER SIDE</p>
+  <h1>Let's untangle<br />your tech troubles.</h1>
+  <p>
+    A question, a curious noise, or a computer that just won't cooperate. Our
+    knowledgeable team is here to help.
+  </p>
+</section>
+<section class="contact-grid">
+  <mat-card class="contact-card"
+    ><span class="contact-icon"><mat-icon>near_me</mat-icon></span>
+    <p class="eyebrow">STOP BY THE SHOP</p>
+    <h2>A friendly face.<br />A fresh perspective.</h2>
+    <p>99909 56th Avenue NE<br />Olympia, WA</p>
+    <span class="contact-caption">PIERCE COUNTY, WASHINGTON</span></mat-card
+  ><mat-card class="contact-card"
+    ><span class="contact-icon"><mat-icon>phone_in_talk</mat-icon></span>
+    <p class="eyebrow">GIVE US A RING</p>
+    <h2>Good help is<br />a conversation away.</h2>
+    <dl>
+      <div>
+        <dt>Direct</dt>
+        <dd>855-666-7777</dd>
       </div>
-    </div>
-
-    <div class="flex-grow">
-      <div style="text-align: center" class="flex-grow">
-        <!-- right card -->
-        <mat-card class="phoneCard">
-          <mat-card-title class="card-title-icon">
-            <mat-icon color="primary">phone</mat-icon>
-          </mat-card-title>
-          <br />
-          <mat-card-content class="align-center">
-            <p>Direct: 855-666-7777</p>
-            <p>Toll-free: 1-855-666-8888</p>
-            <p>Fax: 855-666-9999</p>
-          </mat-card-content>
-        </mat-card>
+      <div>
+        <dt>Toll-free</dt>
+        <dd>1-855-666-8888</dd>
       </div>
-    </div>
-  </div>
-
-  <br /><br /><br /><br />
-  <div class="layout-column">
-    <p style="text-align: center; font-family: Lato">
-      Need more help？Our knowledgeable agents will help you!
-    </p>
-  </div>
-</div>
+      <div>
+        <dt>Fax</dt>
+        <dd>855-666-9999</dd>
+      </div>
+    </dl></mat-card
+  >
+</section>
+<p class="contact-demo">
+  <mat-icon>info_outline</mat-icon>This is a portfolio demonstration. The shop
+  and contact details are fictional.
+</p>
