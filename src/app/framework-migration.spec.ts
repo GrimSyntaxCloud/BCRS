@@ -1,3 +1,5 @@
+import { ConfirmationService } from './shared/services/confirmation.service';
+import { MatDialog } from '@angular/material/dialog';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AppModule } from './app.module';
@@ -6,12 +8,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { LoginComponent } from './pages/login/login.component';
 
-// Compile the real NgModule and Material/PrimeNG templates, not just component classes.
+// Compile the real NgModule and Material templates, not just component classes.
 describe('Angular framework migration', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppModule],
-      providers: [provideHttpClientTesting()]
+      providers: [provideHttpClientTesting(), ConfirmationService]
     }).compileComponents();
   });
 
@@ -41,6 +43,40 @@ describe('Angular framework migration', () => {
     TestBed.inject(HttpTestingController).verify();
   });
 
+  it('keeps confirmation cancellation and acceptance separate with Angular Material', async () => {
+    const fixture = TestBed.createComponent(LoginComponent);
+    fixture.detectChanges();
+    const accept = vi.fn();
+    const reject = vi.fn();
+    const service = TestBed.inject(ConfirmationService);
+    const show = async () => {
+      service.confirm({ message: 'Delete this sample record?', acceptLabel: 'Delete record', rejectLabel: 'Keep record', accept, reject });
+      fixture.detectChanges();
+      await fixture.whenStable();
+    };
+    const click = (label: string) => {
+      const button = Array.from(document.querySelectorAll('mat-dialog-container button') as NodeListOf<HTMLButtonElement>)
+        .find(element => element.textContent?.includes(label));
+      expect(button).toBeDefined();
+      button!.click();
+      fixture.detectChanges();
+    };
+    await show();
+    click('Keep record');
+    await fixture.whenStable();
+    await vi.waitFor(() => expect(reject).toHaveBeenCalledOnce());
+    expect(accept).not.toHaveBeenCalled();
+    await show();
+    click('Delete record');
+    await fixture.whenStable();
+    await vi.waitFor(() => expect(accept).toHaveBeenCalledOnce());
+    await show();
+    TestBed.inject(MatDialog).closeAll();
+    await fixture.whenStable();
+    await vi.waitFor(() => expect(accept).toHaveBeenCalledOnce());
+    await vi.waitFor(() => expect(reject).toHaveBeenCalledTimes(2));
+  });
+
   it('renders validation text safely and preserves message dismissal', () => {
     const fixture = TestBed.createComponent(AppMessagesComponent);
     fixture.componentInstance.value = [{ severity: 'error', summary: 'Unable to save', detail: '<img src=x onerror=alert(1)>' }];
@@ -53,6 +89,6 @@ describe('Angular framework migration', () => {
     fixture.nativeElement.querySelector('button').click();
     fixture.detectChanges();
     expect(remaining).toEqual([]);
-    expect(fixture.nativeElement.querySelector('p-message')).toBeNull();
+    expect(fixture.nativeElement.querySelector('.app-message')).toBeNull();
   });
 });

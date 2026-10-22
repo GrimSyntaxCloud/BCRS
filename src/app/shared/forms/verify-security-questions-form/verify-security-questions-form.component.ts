@@ -9,10 +9,10 @@ Description: verify-security-question-form component
 
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../app-messages.component';
 import { SelectedSecurityQuestion } from '../../models/selected-security-question.interface';
 import { VerifySecurityQuestionModel } from '../../models/verify-security-question.interface';
 import { UserService } from '../../services/user.service';
@@ -23,6 +23,7 @@ import { SessionService } from '../../services/session.service';
   standalone: false,
   selector: 'app-verify-security-questions-form',
   templateUrl: './verify-security-questions-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./verify-security-questions-form.component.css']
 })
 export class VerifySecurityQuestionsFormComponent implements OnInit {

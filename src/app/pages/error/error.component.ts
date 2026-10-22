@@ -7,12 +7,13 @@
  */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   standalone: false,
   selector: 'app-error',
   templateUrl: './error.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {

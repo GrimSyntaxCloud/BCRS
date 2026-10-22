@@ -6,7 +6,7 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: invoice-summary-dialog component
 */
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Invoice } from '../models/invoice';
 
@@ -14,6 +14,7 @@ import { Invoice } from '../models/invoice';
   standalone: false,
   selector: 'app-invoice-summary-dialog',
   templateUrl: './invoice-summary-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./invoice-summary-dialog.component.css']
 })
 export class InvoiceSummaryDialogComponent implements OnInit {

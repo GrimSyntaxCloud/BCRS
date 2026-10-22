@@ -1,3 +1,4 @@
+import { PieChartComponent } from './shared/pie-chart.component';
 /*
  Title: app.module.js
  Author: Professor Krasso
@@ -37,15 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardActions } from '@angular/material/card';
 
-/* -------- PrimeNg Materials -------- */
-import { TableModule } from 'primeng/table';
-import { MessageModule } from 'primeng/message';
+/* -------- Inline messages -------- */
 import { AppMessagesComponent } from './shared/app-messages.component';
-import { providePrimeNG } from 'primeng/config';
-import Material from '@primeuix/themes/material';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 
 /* -------- Components -------- */
 import { HomeComponent } from './pages/home/home.component';//
@@ -73,7 +67,6 @@ import { CartComponent } from './pages/cart/cart.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 import { PurchasesByServiceGraphComponent } from './pages/purchases-by-service-graph/purchases-by-service-graph.component';
-import { ChartModule } from 'primeng/chart';
 import { InvoiceSummaryDialogComponent } from './shared/invoice-summary-dialog/invoice-summary-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -110,6 +103,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
   ],
   imports: [
+    PieChartComponent,
      // Angular Materials
     BrowserModule,
     AppRoutingModule,
@@ -132,19 +126,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatStepperModule,
     MatSelectModule,
     MatBadgeModule,
-    // NgPrime Materials
-    TableModule,
-    MessageModule,
-    ButtonModule,
-    ConfirmDialogModule,
-    ChartModule,
     MatCheckboxModule
 
   ],
 
   providers: [
       provideZoneChangeDetection(),
-      providePrimeNG({ theme: { preset: Material, options: { darkModeSelector: false } } }),
+
       CookieService,
       {
         provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true

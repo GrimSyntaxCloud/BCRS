@@ -7,10 +7,10 @@ Description: User create, allows admin to create new user
 */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SecurityQuestionService } from 'src/app/shared/services/security-question.service';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 import { SecurityQuestion } from 'src/app/shared/models/security-question.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   standalone: false,
   selector: 'app-security-question-details',
   templateUrl: './security-question-details.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./security-question-details.component.css']
 })
 export class SecurityQuestionDetailsComponent implements OnInit {

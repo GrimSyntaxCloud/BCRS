@@ -574,3 +574,9 @@ app-security-question-list > mat-card > p:not(.eyebrow) {
     font-size: 31px;
   }
 }
+
+.demo-table-scroll { max-width: 100%; overflow-x: auto; }
+.demo-table { width: 100%; border-collapse: collapse; text-align: left; font: inherit; }
+.demo-table th, .demo-table td { padding: 1rem; border-bottom: 1px solid var(--line, #ddd); }
+.demo-table th { font-weight: 600; }
+.demo-table-scroll:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }

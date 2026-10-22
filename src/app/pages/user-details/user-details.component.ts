@@ -6,12 +6,12 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description:User detail component
 */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from "../../shared/services/user.service";
 import { User } from "../../shared/models/user.interface";
-import { ConfirmationService, ConfirmEventType, ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 import { Role } from 'src/app/shared/models/role.interface';
 import { RoleService } from 'src/app/shared/services/role.service';
 
@@ -21,7 +21,7 @@ import { RoleService } from 'src/app/shared/services/role.service';
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css'],
-  providers: [ConfirmationService]
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class UserDetailsComponent implements OnInit {
 

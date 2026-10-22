@@ -5,10 +5,10 @@ Updated Date: 02/27/2023
 Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: User create, allows admin to create new user
 */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from 'src/app/shared/services/role.service';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 import { Role } from 'src/app/shared/models/role.interface';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 
@@ -16,6 +16,7 @@ import { FormGroup,FormBuilder, Validators } from '@angular/forms';
   standalone: false,
   selector: 'app-role-details',
   templateUrl: './role-details.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./role-details.component.css']
 })
 export class RoleDetailsComponent implements OnInit {

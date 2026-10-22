@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
-  standalone: false, selector: 'app-invoice-list', template: `
+  standalone: false, selector: 'app-invoice-list', changeDetection: ChangeDetectionStrategy.Eager,
+ template: `
 <mat-card style="max-width: 900px; margin: 32px auto; padding: 24px">
   <p class="eyebrow">THE PAPER TRAIL</p>
   <mat-card-title>My sample invoices</mat-card-title>

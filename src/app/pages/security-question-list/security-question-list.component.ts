@@ -6,8 +6,8 @@ Modified By: Andres Macias/Patrick Wolff/April Yang
 Description: security question list component
 */
 
-import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ConfirmationService } from '../../shared/services/confirmation.service';
 import { SecurityQuestionService } from 'src/app/shared/services/security-question.service';
 import { SecurityQuestion } from 'src/app/shared/models/security-question.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,7 +17,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-security-question-list',
   templateUrl: './security-question-list.component.html',
   styleUrls: ['./security-question-list.component.css'],
-  providers: [ConfirmationService] // primeng
+  changeDetection: ChangeDetectionStrategy.Eager,
+  providers: [ConfirmationService]
 })
 export class SecurityQuestionListComponent implements OnInit {
   securityQuestions: SecurityQuestion[];
@@ -82,15 +83,8 @@ export class SecurityQuestionListComponent implements OnInit {
           }
         })
       },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            console.log('User rejected this operation');
-            break;
-          case ConfirmEventType.CANCEL:
-            console.log('User canceled this operation');
-            break;
-        }
+      reject: () => {
+        console.log('User canceled this operation');
       }
    })
  }

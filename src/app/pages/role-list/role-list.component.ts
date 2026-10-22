@@ -7,11 +7,11 @@ Description: role list component
 */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { ConfirmationService } from '../../shared/services/confirmation.service';
 import { Role } from 'src/app/shared/models/role.interface';
-import { ToastMessageOptions as Message } from 'primeng/api';
+import { AppMessage as Message } from '../../shared/app-messages.component';
 import { RoleService } from 'src/app/shared/services/role.service';
 
 @Component({
@@ -19,6 +19,7 @@ import { RoleService } from 'src/app/shared/services/role.service';
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
   styleUrls: ['./role-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [ConfirmationService]
 })
 export class RoleListComponent implements OnInit {
@@ -88,15 +89,8 @@ export class RoleListComponent implements OnInit {
           }
         })
       },
-      reject: (type: any) => {
-        switch(type) {
-          case ConfirmEventType.REJECT:
-            console.log('User rejected this operation');
-            break;
-          case ConfirmEventType.CANCEL:
-            console.log('User cancelled this operation');
-            break;
-        }
+      reject: () => {
+        console.log('User canceled this operation');
       }
     })
   }
