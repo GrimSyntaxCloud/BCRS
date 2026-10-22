@@ -77,10 +77,11 @@ To use your own **local** MongoDB instead, create the `demo` collection in a
 `bcrs-demo` database, copy `.env.example` to `.env`, and run:
 
 ```sh
-npm run build
-node --env-file=.env api/local.js
+npm run dev
 ```
 
+`npm run dev` builds the frontend and starts the local API using `.env`. After a build,
+`npm run server` starts the same API with file watching.
 That database persists between runs. `npm start` runs only the Angular development
 server; it is not a complete backend/database setup. See
 [the setup guide](docs/azure-demo.md) for deployment and environment details.
