@@ -34,7 +34,7 @@ jobs:
       - run: npm run build
       - run: az bicep build --file infra/main.bicep --outfile /tmp/bcrs-arm.json
       - run: npm run package:azure
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: bcrs
           path: bcrs.zip
